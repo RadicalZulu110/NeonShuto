@@ -9285,6 +9285,10 @@ PrefabInstance:
       propertyPath: FailedQuota
       value: 
       objectReference: {fileID: 271235666}
+    - target: {fileID: 8630399474306727186, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Text
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8745282752507471671, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
