@@ -5,7 +5,7 @@ using UnityEngine;
 public class Buildings : MonoBehaviour
 {
     private GameObject buildingToPlace, roadToPlace, initialToPlace, farmToPlace, batteryToPlace, crystalMineToPlace, stoneMineToPlace;
-    public CustomCursor customCursor, customCursorRoad, customCursorInitial;
+    public CustomCursor customCursor;
     public Grid grid;
     public GameObject[,] tiles;
     public Camera camera;
@@ -182,7 +182,6 @@ public class Buildings : MonoBehaviour
 
                 createBuilding(buildingToPlace, buildingShadow);
                 gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
-                buildingToPlace = null;
             }
 
             //Create farm
@@ -192,7 +191,6 @@ public class Buildings : MonoBehaviour
 
                 createBuilding(farmToPlace, farmShadow);
                 gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
-                farmToPlace = null;
             }
 
             //Create battery
@@ -202,7 +200,6 @@ public class Buildings : MonoBehaviour
 
                 createBuilding(batteryToPlace, batteryShadow);
                 gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
-                batteryToPlace = null;
             }
 
             //Create StoneMine
@@ -212,7 +209,6 @@ public class Buildings : MonoBehaviour
 
                 createBuilding(stoneMineToPlace, stoneMineShadow);
                 gameManager.SetNoStoneMines(gameManager.GetNoStoneMines() + 1);
-                stoneMineToPlace = null;
             }
 
             //Create CrystalMine
@@ -222,7 +218,6 @@ public class Buildings : MonoBehaviour
 
                 createBuilding(crystalMineToPlace, crystalMineShadow);
                 gameManager.SetNoCrystalMines(gameManager.GetNoCrystalMines() + 1);
-                crystalMineToPlace = null;
             }
         }
 
@@ -489,9 +484,7 @@ public class Buildings : MonoBehaviour
         Cursor.visible = true;
         grid.setTilesActive(false);
         roadToPlace = null;
-        customCursorRoad.gameObject.SetActive(false);
         initialToPlace = null;
-        customCursorInitial.gameObject.SetActive(false);
         initialShadow.SetActive(false);
         roadShadow.SetActive(false);
         buildingShadow.SetActive(false);
@@ -517,12 +510,21 @@ public class Buildings : MonoBehaviour
         buildingPlaceSound.Play();
         buildingPlaceParticles.transform.position = new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z);
         buildingPlaceParticles.Play();
-        Cursor.visible = true;
-        grid.setTilesActive(false);
 
         gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
 
-        shadow.SetActive(false);
+        // If the sifht is down, continue 
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            Cursor.visible = true;
+            grid.setTilesActive(false);
+            shadow.SetActive(false);
+            buildingToPlace = null;
+            farmToPlace = null;
+            batteryToPlace = null;
+            stoneMineToPlace = null;
+            crystalMineToPlace = null;
+        }
     }
 
     /********************************************************************************************************************************/
