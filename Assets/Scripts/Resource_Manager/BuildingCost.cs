@@ -14,74 +14,23 @@ public class BuildingCost : MonoBehaviour
     public int CrystalCost;
     public int PopCost;
 
-    //set amount of reasource to increase
-    public int GoldIncrease;
-    public int FoodIncrease;
-    public int EnergyIncrease;
-    public int StoneIncrease;
-    public int CrystalIncrease;
-    public int PopIncrease;
-
     //set time between increases in reasources
     public float timeBtwIncrease;
-    private float nextIncreaseTime;
+    public float nextIncreaseTime;
 
-    private GameManager gm;
+    public GameManager gm;
 
-    private void Start()
+    private void Awake()
     {
         gm = FindObjectOfType<GameManager>();
-        gm.AddPop(PopIncrease);
-        gm.AddGold(GoldIncrease);
-        gm.AddFood(FoodIncrease);
-        gm.AddEnergy(EnergyIncrease);
-        gm.AddStone(StoneIncrease);
-        gm.AddCrystal(CrystalIncrease);
     }
 
     //Doing somthing wrong here 
     private void Update()
     {
-        if (Time.time > nextIncreaseTime)
-        {
-            nextIncreaseTime = Time.time + timeBtwIncrease;
-            gm.gold += GoldIncrease;
-            gm.energy += EnergyIncrease;
-            gm.food += FoodIncrease;
-            gm.stone += StoneIncrease;
-            gm.crystal += CrystalIncrease;
-        }
+        
     }
-
-    public int GetPopulation()
-    {
-        return PopIncrease;
-    }
-
-    public int GetGoldIncrease()
-    {
-        return GoldIncrease;
-    }
-
-    public int GetFoodIncrease()
-    {
-        return FoodIncrease;
-    }
-
-    public int GetEnergyIncrease()
-    {
-        return EnergyIncrease;
-    }
-
-    public int GetCrystalIncrease()
-    {
-        return CrystalIncrease;
-    }
-
-    public int GetStoneIncrease()
-    {
-        return StoneIncrease;
-    }
+    
 
     public int getGridWidth()
     {
@@ -105,5 +54,36 @@ public class BuildingCost : MonoBehaviour
         int haux = height;
         height = width;
         width = haux;
+    }
+
+    // Functions in the child
+    virtual public int GetPopulation()
+    {
+        return 0;
+    }
+
+    virtual public int GetGoldIncrease()
+    {
+        return 0;
+    }
+
+    virtual public int GetFoodIncrease()
+    {
+        return 0;
+    }
+
+    virtual public int GetEnergyIncrease()
+    {
+        return 0;
+    }
+
+    virtual public int GetCrystalIncrease()
+    {
+        return 0;
+    }
+
+    virtual public int GetStoneIncrease()
+    {
+        return 0;
     }
 }
