@@ -59,32 +59,78 @@ public class GameManager : MonoBehaviour
 		popDisplay.text = (currentPop).ToString();
 	}
 
-	//deduction of reasources
+	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)
 	{
 		if (gold >= building.GoldCost)
 		{
 			gold -= building.GoldCost;
+			
 		}
 
 		if (energy >= building.EnergyCost)
 		{
 			energy -= building.EnergyCost;
+			
 		}
 
 		if (food >= building.FoodCost)
 		{
 			food -= building.FoodCost;
+			
 		}
 
-        if (stone >= building.StoneCost)
+		if (stone >= building.StoneCost)
+		{
+			stone -= building.StoneCost;
+			
+		}
+
+		if (crystal >= building.CrystalCost)
+		{
+			crystal -= building.CrystalCost;
+			
+		}
+
+		if (pop >= building.PopCost)
+		{
+			pop -= building.PopCost;
+		}
+	}
+
+	//deduction of reasources new work in progress kind apointless might be useful 
+
+	/*
+	public void BuyBuilding(BuildingCost building)
+	{
+		if (gold >= building.GoldCost && currentGold >= building.MaintenanceGoldCost)
+		{
+			gold -= building.GoldCost;
+			currentGold -= building.MaintenanceGoldCost;
+		}
+
+		if (energy >= building.EnergyCost && currentEnergy >= building.MaintenanceEnergyCost)
+		{
+			energy -= building.EnergyCost;
+			currentEnergy -= building.MaintenanceEnergyCost;
+		}
+
+		if (food >= building.FoodCost && currentFood >= building.MaintenanceFoodCost)
+		{
+			food -= building.FoodCost;
+			currentFood -= building.MaintenanceFoodCost;
+		}
+
+        if (stone >= building.StoneCost && currentStone >= building.MaintenanceStoneCost)
         {
 			stone -= building.StoneCost;
+			currentStone -= building.MaintenanceStoneCost;
         }
 
-        if (crystal >= building.CrystalCost)
+        if (crystal >= building.CrystalCost && currentCrystal >= building.MaintenanceCrystalCost)
         {
 			crystal -= building.CrystalCost;
+			currentCrystal -= building.MaintenanceCrystalCost;
         }
 
 		if (pop >= building.PopCost)
@@ -92,6 +138,7 @@ public class GameManager : MonoBehaviour
 			pop -= building.PopCost;
 		}
 	}
+	*/
 
 	public int GetNoBuildings()
 	{
