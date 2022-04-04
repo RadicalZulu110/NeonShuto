@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8695388670191608797}
-  - component: {fileID: 8695388670191608796}
+  - component: {fileID: 5171418897361353101}
   m_Layer: 0
   m_Name: Power_T1
-  m_TagString: battery
+  m_TagString: ResourceBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8695388670191608796
+--- !u!114 &5171418897361353101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8695388670191608799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
+  m_Script: {fileID: 11500000, guid: e03e7c2916ce5864a8250781b300a640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 1
@@ -52,13 +52,13 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
+  timeBtwIncrease: 5
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
   FoodIncrease: 0
-  EnergyIncrease: 100
+  EnergyIncrease: 50
   StoneIncrease: 0
   CrystalIncrease: 0
-  PopIncrease: 0
-  timeBtwIncrease: 5
 --- !u!1001 &8695388669578976391
 PrefabInstance:
   m_ObjectHideFlags: 0
