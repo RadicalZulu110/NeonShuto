@@ -223,13 +223,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!23 &230045560
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -501,13 +497,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &485383845
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,13 +552,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &614007187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,7 +2461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &965075791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2743,13 +2731,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!65 &1076384731
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2899,13 +2883,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &1120175960
 GameObject:
   m_ObjectHideFlags: 0
@@ -8094,13 +8074,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &1293178219
 GameObject:
   m_ObjectHideFlags: 0
@@ -8465,13 +8441,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &1760358599
 GameObject:
   m_ObjectHideFlags: 0
@@ -8792,13 +8764,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &1865510574
 GameObject:
   m_ObjectHideFlags: 0
@@ -8881,13 +8849,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1001 &1947566732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8975,13 +8939,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &1966396325
 GameObject:
   m_ObjectHideFlags: 0
@@ -9034,13 +8994,9 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1 &2106809022
 GameObject:
   m_ObjectHideFlags: 0
