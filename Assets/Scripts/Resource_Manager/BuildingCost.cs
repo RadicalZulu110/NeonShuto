@@ -6,7 +6,7 @@ public class BuildingCost : MonoBehaviour
 {
     public int width, height;
 
-    //set cost of the building type
+    //set initial cost of the building type
     public int GoldCost;
     public int FoodCost;
     public int EnergyCost;
@@ -14,6 +14,12 @@ public class BuildingCost : MonoBehaviour
     public int CrystalCost;
     public int PopCost;
 
+    public int MaintenanceGoldCost;
+    public int MaintenanceFoodCost;
+    public int MaintenanceEnergyCost;
+    public int MaintenanceStoneCost;
+    public int MaintenanceCrystalCost;
+    public int MaintenancePopCost;
     //set time between increases in reasources
     public float timeBtwIncrease;
     public float nextIncreaseTime;
@@ -25,7 +31,6 @@ public class BuildingCost : MonoBehaviour
         gm = FindObjectOfType<GameManager>();
     }
 
-    //Doing somthing wrong here 
     private void Update()
     {
         

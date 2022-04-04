@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class timer : MonoBehaviour
 {
-    private int seconds;
+    private float seconds;
     private int min;
-    private  int hour;
+    public  int hour;
     private int day;
-    public float timeBtwIncrease;
-    private float nextIncreaseTime;
+    public float timeMod;
 
     public Text TimeDisplay;
     public Text SecDisplay;
@@ -19,47 +18,28 @@ public class timer : MonoBehaviour
 
     private void Update()
     {
-        TimeDisplay.text = min.ToString() + " : " + hour.ToString() + " : " + day.ToString();
-        SecDisplay.text = seconds.ToString();
 
-        if (Time.time > nextIncreaseTime)
+        seconds += Time.deltaTime * timeMod;
+
+        if (seconds >= 60)
         {
-            nextIncreaseTime = Time.time + timeBtwIncrease;
-            
-            if (seconds <= 59)
-            {
-                seconds++;
-            }
-            
-            else if (seconds >= 59)
-            {
-                seconds = 0;
-                min += 1;
-            }
-        
-            if (min <= 60 && seconds >= 59)
-            {
-                seconds = 0;
-                min++;
-            }
-            
-            if (min >= 60)
-            {
-                min = 0;
-                hour++;
-            }
+            min += (int)(seconds / 60);
+            seconds %= 60;
         }
-        
+
+        if (min >= 60)
+        {
+            hour += min / 60;
+            min %= 60;  
+        }
+
         if (hour >= 24)
         {
-            hour = 0;
-            day++;
+            day += hour / 24;
+            hour %= 24;
         }
-
-        if (hour >= 10)
-        {
-            FailedQuota.SetActive(true);
-        }
+        
+        TimeDisplay.text = min.ToString() + " : " + hour.ToString() + " : " + day.ToString();
     }
 }
 

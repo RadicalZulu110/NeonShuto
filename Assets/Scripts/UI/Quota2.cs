@@ -7,15 +7,19 @@ public class Quota2 : MonoBehaviour
 {
     public int secondQuota;
 
+    public int timeLimit;
+
     public Text goldQuotaDisplay;
     public Text foodQuotaDisplay;
     public Text stoneQuotaDisplay;
     public Text crystalQuotaDisplay;
 
     public GameManager gameManager;
+    public timer timer;
     public GameObject QuotaTwo;
     public GameObject QuotaThree;
     public GameObject QuotaTwoComplete;
+    public GameObject FailedQuota;
 
     void Update()
     {
@@ -23,6 +27,12 @@ public class Quota2 : MonoBehaviour
         foodQuotaDisplay.text = gameManager.food.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
         stoneQuotaDisplay.text = gameManager.stone.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
         crystalQuotaDisplay.text = gameManager.crystal.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
+
+        if (timer.hour >= timeLimit)
+        {
+            Time.timeScale = 0;
+            FailedQuota.SetActive(true);
+        }
     }
 
     public void OnMouseDown()
@@ -37,6 +47,8 @@ public class Quota2 : MonoBehaviour
             QuotaTwo.SetActive(false);
             QuotaThree.SetActive(true);
             QuotaTwoComplete.SetActive(true);
+
+            Time.timeScale = 0;
         }
     }
 }

@@ -52,10 +52,17 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  timeBtwIncrease: 3
-  nextIncreaseTime: 0
-  gm: {fileID: 0}
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 10
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  MaintenancePopCost: 0
   GoldIncrease: 50
+  FoodIncrease: -10
+  EnergyIncrease: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
   PopIncrease: 10
 --- !u!1001 &7677352116002200050
 PrefabInstance:

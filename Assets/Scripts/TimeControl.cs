@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TimeControl : MonoBehaviour
 {
+    void Start()
+    {
+        Time.timeScale = 0;
+    }
+
     public void PauseGame()
     { 
          Time.timeScale = 0;
