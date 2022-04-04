@@ -6,13 +6,21 @@ public class BuildingCost : MonoBehaviour
 {
     public int width, height;
 
-    //set cost of the building type
+    //set initial cost of the building type
     public int GoldCost;
     public int FoodCost;
     public int EnergyCost;
     public int StoneCost;
     public int CrystalCost;
     public int PopCost;
+
+    //set maintenance cost of the building type
+    public int MaintenanceGoldCost;
+    public int MaintenanceFoodCost;
+    public int MaintenanceEnergyCost;
+    public int MaintenanceStoneCost;
+    public int MaintenanceCrystalCost;
+    public int MaintenancePopCost;
 
     //set amount of reasource to increase
     public int GoldIncrease;
@@ -39,11 +47,11 @@ public class BuildingCost : MonoBehaviour
         gm.AddCrystal(CrystalIncrease);
     }
 
-    //Doing somthing wrong here 
     private void Update()
     {
         if (Time.time > nextIncreaseTime)
         {
+
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.gold += GoldIncrease;
             gm.energy += EnergyIncrease;
