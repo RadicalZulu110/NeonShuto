@@ -61,34 +61,5 @@ public class BuildingCost : MonoBehaviour
         width = haux;
     }
 
-    // Functions in the child
-    virtual public int GetPopulation()
-    {
-        return 0;
-    }
-
-    virtual public int GetGoldIncrease()
-    {
-        return 0;
-    }
-
-    virtual public int GetFoodIncrease()
-    {
-        return 0;
-    }
-
-    virtual public int GetEnergyIncrease()
-    {
-        return 0;
-    }
-
-    virtual public int GetCrystalIncrease()
-    {
-        return 0;
-    }
-
-    virtual public int GetStoneIncrease()
-    {
-        return 0;
-    }
+    
 }

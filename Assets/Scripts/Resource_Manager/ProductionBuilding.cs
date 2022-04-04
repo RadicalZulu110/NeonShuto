@@ -4,55 +4,40 @@ using UnityEngine;
 
 public class ProductionBuilding : BuildingCost
 {
-    //set amount of reasource to increase
-    public int FoodIncrease;
-    public int EnergyIncrease;
-    public int StoneIncrease;
-    public int CrystalIncrease;
 
     // Start is called before the first frame update
     void Start()
     {
-        gm.AddFood(FoodIncrease);
-        gm.AddEnergy(EnergyIncrease);
-        gm.AddStone(StoneIncrease);
-        gm.AddCrystal(CrystalIncrease);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextIncreaseTime)
-        {
-            nextIncreaseTime = Time.time + timeBtwIncrease;
-            gm.energy += EnergyIncrease;
-            gm.food += FoodIncrease;
-            gm.stone += StoneIncrease;
-            gm.crystal += CrystalIncrease;
-        }
+       
     }
 
-    override
-    public int GetFoodIncrease()
+    
+    public virtual int GetFoodIncrease()
     {
-        return FoodIncrease;
+        return 0;
     }
 
-    override
-    public int GetEnergyIncrease()
+    
+    public virtual int GetEnergyIncrease()
     {
-        return EnergyIncrease;
+        return 0;
     }
 
-    override
-    public int GetCrystalIncrease()
+    
+    public virtual int GetCrystalIncrease()
     {
-        return CrystalIncrease;
+        return 0;
     }
 
-    override
-    public int GetStoneIncrease()
+    
+    public virtual int GetStoneIncrease()
     {
-        return StoneIncrease;
+        return 0;
     }
 }
