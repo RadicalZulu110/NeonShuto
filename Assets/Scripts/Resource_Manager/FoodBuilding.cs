@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PopulationBuilding : BuildingCost
+public class FoodBuilding : ProductionBuilding
 {
-    
-    public int GoldIncrease;
-    public int PopIncrease;
+
+    public int FoodIncrease;
 
     // Start is called before the first frame update
     void Start()
     {
-        gm.AddPop(PopIncrease);
-        gm.AddGold(GoldIncrease);
+        gm.AddFood(FoodIncrease);
     }
 
     // Update is called once per frame
@@ -21,19 +19,12 @@ public class PopulationBuilding : BuildingCost
         if (Time.time > nextIncreaseTime)
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
-            gm.gold += GoldIncrease;
+            gm.food += FoodIncrease;
         }
     }
 
-    
-    public int GetPopulation()
+    public override int GetFoodIncrease()
     {
-        return PopIncrease;
-    }
-
-    
-    public int GetGoldIncrease()
-    {
-        return GoldIncrease;
+        return FoodIncrease;
     }
 }

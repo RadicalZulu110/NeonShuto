@@ -357,7 +357,7 @@ public class Buildings : MonoBehaviour
         // Delete building or road
         if(selectedObjectToDelete != null)
         {
-            selectedObjectToDelete.GetComponent<Renderer>().materials = originalMaterial;
+            selectedObjectToDelete.GetComponentInChildren<Renderer>().materials = originalMaterial;
             selectedObjectToDelete = null;
         }
 
@@ -368,11 +368,11 @@ public class Buildings : MonoBehaviour
             {
                 if (hitInfo.collider.gameObject != null && (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
                                                             hitInfo.collider.tag == "Road" || 
-                                                            hitInfo.collider.tag == "PopulationBuilding"))                        // is a good one
+                                                            hitInfo.collider.tag == "ResourceBuilding"))                        // is a good one
                 {
                     selectedObjectToDelete = hitInfo.collider.gameObject;
-                    originalMaterial = selectedObjectToDelete.GetComponent<Renderer>().materials;
-                    selectedObjectToDelete.GetComponent<Renderer>().materials = deletingMaterial;
+                    originalMaterial = selectedObjectToDelete.GetComponentInChildren<Renderer>().materials;
+                    selectedObjectToDelete.GetComponentInChildren<Renderer>().materials = deletingMaterial;
 
                     if (Input.GetKeyDown(KeyCode.Mouse0))
                     {
@@ -380,17 +380,17 @@ public class Buildings : MonoBehaviour
                         {
                             PopulationBuilding buildingScript = hitInfo.collider.gameObject.GetComponent<PopulationBuilding>();
                             gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
-                            gameManager.AddPop(buildingScript.GetPopulation());
-                            gameManager.AddGold(buildingScript.GetGoldIncrease());
+                            gameManager.AddPop(-buildingScript.GetPopulation());
+                            gameManager.AddGold(-buildingScript.GetGoldIncrease());
                             grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                         }
                         else if(selectedObjectToDelete.tag == "ResourceBuilding")
                         {
                             ProductionBuilding buildingScript = hitInfo.collider.gameObject.GetComponent<ProductionBuilding>();
-                            gameManager.AddFood(buildingScript.GetFoodIncrease());
-                            gameManager.AddEnergy(buildingScript.GetEnergyIncrease());
+                            gameManager.AddFood(-buildingScript.GetFoodIncrease());
+                            gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
                             gameManager.AddStone(-buildingScript.GetStoneIncrease());
-                            gameManager.AddCrystal(buildingScript.GetCrystalIncrease());
+                            gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
                             grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                         }
                         else

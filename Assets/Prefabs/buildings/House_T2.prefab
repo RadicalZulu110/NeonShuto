@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8250806027476472301}
   - component: {fileID: 9000262189700969732}
+  - component: {fileID: 9211990298865749794}
   m_Layer: 0
   m_Name: House_T2
   m_TagString: PopulationBuilding
@@ -58,12 +59,24 @@ MonoBehaviour:
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
   MaintenancePopCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
   GoldIncrease: 50
-  FoodIncrease: -10
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
   PopIncrease: 10
+--- !u!65 &9211990298865749794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8250806027476472299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.429657, z: 1.3075616}
+  m_Center: {x: 0, y: 1.2148285, z: -0.017289996}
 --- !u!1001 &7677352116002200050
 PrefabInstance:
   m_ObjectHideFlags: 0
