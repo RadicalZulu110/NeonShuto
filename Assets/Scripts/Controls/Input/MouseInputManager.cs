@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseInputManager : InputManager
 {
     Vector2Int screen;
-    float mousePositionOnRotateStart;
+    Vector2 mousePositionOnRotateStart;
 
     // Events
     public static event MoveInputHandler OnMoveInput;
@@ -46,17 +46,33 @@ public class MouseInputManager : InputManager
         // Rotation
         if (Input.GetMouseButtonDown(1))
         {
-            mousePositionOnRotateStart = mp.x;
+            mousePositionOnRotateStart.x = mp.x;
+            mousePositionOnRotateStart.y = mp.y;
         }else if (Input.GetMouseButton(1))
         {
-            if(mp.x < mousePositionOnRotateStart)
+            // Rotate to right and left
+            if(mp.x < mousePositionOnRotateStart.x-100)
             {
-                OnRotateInput?.Invoke(-1f);
+                OnRotateInput?.Invoke(-1f, 0);
             }
-            else if(mp.x > mousePositionOnRotateStart)
+            else if(mp.x > mousePositionOnRotateStart.x+100)
             {
-                OnRotateInput?.Invoke(1f);
+                OnRotateInput?.Invoke(1f, 0);
             }
+            else
+            {
+                // Rotete up and down
+                if (mp.y < mousePositionOnRotateStart.y - 100)
+                {
+                    OnRotateInput?.Invoke(0, -1f);
+                }
+                else if (mp.y > mousePositionOnRotateStart.y + 100)
+                {
+                    OnRotateInput?.Invoke(0, 1f);
+                }
+            }
+
+            
         }
 
         // Zoom
