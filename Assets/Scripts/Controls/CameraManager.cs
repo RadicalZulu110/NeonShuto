@@ -14,6 +14,10 @@ public class CameraManager : MonoBehaviour
     public float lateralSpeed = 5f;
     public float rotateSpeed = 45f;
 
+    [Header("Rotation X")]
+    public float maxRotationX = 25f;
+    public float minRotationX = 335f;
+
     [Header("Move Bounds")]
     public Vector2 minBounds, maxBounds;
 
@@ -25,9 +29,10 @@ public class CameraManager : MonoBehaviour
 
     ZoomStrategy zoomStrategy;
     Vector3 frameMove;
-    float frameRotate;
+    float frameRotateX, frameRotateY;
     float frameZoom;
     Camera cam;
+    float rotationX, rotationY;
 
     private void Awake()
     {
@@ -40,7 +45,7 @@ public class CameraManager : MonoBehaviour
     private void OnEnable()
     {
         KeybordInputManager.OnMoveInput += UpdateFrameMove;
-        KeybordInputManager.OnRotateInput += UpdateFrameRotate;
+        //KeybordInputManager.OnRotateInput += UpdateFrameRotate;
         KeybordInputManager.OnZoomInput += UpdateFrameZoom;
         MouseInputManager.OnMoveInput += UpdateFrameMove;
         MouseInputManager.OnRotateInput += UpdateFrameRotate;
@@ -50,7 +55,7 @@ public class CameraManager : MonoBehaviour
     private void OnDisable()
     {
         KeybordInputManager.OnMoveInput -= UpdateFrameMove;
-        KeybordInputManager.OnRotateInput -= UpdateFrameRotate;
+        //KeybordInputManager.OnRotateInput -= UpdateFrameRotate;
         KeybordInputManager.OnZoomInput -= UpdateFrameZoom;
         MouseInputManager.OnMoveInput -= UpdateFrameMove;
         MouseInputManager.OnRotateInput -= UpdateFrameRotate;
@@ -62,9 +67,10 @@ public class CameraManager : MonoBehaviour
         frameZoom += zoomAmount;
     }
 
-    private void UpdateFrameRotate(float rotateAmount)
+    private void UpdateFrameRotate(float rotateAmountX, float rotateAmountY)
     {
-        frameRotate += rotateAmount;
+        frameRotateX += rotateAmountX;
+        frameRotateY += rotateAmountY;
     }
 
     private void UpdateFrameMove(Vector3 moveVector)
@@ -82,13 +88,39 @@ public class CameraManager : MonoBehaviour
             frameMove = Vector3.zero;
         }
 
-        if(frameRotate != 0f)
+        if(frameRotateX != 0f)
         {
-            transform.Rotate(Vector3.up, frameRotate * Time.deltaTime * rotateSpeed);
-            frameRotate = 0f;
+            transform.Rotate(Vector3.up, frameRotateX * Time.deltaTime * rotateSpeed);
+            rotationY = transform.localEulerAngles.y;
+            transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+            frameRotateX = 0f;
+        }
+        else if(frameRotateY != 0f)
+        {
+            if(checkAngleX(transform.eulerAngles.x))
+            {
+                transform.Rotate(Vector3.right, frameRotateY * Time.deltaTime * rotateSpeed);
+                rotationX = transform.localEulerAngles.x;
+                transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+            }
+            else
+            {
+                if(transform.localEulerAngles.x >= maxRotationX+10 )
+                    transform.rotation = Quaternion.Euler(minRotationX, rotationY, 0);
+                else if(transform.localEulerAngles.x-360 <= minRotationX)
+                    transform.rotation = Quaternion.Euler(maxRotationX, rotationY, 0);
+            }
+            Debug.Log(transform.eulerAngles.x);
+            
+            frameRotateY = 0f;
+        }
+        else
+        {
+           
+            transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
         }
 
-        if(frameZoom < 0f)
+        if (frameZoom < 0f)
         {
             zoomStrategy.ZoomIn(cam, Time.deltaTime * Mathf.Abs(frameZoom) * zoomSpeed, nearZoomLimit);
             frameZoom = 0f;
@@ -104,5 +136,13 @@ public class CameraManager : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x),
                                         transform.position.y,
                                         Mathf.Clamp(transform.position.z, minBounds.y, maxBounds.y));
+    }
+
+    private bool checkAngleX(float angle)
+    {
+        if ((angle >= 0 && angle <= maxRotationX) || (angle >= minRotationX && angle <= 360))
+            return true;
+        else
+            return false;
     }
 }
