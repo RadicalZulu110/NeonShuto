@@ -1873,6 +1873,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4672181174916794243, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: timeMod
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4672181175642254267, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: gameManager
       value: 
@@ -2768,7 +2772,9 @@ MonoBehaviour:
   lookAtOffset: 2
   inOutSpeed: 5
   lateralSpeed: 5
-  rotateSpeed: 45
+  rotateSpeed: 15
+  maxRotationX: 25
+  minRotationX: 325
   minBounds: {x: -150, y: -150}
   maxBounds: {x: 150, y: 150}
   zoomSpeed: 4
@@ -8345,7 +8351,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 10
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -8492,13 +8498,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760358599}
-  m_LocalRotation: {x: 0.42415202, y: 0, z: 0, w: 0.905591}
-  m_LocalPosition: {x: 0, y: 14, z: -10}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 50, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1120175961}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50.194, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1001 &1764804715
 PrefabInstance:
   m_ObjectHideFlags: 0
