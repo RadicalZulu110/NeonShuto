@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5400645475189277895}
-  - component: {fileID: 5400645475189277892}
+  - component: {fileID: -3443972160010914857}
   m_Layer: 0
   m_Name: HeroConstruction
   m_TagString: Starting construction
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5400645475189277892
+--- !u!114 &-3443972160010914857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5400645475189277893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d311d59fff159245a60140a61718757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 2
@@ -58,13 +58,9 @@ MonoBehaviour:
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
   MaintenancePopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!1001 &5400645475025704903
 PrefabInstance:
   m_ObjectHideFlags: 0

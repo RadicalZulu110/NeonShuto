@@ -7630,8 +7630,10 @@ MonoBehaviour:
   deleteBuildingSound: {fileID: 1473283310}
   buildingPlaceParticles: {fileID: 859418288}
   gameManager: {fileID: 1945442718}
+  buildingCost: {fileID: 0}
   deletingMaterial:
   - {fileID: 2100000, guid: acf220ee2572c51479e72a1a5b5bc760, type: 2}
+  divisbleReturn: 0.5
 --- !u!4 &1945442720
 Transform:
   m_ObjectHideFlags: 0
