@@ -2114,8 +2114,10 @@ MonoBehaviour:
   deleteBuildingSound: {fileID: 385703524}
   buildingPlaceParticles: {fileID: 1198227686}
   gameManager: {fileID: 906774556}
+  buildingCost: {fileID: 0}
   deletingMaterial:
   - {fileID: 2100000, guid: acf220ee2572c51479e72a1a5b5bc760, type: 2}
+  divisbleReturn: 0
 --- !u!4 &906774558
 Transform:
   m_ObjectHideFlags: 0
@@ -8351,8 +8353,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 10
-  orthographic: 1
+  field of view: 60
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
