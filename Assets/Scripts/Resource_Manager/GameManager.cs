@@ -7,28 +7,29 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	private int NoBuildings;
-	public int gold;
-	public int currentGold;
+	public int TotalGold;
+	public int goldIncome;
 
 	private int NoBatterys;
-	public int energy;
-	public int currentEnergy;
+	public int TotalEnergy;
+	public int energyIncome;
 
 	private int NoFarms;
-	public int food;
-	public int currentFood;
+	public int TotalFood;
+	public int foodIncome;
 
 	public int NoStoneMines;
-	public int stone;
-	public int currentStone;
+	public int TotalStone;
+	public int stoneIncome;
 
 	public int NoCrystalMines;
-	public int crystal;
-	public int currentCrystal;
+	public int TotalCrystal;
+	public int crystalIncome;
 	
 	public int pop;
 	public int futurePop;
-	public int currentPop;
+	public int PopCapacity;
+	public int TotalPop;
 
 
 	public Text goldDisplay;
@@ -51,44 +52,44 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		goldDisplay.text = (gold).ToString() + "(" + (currentGold).ToString() + ")";
-		energyDisplay.text = (energy).ToString() + "(" + (currentEnergy).ToString() + ")";
-		foodDisplay.text = (food).ToString() + "(" + (currentFood).ToString() + ")";
-		StoneDisplay.text = (stone).ToString() + "(" + (currentStone).ToString() + ")";
-		CrystalDisplay.text = (crystal).ToString() + "(" + (currentCrystal).ToString() + ")";
-		popDisplay.text = (currentPop).ToString();
+		goldDisplay.text = (TotalGold).ToString() + "(" + (goldIncome).ToString() + ")";
+		energyDisplay.text = (TotalEnergy).ToString() + "(" + (energyIncome).ToString() + ")";
+		foodDisplay.text = (TotalFood).ToString() + "(" + (foodIncome).ToString() + ")";
+		StoneDisplay.text = (TotalStone).ToString() + "(" + (stoneIncome).ToString() + ")";
+		CrystalDisplay.text = (TotalCrystal).ToString() + "(" + (crystalIncome).ToString() + ")";
+		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
 	}
 
 	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)
 	{
-		if (gold >= building.GoldCost)
+		if (TotalGold >= building.GoldCost)
 		{
-			gold -= building.GoldCost;
+			TotalGold -= building.GoldCost;
 			
 		}
 
-		if (energy >= building.EnergyCost)
+		if (TotalEnergy >= building.EnergyCost)
 		{
-			energy -= building.EnergyCost;
+			TotalEnergy -= building.EnergyCost;
 			
 		}
 
-		if (food >= building.FoodCost)
+		if (TotalFood >= building.FoodCost)
 		{
-			food -= building.FoodCost;
+			TotalFood -= building.FoodCost;
 			
 		}
 
-		if (stone >= building.StoneCost)
+		if (TotalStone >= building.StoneCost)
 		{
-			stone -= building.StoneCost;
+			TotalStone -= building.StoneCost;
 			
 		}
 
-		if (crystal >= building.CrystalCost)
+		if (TotalCrystal >= building.CrystalCost)
 		{
-			crystal -= building.CrystalCost;
+			TotalCrystal -= building.CrystalCost;
 			
 		}
 
@@ -202,56 +203,66 @@ public class GameManager : MonoBehaviour
 
 	public int GetGold()
     {
-		return gold;
+		return TotalGold;
     }
 
 	public int GetEnergy()
     {
-		return energy;
+		return TotalEnergy;
     }
 	
 	public int GetFood()
     {
-		return food;
+		return TotalFood;
     }
 
 	public int GetStone()
     {
-		return stone;
+		return TotalStone;
     }
 
 	public int GetCrystal()
     {
-		return crystal;
+		return TotalCrystal;
     }
 	
 	public void AddGold(int gold)
     {
-		currentGold += gold;
+		goldIncome += gold;
     }
 
 	public void AddFood(int food)
     {
-		currentFood += food;
+		foodIncome += food;
     }
 
 	public void AddEnergy(int Energy)
     {
-		currentEnergy += Energy;
+		energyIncome += Energy;
     }
 
 	public void AddCrystal(int Crystal)
     {
-		currentCrystal += Crystal;
+		crystalIncome += Crystal;
     }
 
 	public void AddStone(int Stone)
     {
-		currentStone += Stone;
+		stoneIncome += Stone;
     }
 
 	public void AddPop(int pop)
     {
-		currentPop += pop;
+		PopCapacity += pop;
+    }
+
+	public void AddTotalPop(int ExpectedPop)
+    {
+		TotalPop += ExpectedPop;
+
+		if (TotalPop > PopCapacity)
+        {
+			TotalPop = PopCapacity;
+		}
     }
 }

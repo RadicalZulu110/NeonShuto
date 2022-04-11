@@ -23,10 +23,10 @@ public class Quota2 : MonoBehaviour
 
     void Update()
     {
-        goldQuotaDisplay.text = gameManager.gold.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
-        foodQuotaDisplay.text = gameManager.food.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
-        stoneQuotaDisplay.text = gameManager.stone.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
-        crystalQuotaDisplay.text = gameManager.crystal.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
+        goldQuotaDisplay.text = gameManager.TotalGold.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
+        foodQuotaDisplay.text = gameManager.TotalFood.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
+        stoneQuotaDisplay.text = gameManager.TotalStone.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
+        crystalQuotaDisplay.text = gameManager.TotalCrystal.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
 
         if (timer.hour >= timeLimit)
         {
@@ -37,12 +37,12 @@ public class Quota2 : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (gameManager.gold >= secondQuota && gameManager.food >= secondQuota && gameManager.stone >= secondQuota && gameManager.crystal >= secondQuota)
+        if (gameManager.TotalGold >= secondQuota && gameManager.TotalFood >= secondQuota && gameManager.TotalStone >= secondQuota && gameManager.TotalCrystal >= secondQuota)
         {
-            gameManager.gold -= secondQuota;
-            gameManager.food -= secondQuota;
-            gameManager.stone -= secondQuota;
-            gameManager.crystal -= secondQuota;
+            gameManager.TotalGold -= secondQuota;
+            gameManager.TotalFood -= secondQuota;
+            gameManager.TotalStone -= secondQuota;
+            gameManager.TotalCrystal -= secondQuota;
 
             QuotaTwo.SetActive(false);
             QuotaThree.SetActive(true);

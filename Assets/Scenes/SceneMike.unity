@@ -183,6 +183,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &127914126
 GameObject:
@@ -973,6 +979,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!65 &596892473
 BoxCollider:
@@ -1166,6 +1178,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &688488611
 GameObject:
@@ -1227,6 +1245,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1001 &713922585
 PrefabInstance:
@@ -1323,6 +1347,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &761028598
 GameObject:
@@ -1422,6 +1452,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &859418286
 GameObject:
@@ -6331,6 +6367,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!114 &980780159 stripped
 MonoBehaviour:
@@ -6682,6 +6724,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1235655439
 GameObject:
@@ -6732,6 +6780,8 @@ MonoBehaviour:
   inOutSpeed: 5
   lateralSpeed: 5
   rotateSpeed: 45
+  maxRotationX: 25
+  minRotationX: 335
   minBounds: {x: -150, y: -150}
   maxBounds: {x: 150, y: 150}
   zoomSpeed: 4
@@ -6930,6 +6980,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!23 &1376361153
 MeshRenderer:
@@ -7264,6 +7320,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1776266883
 GameObject:
@@ -7476,6 +7538,12 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1872680993
 GameObject:
@@ -7581,21 +7649,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24589061139538438b5c9396a614d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 30000
-  currentGold: 0
-  energy: 30000
-  currentEnergy: 0
-  food: 30000
-  currentFood: 0
+  TotalGold: 1000
+  goldIncome: 0
+  TotalEnergy: 1000
+  energyIncome: 0
+  TotalFood: 1000
+  foodIncome: 0
   NoStoneMines: 0
-  stone: 30000
-  currentStone: 0
+  TotalStone: 1000
+  stoneIncome: 0
   NoCrystalMines: 0
-  crystal: 30000
-  currentCrystal: 0
+  TotalCrystal: 0
+  crystalIncome: 0
   pop: 0
   futurePop: 0
-  currentPop: 0
+  PopCapacity: 0
+  TotalPop: 0
   goldDisplay: {fileID: 980780193}
   energyDisplay: {fileID: 980780192}
   foodDisplay: {fileID: 980780191}

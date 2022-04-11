@@ -384,11 +384,11 @@ public class Buildings : MonoBehaviour
                             gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
                             gameManager.AddPop(-buildingScript.GetPopulation());
                             gameManager.AddGold(-buildingScript.GetGoldIncrease());
-                            gameManager.gold += (int)(buildingScript.GoldCost * divisbleReturn);
-                            gameManager.food += (int)(buildingScript.FoodCost * divisbleReturn);
-                            gameManager.energy += (int)(buildingScript.EnergyCost * divisbleReturn);
-                            gameManager.crystal += (int)(buildingScript.CrystalCost * divisbleReturn);
-                            gameManager.stone += (int)(buildingScript.StoneCost * divisbleReturn);
+                            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                             grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                         }
                         else if(selectedObjectToDelete.tag == "ResourceBuilding")
@@ -398,11 +398,11 @@ public class Buildings : MonoBehaviour
                             gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
                             gameManager.AddStone(-buildingScript.GetStoneIncrease());
                             gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
-                            gameManager.gold += (int)(buildingScript.GoldCost * divisbleReturn);
-                            gameManager.food += (int)(buildingScript.FoodCost * divisbleReturn);
-                            gameManager.energy += (int)(buildingScript.EnergyCost * divisbleReturn);
-                            gameManager.crystal += (int)(buildingScript.CrystalCost * divisbleReturn);
-                            gameManager.stone += (int)(buildingScript.StoneCost * divisbleReturn);
+                            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                             grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                         }
                         else

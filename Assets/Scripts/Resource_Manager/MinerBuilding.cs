@@ -5,8 +5,7 @@ using UnityEngine;
 public class MinerBuilding : ProductionBuilding
 {
 
-    public int StoneIncrease;
-    public int CrystalIncrease;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +20,8 @@ public class MinerBuilding : ProductionBuilding
         if (Time.time > nextIncreaseTime)
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
-            gm.stone += StoneIncrease;
-            gm.crystal += CrystalIncrease;
+            gm.TotalStone += StoneIncrease;
+            gm.TotalCrystal += CrystalIncrease;
         }
     }
 

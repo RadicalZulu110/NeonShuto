@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodBuilding : ProductionBuilding
 {
 
-    public int FoodIncrease;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class FoodBuilding : ProductionBuilding
         if (Time.time > nextIncreaseTime)
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
-            gm.food += FoodIncrease;
+            gm.TotalFood += FoodIncrease;
         }
     }
 

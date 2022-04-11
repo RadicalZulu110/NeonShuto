@@ -61,9 +61,13 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 3
   nextIncreaseTime: 0
-  gm: {fileID: 0}
-  GoldIncrease: 50
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: -10
+  FoodIncrease: -10
+  GoldIncreasePerPerson: 0
   PopIncrease: 10
+  gm: {fileID: 0}
 --- !u!65 &9211990298865749794
 BoxCollider:
   m_ObjectHideFlags: 0
