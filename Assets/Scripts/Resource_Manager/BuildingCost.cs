@@ -60,6 +60,4 @@ public class BuildingCost : MonoBehaviour
         height = width;
         width = haux;
     }
-
-    
 }

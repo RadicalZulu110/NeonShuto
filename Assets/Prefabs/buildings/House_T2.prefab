@@ -59,7 +59,7 @@ MonoBehaviour:
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
   MaintenancePopCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 3
   nextIncreaseTime: 0
   gm: {fileID: 0}
   GoldIncrease: 50
