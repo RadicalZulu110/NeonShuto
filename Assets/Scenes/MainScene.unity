@@ -354,8 +354,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
@@ -400,8 +400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
@@ -652,8 +652,10 @@ MonoBehaviour:
   deleteBuildingSound: {fileID: 629086076}
   buildingPlaceParticles: {fileID: 821164417}
   gameManager: {fileID: 434027034}
+  buildingCost: {fileID: 0}
   deletingMaterial:
   - {fileID: 2100000, guid: acf220ee2572c51479e72a1a5b5bc760, type: 2}
+  divisbleReturn: 0
 --- !u!4 &434027033
 Transform:
   m_ObjectHideFlags: 0
@@ -871,8 +873,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
@@ -6295,10 +6297,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1637236833307498038, guid: 033262998bfaa9741881d92ee4e52de5, type: 3}
   tiles: {fileID: 243310689}
-  roadRadius: 2
-  initialRadius: 4
+  roadRadius: 8
+  initialRadius: 16
   gridWorldSize: {x: 100, y: 100}
-  nodeRadius: 1
+  nodeRadius: 0.25
   unwalkable:
     serializedVersion: 2
     m_Bits: 0
@@ -6431,7 +6433,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -6681,8 +6683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
@@ -6812,8 +6814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 2
-  height: 2
+  width: 8
+  height: 8
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
@@ -7527,8 +7529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
@@ -7670,6 +7672,8 @@ MonoBehaviour:
   inOutSpeed: 5
   lateralSpeed: 5
   rotateSpeed: 45
+  maxRotationX: 25
+  minRotationX: 335
   minBounds: {x: -150, y: -150}
   maxBounds: {x: 150, y: 150}
   zoomSpeed: 4
