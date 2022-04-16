@@ -12,6 +12,7 @@ TagManager:
   - Starting construction
   - PopulationBuilding
   - ResourceBuilding
+  - InvisibleWall
   layers:
   - Default
   - TransparentFX

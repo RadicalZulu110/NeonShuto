@@ -2654,6 +2654,7 @@ MonoBehaviour:
   minRotationX: 325
   minBounds: {x: -150, y: -150}
   maxBounds: {x: 150, y: 150}
+  verticalBounds: {x: 0, y: 10}
   zoomSpeed: 4
   nearZoomLimit: 2
   farZoomLimit: 16
