@@ -17,25 +17,25 @@ public class GameManager : MonoBehaviour
 	private int NoFarms;
 	public int TotalFood;
 	public int foodIncome;
-	public int foodCapacity;
-	public int foodStored;
+	[HideInInspector] public int foodCapacity;
+	[HideInInspector] public int foodStored;
 
 	public int NoStoneMines;
 	public int TotalStone;
 	public int stoneIncome;
-	public int stoneCapacity;
-	public int stoneStored;
+	[HideInInspector] public int stoneCapacity;
+	[HideInInspector] public int stoneStored;
 
 	public int NoCrystalMines;
 	public int TotalCrystal;
 	public int crystalIncome;
-	public int crystalCapacity;
-	public int crystalStored;
+	[HideInInspector] public int crystalCapacity;
+	[HideInInspector] public int crystalStored;
 	
 	public int pop;
 	public int futurePop;
-	public int PopCapacity;
-	public int TotalPop;
+	[HideInInspector] public int PopCapacity;
+	[HideInInspector] public int TotalPop;
 
 
 	public Text goldDisplay;

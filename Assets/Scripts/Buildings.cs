@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Buildings : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Buildings : MonoBehaviour
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
 
-    GameObject nearNode, firstNodeRoad, lastNodeRoad;
+    GameObject nearNode, lastNearActiveNode, firstNodeRoad, lastNodeRoad;
     bool isDeleting;
     public GameManager gameManager;//need to change naming convention for this to be somthing else rather than gameManager
     public BuildingCost buildingCost;
@@ -26,6 +27,8 @@ public class Buildings : MonoBehaviour
     private bool firstRoadPlaced, initialPlaced;
     private GameObject[] roads;
     public float divisbleReturn;
+
+    public NavMeshSurface surface;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +56,7 @@ public class Buildings : MonoBehaviour
         if (initialShadow.activeInHierarchy)
         {
             nearNode = getNearestActiveNode(customCursor.gameObject);
+            lastNearActiveNode = nearNode;
             if (grid.areNodesFree(initialShadowScript.getGridWidth(), initialShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 buildPos = buildCentered(grid.getNodes(initialShadowScript.getGridWidth(), initialShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
@@ -94,51 +98,50 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
             
-            if (!nearNode.activeInHierarchy)
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 buildingShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
                 buildingShadow.GetComponentInChildren<Renderer>().material = buildingShadowMaterial;
+                lastNearActiveNode = nearNode;
             }
 
-            if (grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildingShadow.transform.position = new Vector3(buildPos.x, 1.7f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
-                buildingShadow.transform.position = new Vector3(buildPos.x, 1.7f, buildPos.z);
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    rotateAroundY(buildingShadow, 90);
-                    buildingRotateSound.Play();
-                }
+                rotateAroundY(buildingShadow, 90);
+                buildingRotateSound.Play();
             }
+            
         }
 
         //farm shadow
-        if (farmShadow.activeInHierarchy)
+        if (farmShadow.activeInHierarchy )
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy)
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 farmShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
                 farmShadow.GetComponentInChildren<Renderer>().material = farmShadowMaterial;
+                lastNearActiveNode = nearNode;
             }
 
-            if (grid.areNodesFree(farmShadow.GetComponent<BuildingCost>().getGridWidth(), farmShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()))
+           
+            buildPos = buildCentered(grid.getNodes(farmShadow.GetComponent<BuildingCost>().getGridWidth(), farmShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            farmShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                buildPos = buildCentered(grid.getNodes(farmShadow.GetComponent<BuildingCost>().getGridWidth(), farmShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-                farmShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    rotateAroundY(farmShadow, 90);
-                    buildingRotateSound.Play();
-                }
+                rotateAroundY(farmShadow, 90);
+                buildingRotateSound.Play();
             }
+          
         }
 
         //battery shadow
@@ -146,25 +149,25 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy)
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 batteryShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
                 batteryShadow.GetComponentInChildren<Renderer>().material = batteryShadowMaterial;
+                lastNearActiveNode = nearNode;
             }
 
-            if (grid.areNodesFree(batteryShadow.GetComponent<BuildingCost>().getGridWidth(), batteryShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()))
+            
+            buildPos = buildCentered(grid.getNodes(batteryShadow.GetComponent<BuildingCost>().getGridWidth(), batteryShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            batteryShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                buildPos = buildCentered(grid.getNodes(batteryShadow.GetComponent<BuildingCost>().getGridWidth(), batteryShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-                batteryShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    rotateAroundY(batteryShadow, 90);
-                    buildingRotateSound.Play();
-                }
+                rotateAroundY(batteryShadow, 90);
+                buildingRotateSound.Play();
             }
+            
         }
 
         //stonemine shadow
@@ -172,25 +175,25 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy)
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 stoneMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
                 stoneMineShadow.GetComponentInChildren<Renderer>().material = stoneMineShadowMaterial;
+                lastNearActiveNode = nearNode;
             }
 
-            if (grid.areNodesFree(stoneMineShadow.GetComponent<BuildingCost>().getGridWidth(), stoneMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()))
+            
+            buildPos = buildCentered(grid.getNodes(stoneMineShadow.GetComponent<BuildingCost>().getGridWidth(), stoneMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            stoneMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                buildPos = buildCentered(grid.getNodes(stoneMineShadow.GetComponent<BuildingCost>().getGridWidth(), stoneMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-                stoneMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    rotateAroundY(stoneMineShadow, 90);
-                    buildingRotateSound.Play();
-                }
+                rotateAroundY(stoneMineShadow, 90);
+                buildingRotateSound.Play();
             }
+            
         }
 
         //crystalmine shadow
@@ -198,25 +201,25 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy)
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 crystalMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
                 crystalMineShadow.GetComponentInChildren<Renderer>().material = crystalMineShadowMaterial;
+                lastNearActiveNode = nearNode;
             }
 
-            if (grid.areNodesFree(crystalMineShadow.GetComponent<BuildingCost>().getGridWidth(), crystalMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()))
+            
+            buildPos = buildCentered(grid.getNodes(crystalMineShadow.GetComponent<BuildingCost>().getGridWidth(), crystalMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            crystalMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
             {
-                buildPos = buildCentered(grid.getNodes(crystalMineShadow.GetComponent<BuildingCost>().getGridWidth(), crystalMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-                crystalMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    rotateAroundY(crystalMineShadow, 90);
-                    buildingRotateSound.Play();
-                }
+                rotateAroundY(crystalMineShadow, 90);
+                buildingRotateSound.Play();
             }
+            
         }
 
         // Cancel construction with escape
@@ -230,10 +233,14 @@ public class Buildings : MonoBehaviour
             // Create initial building
             if (initialToPlace != null)
             {
-                nearNode = getNearestActiveNode(initialShadow.gameObject);
+                //nearNode = getNearestActiveNode(customCursor.gameObject);
 
                 createBuilding(initialToPlace, initialShadow);
-                nearNode.GetComponent<Node>().setInitial(true);
+                List<GameObject> nodes = grid.getNodes(initialShadow.GetComponent<BuildingCost>().getGridWidth(), initialShadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
+                for(int i=0; i<nodes.Count; i++)
+                {
+                    nodes[i].GetComponent<Node>().setInitial(true);
+                }
                 initialPlaced = true;
                 initialToPlace = null;
                 grid.checkTilesRoads();
@@ -242,7 +249,7 @@ public class Buildings : MonoBehaviour
             // Create house
             if (buildingToPlace != null)
             {
-                nearNode = getNearestNode(buildingShadow.gameObject);
+                //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(buildingToPlace, buildingShadow);
                 gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
@@ -251,7 +258,7 @@ public class Buildings : MonoBehaviour
             //Create farm
             if (farmToPlace != null)
             {
-                nearNode = getNearestNode(farmShadow.gameObject);
+                //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(farmToPlace, farmShadow);
                 gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
@@ -260,7 +267,7 @@ public class Buildings : MonoBehaviour
             //Create battery
             if (batteryToPlace != null)
             {
-                nearNode = getNearestNode(batteryShadow.gameObject);
+                //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(batteryToPlace, batteryShadow);
                 gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
@@ -269,7 +276,7 @@ public class Buildings : MonoBehaviour
             //Create StoneMine
             if (stoneMineToPlace != null)
             {
-                nearNode = getNearestNode(stoneMineShadow.gameObject);
+                //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(stoneMineToPlace, stoneMineShadow);
                 gameManager.SetNoStoneMines(gameManager.GetNoStoneMines() + 1);
@@ -278,7 +285,7 @@ public class Buildings : MonoBehaviour
             //Create CrystalMine
             if (crystalMineToPlace != null)
             {
-                nearNode = getNearestNode(crystalMineShadow.gameObject);
+                //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(crystalMineToPlace, crystalMineShadow);
                 gameManager.SetNoCrystalMines(gameManager.GetNoCrystalMines() + 1);
@@ -289,14 +296,18 @@ public class Buildings : MonoBehaviour
         // Create road
         if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && !Input.GetKey(KeyCode.LeftShift)) // Create single road
         {
-            nearNode = getNearestActiveNode(roadShadow.gameObject);
+            nearNode = getNearestActiveNode(customCursor.gameObject);
 
             Instantiate(roadToPlace, new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z), roadShadow.transform.rotation);
             buildingPlaceSound.Play();
             buildingPlaceParticles.transform.position = new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z);
             buildingPlaceParticles.Play();
             nearNode.GetComponent<Node>().setOcupied(true);
-            nearNode.GetComponent<Node>().setRoad(true);
+            List<GameObject> nodes = grid.getNodes(roadToPlace.GetComponent<BuildingCost>().getGridWidth(), roadToPlace.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>());
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                nodes[i].GetComponent<Node>().setRoad(true);
+            }
             gameManager.BuyBuilding(roadToPlace.GetComponent<BuildingCost>());
             roadToPlace = null;
             customCursor.gameObject.SetActive(false);
@@ -305,11 +316,12 @@ public class Buildings : MonoBehaviour
             grid.checkTilesRoads();
             roadShadow.SetActive(false);
             updateRoadsJunction();
+            surface.BuildNavMesh();
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && firstRoadPlaced && Input.GetKey(KeyCode.LeftShift)) // Last road of the line
         {
-            nearNode = getNearestActiveNode(roadShadow.gameObject);
+            nearNode = getNearestActiveNode(customCursor.gameObject);
 
             Instantiate(roadToPlace, new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z), roadShadow.transform.rotation);
             lastNodeRoad = nearNode;
@@ -327,11 +339,12 @@ public class Buildings : MonoBehaviour
             firstRoadPlaced = false;
             grid.setTilesActive(false);
             updateRoadsJunction();
+            surface.BuildNavMesh();
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && Input.GetKey(KeyCode.LeftShift)) // First road of the line
         {
-            nearNode = getNearestActiveNode(roadShadow.gameObject);
+            nearNode = getNearestActiveNode(customCursor.gameObject);
 
             Instantiate(roadToPlace, new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z), roadShadow.transform.rotation);
             buildingPlaceSound.Play();
@@ -469,15 +482,16 @@ public class Buildings : MonoBehaviour
         {
             for (int j = 0; j < tiles.GetLength(1); j++)
             {
-                if (!tiles[i, j].GetComponent<Node>().isOcupied())
-                {
+                //if (!tiles[i, j].GetComponent<Node>().isOcupied())
+                //{
                     dist = Vector3.Distance(tiles[i, j].transform.position, gObject.transform.position);
                     if (dist < distanceNode)
                     {
+                        //Debug.Log(dist);
                         distanceNode = dist;
                         res = tiles[i, j];
                     }
-                }
+                //}
             }
         }
 
@@ -619,15 +633,15 @@ public class Buildings : MonoBehaviour
      */
     private void createBuilding(GameObject building, GameObject shadow)
     {
-        if (nearNode.activeInHierarchy)
+        if (lastNearActiveNode.activeInHierarchy && grid.areNodesFree(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()))
         {
             building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
-            buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-            grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>());
+            buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+            grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
             Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
 
             buildingPlaceSound.Play();
-            buildingPlaceParticles.transform.position = new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z);
+            buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
             buildingPlaceParticles.Play();
 
             gameManager.BuyBuilding(building.GetComponent<BuildingCost>());

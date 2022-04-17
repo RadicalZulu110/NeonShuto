@@ -14,12 +14,13 @@ GameObject:
   - component: {fileID: 3658741085456108079}
   - component: {fileID: 6985212095791638094}
   - component: {fileID: 6361615202149461296}
-  m_Layer: 0
+  - component: {fileID: 8765101993084121368}
+  m_Layer: 6
   m_Name: Model_Straight_Road
   m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5612648888748571024
 Transform:
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5093556617617154858}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 1, z: 0.25}
   m_Children:
   - {fileID: 7561935343244447565}
   m_Father: {fileID: 0}
@@ -96,7 +97,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.049999997, z: 2}
+  m_Size: {x: 1, y: 0.049999997, z: 1}
   m_Center: {x: 0, y: 0.02, z: 0}
 --- !u!114 &6985212095791638094
 MonoBehaviour:
@@ -110,21 +111,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 0
-  height: 0
+  width: 1
+  height: 1
   GoldCost: 25
   FoodCost: 0
   EnergyCost: 0
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  GoldIncrease: 0
-  FoodIncrease: 0
-  EnergyIncrease: 0
-  StoneIncrease: 0
-  CrystalIncrease: 0
-  PopIncrease: 0
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  MaintenancePopCost: 0
   timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  gm: {fileID: 0}
 --- !u!114 &6361615202149461296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +155,22 @@ MonoBehaviour:
   right: 0
   up: 0
   down: 0
+--- !u!114 &8765101993084121368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5093556617617154858}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 0
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &8794094950231325349
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,12 +180,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7561935343244447565}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7561935343244447565
 Transform:

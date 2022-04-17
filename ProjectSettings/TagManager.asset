@@ -12,6 +12,8 @@ TagManager:
   - Starting construction
   - PopulationBuilding
   - ResourceBuilding
+  - InvisibleWall
+  - Truck
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Road
+  - Truck
   - 
   - 
   - 

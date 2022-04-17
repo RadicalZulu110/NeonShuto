@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     public float minRotationX = 335f;
 
     [Header("Move Bounds")]
-    public Vector2 minBounds, maxBounds;
+    public Vector2 minBounds, maxBounds, verticalBounds;
 
     [Header("Zoom controls")]
     public float zoomSpeed = 4f;
@@ -38,7 +38,8 @@ public class CameraManager : MonoBehaviour
     {
         cam = GetComponentInChildren<Camera>();
         cam.transform.localPosition = new Vector3(0f, Mathf.Abs(cameraOffset.y), -Mathf.Abs(cameraOffset.x));
-        zoomStrategy = new OrtographZoomStrategy(cam, startingZoom);
+        //zoomStrategy = new OrtographZoomStrategy(cam, startingZoom);
+        zoomStrategy = new PerspectiveZoomStrategy(cam, cameraOffset, startingZoom);
         cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
     }
 
@@ -134,7 +135,7 @@ public class CameraManager : MonoBehaviour
     private void LockPositionInBounds()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x),
-                                        transform.position.y,
+                                        Mathf.Clamp(transform.position.y, verticalBounds.x, verticalBounds.y),
                                         Mathf.Clamp(transform.position.z, minBounds.y, maxBounds.y));
     }
 
