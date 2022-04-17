@@ -18,7 +18,6 @@ public class StartingConstruction : BuildingCost
         {
             nextPopIncreaseTime = (int)(Time.time + timeBtwPopIncrease);
             ExpectedPop = Random.Range(MinPop, MaxPop);
-            Debug.Log(ExpectedPop);
 
             gm.AddTotalPop(ExpectedPop);
             gm.goldIncome = gm.TotalPop * GoldIncreasePerPerson;

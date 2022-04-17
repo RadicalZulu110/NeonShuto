@@ -53,21 +53,24 @@ MonoBehaviour:
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  MaintenanceGoldCost: 0
+  MaintenanceGoldCost: 100
   MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 0
+  MaintenanceEnergyCost: 100
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 3
   nextIncreaseTime: 0
   StoneIncrease: 100
   CrystalIncrease: 0
   EnergyIncrease: -20
   FoodIncrease: 0
-  GoldIncrease: 0
+  GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+  PersonalStoneCapacity: 200
+  PersonalCrystalCapacity: 0
+  currentStoneStored: 0
+  currentCrystalStored: 0
 --- !u!65 &2031171049058115582
 BoxCollider:
   m_ObjectHideFlags: 0

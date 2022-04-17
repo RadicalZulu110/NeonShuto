@@ -14,14 +14,17 @@ public class EnergyBuilding : ProductionBuilding
     }
 
     // Update is called once per frame
+    
     void Update()
     {
         if (Time.time > nextIncreaseTime)
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.TotalEnergy += EnergyIncrease;
+            gm.TotalGold -= MaintenanceGoldCost;
         }
     }
+    
 
     public override int GetEnergyIncrease()
     {

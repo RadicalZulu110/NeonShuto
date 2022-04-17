@@ -17,14 +17,20 @@ public class GameManager : MonoBehaviour
 	private int NoFarms;
 	public int TotalFood;
 	public int foodIncome;
+	public int foodCapacity;
+	public int foodStored;
 
 	public int NoStoneMines;
 	public int TotalStone;
 	public int stoneIncome;
+	public int stoneCapacity;
+	public int stoneStored;
 
 	public int NoCrystalMines;
 	public int TotalCrystal;
 	public int crystalIncome;
+	public int crystalCapacity;
+	public int crystalStored;
 	
 	public int pop;
 	public int futurePop;
@@ -35,8 +41,11 @@ public class GameManager : MonoBehaviour
 	public Text goldDisplay;
 	public Text energyDisplay;
 	public Text foodDisplay;
+	public Text foodStorage;
 	public Text StoneDisplay;
+	public Text stoneStorage;
 	public Text CrystalDisplay;
+	public Text crystalStorage;
 	public Text popDisplay;
 
 	public CustomCursor customCursor;
@@ -58,39 +67,47 @@ public class GameManager : MonoBehaviour
 		StoneDisplay.text = (TotalStone).ToString() + "(" + (stoneIncome).ToString() + ")";
 		CrystalDisplay.text = (TotalCrystal).ToString() + "(" + (crystalIncome).ToString() + ")";
 		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
+
+		foodStorage.text = (foodStored).ToString() + "[" + (foodCapacity).ToString() + "]";
+		stoneStorage.text = (stoneStored).ToString() + "[" + (stoneCapacity).ToString() + "]";
+		crystalStorage.text = (crystalStored).ToString() + "[" + (crystalCapacity).ToString() + "]";
 	}
 
 	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)
 	{
+		goldIncome -= building.MaintenanceGoldCost;
+		energyIncome -= building.MaintenanceEnergyCost;
+		foodIncome -= building.MaintenanceFoodCost;
+		stoneIncome -= building.MaintenanceStoneCost;
+		crystalIncome -= building.MaintenanceCrystalCost;
+
+
+		//initial gold cost deduction
 		if (TotalGold >= building.GoldCost)
 		{
 			TotalGold -= building.GoldCost;
-			
 		}
 
+		//initial energy cost deduction
 		if (TotalEnergy >= building.EnergyCost)
 		{
 			TotalEnergy -= building.EnergyCost;
-			
 		}
 
 		if (TotalFood >= building.FoodCost)
 		{
 			TotalFood -= building.FoodCost;
-			
 		}
 
 		if (TotalStone >= building.StoneCost)
 		{
 			TotalStone -= building.StoneCost;
-			
 		}
 
 		if (TotalCrystal >= building.CrystalCost)
 		{
 			TotalCrystal -= building.CrystalCost;
-			
 		}
 
 		if (pop >= building.PopCost)
@@ -201,27 +218,27 @@ public class GameManager : MonoBehaviour
 		futurePop = futurePopulation;
     }
 
-	public int GetGold()
+	public int GetTotalGold()
     {
 		return TotalGold;
     }
 
-	public int GetEnergy()
+	public int GetTotalEnergy()
     {
 		return TotalEnergy;
     }
 	
-	public int GetFood()
+	public int GetTotalFood()
     {
 		return TotalFood;
     }
 
-	public int GetStone()
+	public int GetTotalStone()
     {
 		return TotalStone;
     }
 
-	public int GetCrystal()
+	public int GetTotalCrystal()
     {
 		return TotalCrystal;
     }
@@ -264,5 +281,35 @@ public class GameManager : MonoBehaviour
         {
 			TotalPop = PopCapacity;
 		}
+    }
+
+	public void AddFoodPersonalCapacity(int FoodIncrease)
+	{
+		foodStored += FoodIncrease;
+
+		if(foodStored > foodCapacity)
+		{
+			foodStored = foodCapacity;
+		}
+	}
+
+	public void AddStonePersonalCapacity(int StoneIncrease)
+    {
+		stoneStored += StoneIncrease;
+
+		if(stoneStored > stoneCapacity)
+        {
+			stoneStored = stoneCapacity;
+        }
+    }
+
+	public void AddCrystalPersonalCapacity(int CrystalIncrease)
+    {
+		crystalStored += CrystalIncrease;
+
+		if(crystalStored > crystalCapacity)
+        {
+			crystalStored = crystalCapacity;
+        }
     }
 }

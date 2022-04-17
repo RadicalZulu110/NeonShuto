@@ -10,20 +10,18 @@ public class PopulationBuilding : BuildingCost
     // Start is called before the first frame update
     void Start()
     {
-        gm.AddPop(PopIncrease);
-        //gm.AddGold(GoldIncreasePerPerson);
+        gm.AddPop(PopIncrease); 
     }
 
     // Update is called once per frame
     void Update()
-    {
-        /*
+    {  
         if (Time.time > nextIncreaseTime)
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
-            gm.TotalGold += GoldIncrease;
+            gm.TotalEnergy -= MaintenanceEnergyCost;
+            gm.TotalFood -= MaintenanceFoodCost;
         }
-        */
     }
 
     

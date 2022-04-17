@@ -19,7 +19,6 @@ public class BuildingCost : MonoBehaviour
     public int MaintenanceEnergyCost;
     public int MaintenanceStoneCost;
     public int MaintenanceCrystalCost;
-    public int MaintenancePopCost;
 
     //set time between increases in reasources
     public float timeBtwIncrease;
