@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Buildings : MonoBehaviour
 {
@@ -26,6 +27,8 @@ public class Buildings : MonoBehaviour
     private bool firstRoadPlaced, initialPlaced;
     private GameObject[] roads;
     public float divisbleReturn;
+
+    public NavMeshSurface surface;
 
     // Start is called before the first frame update
     void Start()
@@ -233,7 +236,11 @@ public class Buildings : MonoBehaviour
                 //nearNode = getNearestActiveNode(customCursor.gameObject);
 
                 createBuilding(initialToPlace, initialShadow);
-                nearNode.GetComponent<Node>().setInitial(true);
+                List<GameObject> nodes = grid.getNodes(initialShadow.GetComponent<BuildingCost>().getGridWidth(), initialShadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
+                for(int i=0; i<nodes.Count; i++)
+                {
+                    nodes[i].GetComponent<Node>().setInitial(true);
+                }
                 initialPlaced = true;
                 initialToPlace = null;
                 grid.checkTilesRoads();
@@ -296,7 +303,11 @@ public class Buildings : MonoBehaviour
             buildingPlaceParticles.transform.position = new Vector3(nearNode.transform.position.x, 0, nearNode.transform.position.z);
             buildingPlaceParticles.Play();
             nearNode.GetComponent<Node>().setOcupied(true);
-            nearNode.GetComponent<Node>().setRoad(true);
+            List<GameObject> nodes = grid.getNodes(roadToPlace.GetComponent<BuildingCost>().getGridWidth(), roadToPlace.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>());
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                nodes[i].GetComponent<Node>().setRoad(true);
+            }
             gameManager.BuyBuilding(roadToPlace.GetComponent<BuildingCost>());
             roadToPlace = null;
             customCursor.gameObject.SetActive(false);
@@ -305,6 +316,7 @@ public class Buildings : MonoBehaviour
             grid.checkTilesRoads();
             roadShadow.SetActive(false);
             updateRoadsJunction();
+            surface.BuildNavMesh();
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && firstRoadPlaced && Input.GetKey(KeyCode.LeftShift)) // Last road of the line
@@ -327,6 +339,7 @@ public class Buildings : MonoBehaviour
             firstRoadPlaced = false;
             grid.setTilesActive(false);
             updateRoadsJunction();
+            surface.BuildNavMesh();
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && Input.GetKey(KeyCode.LeftShift)) // First road of the line
