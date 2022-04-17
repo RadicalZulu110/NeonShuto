@@ -228,9 +228,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!23 &230045560
 MeshRenderer:
@@ -281,88 +286,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230045556}
   m_Mesh: {fileID: 2414578763061035916, guid: 5882e7bcfda6b0443893bccfe93d8784, type: 3}
---- !u!114 &314365245 stripped
+--- !u!114 &370497141 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4672181175642254269, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
-  m_PrefabInstance: {fileID: 708403755}
+  m_CorrespondingSourceObject: {fileID: 1177933842048023847, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+  m_PrefabInstance: {fileID: 1177933842417953618}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &368649396 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4672181175642254270, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
-  m_PrefabInstance: {fileID: 708403755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &370497139
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 370497140}
-  - component: {fileID: 370497141}
-  m_Layer: 0
-  m_Name: NavMesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &370497140
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370497139}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: -50}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &370497141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370497139}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 1
-  m_TileSize: 196
-  m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.01
-  m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 851fd2c9cdc472e4aabbe7e320ae3518, type: 2}
 --- !u!1 &385703522
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,9 +524,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &485383845
 GameObject:
@@ -651,9 +590,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &614007187
 GameObject:
@@ -2066,17 +2010,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &862216629 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4672181175642254175, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
-  m_PrefabInstance: {fileID: 708403755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &906774554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,27 +2058,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24589061139538438b5c9396a614d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gold: 1000
-  currentGold: 0
-  energy: 1000
-  currentEnergy: 0
-  food: 1000
-  currentFood: 0
+  TotalGold: 0
+  goldIncome: 0
+  TotalEnergy: 0
+  energyIncome: 0
+  TotalFood: 0
+  foodIncome: 0
+  foodCapacity: 0
+  foodStored: 0
   NoStoneMines: 0
-  stone: 1000
-  currentStone: 0
+  TotalStone: 0
+  stoneIncome: 0
+  stoneCapacity: 0
+  stoneStored: 0
   NoCrystalMines: 0
-  crystal: 1000
-  currentCrystal: 0
+  TotalCrystal: 0
+  crystalIncome: 0
+  crystalCapacity: 0
+  crystalStored: 0
   pop: 0
   futurePop: 0
-  currentPop: 0
-  goldDisplay: {fileID: 1272165072}
-  energyDisplay: {fileID: 1968953232}
-  foodDisplay: {fileID: 998532079}
-  StoneDisplay: {fileID: 368649396}
-  CrystalDisplay: {fileID: 314365245}
-  popDisplay: {fileID: 862216629}
+  PopCapacity: 0
+  TotalPop: 0
+  goldDisplay: {fileID: 0}
+  energyDisplay: {fileID: 0}
+  foodDisplay: {fileID: 0}
+  foodStorage: {fileID: 0}
+  StoneDisplay: {fileID: 0}
+  stoneStorage: {fileID: 0}
+  CrystalDisplay: {fileID: 0}
+  crystalStorage: {fileID: 0}
+  popDisplay: {fileID: 0}
   customCursor: {fileID: 965075791}
 --- !u!114 &906774557
 MonoBehaviour:
@@ -2428,17 +2371,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &998532079 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4672181175642254271, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
-  m_PrefabInstance: {fileID: 708403755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1062939880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2658,9 +2590,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1120175960
 GameObject:
@@ -2777,9 +2714,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1189627715
 GameObject:
@@ -7778,21 +7720,15 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
---- !u!114 &1272165072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4672181175642254209, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
-  m_PrefabInstance: {fileID: 708403755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1293178219
 GameObject:
   m_ObjectHideFlags: 0
@@ -8169,9 +8105,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1760358599
 GameObject:
@@ -8498,9 +8439,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1865510574
 GameObject:
@@ -8589,9 +8535,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1001 &1947566732
 PrefabInstance:
@@ -8685,9 +8636,14 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
 --- !u!1 &1966396325
 GameObject:
@@ -8746,21 +8702,15 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
   gm: {fileID: 0}
---- !u!114 &1968953232 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4672181175642254208, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
-  m_PrefabInstance: {fileID: 708403755}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2106809022
 GameObject:
   m_ObjectHideFlags: 0
@@ -8889,3 +8839,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9240db2e632e94f45a4e3f3ff4e5081b, type: 3}
   m_PrefabInstance: {fileID: 2130445562}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1177933842417953618
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1177933842048023841, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_Name
+      value: NavMesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177933842048023846, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 17ce2b26b48ddfc4aba9883c620860c0, type: 3}
