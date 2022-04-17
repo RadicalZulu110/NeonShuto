@@ -19,7 +19,7 @@ public class CameraManager : MonoBehaviour
     public float minRotationX = 335f;
 
     [Header("Move Bounds")]
-    public Vector2 minBounds, maxBounds;
+    public Vector2 minBounds, maxBounds, verticalBounds;
 
     [Header("Zoom controls")]
     public float zoomSpeed = 4f;
@@ -135,7 +135,7 @@ public class CameraManager : MonoBehaviour
     private void LockPositionInBounds()
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x),
-                                        transform.position.y,
+                                        Mathf.Clamp(transform.position.y, verticalBounds.x, verticalBounds.y),
                                         Mathf.Clamp(transform.position.z, minBounds.y, maxBounds.y));
     }
 
