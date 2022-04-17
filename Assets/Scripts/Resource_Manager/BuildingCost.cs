@@ -19,10 +19,17 @@ public class BuildingCost : MonoBehaviour
     public int MaintenanceEnergyCost;
     public int MaintenanceStoneCost;
     public int MaintenanceCrystalCost;
-    public int MaintenancePopCost;
+
     //set time between increases in reasources
     public float timeBtwIncrease;
     public float nextIncreaseTime;
+
+    public int StoneIncrease;
+    public int CrystalIncrease;
+    public int EnergyIncrease;
+    public int FoodIncrease;
+    public int GoldIncreasePerPerson;
+    public int PopIncrease;
 
     public GameManager gm;
 
@@ -59,5 +66,10 @@ public class BuildingCost : MonoBehaviour
         int haux = height;
         height = width;
         width = haux;
+    }
+
+    public virtual int GetFoodIncrease()
+    {
+        return FoodIncrease;
     }
 }

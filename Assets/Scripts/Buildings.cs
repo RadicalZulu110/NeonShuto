@@ -397,25 +397,31 @@ public class Buildings : MonoBehaviour
                             gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
                             gameManager.AddPop(-buildingScript.GetPopulation());
                             gameManager.AddGold(-buildingScript.GetGoldIncrease());
-                            gameManager.gold += (int)(buildingScript.GoldCost * divisbleReturn);
-                            gameManager.food += (int)(buildingScript.FoodCost * divisbleReturn);
-                            gameManager.energy += (int)(buildingScript.EnergyCost * divisbleReturn);
-                            gameManager.crystal += (int)(buildingScript.CrystalCost * divisbleReturn);
-                            gameManager.stone += (int)(buildingScript.StoneCost * divisbleReturn);
+                            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                             grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                         }
                         else if(selectedObjectToDelete.tag == "ResourceBuilding")
                         {
                             ProductionBuilding buildingScript = hitInfo.collider.gameObject.GetComponent<ProductionBuilding>();
-                            gameManager.AddFood(-buildingScript.GetFoodIncrease());
+                            //gameManager.AddFood(-buildingScript.GetFoodIncrease());
+                            gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
+                            gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
                             gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
-                            gameManager.AddStone(-buildingScript.GetStoneIncrease());
-                            gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
-                            gameManager.gold += (int)(buildingScript.GoldCost * divisbleReturn);
-                            gameManager.food += (int)(buildingScript.FoodCost * divisbleReturn);
-                            gameManager.energy += (int)(buildingScript.EnergyCost * divisbleReturn);
-                            gameManager.crystal += (int)(buildingScript.CrystalCost * divisbleReturn);
-                            gameManager.stone += (int)(buildingScript.StoneCost * divisbleReturn);
+                            //gameManager.AddStone(-buildingScript.GetStoneIncrease());
+                            gameManager.stoneCapacity -= (buildingScript.GetPersonalStoneCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalStoneCapacity;
+                            gameManager.stoneStored -= (buildingScript.GetCurrentStoneStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentStoneStored;
+                            //gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
+                            gameManager.crystalCapacity -= (buildingScript.GetPersonalCrystalCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalCrystalCapacity;
+                            gameManager.crystalStored -= (buildingScript.GetCurrentCrystalStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentCrystalStored;
+                            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                             grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                         }
                         else
@@ -662,11 +668,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -682,11 +688,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if (gameManager.GetTotalGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -703,11 +709,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if (gameManager.GetTotalGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -723,11 +729,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced && grid.isStoneAvailable())
         {
-            if (gameManager.GetGold() - StoneMine.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetFood() - StoneMine.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetEnergy() - StoneMine.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetStone() - StoneMine.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetCrystal() - StoneMine.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if (gameManager.GetTotalGold() - StoneMine.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - StoneMine.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - StoneMine.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - StoneMine.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - StoneMine.GetComponent<BuildingCost>().CrystalCost < 0) return;
 
             grid.setTilesStoneActive(true);
             customCursor.gameObject.SetActive(true);
@@ -743,11 +749,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced && grid.isCrystalAvailable())
         {
-            if (gameManager.GetGold() - CrystalMine.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetFood() - CrystalMine.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetEnergy() - CrystalMine.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetStone() - CrystalMine.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetCrystal() - CrystalMine.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if (gameManager.GetTotalGold() - CrystalMine.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - CrystalMine.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - CrystalMine.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - CrystalMine.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - CrystalMine.GetComponent<BuildingCost>().CrystalCost < 0) return;
 
             grid.setTilesCrystalActive(true);
             customCursor.gameObject.SetActive(true);
@@ -763,11 +769,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetGold() - road.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetFood() - road.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetEnergy() - road.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetStone() - road.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetCrystal() - road.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if (gameManager.GetTotalGold() - road.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - road.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - road.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - road.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - road.GetComponent<BuildingCost>().CrystalCost < 0) return;
 
             grid.setTilesAdyacentRoadActive(true);
             customCursor.gameObject.SetActive(true);
