@@ -7,35 +7,45 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	private int NoBuildings;
-	public int gold;
-	public int currentGold;
+	public int TotalGold;
+	public int goldIncome;
 
 	private int NoBatterys;
-	public int energy;
-	public int currentEnergy;
+	public int TotalEnergy;
+	public int energyIncome;
 
 	private int NoFarms;
-	public int food;
-	public int currentFood;
+	public int TotalFood;
+	public int foodIncome;
+	public int foodCapacity;
+	public int foodStored;
 
 	public int NoStoneMines;
-	public int stone;
-	public int currentStone;
+	public int TotalStone;
+	public int stoneIncome;
+	public int stoneCapacity;
+	public int stoneStored;
 
 	public int NoCrystalMines;
-	public int crystal;
-	public int currentCrystal;
+	public int TotalCrystal;
+	public int crystalIncome;
+	public int crystalCapacity;
+	public int crystalStored;
 	
 	public int pop;
 	public int futurePop;
-	public int currentPop;
+	public int PopCapacity;
+	public int TotalPop;
 
 
 	public Text goldDisplay;
 	public Text energyDisplay;
 	public Text foodDisplay;
+	public Text foodStorage;
 	public Text StoneDisplay;
+	public Text stoneStorage;
 	public Text CrystalDisplay;
+	public Text crystalStorage;
 	public Text popDisplay;
 
 	public CustomCursor customCursor;
@@ -51,45 +61,53 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		goldDisplay.text = (gold).ToString() + "(" + (currentGold).ToString() + ")";
-		energyDisplay.text = (energy).ToString() + "(" + (currentEnergy).ToString() + ")";
-		foodDisplay.text = (food).ToString() + "(" + (currentFood).ToString() + ")";
-		StoneDisplay.text = (stone).ToString() + "(" + (currentStone).ToString() + ")";
-		CrystalDisplay.text = (crystal).ToString() + "(" + (currentCrystal).ToString() + ")";
-		popDisplay.text = (currentPop).ToString();
+		goldDisplay.text = (TotalGold).ToString() + "(" + (goldIncome).ToString() + ")";
+		energyDisplay.text = (TotalEnergy).ToString() + "(" + (energyIncome).ToString() + ")";
+		foodDisplay.text = (TotalFood).ToString() + "(" + (foodIncome).ToString() + ")";
+		StoneDisplay.text = (TotalStone).ToString() + "(" + (stoneIncome).ToString() + ")";
+		CrystalDisplay.text = (TotalCrystal).ToString() + "(" + (crystalIncome).ToString() + ")";
+		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
+
+		foodStorage.text = (foodStored).ToString() + "[" + (foodCapacity).ToString() + "]";
+		stoneStorage.text = (stoneStored).ToString() + "[" + (stoneCapacity).ToString() + "]";
+		crystalStorage.text = (crystalStored).ToString() + "[" + (crystalCapacity).ToString() + "]";
 	}
 
 	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)
 	{
-		if (gold >= building.GoldCost)
+		goldIncome -= building.MaintenanceGoldCost;
+		energyIncome -= building.MaintenanceEnergyCost;
+		foodIncome -= building.MaintenanceFoodCost;
+		stoneIncome -= building.MaintenanceStoneCost;
+		crystalIncome -= building.MaintenanceCrystalCost;
+
+
+		//initial gold cost deduction
+		if (TotalGold >= building.GoldCost)
 		{
-			gold -= building.GoldCost;
-			
+			TotalGold -= building.GoldCost;
 		}
 
-		if (energy >= building.EnergyCost)
+		//initial energy cost deduction
+		if (TotalEnergy >= building.EnergyCost)
 		{
-			energy -= building.EnergyCost;
-			
+			TotalEnergy -= building.EnergyCost;
 		}
 
-		if (food >= building.FoodCost)
+		if (TotalFood >= building.FoodCost)
 		{
-			food -= building.FoodCost;
-			
+			TotalFood -= building.FoodCost;
 		}
 
-		if (stone >= building.StoneCost)
+		if (TotalStone >= building.StoneCost)
 		{
-			stone -= building.StoneCost;
-			
+			TotalStone -= building.StoneCost;
 		}
 
-		if (crystal >= building.CrystalCost)
+		if (TotalCrystal >= building.CrystalCost)
 		{
-			crystal -= building.CrystalCost;
-			
+			TotalCrystal -= building.CrystalCost;
 		}
 
 		if (pop >= building.PopCost)
@@ -200,58 +218,98 @@ public class GameManager : MonoBehaviour
 		futurePop = futurePopulation;
     }
 
-	public int GetGold()
+	public int GetTotalGold()
     {
-		return gold;
+		return TotalGold;
     }
 
-	public int GetEnergy()
+	public int GetTotalEnergy()
     {
-		return energy;
+		return TotalEnergy;
     }
 	
-	public int GetFood()
+	public int GetTotalFood()
     {
-		return food;
+		return TotalFood;
     }
 
-	public int GetStone()
+	public int GetTotalStone()
     {
-		return stone;
+		return TotalStone;
     }
 
-	public int GetCrystal()
+	public int GetTotalCrystal()
     {
-		return crystal;
+		return TotalCrystal;
     }
 	
 	public void AddGold(int gold)
     {
-		currentGold += gold;
+		goldIncome += gold;
     }
 
 	public void AddFood(int food)
     {
-		currentFood += food;
+		foodIncome += food;
     }
 
 	public void AddEnergy(int Energy)
     {
-		currentEnergy += Energy;
+		energyIncome += Energy;
     }
 
 	public void AddCrystal(int Crystal)
     {
-		currentCrystal += Crystal;
+		crystalIncome += Crystal;
     }
 
 	public void AddStone(int Stone)
     {
-		currentStone += Stone;
+		stoneIncome += Stone;
     }
 
 	public void AddPop(int pop)
     {
-		currentPop += pop;
+		PopCapacity += pop;
+    }
+
+	public void AddTotalPop(int ExpectedPop)
+    {
+		TotalPop += ExpectedPop;
+
+		if (TotalPop > PopCapacity)
+        {
+			TotalPop = PopCapacity;
+		}
+    }
+
+	public void AddFoodPersonalCapacity(int FoodIncrease)
+	{
+		foodStored += FoodIncrease;
+
+		if(foodStored > foodCapacity)
+		{
+			foodStored = foodCapacity;
+		}
+	}
+
+	public void AddStonePersonalCapacity(int StoneIncrease)
+    {
+		stoneStored += StoneIncrease;
+
+		if(stoneStored > stoneCapacity)
+        {
+			stoneStored = stoneCapacity;
+        }
+    }
+
+	public void AddCrystalPersonalCapacity(int CrystalIncrease)
+    {
+		crystalStored += CrystalIncrease;
+
+		if(crystalStored > crystalCapacity)
+        {
+			crystalStored = crystalCapacity;
+        }
     }
 }
