@@ -60,7 +60,17 @@ MonoBehaviour:
   MaintenancePopCost: 0
   timeBtwIncrease: 0
   nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 3
+  PopIncrease: 0
   gm: {fileID: 0}
+  MaxPop: 10
+  MinPop: 1
+  ExpectedPop: 0
+  timeBtwPopIncrease: 3
 --- !u!1001 &5400645475025704903
 PrefabInstance:
   m_ObjectHideFlags: 0
