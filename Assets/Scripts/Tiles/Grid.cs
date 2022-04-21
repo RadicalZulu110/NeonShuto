@@ -390,6 +390,15 @@ public class Grid : MonoBehaviour
 		}
 	}
 
+	// Set nodes unoccupied
+	public void setNodesUnoccupied(List<GameObject> nodes)
+	{
+		for (int i = 0; i < nodes.Count; i++)
+		{
+			nodes[i].GetComponent<Node>().setOcupied(false);
+		}
+	}
+
 	// Make visible the line of roads available
 	public void setTilesLineRoadVisible(Node roadNode)
     {

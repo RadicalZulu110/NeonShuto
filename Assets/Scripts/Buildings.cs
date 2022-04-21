@@ -259,9 +259,9 @@ public class Buildings : MonoBehaviour
             if (farmToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
-
                 createBuilding(farmToPlace, farmShadow);
                 gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
+                
             }
 
             //Create battery
@@ -378,7 +378,7 @@ public class Buildings : MonoBehaviour
 
         if (isDeleting) // If Im deleting
         {
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position
             if (Physics.Raycast(ray, out RaycastHit hitInfo))           // If we get a hit with that ray
             {
                 if (hitInfo.collider.gameObject != null && (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
@@ -393,7 +393,7 @@ public class Buildings : MonoBehaviour
                     {
                         if (selectedObjectToDelete.tag == "PopulationBuilding")
                         {
-                            PopulationBuilding buildingScript = hitInfo.collider.gameObject.GetComponent<PopulationBuilding>();
+                            PopulationBuilding buildingScript = selectedObjectToDelete.GetComponent<PopulationBuilding>();
                             gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
                             gameManager.AddPop(-buildingScript.GetPopulation());
                             gameManager.AddGold(-buildingScript.GetGoldIncrease());
@@ -402,11 +402,16 @@ public class Buildings : MonoBehaviour
                             gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
                             gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                             gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
-                            grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
+                            grid.setNodesUnoccupied(buildingScript.getNodes());
                         }
                         else if(selectedObjectToDelete.tag == "ResourceBuilding")
                         {
-                            ProductionBuilding buildingScript = hitInfo.collider.gameObject.GetComponent<ProductionBuilding>();
+                            if(selectedObjectToDelete.GetType() == typeof(FoodBuilding))
+                            {
+                                gameManager.deleteFarm(selectedObjectToDelete);
+                            }
+
+                            ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
                             //gameManager.AddFood(-buildingScript.GetFoodIncrease());
                             gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
                             gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
@@ -422,7 +427,7 @@ public class Buildings : MonoBehaviour
                             gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
                             gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                             gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
-                            grid.setNodesUnoccupied(buildingScript.getGridWidth(), buildingScript.getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
+                            grid.setNodesUnoccupied(buildingScript.getNodes());
                         }
                         else
                         {
@@ -431,7 +436,7 @@ public class Buildings : MonoBehaviour
                             updateRoadsJunction();
                         }
                         
-                        grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>().setOcupied(false);
+                        
                         Destroy(selectedObjectToDelete);
                         deleteBuildingSound.Play();
                         selectedObjectToDelete = null;
@@ -633,12 +638,20 @@ public class Buildings : MonoBehaviour
      */
     private void createBuilding(GameObject building, GameObject shadow)
     {
+        GameObject buildCreated;
+
         if (lastNearActiveNode.activeInHierarchy && grid.areNodesFree(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()))
         {
             building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
             buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
             grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
-            Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+            building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+            buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+
+            if (buildCreated.GetComponent<FoodBuilding>())
+            {
+                gameManager.addFarm(buildCreated);
+            }
 
             buildingPlaceSound.Play();
             buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);

@@ -33,7 +33,6 @@ public class CustomCursor : MonoBehaviour
         }
         else
         {
-            Debug.Log("NO");
             return Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
         }

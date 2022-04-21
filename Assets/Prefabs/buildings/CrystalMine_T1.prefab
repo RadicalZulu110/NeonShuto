@@ -67,6 +67,7 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+  recollecting: 0
   PersonalStoneCapacity: 0
   PersonalCrystalCapacity: 200
   currentStoneStored: 0
@@ -79,7 +80,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5682111925873956489}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1.3160095, z: 0.8626251}
