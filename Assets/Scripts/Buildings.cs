@@ -175,7 +175,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesStone(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 stoneMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -201,7 +201,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesCrystal(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 crystalMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -639,6 +639,82 @@ public class Buildings : MonoBehaviour
     private void createBuilding(GameObject building, GameObject shadow)
     {
         GameObject buildCreated;
+
+        if (building.GetComponent<StoneMiner>())
+        {
+            if (lastNearActiveNode.activeInHierarchy && grid.areNodesStone(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()))
+            {
+                building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
+                buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
+                building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+
+                if (buildCreated.GetComponent<FoodBuilding>())
+                {
+                    gameManager.addFarm(buildCreated);
+                }
+
+                buildingPlaceSound.Play();
+                buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                buildingPlaceParticles.Play();
+
+                gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+
+                // If the sifht is down, continue 
+                if (!Input.GetKey(KeyCode.LeftShift))
+                {
+                    Cursor.visible = true;
+                    grid.setTilesActive(false);
+                    shadow.SetActive(false);
+                    buildingToPlace = null;
+                    farmToPlace = null;
+                    batteryToPlace = null;
+                    stoneMineToPlace = null;
+                    crystalMineToPlace = null;
+                }
+            }
+
+            return;
+        }
+
+        if (building.GetComponent<CrystalMiner>())
+        {
+            if (lastNearActiveNode.activeInHierarchy && grid.areNodesCrystal(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()))
+            {
+                building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
+                buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
+                building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+
+                if (buildCreated.GetComponent<FoodBuilding>())
+                {
+                    gameManager.addFarm(buildCreated);
+                }
+
+                buildingPlaceSound.Play();
+                buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                buildingPlaceParticles.Play();
+
+                gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+
+                // If the sifht is down, continue 
+                if (!Input.GetKey(KeyCode.LeftShift))
+                {
+                    Cursor.visible = true;
+                    grid.setTilesActive(false);
+                    shadow.SetActive(false);
+                    buildingToPlace = null;
+                    farmToPlace = null;
+                    batteryToPlace = null;
+                    stoneMineToPlace = null;
+                    crystalMineToPlace = null;
+                }
+            }
+
+            return;
+        }
 
         if (lastNearActiveNode.activeInHierarchy && grid.areNodesFree(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()))
         {

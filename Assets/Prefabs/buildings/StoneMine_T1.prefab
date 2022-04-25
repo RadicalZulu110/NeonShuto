@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7601690214076946327}
-  - component: {fileID: -5001084447955607752}
   - component: {fileID: 2031171049058115582}
+  - component: {fileID: 4809925714382291427}
   m_Layer: 0
   m_Name: StoneMine_T1
   m_TagString: ResourceBuilding
@@ -33,44 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5001084447955607752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7601690214076946325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384a6f5ac07d17345ad1d49bb92f274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 1
-  height: 1
-  GoldCost: 100
-  FoodCost: 100
-  EnergyCost: 100
-  StoneCost: 0
-  CrystalCost: 0
-  PopCost: 0
-  MaintenanceGoldCost: 100
-  MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 100
-  MaintenanceStoneCost: 0
-  MaintenanceCrystalCost: 0
-  timeBtwIncrease: 3
-  nextIncreaseTime: 0
-  StoneIncrease: 100
-  CrystalIncrease: 0
-  EnergyIncrease: -20
-  FoodIncrease: 0
-  GoldIncreasePerPerson: 0
-  PopIncrease: 0
-  gm: {fileID: 0}
-  PersonalStoneCapacity: 200
-  PersonalCrystalCapacity: 0
-  currentStoneStored: 0
-  currentCrystalStored: 0
 --- !u!65 &2031171049058115582
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84,6 +46,46 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.1569519, z: 0.8715451}
   m_Center: {x: 0, y: 0.5806427, z: -0.07254374}
+--- !u!114 &4809925714382291427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601690214076946325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b157597084ff34a8bf35c0cc6543ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 4
+  height: 4
+  GoldCost: 100
+  FoodCost: 100
+  EnergyCost: 100
+  StoneCost: 0
+  CrystalCost: 0
+  PopCost: 0
+  MaintenanceGoldCost: 100
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 100
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  StoneIncrease: 100
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
+  gm: {fileID: 0}
+  recollecting: 0
+  truckRecollecting: {fileID: 0}
+  PersonalStoneCapacity: 200
+  PersonalCrystalCapacity: 0
+  currentStoneStored: 0
+  currentCrystalStored: 0
 --- !u!1001 &7904186935779669739
 PrefabInstance:
   m_ObjectHideFlags: 0

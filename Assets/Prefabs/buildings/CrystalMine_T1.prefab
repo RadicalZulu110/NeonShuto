@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5682111925873956495}
-  - component: {fileID: 246551528418110713}
   - component: {fileID: 8308644177364261100}
+  - component: {fileID: 3678188784780324046}
   m_Layer: 0
   m_Name: CrystalMine_T1
   m_TagString: ResourceBuilding
@@ -33,45 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &246551528418110713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5682111925873956489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384a6f5ac07d17345ad1d49bb92f274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 1
-  height: 1
-  GoldCost: 100
-  FoodCost: 100
-  EnergyCost: 100
-  StoneCost: 0
-  CrystalCost: 0
-  PopCost: 0
-  MaintenanceGoldCost: 100
-  MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 100
-  MaintenanceStoneCost: 0
-  MaintenanceCrystalCost: 0
-  timeBtwIncrease: 3
-  nextIncreaseTime: 0
-  StoneIncrease: 0
-  CrystalIncrease: 100
-  EnergyIncrease: -20
-  FoodIncrease: 0
-  GoldIncreasePerPerson: 0
-  PopIncrease: 0
-  gm: {fileID: 0}
-  recollecting: 0
-  PersonalStoneCapacity: 0
-  PersonalCrystalCapacity: 200
-  currentStoneStored: 0
-  currentCrystalStored: 0
 --- !u!65 &8308644177364261100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -85,6 +46,46 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.3160095, z: 0.8626251}
   m_Center: {x: 0, y: 0.6287384, z: -0.06868744}
+--- !u!114 &3678188784780324046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5682111925873956489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6260b147ac181940bfa8e3e4377e06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 4
+  height: 4
+  GoldCost: 0
+  FoodCost: 0
+  EnergyCost: 0
+  StoneCost: 0
+  CrystalCost: 0
+  PopCost: 0
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
+  gm: {fileID: 0}
+  recollecting: 0
+  truckRecollecting: {fileID: 0}
+  PersonalStoneCapacity: 0
+  PersonalCrystalCapacity: 200
+  currentStoneStored: 0
+  currentCrystalStored: 0
 --- !u!1001 &8994754346104330259
 PrefabInstance:
   m_ObjectHideFlags: 0
