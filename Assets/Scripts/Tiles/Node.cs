@@ -8,7 +8,6 @@ public class Node : MonoBehaviour
 	public bool walkable; // walkable for cars and characters
 	public Vector3 worldPosition;
 	public bool ocupied, nearRoad, adyacentRoad, road, initial, stone, crystal;
-	public bool adyacentStone, adyacentCrystal;
 	public int posX, posY;
 
 	public Node()
@@ -73,16 +72,6 @@ public class Node : MonoBehaviour
 		return crystal;
     }
 
-	public bool isAdyacentStone()
-    {
-		return adyacentStone;
-    }
-
-	public bool isAdyacentCrystal()
-    {
-		return adyacentCrystal;
-    }
-
 	// Setters
 	public void setOcupied(bool o)
     {
@@ -136,13 +125,4 @@ public class Node : MonoBehaviour
 		crystal = c;
     }
 
-	public void setAdyacentStone(bool ast)
-    {
-		adyacentStone = ast;
-    }
-
-	public void setAdyacentCrystal(bool acr)
-    {
-		adyacentCrystal = acr;
-    }
 }

@@ -599,6 +599,17 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+--- !u!114 &573273782 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401785524582, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &614007187
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,12 +877,44 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: deleteBuilding
       objectReference: {fileID: 0}
+    - target: {fileID: 1641858902606891096, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 1641858902606891096, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createFarm
+      objectReference: {fileID: 0}
+    - target: {fileID: 2754971960442831704, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 2754971960442831704, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createStoneMine
+      objectReference: {fileID: 0}
     - target: {fileID: 3249884307390791839, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: m_Text
       value: You and your people have just arrived at our new home, it is up to you
         to manage the colonisation process. In addition you will have 3 quotas to
         complete so that we may send supplies to our old home. Get this done in 10
         hours or we'll be forced to find somone who can.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3346567889566218819, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 3346567889566218819, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: deleteBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 3456493332431347259, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 3456493332431347259, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createInitial
       objectReference: {fileID: 0}
     - target: {fileID: 3662216305123679728, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -1877,6 +1920,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4648853280945246240, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 4648853280945246240, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createCrystalMine
+      objectReference: {fileID: 0}
     - target: {fileID: 4672181174916794243, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: timeMod
       value: 1
@@ -1905,6 +1956,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EndGame, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5710323518099822651, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 5710323518099822651, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createBattery
+      objectReference: {fileID: 0}
+    - target: {fileID: 5754481315659108688, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 5754481315659108688, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createRoad
+      objectReference: {fileID: 0}
     - target: {fileID: 6098692772573972703, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: FailedQuota
       value: 
@@ -1925,6 +1992,14 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: createStoneMine
       objectReference: {fileID: 0}
+    - target: {fileID: 6522808280334294500, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 906774557}
+    - target: {fileID: 6522808280334294500, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: createBuilding
+      objectReference: {fileID: 0}
     - target: {fileID: 6796414371231827971, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1932,6 +2007,10 @@ PrefabInstance:
     - target: {fileID: 6796414371231827971, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: createRoad
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970186799834171442, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8630399474306727186, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
       propertyPath: m_Text
@@ -2010,6 +2089,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &711587724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412402197898311, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &769217140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401785524568, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &889653640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401785524615, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &906774554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,11 +2170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b24589061139538438b5c9396a614d9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TotalGold: 0
+  TotalGold: 1000
   goldIncome: 0
-  TotalEnergy: 0
+  TotalEnergy: 1000
   energyIncome: 0
-  TotalFood: 0
+  TotalFood: 1000
   foodIncome: 0
   foodCapacity: 0
   foodStored: 0
@@ -2080,15 +2192,15 @@ MonoBehaviour:
   futurePop: 0
   PopCapacity: 0
   TotalPop: 0
-  goldDisplay: {fileID: 0}
-  energyDisplay: {fileID: 0}
-  foodDisplay: {fileID: 0}
-  foodStorage: {fileID: 0}
-  StoneDisplay: {fileID: 0}
-  stoneStorage: {fileID: 0}
-  CrystalDisplay: {fileID: 0}
-  crystalStorage: {fileID: 0}
-  popDisplay: {fileID: 0}
+  goldDisplay: {fileID: 1931185683}
+  energyDisplay: {fileID: 769217140}
+  foodDisplay: {fileID: 1252422707}
+  foodStorage: {fileID: 1953814308}
+  StoneDisplay: {fileID: 573273782}
+  stoneStorage: {fileID: 711587724}
+  CrystalDisplay: {fileID: 1581302801}
+  crystalStorage: {fileID: 907235090}
+  popDisplay: {fileID: 889653640}
   customCursor: {fileID: 965075791}
 --- !u!114 &906774557
 MonoBehaviour:
@@ -2136,6 +2248,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &907235090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412402222291115, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &926842431
 GameObject:
   m_ObjectHideFlags: 0
@@ -7729,6 +7852,17 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+--- !u!114 &1252422707 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401785524583, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1293178219
 GameObject:
   m_ObjectHideFlags: 0
@@ -8114,6 +8248,17 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+--- !u!114 &1581302801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401785524581, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1760358599
 GameObject:
   m_ObjectHideFlags: 0
@@ -8544,6 +8689,17 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+--- !u!114 &1931185683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401785524569, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1947566732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8645,6 +8801,17 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+--- !u!114 &1953814308 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 227412401853687947, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
+  m_PrefabInstance: {fileID: 708403755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1966396325
 GameObject:
   m_ObjectHideFlags: 0

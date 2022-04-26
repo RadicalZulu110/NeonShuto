@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ProductionBuilding : BuildingCost
 {
+
+    public bool recollecting;
+    public GameObject truckRecollecting;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        recollecting = false;
+        truckRecollecting = null;
     }
 
     // Update is called once per frame
@@ -63,5 +68,29 @@ public class ProductionBuilding : BuildingCost
     public virtual int GetStoneIncrease()
     {
         return 0;
+    }
+
+    public bool isRecollecting()
+    {
+        return recollecting;
+    }
+
+    public void setRecollecting(bool r)
+    {
+        recollecting = r;
+    }
+
+    public GameObject getTruckRecollecting()
+    {
+        return truckRecollecting;
+    }
+
+    public void setTruckRecollecting(GameObject truck)
+    {
+        truckRecollecting = truck;
+    }
+
+    public virtual void addFood(int food)
+    {
     }
 }

@@ -263,7 +263,7 @@ public class Grid : MonoBehaviour
 	}
 
 	// Make the nodes adyacent to the given adyacent to stone
-	public void setAdyacentStone(Node stone)
+	/*public void setAdyacentStone(Node stone)
     {
 		if (stone.getPosX() + 1 < gridSizeX)
 			grid[stone.getPosX() + 1, stone.getPosY()].GetComponent<Node>().setAdyacentStone(true);
@@ -276,10 +276,11 @@ public class Grid : MonoBehaviour
 
 		if (stone.getPosY() - 1 > 0)
 			grid[stone.getPosX(), stone.getPosY() - 1].GetComponent<Node>().setAdyacentStone(true);
-	}
+	}*/
+
 
 	// Make the nodes adyacent to the given adyacent to crystal
-	public void setAdyacentCrystal(Node crystal)
+	/*public void setAdyacentCrystal(Node crystal)
 	{
 		if (crystal.getPosX() + 1 < gridSizeX)
 			grid[crystal.getPosX() + 1, crystal.getPosY()].GetComponent<Node>().setAdyacentCrystal(true);
@@ -292,10 +293,10 @@ public class Grid : MonoBehaviour
 
 		if (crystal.getPosY() - 1 > 0)
 			grid[crystal.getPosX(), crystal.getPosY() - 1].GetComponent<Node>().setAdyacentCrystal(true);
-	}
+	}*/
 
 	// Make nodes adyacent to stone and road visibles
-	public void setTilesStoneActive(bool ac)
+	/*public void setTilesStoneActive(bool ac)
     {
 		for (int i = 0; i < grid.GetLength(0); i++)
 		{
@@ -310,10 +311,26 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
+	}*/
+
+	// Make the stone tiles near to rads visibles
+	public void setTilesStoneActive(bool ac)
+    {
+		for (int i = 0; i < grid.GetLength(0); i++)
+		{
+			for (int j = 0; j < grid.GetLength(1); j++)
+			{
+				if (grid[i, j].GetComponent<Node>().isNearRoad() && grid[i,j].GetComponent<Node>().isStone())
+				{
+					grid[i, j].SetActive(ac);
+				}
+			}
+		}
 	}
 
+
 	// Make nodes adyacent to crystal and road visibles
-	public void setTilesCrystalActive(bool ac)
+	/*public void setTilesCrystalActive(bool ac)
 	{
 		for (int i = 0; i < grid.GetLength(0); i++)
 		{
@@ -325,6 +342,21 @@ public class Grid : MonoBehaviour
 
 					if (grid[i, j].GetComponent<Node>().isOcupied())
 						grid[i, j].SetActive(false);
+				}
+			}
+		}
+	}*/
+
+	//Makes crystal nodes and near to roads visibles
+	public void setTilesCrystalActive(bool ac)
+	{
+		for (int i = 0; i < grid.GetLength(0); i++)
+		{
+			for (int j = 0; j < grid.GetLength(1); j++)
+			{
+				if (grid[i, j].GetComponent<Node>().isNearRoad() && grid[i, j].GetComponent<Node>().isCrystal())
+				{
+					grid[i, j].SetActive(ac);
 				}
 			}
 		}
@@ -361,6 +393,36 @@ public class Grid : MonoBehaviour
 		return true;
 	}
 
+	// True if all the nodes are stone
+	public bool areNodesStone(int width, int height, Node actualNode)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			for (int j = 0; j < height; j++)
+			{
+				if (!grid[i + actualNode.getPosX(), j + actualNode.getPosY()].GetComponent<Node>().isStone())
+					return false;
+			}
+		}
+
+		return true;
+	}
+
+	// True if all the nodes are stone
+	public bool areNodesCrystal(int width, int height, Node actualNode)
+	{
+		for (int i = 0; i < width; i++)
+		{
+			for (int j = 0; j < height; j++)
+			{
+				if (!grid[i + actualNode.getPosX(), j + actualNode.getPosY()].GetComponent<Node>().isCrystal())
+					return false;
+			}
+		}
+
+		return true;
+	}
+
 	// Set nodes occupied
 	public void setNodesOccupied(int width, int height, Node actualNode)
     {
@@ -387,6 +449,33 @@ public class Grid : MonoBehaviour
 			{
 				grid[i + actualNode.getPosX(), j + actualNode.getPosY()].GetComponent<Node>().setOcupied(false);
 			}
+		}
+	}
+
+	// Set nodes unoccupied
+	public void setNodesUnoccupied(List<GameObject> nodes)
+	{
+		for (int i = 0; i < nodes.Count; i++)
+		{
+			nodes[i].GetComponent<Node>().setOcupied(false);
+		}
+	}
+
+	// Set nodes stone
+	public void setNodesStone(List<GameObject> nodes)
+	{
+		for (int i = 0; i < nodes.Count; i++)
+		{
+			nodes[i].GetComponent<Node>().setStone(true);
+		}
+	}
+
+	// Set nodes crystal
+	public void setNodesCrystal(List<GameObject> nodes)
+	{
+		for (int i = 0; i < nodes.Count; i++)
+		{
+			nodes[i].GetComponent<Node>().setCrystal(true);
 		}
 	}
 
@@ -445,7 +534,7 @@ public class Grid : MonoBehaviour
         {
 			for(int j = 0; j < gridSizeY; j++)
             {
-				if (grid[i, j].GetComponent<Node>().isAdyacentStone() && grid[i, j].GetComponent<Node>().isNearRoad() && !grid[i, j].GetComponent<Node>().isOcupied())
+				if (grid[i, j].GetComponent<Node>().isStone() && grid[i, j].GetComponent<Node>().isNearRoad())
 					return true;
             }
         }
@@ -460,7 +549,7 @@ public class Grid : MonoBehaviour
 		{
 			for (int j = 0; j < gridSizeY; j++)
 			{
-				if (grid[i, j].GetComponent<Node>().isAdyacentCrystal() && grid[i, j].GetComponent<Node>().isNearRoad() && !grid[i, j].GetComponent<Node>().isOcupied())
+				if (grid[i, j].GetComponent<Node>().isCrystal() && grid[i, j].GetComponent<Node>().isNearRoad())
 					return true;
 			}
 		}
