@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 	public int foodIncome;
 	[HideInInspector] public int foodCapacity;
 	[HideInInspector] public int foodStored;
+	private int NoFoodStorage;
 
 	public int NoStoneMines;
 	public int TotalStone;
@@ -31,21 +32,37 @@ public class GameManager : MonoBehaviour
 	public int crystalIncome;
 	[HideInInspector] public int crystalCapacity;
 	[HideInInspector] public int crystalStored;
+	private int NoResourceStorage;
 	
 	public int pop;
 	public int futurePop;
 	[HideInInspector] public int PopCapacity;
 	[HideInInspector] public int TotalPop;
 
+	
 
-	public Text goldDisplay;
-	public Text energyDisplay;
-	public Text foodDisplay;
-	public Text foodStorage;
-	public Text StoneDisplay;
-	public Text stoneStorage;
-	public Text CrystalDisplay;
-	public Text crystalStorage;
+	public Text PlayerGoldDisplay;
+	public Text GoldProduced;
+
+	public Text PlayerEnergyDisplay;
+	public Text EnergyProduced;
+
+	public Text PlayerFoodDisplay;
+	public Text FoodConsumed;
+	public Text FoodStored;
+	public Text FoodCapacity;
+
+	public Text PlayerStoneDisplay;
+	public Text StoneConsumed;
+	public Text StoneStored;
+	public Text StoneCapacity;
+
+	public Text PlayerCrystalDisplay;
+	public Text CrystalConsumed;
+	public Text CrystalStored;
+	public Text CrystalCapacity;
+
+
 	public Text popDisplay;
 
 	public CustomCursor customCursor;
@@ -62,20 +79,34 @@ public class GameManager : MonoBehaviour
 		foodBuildings = new List<GameObject>();
 		stoneMiners = new List<GameObject>();
 		crystalMiners = new List<GameObject>();
+		NoFoodStorage = 0;
+		NoResourceStorage = 0;
 	}
 
 	private void Update()
 	{
-		goldDisplay.text = (TotalGold).ToString() + "(" + (goldIncome).ToString() + ")";
-		energyDisplay.text = (TotalEnergy).ToString() + "(" + (energyIncome).ToString() + ")";
-		foodDisplay.text = (TotalFood).ToString() + "(" + (foodIncome).ToString() + ")";
-		StoneDisplay.text = (TotalStone).ToString() + "(" + (stoneIncome).ToString() + ")";
-		CrystalDisplay.text = (TotalCrystal).ToString() + "(" + (crystalIncome).ToString() + ")";
-		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
+		PlayerGoldDisplay.text = (TotalGold).ToString();
+		GoldProduced.text = (goldIncome).ToString();
 
-		foodStorage.text = (foodStored).ToString() + "[" + (foodCapacity).ToString() + "]";
-		stoneStorage.text = (stoneStored).ToString() + "[" + (stoneCapacity).ToString() + "]";
-		crystalStorage.text = (crystalStored).ToString() + "[" + (crystalCapacity).ToString() + "]";
+		PlayerEnergyDisplay.text = (TotalEnergy).ToString();
+		EnergyProduced.text = (energyIncome).ToString();
+
+		PlayerFoodDisplay.text = (TotalFood).ToString();
+		FoodConsumed.text = (foodIncome).ToString();
+		FoodStored.text = (foodStored).ToString();
+		FoodCapacity.text = (foodCapacity).ToString();
+
+		PlayerStoneDisplay.text = (TotalStone).ToString();
+		StoneConsumed.text = (stoneIncome).ToString();
+		StoneStored.text = (stoneStored).ToString();
+		StoneCapacity.text = (stoneCapacity).ToString();
+
+		PlayerCrystalDisplay.text = (TotalCrystal).ToString();
+		CrystalConsumed.text = (crystalIncome).ToString();
+		CrystalStored.text = (crystalStored).ToString();
+		CrystalCapacity.text = (crystalCapacity).ToString();
+
+		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
 	}
 
 	//deduction of Reasources
@@ -121,48 +152,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	//deduction of reasources new work in progress kind apointless might be useful 
-
-	/*
-	public void BuyBuilding(BuildingCost building)
-	{
-		if (gold >= building.GoldCost && currentGold >= building.MaintenanceGoldCost)
-		{
-			gold -= building.GoldCost;
-			currentGold -= building.MaintenanceGoldCost;
-		}
-
-		if (energy >= building.EnergyCost && currentEnergy >= building.MaintenanceEnergyCost)
-		{
-			energy -= building.EnergyCost;
-			currentEnergy -= building.MaintenanceEnergyCost;
-		}
-
-		if (food >= building.FoodCost && currentFood >= building.MaintenanceFoodCost)
-		{
-			food -= building.FoodCost;
-			currentFood -= building.MaintenanceFoodCost;
-		}
-
-        if (stone >= building.StoneCost && currentStone >= building.MaintenanceStoneCost)
-        {
-			stone -= building.StoneCost;
-			currentStone -= building.MaintenanceStoneCost;
-        }
-
-        if (crystal >= building.CrystalCost && currentCrystal >= building.MaintenanceCrystalCost)
-        {
-			crystal -= building.CrystalCost;
-			currentCrystal -= building.MaintenanceCrystalCost;
-        }
-
-		if (pop >= building.PopCost)
-		{
-			pop -= building.PopCost;
-		}
-	}
-	*/
-
 	public int GetNoBuildings()
 	{
 		return NoBuildings;
@@ -191,6 +180,26 @@ public class GameManager : MonoBehaviour
 	public void SetNoBatterys(int BatteryNo)
     {
 		NoBatterys = BatteryNo;
+    }
+
+	public int GetNoFoodStorage()
+    {
+		return NoFoodStorage;
+    }
+
+	public void SetNoFoodStorage(int FoodStorageNo)
+    {
+		NoFoodStorage = FoodStorageNo;
+    }
+
+	public int GetNoResourceStorage()
+    {
+		return NoResourceStorage;
+    }
+
+	public void SetNoResourceStorage(int ResourceStorageNo)
+    {
+		NoResourceStorage = ResourceStorageNo;
     }
 
 	public int GetNoStoneMines()

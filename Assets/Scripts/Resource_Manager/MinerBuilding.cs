@@ -9,6 +9,8 @@ public class MinerBuilding : ProductionBuilding
     
     
 
+    ResourceNode rn;
+
     // Start is called before the first frame update
     void Start()
     {

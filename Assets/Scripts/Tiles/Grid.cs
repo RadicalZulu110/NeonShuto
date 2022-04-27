@@ -302,7 +302,7 @@ public class Grid : MonoBehaviour
 		{
 			for (int j = 0; j < grid.GetLength(1); j++)
 			{
-				if (grid[i, j].GetComponent<Node>().isNearRoad() && grid[i,j].GetComponent<Node>().isAdyacentStone())
+				if (grid[i, j].GetComponent<Node>().isNearRoad() && grid[i,j].GetComponent<Node>().isAdjacentStone())
 				{
 					grid[i, j].SetActive(ac);
 
