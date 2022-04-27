@@ -73,7 +73,7 @@ public class Node : MonoBehaviour
 		return crystal;
     }
 
-	public bool isAdyacentStone()
+	public bool isAdjacentStone()
     {
 		return adyacentStone;
     }

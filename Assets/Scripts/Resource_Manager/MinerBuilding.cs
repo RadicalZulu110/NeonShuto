@@ -9,6 +9,8 @@ public class MinerBuilding : ProductionBuilding
     [HideInInspector] public int currentStoneStored;
     [HideInInspector] public int currentCrystalStored;
 
+    ResourceNode rn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,15 +23,17 @@ public class MinerBuilding : ProductionBuilding
     {
         if (Time.time > nextIncreaseTime)
         {
-            nextIncreaseTime = Time.time + timeBtwIncrease;
-            currentStoneStored += StoneIncrease;
+            nextIncreaseTime = Time.time + timeBtwIncrease;    
+               
             currentCrystalStored += CrystalIncrease;
+            gm.AddCrystalPersonalCapacity(CrystalIncrease);
+               
+            currentStoneStored += StoneIncrease;
+            gm.AddStonePersonalCapacity(StoneIncrease);
+          
 
             gm.TotalGold -= MaintenanceGoldCost;
             gm.TotalEnergy -= MaintenanceEnergyCost;
-
-            gm.AddCrystalPersonalCapacity(CrystalIncrease);
-            gm.AddStonePersonalCapacity(StoneIncrease);
 
             if(currentCrystalStored > PersonalCrystalCapacity)
             {

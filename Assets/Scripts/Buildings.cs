@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class Buildings : MonoBehaviour
 {
-    private GameObject buildingToPlace, roadToPlace, initialToPlace, farmToPlace, batteryToPlace, crystalMineToPlace, stoneMineToPlace;
+    private GameObject T1HouseToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T1PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
     public CustomCursor customCursor;
     public Grid grid;
     public GameObject[,] tiles;
     public Camera camera;
-    public GameObject initialShadow, roadShadow, buildingShadow, farmShadow, batteryShadow, stoneMineShadow, crystalMineShadow;
-    private Material roadShadowMaterial, buildingShadowMaterial, farmShadowMaterial, batteryShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial;
+    public GameObject initialShadow, roadShadow, T1HouseShadow, T1FoodShadow, T1PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
+    private Material roadShadowMaterial, T1HouseShadowMaterial, T1FoodShadowMaterial, T1PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
 
@@ -34,7 +34,7 @@ public class Buildings : MonoBehaviour
     void Start()
     {
         isDeleting = false;
-        buildingShadowScript = buildingShadow.GetComponent<BuildingCost>();
+        buildingShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
         initialShadowScript = initialShadow.GetComponent<BuildingCost>();
         firstRoadPlaced = false;
         initialPlaced = false;
@@ -93,81 +93,133 @@ public class Buildings : MonoBehaviour
             }
         }
 
-        //Building Shadow
-        if (buildingShadow.activeInHierarchy)
+        //T1 House Shadow
+        if (T1HouseShadow.activeInHierarchy)
         {
             nearNode = getNearestNode(customCursor.gameObject);
             
             if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
-                buildingShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+                T1HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
-                buildingShadow.GetComponentInChildren<Renderer>().material = buildingShadowMaterial;
+                T1HouseShadow.GetComponentInChildren<Renderer>().material = T1HouseShadowMaterial;
                 lastNearActiveNode = nearNode;
             }
 
             buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
-            buildingShadow.transform.position = new Vector3(buildPos.x, 1.7f, buildPos.z);
+            T1HouseShadow.transform.position = new Vector3(buildPos.x, 1.7f, buildPos.z);
             if (Input.GetKeyDown(KeyCode.R))
             {
-                rotateAroundY(buildingShadow, 90);
+                rotateAroundY(T1HouseShadow, 90);
                 buildingRotateSound.Play();
             }
             
         }
 
-        //farm shadow
-        if (farmShadow.activeInHierarchy )
+        //T1 Food shadow
+        if (T1FoodShadow.activeInHierarchy )
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
             if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
-                farmShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+                T1FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
-                farmShadow.GetComponentInChildren<Renderer>().material = farmShadowMaterial;
+                T1FoodShadow.GetComponentInChildren<Renderer>().material = T1FoodShadowMaterial;
                 lastNearActiveNode = nearNode;
             }
 
            
-            buildPos = buildCentered(grid.getNodes(farmShadow.GetComponent<BuildingCost>().getGridWidth(), farmShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-            farmShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            buildPos = buildCentered(grid.getNodes(T1FoodShadow.GetComponent<BuildingCost>().getGridWidth(), T1FoodShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            T1FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
             if (Input.GetKeyDown(KeyCode.R))
             {
-                rotateAroundY(farmShadow, 90);
+                rotateAroundY(T1FoodShadow, 90);
                 buildingRotateSound.Play();
             }
           
         }
 
-        //battery shadow
-        if (batteryShadow.activeInHierarchy)
+        //T1 Power shadow
+        if (T1PowerShadow.activeInHierarchy)
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
             if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
-                batteryShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+                T1PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
-                batteryShadow.GetComponentInChildren<Renderer>().material = batteryShadowMaterial;
+                T1PowerShadow.GetComponentInChildren<Renderer>().material = T1PowerShadowMaterial;
                 lastNearActiveNode = nearNode;
             }
 
             
-            buildPos = buildCentered(grid.getNodes(batteryShadow.GetComponent<BuildingCost>().getGridWidth(), batteryShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
-            batteryShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            buildPos = buildCentered(grid.getNodes(T1PowerShadow.GetComponent<BuildingCost>().getGridWidth(), T1PowerShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            T1PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
             if (Input.GetKeyDown(KeyCode.R))
             {
-                rotateAroundY(batteryShadow, 90);
+                rotateAroundY(T1PowerShadow, 90);
                 buildingRotateSound.Play();
             }
             
+        }
+
+        //Food Storage shadow
+        if (B_FoodStoageShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                B_FoodStoageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                B_FoodStoageShadow.GetComponentInChildren<Renderer>().material = T1PowerShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+
+            buildPos = buildCentered(grid.getNodes(B_FoodStoageShadow.GetComponent<BuildingCost>().getGridWidth(), B_FoodStoageShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            B_FoodStoageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(B_FoodStoageShadow, 90);
+                buildingRotateSound.Play();
+            }
+
+        }
+
+        //Food Resource shadow
+        if (B_ResourceStorageShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                B_ResourceStorageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material = T1PowerShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+
+            buildPos = buildCentered(grid.getNodes(B_ResourceStorageShadow.GetComponent<BuildingCost>().getGridWidth(), B_ResourceStorageShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            B_ResourceStorageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(B_ResourceStorageShadow, 90);
+                buildingRotateSound.Play();
+            }
+
         }
 
         //stonemine shadow
@@ -247,30 +299,48 @@ public class Buildings : MonoBehaviour
             }
 
             // Create house
-            if (buildingToPlace != null)
+            if (T1HouseToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
 
-                createBuilding(buildingToPlace, buildingShadow);
+                createBuilding(T1HouseToPlace, T1HouseShadow);
                 gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
             }
 
             //Create farm
-            if (farmToPlace != null)
+            if (T1FoodToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
 
-                createBuilding(farmToPlace, farmShadow);
+                createBuilding(T1FoodToPlace, T1FoodShadow);
                 gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
             }
 
             //Create battery
-            if (batteryToPlace != null)
+            if (T1PowerToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
 
-                createBuilding(batteryToPlace, batteryShadow);
+                createBuilding(T1PowerToPlace, T1PowerShadow);
                 gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
+            }
+
+            //Create Food Storage
+            if (B_FoodStorageToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(B_FoodStorageToPlace, B_FoodStoageShadow);
+                gameManager.SetNoFoodStorage(gameManager.GetNoFoodStorage() + 1);
+            }
+
+            //Create Resource Storage
+            if (B_ResourceStorageToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(B_ResourceStorageToPlace, B_ResourceStorageShadow);
+                gameManager.SetNoResourceStorage(gameManager.GetNoResourceStorage() + 1);
             }
 
             //Create StoneMine
@@ -595,9 +665,9 @@ public class Buildings : MonoBehaviour
     // Reset all the values to the originals
     private void reSetValues()
     {
-        buildingToPlace = null;
-        farmToPlace = null;
-        batteryToPlace = null;
+        T1HouseToPlace = null;
+        T1FoodToPlace = null;
+        T1PowerToPlace = null;
         stoneMineToPlace = null;
         crystalMineToPlace = null;
         customCursor.gameObject.SetActive(false);
@@ -607,23 +677,27 @@ public class Buildings : MonoBehaviour
         initialToPlace = null;
         initialShadow.SetActive(false);
         roadShadow.SetActive(false);
-        buildingShadow.SetActive(false);
-        farmShadow.SetActive(false);
-        batteryShadow.SetActive(false);
+        T1HouseShadow.SetActive(false);
+        T1FoodShadow.SetActive(false);
+        T1PowerShadow.SetActive(false);
         stoneMineShadow.SetActive(false);
         crystalMineShadow.SetActive(false);
+        B_FoodStoageShadow.SetActive(false);
+        B_ResourceStorageShadow.SetActive(false);
         isDeleting = false;
     }
 
     // Get all the materials of the shadow buildings
     private void getShadowMaterials()
     {
-        buildingShadowMaterial = buildingShadow.GetComponentInChildren<Renderer>().material;
+        T1HouseShadowMaterial = T1HouseShadow.GetComponentInChildren<Renderer>().material;
         roadShadowMaterial = roadShadow.GetComponentInChildren<Renderer>().material;
-        farmShadowMaterial = farmShadow.GetComponentInChildren<Renderer>().material;
-        batteryShadowMaterial = batteryShadow.GetComponentInChildren<Renderer>().material;
+        T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
+        T1PowerShadowMaterial = T1PowerShadow.GetComponentInChildren<Renderer>().material;
         stoneMineShadowMaterial = stoneMineShadow.GetComponentInChildren<Renderer>().material;
-        crystalMineShadowMaterial = crystalMineShadow   .GetComponentInChildren<Renderer>().material;
+        crystalMineShadowMaterial = crystalMineShadow.GetComponentInChildren<Renderer>().material;
+        B_FoodStorageShadowMaterial = B_FoodStoageShadow.GetComponentInChildren<Renderer>().material;
+        B_ResourceStorageShadowMaterial = B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material;
     }
 
     /* Instantiate a building in the nodes necessary
@@ -652,11 +726,13 @@ public class Buildings : MonoBehaviour
                 Cursor.visible = true;
                 grid.setTilesActive(false);
                 shadow.SetActive(false);
-                buildingToPlace = null;
-                farmToPlace = null;
-                batteryToPlace = null;
+                T1HouseToPlace = null;
+                T1FoodToPlace = null;
+                T1PowerToPlace = null;
                 stoneMineToPlace = null;
                 crystalMineToPlace = null;
+                B_FoodStorageToPlace = null;
+                B_ResourceStorageToPlace = null;
             }
         }
     }
@@ -677,9 +753,9 @@ public class Buildings : MonoBehaviour
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            buildingToPlace = building;
+            T1HouseToPlace = building;
             isDeleting = false;
-            buildingShadow.SetActive(true);
+            T1HouseShadow.SetActive(true);
         }
     }
 
@@ -697,9 +773,9 @@ public class Buildings : MonoBehaviour
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            farmToPlace = farm;
+            T1FoodToPlace = farm;
             isDeleting = false;
-            farmShadow.SetActive(true);
+            T1FoodShadow.SetActive(true);
         }
         
     }
@@ -718,9 +794,49 @@ public class Buildings : MonoBehaviour
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            batteryToPlace = battery;
+            T1PowerToPlace = battery;
             isDeleting = false;
-            batteryShadow.SetActive(true);
+            T1PowerShadow.SetActive(true);
+        }
+    }
+
+    //button event to create a Food Storage
+    public void createFoodStorage(GameObject foodStorage)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - foodStorage.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - foodStorage.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - foodStorage.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - foodStorage.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - foodStorage.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            B_FoodStorageToPlace = foodStorage;
+            isDeleting = false;
+            B_FoodStoageShadow.SetActive(true);
+        }
+    }
+
+    //button event to create a Resource Storage
+    public void createResourceStorage(GameObject resourceStorage)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - resourceStorage.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - resourceStorage.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - resourceStorage.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - resourceStorage.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - resourceStorage.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            B_ResourceStorageToPlace = resourceStorage;
+            isDeleting = false;
+            B_ResourceStorageShadow.SetActive(true);
         }
     }
 
