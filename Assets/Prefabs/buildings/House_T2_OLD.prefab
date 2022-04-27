@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 1
   height: 1
-  GoldCost: 100
+  GoldCost: 0
   FoodCost: 100
   EnergyCost: 50
   StoneCost: 0

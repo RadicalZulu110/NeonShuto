@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PopulationBuilding : BuildingCost
 {
-    
+
     
 
     // Start is called before the first frame update
     void Start()
     {
-        gm.AddPop(PopIncrease); 
+        gm.AddPop(PopIncrease);
+        
     }
 
     // Update is called once per frame
@@ -35,4 +36,6 @@ public class PopulationBuilding : BuildingCost
     {
         return GoldIncreasePerPerson;
     }
+
+    
 }

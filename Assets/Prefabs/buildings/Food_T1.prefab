@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3949696708190100572}
   - component: {fileID: 2615764790299825905}
   - component: {fileID: 9031250134975283332}
+  - component: {fileID: 6897818237577707364}
   m_Layer: 0
   m_Name: Food_T1
   m_TagString: ResourceBuilding
@@ -45,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b384f5af84bc5844ab65aa9a1ae8044f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 150
   FoodCost: 50
   EnergyCost: 100
@@ -67,6 +68,7 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+  recollecting: 0
   PersonalFoodCapacity: 200
   currentFoodStored: 0
 --- !u!65 &9031250134975283332
@@ -77,11 +79,24 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3949696708190098339}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.3170166, y: 1.2871704, z: 1.6414752}
-  m_Center: {x: -0.034240723, y: 0.5155945, z: -0.10104203}
+  m_Size: {x: 1.5975342, y: 1.2871704, z: 1.6414752}
+  m_Center: {x: 0.0048217773, y: 0.5155945, z: -0.10104203}
+--- !u!135 &6897818237577707364
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3949696708190098339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3149887
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7779791837984811888
 PrefabInstance:
   m_ObjectHideFlags: 0

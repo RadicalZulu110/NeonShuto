@@ -9,11 +9,11 @@ TagManager:
   - Tile
   - TileManager
   - Road
-  - Starting construction
   - PopulationBuilding
   - ResourceBuilding
   - InvisibleWall
   - Truck
+  - HeroBuilding
   layers:
   - Default
   - TransparentFX

@@ -33,9 +33,12 @@ public class BuildingCost : MonoBehaviour
 
     public GameManager gm;
 
+    private List<GameObject> nodes;
+
     private void Awake()
     {
         gm = FindObjectOfType<GameManager>();
+        nodes = new List<GameObject>();
     }
 
     private void Update()
@@ -71,5 +74,17 @@ public class BuildingCost : MonoBehaviour
     public virtual int GetFoodIncrease()
     {
         return FoodIncrease;
+    }
+
+    // Get the nodes that the building is occuping
+    public List<GameObject> getNodes()
+    {
+        return nodes;
+    }
+
+    // Set the nodes that the building is occuping
+    public void setNodes(List<GameObject> n)
+    {
+        nodes = n;
     }
 }

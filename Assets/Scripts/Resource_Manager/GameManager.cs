@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
 
 	public CustomCursor customCursor;
 
+	private List<GameObject> foodBuildings;
+
 	private void Start()
 	{
 		NoBuildings = 0;
@@ -320,5 +322,27 @@ public class GameManager : MonoBehaviour
         {
 			crystalStored = crystalCapacity;
         }
+    }
+
+	// Add a new farm to the list
+	public void addFarm(GameObject farm)
+    {
+		foodBuildings.Add(farm);
+    }
+
+	// Delete a farm from the list
+	public void deleteFarm(GameObject farm)
+    {
+		foodBuildings.Remove(farm);
+    }
+
+	public List<GameObject> getFarms()
+    {
+		return foodBuildings;
+    }
+
+	public void addTotalFood(int food)
+    {
+		TotalFood += food;
     }
 }
