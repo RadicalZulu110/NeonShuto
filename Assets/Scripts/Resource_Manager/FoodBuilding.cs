@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodBuilding : ProductionBuilding
 {
     public int PersonalFoodCapacity;
-    [HideInInspector] public int currentFoodStored;
+    public int currentFoodStored;
 
     // Start is called before the first frame update
     void Start()
@@ -43,5 +43,10 @@ public class FoodBuilding : ProductionBuilding
     public override int GetPersonalFoodCapacity()
     {
         return PersonalFoodCapacity;
+    }
+
+    public override void addFood(int food)
+    {
+        currentFoodStored += food;
     }
 }
