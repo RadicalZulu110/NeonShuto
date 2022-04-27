@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1151715143536416795
+--- !u!114 &-9179683901431191860
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,28 +30,28 @@ Material:
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
+  - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
   - RayTracingPrepass
-  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_18c9f7c3ab4946fb833dcbc555942b33:
-        m_Texture: {fileID: 2800000, guid: 761049a885322d1488c46275bebc621a, type: 3}
+        m_Texture: {fileID: 2800000, guid: ab64810b45a63844a9a55c51c3a164e9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_2ac1d9133fa94a9c8ae6dc7edbd9e350:
-        m_Texture: {fileID: 2800000, guid: 8c7b6d77f5fa6a94b9d14a1f1fbbd0a4, type: 3}
+        m_Texture: {fileID: 2800000, guid: e78e1af9131e387489b970f6df4d2948, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_49f3fdd18e3a4cc4936ab5ab8f12e7b2:
-        m_Texture: {fileID: 2800000, guid: b57dd7355d62dd043a7553839bec1095, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0010895e854318b4f9c11e299ac3d891, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_a90a4e6d10d04ae49be57cacd97e5d8c:
-        m_Texture: {fileID: 2800000, guid: 76bfd1ec97f044f40b29ac3772ba11e7, type: 3}
+        m_Texture: {fileID: 2800000, guid: e888ac9934c449340b58dbed4036c506, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
