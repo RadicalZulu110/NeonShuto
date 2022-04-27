@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89a8c38c85033a46a921ae577c652e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  width: 4
+  height: 4
   GoldCost: 100
   FoodCost: 100
   EnergyCost: 100
@@ -58,16 +58,17 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  MaintenancePopCost: 0
   timeBtwIncrease: 3
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 100
   FoodIncrease: 0
-  GoldIncrease: 0
+  GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+  recollecting: 0
+  truckRecollecting: {fileID: 0}
 --- !u!65 &8432041543815645746
 BoxCollider:
   m_ObjectHideFlags: 0

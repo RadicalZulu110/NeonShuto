@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5682111925873956489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1150.7098, y: 487.3777, z: 4.1220703}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 8888258581930868728}
   m_Father: {fileID: 0}
@@ -83,9 +83,7 @@ MonoBehaviour:
   gm: {fileID: 0}
   recollecting: 0
   truckRecollecting: {fileID: 0}
-  PersonalStoneCapacity: 0
   PersonalCrystalCapacity: 200
-  currentStoneStored: 0
   currentCrystalStored: 0
 --- !u!135 &-656283116489129824
 SphereCollider:
