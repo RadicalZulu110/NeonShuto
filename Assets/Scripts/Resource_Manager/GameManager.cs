@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
 	public CustomCursor customCursor;
 
-	private List<GameObject> foodBuildings;
+	private List<GameObject> foodBuildings, stoneMiners, crystalMiners;
 
 	private void Start()
 	{
@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 		NoCrystalMines = 0;
 		NoStoneMines = 0;
 		foodBuildings = new List<GameObject>();
+		stoneMiners = new List<GameObject>();
+		crystalMiners = new List<GameObject>();
 	}
 
 	private void Update()
@@ -337,4 +339,48 @@ public class GameManager : MonoBehaviour
     {
 		TotalFood += food;
     }
+
+	// Add a new stone miner to the list
+	public void addStoneMiner(GameObject stoneMiner)
+	{
+		stoneMiners.Add(stoneMiner);
+	}
+
+	// Delete a stone miner from the list
+	public void deleteStoneMiner(GameObject stoneMiner)
+	{
+		stoneMiners.Remove(stoneMiner);
+	}
+
+	public List<GameObject> getStoneMiners()
+	{
+		return stoneMiners;
+	}
+
+	public void addTotalStone(int stone)
+	{
+		TotalStone += stone;
+	}
+
+	// Add a new crystal miner to the list
+	public void addCrystalMiner(GameObject crystalMiner)
+	{
+		crystalMiners.Add(crystalMiner);
+	}
+
+	// Delete a farm from the list
+	public void deleteCrystalMiner(GameObject crystalMiner)
+	{
+		crystalMiners.Remove(crystalMiner);
+	}
+
+	public List<GameObject> getCrystalMiners()
+	{
+		return crystalMiners;
+	}
+
+	public void addTotalCrystal(int crystal)
+	{
+		TotalCrystal += crystal;
+	}
 }

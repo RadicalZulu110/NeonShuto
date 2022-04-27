@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7601690214076946327}
   - component: {fileID: 2031171049058115582}
   - component: {fileID: 4809925714382291427}
+  - component: {fileID: -7812220330346370875}
   m_Layer: 0
   m_Name: StoneMine_T1
   m_TagString: ResourceBuilding
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7601690214076946325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1150.7098, y: 487.3777, z: 4.1220703}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 7654968584532349184}
   m_Father: {fileID: 0}
@@ -60,20 +61,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 100
-  FoodCost: 100
-  EnergyCost: 100
+  GoldCost: 0
+  FoodCost: 0
+  EnergyCost: 0
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  MaintenanceGoldCost: 100
+  MaintenanceGoldCost: 0
   MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 100
+  MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 5
   nextIncreaseTime: 0
-  StoneIncrease: 100
+  StoneIncrease: 10
   CrystalIncrease: 0
   EnergyIncrease: 0
   FoodIncrease: 0
@@ -83,9 +84,20 @@ MonoBehaviour:
   recollecting: 0
   truckRecollecting: {fileID: 0}
   PersonalStoneCapacity: 200
-  PersonalCrystalCapacity: 0
   currentStoneStored: 0
-  currentCrystalStored: 0
+--- !u!135 &-7812220330346370875
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601690214076946325}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7904186935779669739
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -93,4 +93,12 @@ public class ProductionBuilding : BuildingCost
     public virtual void addFood(int food)
     {
     }
+
+    public virtual void addStone(int s)
+    {
+    }
+
+    public virtual void addCrystal(int c)
+    {
+    }
 }
