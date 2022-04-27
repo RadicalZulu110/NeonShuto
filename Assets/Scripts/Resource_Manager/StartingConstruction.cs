@@ -14,15 +14,17 @@ public class StartingConstruction : BuildingCost
     public int maxTrucks, nTrucks;
     public GameObject truckPrefab;
     List<GameObject> trucksAvailable, trucksNoAvailable;
-    List<GameObject> farms;
+    List<GameObject> farms, stoneMiners, crystalMiners;
 
-    private GameObject currentFarm, currentTruck;
+    private GameObject currentBuilding, currentTruck;
 
     private void Start()
     {
         trucksAvailable = new List<GameObject>();
         trucksNoAvailable = new List<GameObject>();
         farms = new List<GameObject>();
+        stoneMiners = new List<GameObject>();
+        crystalMiners = new List<GameObject>();
 
         for(int i=0; i<maxTrucks; i++)
         {
@@ -44,22 +46,42 @@ public class StartingConstruction : BuildingCost
             gm.TotalGold += gm.goldIncome;
         }
 
+        // If there is a truck available
         if(trucksAvailable.Count > 0)
         {
+            // Get the buildings
             farms = gm.getFarms();
-            if(farms.Count > 0)
+            stoneMiners = gm.getStoneMiners();
+            crystalMiners = gm.getCrystalMiners();
+            if(farms.Count > 0 || stoneMiners.Count > 0 || crystalMiners.Count > 0)
             {
-                currentFarm = getMaxFarm();
-                if (currentFarm != null)
+                // Get the building with more rosources in
+                currentBuilding = getMaxResourceBuilding();
+
+                if (currentBuilding != null)
                 {
                     currentTruck = trucksAvailable[0];
                     trucksAvailable.Remove(currentTruck);
                     trucksNoAvailable.Add(currentTruck);
                     currentTruck.transform.position = getNearestRoad().transform.position;
                     currentTruck.SetActive(true);
-                    currentTruck.GetComponent<Truck>().setDestination(currentFarm.transform.position);
-                    currentFarm.GetComponent<FoodBuilding>().setRecollecting(true);
-                    currentFarm.GetComponent<FoodBuilding>().setTruckRecollecting(currentTruck);
+                    currentTruck.GetComponent<Truck>().setDestination(currentBuilding.transform.position);
+
+                    // If it is a farm
+                    if (currentBuilding.GetComponent<FoodBuilding>())
+                    {
+                        currentBuilding.GetComponent<FoodBuilding>().setRecollecting(true);
+                        currentBuilding.GetComponent<FoodBuilding>().setTruckRecollecting(currentTruck);
+                    }
+                    else if (currentBuilding.GetComponent<StoneMiner>())     // if it is a stone miner
+                    {
+                        currentBuilding.GetComponent<StoneMiner>().setRecollecting(true);
+                        currentBuilding.GetComponent<StoneMiner>().setTruckRecollecting(currentTruck);
+                    }else if (currentBuilding.GetComponent<CrystalMiner>())     // If it is a crystal miner
+                    {
+                        currentBuilding.GetComponent<CrystalMiner>().setRecollecting(true);
+                        currentBuilding.GetComponent<CrystalMiner>().setTruckRecollecting(currentTruck);
+                    }
                 }
             }
             
@@ -91,6 +113,63 @@ public class StartingConstruction : BuildingCost
                 (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > res.GetComponent<FoodBuilding>().GetCurrentFoodStored() && !farms[i].GetComponent<FoodBuilding>().isRecollecting()))
             {
                 res = farms[i];
+            }
+        }
+
+        return res;
+    }
+
+    // Get the building with more reosurces in
+    private GameObject getMaxResourceBuilding()
+    {
+        if(farms.Count == 0 && stoneMiners.Count == 0 && crystalMiners.Count == 0)
+        {
+            return null;
+        }
+
+        GameObject res = null;
+        int actual = 0;
+
+        /*if (farms.Count > 0 && !farms[0].GetComponent<FoodBuilding>().isRecollecting())
+        {
+            res = farms[0];
+            actual = farms[0].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+        }
+        else
+        {
+            res = null;
+        }*/
+
+        // Check farms
+        for (int i = 0; i < farms.Count; i++)
+        {
+            if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
+                (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
+            {
+                res = farms[i];
+                actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+            }
+        }
+
+        // Check stone miners
+        for (int i = 0; i < stoneMiners.Count; i++)
+        {
+            if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
+                (res != null && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+            {
+                res = stoneMiners[i];
+                actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+            }
+        }
+
+        // Check crystal miners
+        for (int i = 0; i < crystalMiners.Count; i++)
+        {
+            if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
+                (res != null && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+            {
+                res = crystalMiners[i];
+                actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
             }
         }
 

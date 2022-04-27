@@ -409,6 +409,12 @@ public class Buildings : MonoBehaviour
                             if(selectedObjectToDelete.GetType() == typeof(FoodBuilding))
                             {
                                 gameManager.deleteFarm(selectedObjectToDelete);
+                            }else if(selectedObjectToDelete.GetType() == typeof(StoneMiner))
+                            {
+                                gameManager.deleteStoneMiner(selectedObjectToDelete);
+                            }else if(selectedObjectToDelete.GetType() == typeof(CrystalMiner))
+                            {
+                                gameManager.deleteCrystalMiner(selectedObjectToDelete);
                             }
 
                             ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
@@ -650,10 +656,7 @@ public class Buildings : MonoBehaviour
                 building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                 buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
 
-                if (buildCreated.GetComponent<FoodBuilding>())
-                {
-                    gameManager.addFarm(buildCreated);
-                }
+                gameManager.addStoneMiner(buildCreated);
 
                 buildingPlaceSound.Play();
                 buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
@@ -688,10 +691,9 @@ public class Buildings : MonoBehaviour
                 building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                 buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
 
-                if (buildCreated.GetComponent<FoodBuilding>())
-                {
-                    gameManager.addFarm(buildCreated);
-                }
+                
+                gameManager.addCrystalMiner(buildCreated);
+                
 
                 buildingPlaceSound.Play();
                 buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);

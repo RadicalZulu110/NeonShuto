@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5682111925873956495}
   - component: {fileID: 8308644177364261100}
   - component: {fileID: 3678188784780324046}
+  - component: {fileID: -656283116489129824}
   m_Layer: 0
   m_Name: CrystalMine_T1
   m_TagString: ResourceBuilding
@@ -71,10 +72,10 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 5
   nextIncreaseTime: 0
   StoneIncrease: 0
-  CrystalIncrease: 0
+  CrystalIncrease: 10
   EnergyIncrease: 0
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
@@ -86,6 +87,19 @@ MonoBehaviour:
   PersonalCrystalCapacity: 200
   currentStoneStored: 0
   currentCrystalStored: 0
+--- !u!135 &-656283116489129824
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5682111925873956489}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8994754346104330259
 PrefabInstance:
   m_ObjectHideFlags: 0
