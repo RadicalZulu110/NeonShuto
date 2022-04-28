@@ -109,7 +109,7 @@ public class Buildings : MonoBehaviour
             }
 
             buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
-            T1HouseShadow.transform.position = new Vector3(buildPos.x, 1.7f, buildPos.z);
+            T1HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1HouseShadow, 90);

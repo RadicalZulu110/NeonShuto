@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
 		crystalMiners = new List<GameObject>();
 		NoFoodStorage = 0;
 		NoResourceStorage = 0;
+		foodBuildings = new List<GameObject>();
 	}
 
 	private void Update()
