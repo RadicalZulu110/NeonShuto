@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
 		NoStoneMines = 0;
 		NoFoodStorage = 0;
 		NoResourceStorage = 0;
+		foodBuildings = new List<GameObject>();
 	}
 
 	private void Update()

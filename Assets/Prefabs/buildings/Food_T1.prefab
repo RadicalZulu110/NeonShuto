@@ -69,6 +69,7 @@ MonoBehaviour:
   PopIncrease: 0
   gm: {fileID: 0}
   recollecting: 0
+  truckRecollecting: {fileID: 0}
   PersonalFoodCapacity: 200
   currentFoodStored: 0
 --- !u!65 &9031250134975283332
