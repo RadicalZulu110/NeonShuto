@@ -109,7 +109,7 @@ public class Buildings : MonoBehaviour
             }
 
             buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
-            T1HouseShadow.transform.position = new Vector3(buildPos.x, 1.7f, buildPos.z);
+            T1HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1HouseShadow, 90);
@@ -742,9 +742,9 @@ public class Buildings : MonoBehaviour
                     Cursor.visible = true;
                     grid.setTilesActive(false);
                     shadow.SetActive(false);
-                    buildingToPlace = null;
-                    farmToPlace = null;
-                    batteryToPlace = null;
+                    T1HouseToPlace = null;
+                    T1FoodToPlace = null;
+                    T1PowerToPlace = null;
                     stoneMineToPlace = null;
                     crystalMineToPlace = null;
                 }
@@ -780,9 +780,9 @@ public class Buildings : MonoBehaviour
                     Cursor.visible = true;
                     grid.setTilesActive(false);
                     shadow.SetActive(false);
-                    buildingToPlace = null;
-                    farmToPlace = null;
-                    batteryToPlace = null;
+                    T1HouseToPlace = null;
+                    T1FoodToPlace = null;
+                    T1PowerToPlace = null;
                     stoneMineToPlace = null;
                     crystalMineToPlace = null;
                 }
