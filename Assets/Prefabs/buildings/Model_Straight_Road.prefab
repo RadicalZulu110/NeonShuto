@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3658741085456108079}
   - component: {fileID: 6985212095791638094}
   - component: {fileID: 6361615202149461296}
-  - component: {fileID: 8765101993084121368}
   m_Layer: 6
   m_Name: Model_Straight_Road
   m_TagString: Road
@@ -160,22 +159,6 @@ MonoBehaviour:
   right: 0
   up: 0
   down: 0
---- !u!114 &8765101993084121368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5093556617617154858}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &8794094950231325349
 GameObject:
   m_ObjectHideFlags: 0
