@@ -745,9 +745,9 @@ public class Buildings : MonoBehaviour
                     Cursor.visible = true;
                     grid.setTilesActive(false);
                     shadow.SetActive(false);
-                    buildingToPlace = null;
-                    farmToPlace = null;
-                    batteryToPlace = null;
+                    T1HouseToPlace = null;
+                    T1FoodToPlace = null;
+                    T1PowerToPlace = null;
                     stoneMineToPlace = null;
                     crystalMineToPlace = null;
                 }
@@ -782,9 +782,9 @@ public class Buildings : MonoBehaviour
                     Cursor.visible = true;
                     grid.setTilesActive(false);
                     shadow.SetActive(false);
-                    buildingToPlace = null;
-                    farmToPlace = null;
-                    batteryToPlace = null;
+                    T1HouseToPlace = null;
+                    T1FoodToPlace = null;
+                    T1PowerToPlace = null;
                     stoneMineToPlace = null;
                     crystalMineToPlace = null;
                 }
