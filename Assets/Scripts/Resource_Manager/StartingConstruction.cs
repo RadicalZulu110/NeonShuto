@@ -11,6 +11,7 @@ public class StartingConstruction : BuildingCost
     public int ExpectedPop;
     private int nextPopIncreaseTime;
     public int timeBtwPopIncrease;
+
     public int maxTrucks, nTrucks;
     public GameObject truckPrefab;
     List<GameObject> trucksAvailable, trucksNoAvailable;
@@ -30,6 +31,7 @@ public class StartingConstruction : BuildingCost
         {
             GameObject truck = Instantiate(truckPrefab, this.transform.position, Quaternion.identity);
             truck.SetActive(false);
+            truck.GetComponent<Truck>().setStorageBuilding(this.gameObject);
             trucksAvailable.Add(truck);
         }
     }
@@ -93,31 +95,7 @@ public class StartingConstruction : BuildingCost
         return ExpectedPop;
     }
 
-    // Get the farm with more food in the storage
-    private GameObject getMaxFarm()
-    {
-        GameObject res;
-
-        if (!farms[0].GetComponent<FoodBuilding>().isRecollecting())
-        {
-            res = farms[0];
-        }
-        else
-        {
-            res = null;
-        }
-
-        for (int i=1; i<farms.Count; i++)
-        {
-            if((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
-                (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > res.GetComponent<FoodBuilding>().GetCurrentFoodStored() && !farms[i].GetComponent<FoodBuilding>().isRecollecting()))
-            {
-                res = farms[i];
-            }
-        }
-
-        return res;
-    }
+    
 
     // Get the building with more reosurces in
     private GameObject getMaxResourceBuilding()
