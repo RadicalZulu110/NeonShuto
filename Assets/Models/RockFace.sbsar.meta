@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: e15a05bd4847ba849a0f1ee76fb9a6ab
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: ff17b053d2a5497469941ca1c82db06a, type: 2}
+  _assetPath: Assets/Models/RockFace.sbsar

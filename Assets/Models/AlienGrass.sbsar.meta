@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 7d18b058d94d31e4c872498f32f1ae26
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 40d71af635835a2449796682326b2412, type: 2}
+  _assetPath: Assets/Models/AlienGrass.sbsar
