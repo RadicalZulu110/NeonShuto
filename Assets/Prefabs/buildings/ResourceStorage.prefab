@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8888588644577474701}
   - component: {fileID: 6857385349125962590}
-  - component: {fileID: 3533624136351394514}
+  - component: {fileID: 7304668396925619061}
+  - component: {fileID: 5155773891494077367}
   m_Layer: 0
   m_Name: ResourceStorage
   m_TagString: Untagged
@@ -44,9 +45,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3533624136351394514
+  m_Size: {x: 1.8693237, y: 1.5364685, z: 1.863652}
+  m_Center: {x: -0.07144165, y: 0.8047638, z: 0.019183278}
+--- !u!114 &7304668396925619061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,12 +56,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8605351926286229193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f99bf831f3f2bdc4e8e771a9bd25057e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6faa563a7d4d4d54bab584e483e04b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 100
+  GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
   StoneCost: 0
@@ -80,6 +81,26 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
+  maxTrucks: 3
+  nTrucks: 0
+  truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
+  trucksAvailable: []
+  trucksNoAvailable: []
+  currentBuilding: {fileID: 0}
+  currentTruck: {fileID: 0}
+--- !u!135 &5155773891494077367
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8605351926286229193}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8055012117789991981
 PrefabInstance:
   m_ObjectHideFlags: 0

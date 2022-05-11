@@ -1031,6 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 127966008}
+  - component: {fileID: 127966009}
   m_Layer: 0
   m_Name: Shadow_Storage_Reasources
   m_TagString: Untagged
@@ -1053,6 +1054,40 @@ Transform:
   m_Father: {fileID: 38996085}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &127966009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127966007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 4
+  height: 4
+  GoldCost: 0
+  FoodCost: 0
+  EnergyCost: 0
+  StoneCost: 0
+  CrystalCost: 0
+  PopCost: 0
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
+  gm: {fileID: 0}
 --- !u!1 &144895810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8803092239233461612, guid: 906047ad9fbaed948a74f32e721da5a1, type: 3}
@@ -4622,6 +4657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791567194}
+  - component: {fileID: 791567195}
   m_Layer: 0
   m_Name: Shadow_Storage_Food
   m_TagString: Untagged
@@ -4644,6 +4680,40 @@ Transform:
   m_Father: {fileID: 38996085}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791567195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791567193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 4
+  height: 4
+  GoldCost: 0
+  FoodCost: 0
+  EnergyCost: 0
+  StoneCost: 0
+  CrystalCost: 0
+  PopCost: 0
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
+  gm: {fileID: 0}
 --- !u!1 &792178828
 GameObject:
   m_ObjectHideFlags: 0
@@ -13174,10 +13244,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 165399088}
+    - target: {fileID: 6936896674266718577, guid: 6d08f76dccaedb942944fef03c38bc2f, type: 3}
+      propertyPath: m_Name
+      value: ResourceTab
+      objectReference: {fileID: 0}
     - target: {fileID: 6936896674418120219, guid: 6d08f76dccaedb942944fef03c38bc2f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 434027032}
+    - target: {fileID: 6936896674432468052, guid: 6d08f76dccaedb942944fef03c38bc2f, type: 3}
+      propertyPath: m_Text
+      value: Resource
+      objectReference: {fileID: 0}
+    - target: {fileID: 6936896674432468054, guid: 6d08f76dccaedb942944fef03c38bc2f, type: 3}
+      propertyPath: m_Name
+      value: Resource
+      objectReference: {fileID: 0}
     - target: {fileID: 6936896674871952735, guid: 6d08f76dccaedb942944fef03c38bc2f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
