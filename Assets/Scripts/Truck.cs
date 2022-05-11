@@ -8,14 +8,13 @@ public class Truck : MonoBehaviour
 
     public NavMeshAgent agent;
     public int capacity, maxCapacity;
-    private GameObject heroBuilding;
+    private GameObject  storageBuilding;
     private bool comingBack, food, stone, crystal;
     private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        heroBuilding = GameObject.FindGameObjectWithTag("HeroBuilding");
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         comingBack = false;
         capacity = 0;
@@ -69,7 +68,7 @@ public class Truck : MonoBehaviour
                     }
 
 
-                    agent.SetDestination(heroBuilding.transform.position);
+                    agent.SetDestination(storageBuilding.transform.position);
                     otherScript.setTruckRecollecting(null);
                     otherScript.setRecollecting(false);
                     comingBack = true;
@@ -77,8 +76,8 @@ public class Truck : MonoBehaviour
             }
             else
             {
-                // If it is the hero building
-                if(other.gameObject.tag == "HeroBuilding" && comingBack)
+                // If it is the original storage building
+                if(other.gameObject == storageBuilding && comingBack)
                 {
                     if (food)
                     {
@@ -96,8 +95,12 @@ public class Truck : MonoBehaviour
 
                     this.gameObject.SetActive(false);
                     comingBack = false;
-                    heroBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
                     capacity = 0;
+
+                    if(storageBuilding.GetComponent<StartingConstruction>())
+                        storageBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
+                    else if(storageBuilding.GetComponent<StorageBuilding>())
+                        storageBuilding.GetComponent<StorageBuilding>().makeAvailableTruck(this.gameObject);
                 }
             }
         }
@@ -106,5 +109,15 @@ public class Truck : MonoBehaviour
     public void setDestination(Vector3 goal)
     {
         agent.SetDestination(goal);
+    }
+
+    public GameObject getStorageBuilding()
+    {
+        return storageBuilding;
+    }
+
+    public void setStorageBuilding(GameObject sb)
+    {
+        storageBuilding = sb;
     }
 }
