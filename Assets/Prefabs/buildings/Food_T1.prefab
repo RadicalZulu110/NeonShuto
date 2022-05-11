@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 0
+  GoldCost: 100
   FoodCost: 0
-  EnergyCost: 0
+  EnergyCost: 100
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 0
-  FoodIncrease: 10
+  FoodIncrease: 100
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
