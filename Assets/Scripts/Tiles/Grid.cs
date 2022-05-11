@@ -408,7 +408,7 @@ public class Grid : MonoBehaviour
 		return true;
 	}
 
-	// True if all the nodes are stone
+	// True if all the nodes are crystal
 	public bool areNodesCrystal(int width, int height, Node actualNode)
 	{
 		for (int i = 0; i < width; i++)
@@ -421,6 +421,36 @@ public class Grid : MonoBehaviour
 		}
 
 		return true;
+	}
+
+	// True if there is at least one node adyacent that is road
+	public bool hasRoadAdyacent(int width, int height, Node actualNode)
+    {
+		for(int i = 0; i < width; i++)	// y = -1
+        {
+			if (grid[actualNode.getPosX() + i, actualNode.getPosY() - 1].GetComponent<Node>().isRoad())
+				return true;
+        }
+
+		for (int i = 0; i < width; i++) // y = +1
+		{
+			if (grid[actualNode.getPosX() + i, actualNode.getPosY() + height].GetComponent<Node>().isRoad())
+				return true;
+		}
+
+		for (int i = 0; i < height; i++) // x = -1
+		{
+			if (grid[actualNode.getPosX() - 1, actualNode.getPosY() + i].GetComponent<Node>().isRoad())
+				return true;
+		}
+
+		for (int i = 0; i < height; i++) // x = +1
+		{
+			if (grid[actualNode.getPosX() + width, actualNode.getPosY() + i].GetComponent<Node>().isRoad())
+				return true;
+		}
+
+		return false;
 	}
 
 	// Set nodes occupied
