@@ -71,7 +71,7 @@ MonoBehaviour:
   MinPop: 1
   ExpectedPop: 0
   timeBtwPopIncrease: 3
-  maxTrucks: 5
+  maxTrucks: 1
   nTrucks: 0
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
 --- !u!135 &6602387101543961845
