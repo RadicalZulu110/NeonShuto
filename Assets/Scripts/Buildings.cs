@@ -455,76 +455,85 @@ public class Buildings : MonoBehaviour
         if (isDeleting) // If Im deleting
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position
-            if (Physics.Raycast(ray, out RaycastHit hitInfo))           // If we get a hit with that ray
+            if (Physics.Raycast(ray, out RaycastHit hitInfoAux))           // If we get a hit with that ray
             {
-                Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.yellow, 1, true);
-                if (hitInfo.collider.gameObject != null && hitInfo.collider is BoxCollider &&
-                                                            (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
-                                                            hitInfo.collider.tag == "Road" || 
-                                                            hitInfo.collider.tag == "ResourceBuilding"))                        // is a good one
-                {
-                    Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.green, 1, true);
-                    selectedObjectToDelete = hitInfo.collider.gameObject;
-                    originalMaterial = selectedObjectToDelete.GetComponentInChildren<Renderer>().materials;
-                    selectedObjectToDelete.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+                RaycastHit[] hits = Physics.RaycastAll(ray);            // Get all the hits
+                Debug.DrawLine(Input.mousePosition, hitInfoAux.collider.transform.position, Color.yellow, 1, true);
 
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                foreach(RaycastHit hitInfo in hits)
+                {
+                    if (hitInfo.collider.gameObject != null && hitInfo.collider is BoxCollider &&
+                                                            (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
+                                                            hitInfo.collider.tag == "Road" ||
+                                                            hitInfo.collider.tag == "ResourceBuilding"))                        // is a good one
                     {
-                        if (selectedObjectToDelete.tag == "PopulationBuilding")
+                        Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.green, 1, true);
+                        selectedObjectToDelete = hitInfo.collider.gameObject;
+                        originalMaterial = selectedObjectToDelete.GetComponentInChildren<Renderer>().materials;
+                        selectedObjectToDelete.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+
+                        if (Input.GetKeyDown(KeyCode.Mouse0))
                         {
-                            PopulationBuilding buildingScript = selectedObjectToDelete.GetComponent<PopulationBuilding>();
-                            gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
-                            gameManager.AddPop(-buildingScript.GetPopulation());
-                            gameManager.AddGold(-buildingScript.GetGoldIncrease());
-                            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
-                            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
-                            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
-                            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
-                            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
-                            grid.setNodesUnoccupied(buildingScript.getNodes());
-                        }
-                        else if(selectedObjectToDelete.tag == "ResourceBuilding")
-                        {
-                            if(selectedObjectToDelete.GetType() == typeof(FoodBuilding))
+                            if (selectedObjectToDelete.tag == "PopulationBuilding")
                             {
-                                gameManager.deleteFarm(selectedObjectToDelete);
-                            }else if(selectedObjectToDelete.GetType() == typeof(StoneMiner))
+                                PopulationBuilding buildingScript = selectedObjectToDelete.GetComponent<PopulationBuilding>();
+                                gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
+                                gameManager.AddPop(-buildingScript.GetPopulation());
+                                gameManager.AddGold(-buildingScript.GetGoldIncrease());
+                                gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                                gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                                gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                                gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                                gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+                                grid.setNodesUnoccupied(buildingScript.getNodes());
+                            }
+                            else if (selectedObjectToDelete.tag == "ResourceBuilding")
                             {
-                                gameManager.deleteStoneMiner(selectedObjectToDelete);
-                            }else if(selectedObjectToDelete.GetType() == typeof(CrystalMiner))
+                                if (selectedObjectToDelete.GetType() == typeof(FoodBuilding))
+                                {
+                                    gameManager.deleteFarm(selectedObjectToDelete);
+                                }
+                                else if (selectedObjectToDelete.GetType() == typeof(StoneMiner))
+                                {
+                                    gameManager.deleteStoneMiner(selectedObjectToDelete);
+                                }
+                                else if (selectedObjectToDelete.GetType() == typeof(CrystalMiner))
+                                {
+                                    gameManager.deleteCrystalMiner(selectedObjectToDelete);
+                                }
+
+                                ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
+                                //gameManager.AddFood(-buildingScript.GetFoodIncrease());
+                                gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
+                                gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
+                                gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
+                                //gameManager.AddStone(-buildingScript.GetStoneIncrease());
+                                gameManager.stoneCapacity -= (buildingScript.GetPersonalStoneCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalStoneCapacity;
+                                gameManager.stoneStored -= (buildingScript.GetCurrentStoneStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentStoneStored;
+                                                                                                    //gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
+                                gameManager.crystalCapacity -= (buildingScript.GetPersonalCrystalCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalCrystalCapacity;
+                                gameManager.crystalStored -= (buildingScript.GetCurrentCrystalStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentCrystalStored;
+                                gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                                gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                                gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                                gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                                gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+                                grid.setNodesUnoccupied(buildingScript.getNodes());
+                            }
+                            else
                             {
-                                gameManager.deleteCrystalMiner(selectedObjectToDelete);
+                                grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
+                                grid.checkTilesRoads();
+                                updateRoadsJunction();
                             }
 
-                            ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
-                            //gameManager.AddFood(-buildingScript.GetFoodIncrease());
-                            gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
-                            gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
-                            gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
-                            //gameManager.AddStone(-buildingScript.GetStoneIncrease());
-                            gameManager.stoneCapacity -= (buildingScript.GetPersonalStoneCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalStoneCapacity;
-                            gameManager.stoneStored -= (buildingScript.GetCurrentStoneStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentStoneStored;
-                            //gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
-                            gameManager.crystalCapacity -= (buildingScript.GetPersonalCrystalCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalCrystalCapacity;
-                            gameManager.crystalStored -= (buildingScript.GetCurrentCrystalStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentCrystalStored;
-                            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
-                            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
-                            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
-                            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
-                            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
-                            grid.setNodesUnoccupied(buildingScript.getNodes());
+
+                            Destroy(selectedObjectToDelete);
+                            deleteBuildingSound.Play();
+                            selectedObjectToDelete = null;
                         }
-                        else
-                        {
-                            grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
-                            grid.checkTilesRoads();
-                            updateRoadsJunction();
-                        }
-                        
-                        
-                        Destroy(selectedObjectToDelete);
-                        deleteBuildingSound.Play();
-                        selectedObjectToDelete = null;
+
+                        break;
                     }
                 }
             }
