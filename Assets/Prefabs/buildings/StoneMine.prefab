@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.52552795, z: 1}
+  m_Center: {x: 0, y: 0.23723602, z: 0}
 --- !u!114 &5838523737551343046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,9 +83,7 @@ MonoBehaviour:
   recollecting: 0
   truckRecollecting: {fileID: 0}
   PersonalStoneCapacity: 0
-  PersonalCrystalCapacity: 0
   currentStoneStored: 0
-  currentCrystalStored: 0
 --- !u!1001 &8138345597263560314
 PrefabInstance:
   m_ObjectHideFlags: 0
