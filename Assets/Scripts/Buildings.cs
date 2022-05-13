@@ -457,10 +457,13 @@ public class Buildings : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position
             if (Physics.Raycast(ray, out RaycastHit hitInfo))           // If we get a hit with that ray
             {
-                if (hitInfo.collider.gameObject != null && (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
+                Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.yellow, 1, true);
+                if (hitInfo.collider.gameObject != null && hitInfo.collider is BoxCollider &&
+                                                            (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
                                                             hitInfo.collider.tag == "Road" || 
                                                             hitInfo.collider.tag == "ResourceBuilding"))                        // is a good one
                 {
+                    Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.green, 1, true);
                     selectedObjectToDelete = hitInfo.collider.gameObject;
                     originalMaterial = selectedObjectToDelete.GetComponentInChildren<Renderer>().materials;
                     selectedObjectToDelete.GetComponentInChildren<Renderer>().materials = deletingMaterial;
