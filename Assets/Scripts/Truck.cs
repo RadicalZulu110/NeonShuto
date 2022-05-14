@@ -79,29 +79,57 @@ public class Truck : MonoBehaviour
                 // If it is the original storage building
                 if(other.gameObject == storageBuilding && comingBack)
                 {
+
+                    if (storageBuilding.GetComponent<StartingConstruction>())
+                    {
+                        storageBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
+                        if (food)
+                        {
+                            other.gameObject.GetComponent<StartingConstruction>().addFood(capacity);
+                        }
+                        else if (stone)
+                        {
+                            other.gameObject.GetComponent<StartingConstruction>().addStone(capacity);
+                        }
+                        else if (crystal)
+                        {
+                            other.gameObject.GetComponent<StartingConstruction>().addCrystal(capacity);
+                        }
+                    }
+                    else if (storageBuilding.GetComponent<StorageBuilding>())
+                    {
+                        storageBuilding.GetComponent<StorageBuilding>().makeAvailableTruck(this.gameObject);
+                        if (food)
+                        {
+                            other.gameObject.GetComponent<FoodStorageBuilding>().addFood(capacity);
+                        }
+                        else if (stone)
+                        {
+                            other.gameObject.GetComponent<ResourceStorageBuilding>().addStone(capacity);
+                        }
+                        else if (crystal)
+                        {
+                            other.gameObject.GetComponent<ResourceStorageBuilding>().addCrystal(capacity);
+                        }
+                    }
+
                     if (food)
                     {
                         food = false;
-                        gameManager.addTotalFood(capacity);
+                        //gameManager.addTotalFood(capacity);
                     }else if (stone)
                     {
                         stone = false;
-                        gameManager.addTotalStone(capacity);
+                        //gameManager.addTotalStone(capacity);
                     }else if (crystal)
                     {
                         crystal = false;
-                        gameManager.addTotalCrystal(capacity);
+                        //gameManager.addTotalCrystal(capacity);
                     }
 
                     this.gameObject.SetActive(false);
                     comingBack = false;
-                    capacity = 0;
-
-                    if(storageBuilding.GetComponent<StartingConstruction>())
-                        storageBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
-                    else if(storageBuilding.GetComponent<StorageBuilding>())
-                        storageBuilding.GetComponent<StorageBuilding>().makeAvailableTruck(this.gameObject);
-                }
+                    capacity = 0;                }
             }
         }
     }
@@ -119,5 +147,15 @@ public class Truck : MonoBehaviour
     public void setStorageBuilding(GameObject sb)
     {
         storageBuilding = sb;
+    }
+
+    public int getCapacity()
+    {
+        return capacity;
+    }
+
+    public int getMaxCapacity()
+    {
+        return maxCapacity;
     }
 }
