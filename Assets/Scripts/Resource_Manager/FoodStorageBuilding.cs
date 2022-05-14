@@ -6,6 +6,9 @@ public class FoodStorageBuilding : StorageBuilding
 {
 
     List<GameObject> farms;
+    public int maxFood;
+    [SerializeField]
+    private int storedFood;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -49,6 +52,11 @@ public class FoodStorageBuilding : StorageBuilding
     {
         GameObject res;
 
+        if(!(storedFood + truckStorage <= maxFood))
+        {
+            return null;
+        }
+
         if (!farms[0].GetComponent<FoodBuilding>().isRecollecting())
         {
             res = farms[0];
@@ -68,5 +76,15 @@ public class FoodStorageBuilding : StorageBuilding
         }
 
         return res;
+    }
+
+    public void addFood(int f)
+    {
+        storedFood += f;
+    }
+
+    public int getFoodStored()
+    {
+        return storedFood;
     }
 }
