@@ -11,6 +11,9 @@ public class StartingConstruction : BuildingCost
     public int ExpectedPop;
     private int nextPopIncreaseTime;
     public int timeBtwPopIncrease;
+    public int maxFood, maxStone, maxCrystal;
+    [SerializeField]
+    private int storedFood, storedStone, storedCrystal; 
 
     public int maxTrucks, nTrucks;
     public GameObject truckPrefab;
@@ -18,6 +21,7 @@ public class StartingConstruction : BuildingCost
     List<GameObject> farms, stoneMiners, crystalMiners;
 
     private GameObject currentBuilding, currentTruck;
+    private int truckStorage;
 
     private void Start()
     {
@@ -26,6 +30,7 @@ public class StartingConstruction : BuildingCost
         farms = new List<GameObject>();
         stoneMiners = new List<GameObject>();
         crystalMiners = new List<GameObject>();
+        truckStorage = truckPrefab.GetComponent<Truck>().getMaxCapacity();
 
         for(int i=0; i<maxTrucks; i++)
         {
@@ -119,37 +124,47 @@ public class StartingConstruction : BuildingCost
         }*/
 
         // Check farms
-        for (int i = 0; i < farms.Count; i++)
+        if(storedFood + truckStorage <= maxFood)
         {
-            if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
-                (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
+            for (int i = 0; i < farms.Count; i++)
             {
-                res = farms[i];
-                actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
+                    (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
+                {
+                    res = farms[i];
+                    actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                }
             }
         }
 
         // Check stone miners
-        for (int i = 0; i < stoneMiners.Count; i++)
+        if(storedStone + truckStorage <= maxStone)
         {
-            if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
-                (res != null && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+            for (int i = 0; i < stoneMiners.Count; i++)
             {
-                res = stoneMiners[i];
-                actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
+                    (res != null && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+                {
+                    res = stoneMiners[i];
+                    actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                }
             }
         }
 
         // Check crystal miners
-        for (int i = 0; i < crystalMiners.Count; i++)
+        if(storedCrystal + truckStorage <= maxCrystal)
         {
-            if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
-                (res != null && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+            for (int i = 0; i < crystalMiners.Count; i++)
             {
-                res = crystalMiners[i];
-                actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
+                    (res != null && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+                {
+                    res = crystalMiners[i];
+                    actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                }
             }
         }
+        
 
         return res;
     }
@@ -174,5 +189,35 @@ public class StartingConstruction : BuildingCost
     {
         trucksNoAvailable.Remove(truck);
         trucksAvailable.Add(truck);
+    }
+
+    public void addFood(int f)
+    {
+        storedFood += f;
+    }
+
+    public void addStone(int s)
+    {
+        storedStone += s;
+    }
+
+    public void addCrystal(int c)
+    {
+        storedCrystal += c;
+    }
+
+    public int getFoodStored()
+    {
+        return storedFood;
+    }
+
+    public int getStoneStored()
+    {
+        return storedStone;
+    }
+
+    public int getCrystalStored()
+    {
+        return storedCrystal;
     }
 }
