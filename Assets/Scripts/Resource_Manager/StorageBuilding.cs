@@ -9,12 +9,14 @@ public class StorageBuilding : BuildingCost
     public GameObject truckPrefab;
     public List<GameObject> trucksAvailable, trucksNoAvailable;
     public GameObject currentBuilding, currentTruck;
+    protected int truckStorage;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         trucksAvailable = new List<GameObject>();
         trucksNoAvailable = new List<GameObject>();
+        truckStorage = truckPrefab.GetComponent<Truck>().getMaxCapacity();
 
         for (int i = 0; i < maxTrucks; i++)
         {
