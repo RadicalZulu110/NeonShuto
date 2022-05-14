@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	StartingConstruction SC;
+	FoodStorageBuilding FSB;
+	ResourceStorageBuilding RSB;
+
 	private int NoBuildings;
 	public int TotalGold;
 	public int goldIncome;
@@ -108,6 +112,10 @@ public class GameManager : MonoBehaviour
 		CrystalCapacity.text = (crystalCapacity).ToString();
 
 		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
+
+		TotalFood = SC.GetFoodStored() + FSB.GetFoodStored();
+		TotalStone = SC.GetStoneStored() + RSB.GetStoneStored();
+		TotalCrystal = SC.GetCrystalStored() + RSB.GetCrystalStored();
 	}
 
 	//deduction of Reasources

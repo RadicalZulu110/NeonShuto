@@ -206,17 +206,17 @@ public class StartingConstruction : BuildingCost
         storedCrystal += c;
     }
 
-    public int getFoodStored()
+    public int GetFoodStored()
     {
         return storedFood;
     }
 
-    public int getStoneStored()
+    public int GetStoneStored()
     {
         return storedStone;
     }
 
-    public int getCrystalStored()
+    public int GetCrystalStored()
     {
         return storedCrystal;
     }
