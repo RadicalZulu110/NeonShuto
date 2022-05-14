@@ -106,12 +106,12 @@ public class ResourceStorageBuilding : StorageBuilding
         storedCrystal += c;
     }
 
-    public int getStoneStored()
+    public int GetStoneStored()
     {
         return storedStone;
     }
 
-    public int getCrystalStored()
+    public int GetCrystalStored()
     {
         return storedCrystal;
     }

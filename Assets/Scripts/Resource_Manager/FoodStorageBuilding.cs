@@ -83,7 +83,7 @@ public class FoodStorageBuilding : StorageBuilding
         storedFood += f;
     }
 
-    public int getFoodStored()
+    public int GetFoodStored()
     {
         return storedFood;
     }
