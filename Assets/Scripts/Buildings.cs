@@ -16,7 +16,7 @@ public class Buildings : MonoBehaviour
     public ParticleSystem buildingPlaceParticles;
 
     GameObject nearNode, lastNearActiveNode, firstNodeRoad, lastNodeRoad;
-    bool isDeleting;
+    public bool isDeleting;
     public GameManager gameManager;//need to change naming convention for this to be somthing else rather than gameManager
     public BuildingCost buildingCost;
     private GameObject selectedObjectToDelete;
@@ -454,6 +454,8 @@ public class Buildings : MonoBehaviour
 
         if (isDeleting) // If Im deleting
         {
+            // set button color here 
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position
             if (Physics.Raycast(ray, out RaycastHit hitInfoAux))           // If we get a hit with that ray
             {
@@ -465,7 +467,8 @@ public class Buildings : MonoBehaviour
                     if (hitInfo.collider.gameObject != null && hitInfo.collider is BoxCollider &&
                                                             (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
                                                             hitInfo.collider.tag == "Road" ||
-                                                            hitInfo.collider.tag == "ResourceBuilding"))                        // is a good one
+                                                            hitInfo.collider.tag == "ResourceBuilding" ||
+                                                            hitInfo.collider.tag == "StorageBuilding"))                        // is a good one
                     {
                         Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.green, 1, true);
                         selectedObjectToDelete = hitInfo.collider.gameObject;
@@ -519,13 +522,18 @@ public class Buildings : MonoBehaviour
                                 gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                                 gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                                 grid.setNodesUnoccupied(buildingScript.getNodes());
-                            }else if (selectedObjectToDelete.tag == "StorageBuilding")
+                            }
+                            else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
                                 if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
                                 {
+                                    gameManager.foodCapacity -= selectedObjectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
                                     gameManager.DeleteFoodStorageBuilding(selectedObjectToDelete.GetComponent<FoodStorageBuilding>());
-                                }else if (selectedObjectToDelete.GetComponent<ResourceStorageBuilding>())
+                                }
+                                else if (selectedObjectToDelete.GetComponent<ResourceStorageBuilding>())
                                 {
+                                    gameManager.stoneCapacity -= selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxStone();
+                                    gameManager.crystalCapacity -= selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxCrystal();
                                     gameManager.DeleteResourceStorageBuilding(selectedObjectToDelete.GetComponent<ResourceStorageBuilding>());
                                 }
                             }

@@ -17,6 +17,7 @@ public class FoodStorageBuilding : StorageBuilding
     {
         base.Start();
         farms = new List<GameObject>();
+        gm.foodCapacity += maxFood;
     }
 
     // Update is called once per frame
@@ -84,6 +85,11 @@ public class FoodStorageBuilding : StorageBuilding
     {
         storedFood += f;
         foodPercentage = (storedFood * 100) / maxFood;
+    }
+
+    public int GetMaxFood()
+    {
+        return maxFood;
     }
 
     public int GetFoodStored()

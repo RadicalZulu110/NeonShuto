@@ -17,6 +17,8 @@ public class ResourceStorageBuilding : StorageBuilding
         base.Start();
         stoneMiners = new List<GameObject>();
         crystalMiners = new List<GameObject>();
+        gm.stoneCapacity += maxStone;
+        gm.crystalCapacity += maxCrystal;
     }
 
     // Update is called once per frame
@@ -107,6 +109,16 @@ public class ResourceStorageBuilding : StorageBuilding
     {
         storedCrystal += c;
         crystalPercentage = (storedCrystal * 100) / maxCrystal;
+    }
+
+    public int GetMaxStone()
+    {
+        return maxStone;
+    }
+
+    public int GetMaxCrystal()
+    {
+        return maxCrystal;
     }
 
     public int GetStoneStored()
