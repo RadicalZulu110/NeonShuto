@@ -13,7 +13,9 @@ public class StartingConstruction : BuildingCost
     public int timeBtwPopIncrease;
     public int maxFood, maxStone, maxCrystal;
     [SerializeField]
-    private int storedFood, storedStone, storedCrystal; 
+    private int storedFood, storedStone, storedCrystal;
+    [SerializeField]
+    private float foodPercentage, stonePercentage, crystalPercentage;
 
     public int maxTrucks, nTrucks;
     public GameObject truckPrefab;
@@ -194,16 +196,19 @@ public class StartingConstruction : BuildingCost
     public void addFood(int f)
     {
         storedFood += f;
+        foodPercentage = (storedFood * 100) / maxFood;
     }
 
     public void addStone(int s)
     {
         storedStone += s;
+        stonePercentage = (storedStone * 100) / maxStone;
     }
 
     public void addCrystal(int c)
     {
         storedCrystal += c;
+        crystalPercentage = (storedCrystal * 100) / maxCrystal;
     }
 
     public int GetFoodStored()
@@ -219,5 +224,20 @@ public class StartingConstruction : BuildingCost
     public int GetCrystalStored()
     {
         return storedCrystal;
+    }
+
+    public float GetFoodPercentage()
+    {
+        return foodPercentage;
+    }
+
+    public float GetStonePercentage()
+    {
+        return stonePercentage;
+    }
+
+    public float GetCrystalPercentage()
+    {
+        return crystalPercentage;
     }
 }
