@@ -183,6 +183,22 @@ public class GameManager : MonoBehaviour
 		{
 			pop -= building.PopCost;
 		}
+
+		//not sure if below is needed
+		if(TotalFood > foodCapacity)
+        {
+			TotalFood = foodCapacity;
+        }
+
+		if(TotalStone > stoneCapacity)
+        {
+			TotalStone = stoneCapacity;
+        }
+
+		if(TotalCrystal > crystalCapacity)
+        {
+			TotalCrystal = crystalCapacity;
+        }
 	}
 
 	public int GetNoBuildings()
