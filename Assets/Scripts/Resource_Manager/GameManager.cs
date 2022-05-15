@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-	StartingConstruction SC;
-	FoodStorageBuilding FSB;
-	ResourceStorageBuilding RSB;
+	[SerializeField]
+	private StartingConstruction heroBuilding;
+	private List<FoodStorageBuilding> foodStorageBuildings;
+	private List<ResourceStorageBuilding> resourceStorageBuildings;
 
 	private int NoBuildings;
 	public int TotalGold;
@@ -86,10 +87,36 @@ public class GameManager : MonoBehaviour
 		NoFoodStorage = 0;
 		NoResourceStorage = 0;
 		foodBuildings = new List<GameObject>();
+		foodStorageBuildings = new List<FoodStorageBuilding>();
+		resourceStorageBuildings = new List<ResourceStorageBuilding>();
+		TotalFood = 0;
+		TotalStone = 0;
+		TotalCrystal = 0;
 	}
 
 	private void Update()
 	{
+        if (heroBuilding)
+		{ 
+			// Food
+			TotalFood = heroBuilding.GetComponent<StartingConstruction>().GetFoodStored();
+			foreach (FoodStorageBuilding foodStorage in foodStorageBuildings)
+            {
+				TotalFood += foodStorage.GetFoodStored();
+			}
+
+			// Stone
+			TotalStone = heroBuilding.GetStoneStored();
+			foreach (ResourceStorageBuilding resourceStorage in resourceStorageBuildings)
+				TotalStone += resourceStorage.GetStoneStored();
+
+			// Crystal
+			TotalCrystal = heroBuilding.GetCrystalStored();
+			foreach (ResourceStorageBuilding resourceStorage in resourceStorageBuildings)
+				TotalCrystal += resourceStorage.GetCrystalStored();
+		}
+		
+
 		PlayerGoldDisplay.text = (TotalGold).ToString();
 		GoldProduced.text = (goldIncome).ToString();
 
@@ -113,9 +140,6 @@ public class GameManager : MonoBehaviour
 
 		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
 
-		TotalFood = SC.GetFoodStored() + FSB.GetFoodStored();
-		TotalStone = SC.GetStoneStored() + RSB.GetStoneStored();
-		TotalCrystal = SC.GetCrystalStored() + RSB.GetCrystalStored();
 	}
 
 	//deduction of Reasources
@@ -400,5 +424,30 @@ public class GameManager : MonoBehaviour
 	public void addTotalCrystal(int crystal)
 	{
 		TotalCrystal += crystal;
+	}
+
+	public void AddHeroBuilding(StartingConstruction hB)
+    {
+		heroBuilding = hB;
+    }
+
+	public void AddFoodStorageBuilding(FoodStorageBuilding fSB)
+    {
+		foodStorageBuildings.Add(fSB);
+    }
+
+	public void DeleteFoodStorageBuilding(FoodStorageBuilding fsb)
+    {
+		foodStorageBuildings.Remove(fsb);
+    }
+
+	public void AddResourceStorageBuilding(ResourceStorageBuilding rSB)
+	{
+		resourceStorageBuildings.Add(rSB);
+	}
+
+	public void DeleteResourceStorageBuilding(ResourceStorageBuilding rsb)
+	{
+		resourceStorageBuildings.Remove(rsb);
 	}
 }
