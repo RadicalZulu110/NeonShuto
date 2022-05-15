@@ -842,7 +842,7 @@ public class Buildings : MonoBehaviour
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
-                    gameManager.AddHeroBuilding(buildCreated);
+                    gameManager.AddHeroBuilding(buildCreated.GetComponent<StartingConstruction>());
                 }else if (buildCreated.GetComponent<FoodStorageBuilding>())
                 {
                     gameManager.AddFoodStorageBuilding(buildCreated.GetComponent<FoodStorageBuilding>());

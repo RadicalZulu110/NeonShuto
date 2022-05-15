@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject heroBuilding;
+	private StartingConstruction heroBuilding;
 	private List<FoodStorageBuilding> foodStorageBuildings;
 	private List<ResourceStorageBuilding> resourceStorageBuildings;
 
@@ -102,21 +102,18 @@ public class GameManager : MonoBehaviour
 			TotalFood = heroBuilding.GetComponent<StartingConstruction>().GetFoodStored();
 			foreach (FoodStorageBuilding foodStorage in foodStorageBuildings)
             {
-				Debug.Log("FoodStorage: " + foodStorage.GetFoodStored());
 				TotalFood += foodStorage.GetFoodStored();
 			}
 
-			Debug.Log(TotalFood);
-
 			// Stone
-			/*TotalStone = heroBuilding.GetStoneStored();
+			TotalStone = heroBuilding.GetStoneStored();
 			foreach (ResourceStorageBuilding resourceStorage in resourceStorageBuildings)
 				TotalStone += resourceStorage.GetStoneStored();
 
 			// Crystal
 			TotalCrystal = heroBuilding.GetCrystalStored();
 			foreach (ResourceStorageBuilding resourceStorage in resourceStorageBuildings)
-				TotalCrystal += resourceStorage.GetCrystalStored();*/
+				TotalCrystal += resourceStorage.GetCrystalStored();
 		}
 		
 
@@ -429,7 +426,7 @@ public class GameManager : MonoBehaviour
 		TotalCrystal += crystal;
 	}
 
-	public void AddHeroBuilding(GameObject hB)
+	public void AddHeroBuilding(StartingConstruction hB)
     {
 		heroBuilding = hB;
     }
