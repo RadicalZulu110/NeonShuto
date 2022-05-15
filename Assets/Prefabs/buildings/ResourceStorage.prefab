@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5155773891494077367}
   m_Layer: 0
   m_Name: ResourceStorage
-  m_TagString: Untagged
+  m_TagString: StorageBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,6 +88,10 @@ MonoBehaviour:
   trucksNoAvailable: []
   currentBuilding: {fileID: 0}
   currentTruck: {fileID: 0}
+  maxStone: 0
+  maxCrystal: 0
+  storedStone: 0
+  storedCrystal: 0
 --- !u!135 &5155773891494077367
 SphereCollider:
   m_ObjectHideFlags: 0
