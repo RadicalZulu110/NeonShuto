@@ -9,6 +9,7 @@ public class ResourceStorageBuilding : StorageBuilding
     public int maxStone, maxCrystal;
     [SerializeField]
     private int storedStone, storedCrystal;
+    private float stonePercentage, crystalPercentage;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -99,11 +100,13 @@ public class ResourceStorageBuilding : StorageBuilding
     public void addStone(int s)
     {
         storedStone += s;
+        stonePercentage = (storedStone * 100) / maxStone;
     }
 
     public void addCrystal(int c)
     {
         storedCrystal += c;
+        crystalPercentage = (storedCrystal * 100) / maxCrystal;
     }
 
     public int GetStoneStored()
@@ -114,5 +117,15 @@ public class ResourceStorageBuilding : StorageBuilding
     public int GetCrystalStored()
     {
         return storedCrystal;
+    }
+
+    public float GetStonePercentage()
+    {
+        return stonePercentage;
+    }
+
+    public float GetCrystalPercentage()
+    {
+        return crystalPercentage;
     }
 }

@@ -9,6 +9,8 @@ public class FoodStorageBuilding : StorageBuilding
     public int maxFood;
     [SerializeField]
     private int storedFood;
+    [SerializeField]
+    private float foodPercentage;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -81,10 +83,16 @@ public class FoodStorageBuilding : StorageBuilding
     public void addFood(int f)
     {
         storedFood += f;
+        foodPercentage = (storedFood * 100) / maxFood;
     }
 
     public int GetFoodStored()
     {
         return storedFood;
+    }
+
+    public float GetFoodPercentage()
+    {
+        return foodPercentage;
     }
 }
