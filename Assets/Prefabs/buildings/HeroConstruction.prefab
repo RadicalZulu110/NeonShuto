@@ -71,12 +71,12 @@ MonoBehaviour:
   MinPop: 1
   ExpectedPop: 0
   timeBtwPopIncrease: 3
-  maxFood: 50
-  maxStone: 50
-  maxCrystal: 50
-  storedFood: 0
-  storedStone: 0
-  storedCrystal: 0
+  maxFood: 5000
+  maxStone: 5000
+  maxCrystal: 5000
+  storedFood: 1000
+  storedStone: 1000
+  storedCrystal: 1000
   maxTrucks: 1
   nTrucks: 0
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}

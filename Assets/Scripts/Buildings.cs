@@ -519,6 +519,15 @@ public class Buildings : MonoBehaviour
                                 gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                                 gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                                 grid.setNodesUnoccupied(buildingScript.getNodes());
+                            }else if (selectedObjectToDelete.tag == "StorageBuilding")
+                            {
+                                if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
+                                {
+                                    gameManager.DeleteFoodStorageBuilding(selectedObjectToDelete.GetComponent<FoodStorageBuilding>());
+                                }else if (selectedObjectToDelete.GetComponent<ResourceStorageBuilding>())
+                                {
+                                    gameManager.DeleteResourceStorageBuilding(selectedObjectToDelete.GetComponent<ResourceStorageBuilding>());
+                                }
                             }
                             else
                             {
@@ -830,6 +839,17 @@ public class Buildings : MonoBehaviour
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+
+                if (buildCreated.GetComponent<StartingConstruction>())
+                {
+                    gameManager.AddHeroBuilding(buildCreated.GetComponent<StartingConstruction>());
+                }else if (buildCreated.GetComponent<FoodStorageBuilding>())
+                {
+                    gameManager.AddFoodStorageBuilding(buildCreated.GetComponent<FoodStorageBuilding>());
+                }else if (buildCreated.GetComponent<ResourceStorageBuilding>())
+                {
+                    gameManager.AddResourceStorageBuilding(buildCreated.GetComponent<ResourceStorageBuilding>());
+                }
 
                 // If the sifht is down, continue 
                 if (!Input.GetKey(KeyCode.LeftShift))
