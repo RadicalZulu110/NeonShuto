@@ -14,6 +14,7 @@ public class Grid : MonoBehaviour
 	public LayerMask unwalkable;
 	float nodeDiameter; // node diameter = node radius * 2
 	int gridSizeX, gridSizeY; // defintion of x and y
+	public int treeX, treeY;
 
 	void Awake()
 	{ // start function to create the grid and find the world size and diameter
@@ -31,8 +32,10 @@ public class Grid : MonoBehaviour
 
 		for (int x = 0; x < gridSizeX; x++)
 		{ // while x = 0 x is less then gridsize x
+			
 			for (int y = 0; y < gridSizeY; y++)
 			{// while y = 0 y is less then gridsize y
+				
 				Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 				bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkable));
 				grid[x, y] = Instantiate(tilePrefab, new Vector3(worldPoint.x, 0f, worldPoint.z), Quaternion.identity); // creates the new node with walkable and world point
@@ -40,8 +43,16 @@ public class Grid : MonoBehaviour
 				grid[x, y].SetActive(false);
 				grid[x, y].GetComponent<Node>().setPosX(x);
 				grid[x, y].GetComponent<Node>().setPosY(y);
+				
+				// Make the tree occupied
+				if(x > treeX && y > treeY)
+                {
+					grid[x, y].GetComponent<Node>().setOcupied(true);
+				}
 			}
+			
 		}
+
 	}
 
 
@@ -408,7 +419,7 @@ public class Grid : MonoBehaviour
 		return true;
 	}
 
-	// True if all the nodes are stone
+	// True if all the nodes are crystal
 	public bool areNodesCrystal(int width, int height, Node actualNode)
 	{
 		for (int i = 0; i < width; i++)
@@ -421,6 +432,36 @@ public class Grid : MonoBehaviour
 		}
 
 		return true;
+	}
+
+	// True if there is at least one node adyacent that is road
+	public bool hasRoadAdyacent(int width, int height, Node actualNode)
+    {
+		for(int i = 0; i < width; i++)	// y = -1
+        {
+			if (grid[actualNode.getPosX() + i, actualNode.getPosY() - 1].GetComponent<Node>().isRoad())
+				return true;
+        }
+
+		for (int i = 0; i < width; i++) // y = +1
+		{
+			if (grid[actualNode.getPosX() + i, actualNode.getPosY() + height].GetComponent<Node>().isRoad())
+				return true;
+		}
+
+		for (int i = 0; i < height; i++) // x = -1
+		{
+			if (grid[actualNode.getPosX() - 1, actualNode.getPosY() + i].GetComponent<Node>().isRoad())
+				return true;
+		}
+
+		for (int i = 0; i < height; i++) // x = +1
+		{
+			if (grid[actualNode.getPosX() + width, actualNode.getPosY() + i].GetComponent<Node>().isRoad())
+				return true;
+		}
+
+		return false;
 	}
 
 	// Set nodes occupied

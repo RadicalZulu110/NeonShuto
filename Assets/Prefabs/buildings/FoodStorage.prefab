@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -212300576196665198}
   m_Layer: 0
   m_Name: FoodStorage
-  m_TagString: Untagged
+  m_TagString: StorageBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,13 +81,15 @@ MonoBehaviour:
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   gm: {fileID: 0}
-  maxTrucks: 3
+  maxTrucks: 1
   nTrucks: 0
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
   trucksAvailable: []
   trucksNoAvailable: []
   currentBuilding: {fileID: 0}
   currentTruck: {fileID: 0}
+  maxFood: 50
+  storedFood: 0
 --- !u!135 &-212300576196665198
 SphereCollider:
   m_ObjectHideFlags: 0

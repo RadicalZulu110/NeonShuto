@@ -33,13 +33,15 @@ public class timer : MonoBehaviour
             min %= 60;  
         }
 
+        /*
         if (hour >= 24)
         {
             day += hour / 24;
             hour %= 24;
         }
-        
-        TimeDisplay.text = min.ToString() + " : " + hour.ToString() + " : " + day.ToString();
+        */
+
+        TimeDisplay.text = min.ToString() + " : " + hour.ToString(); //+ " : " + day.ToString();
     }
 }
 

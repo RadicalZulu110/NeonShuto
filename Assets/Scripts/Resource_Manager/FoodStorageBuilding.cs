@@ -6,12 +6,18 @@ public class FoodStorageBuilding : StorageBuilding
 {
 
     List<GameObject> farms;
+    public int maxFood;
+    [SerializeField]
+    private int storedFood;
+    [SerializeField]
+    private float foodPercentage;
 
     // Start is called before the first frame update
     protected new void Start()
     {
         base.Start();
         farms = new List<GameObject>();
+        gm.foodCapacity += maxFood;
     }
 
     // Update is called once per frame
@@ -49,6 +55,11 @@ public class FoodStorageBuilding : StorageBuilding
     {
         GameObject res;
 
+        if(!(storedFood + truckStorage <= maxFood))
+        {
+            return null;
+        }
+
         if (!farms[0].GetComponent<FoodBuilding>().isRecollecting())
         {
             res = farms[0];
@@ -68,5 +79,26 @@ public class FoodStorageBuilding : StorageBuilding
         }
 
         return res;
+    }
+
+    public void addFood(int f)
+    {
+        storedFood += f;
+        foodPercentage = (storedFood * 100) / maxFood;
+    }
+
+    public int GetMaxFood()
+    {
+        return maxFood;
+    }
+
+    public int GetFoodStored()
+    {
+        return storedFood;
+    }
+
+    public float GetFoodPercentage()
+    {
+        return foodPercentage;
     }
 }
