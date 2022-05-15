@@ -31,6 +31,9 @@ public class StartingConstruction : BuildingCost
         stoneMiners = new List<GameObject>();
         crystalMiners = new List<GameObject>();
         truckStorage = truckPrefab.GetComponent<Truck>().getMaxCapacity();
+        gm.foodCapacity += maxFood;
+        gm.stoneCapacity += maxStone;
+        gm.crystalCapacity += maxCrystal;
 
         for(int i=0; i<maxTrucks; i++)
         {
