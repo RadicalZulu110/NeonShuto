@@ -38,7 +38,8 @@ public class Quota : MonoBehaviour
     {
 		if(heroBuilding == null)
         {
-			heroBuilding = GameObject.FindGameObjectWithTag("HeroBuilding").GetComponent<StartingConstruction>();
+			if(GameObject.FindGameObjectWithTag("HeroBuilding"))
+				heroBuilding = GameObject.FindGameObjectWithTag("HeroBuilding").GetComponent<StartingConstruction>();
         }
 
         goldQuotaDisplay.text = gameManager.TotalGold.ToString() + "/" + "(" + (firstQuota).ToString() + ")";
