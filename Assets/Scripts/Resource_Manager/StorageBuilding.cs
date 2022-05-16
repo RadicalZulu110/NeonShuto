@@ -10,6 +10,7 @@ public class StorageBuilding : BuildingCost
     public List<GameObject> trucksAvailable, trucksNoAvailable;
     public GameObject currentBuilding, currentTruck;
     protected int truckStorage;
+    
 
     // Start is called before the first frame update
     protected virtual void Start()

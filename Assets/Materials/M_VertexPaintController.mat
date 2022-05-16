@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap1:
         m_Texture: {fileID: 2800000, guid: a7c0d513080bbb24facb80b6e3936fc7, type: 3}
-        m_Scale: {x: 10, y: 10}
+        m_Scale: {x: 30, y: 30}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap2:
         m_Texture: {fileID: 0}
@@ -429,7 +429,7 @@ Material:
     - _InheritBaseNormal3: 0
     - _InvTilingScale: 1
     - _InvTilingScale0: 0.1
-    - _InvTilingScale1: 0.1
+    - _InvTilingScale1: 0.033333335
     - _InvTilingScale2: 1
     - _InvTilingScale3: 1
     - _Ior: 1.5
@@ -463,7 +463,7 @@ Material:
     - _NormalMapSpace2: 0
     - _NormalMapSpace3: 0
     - _NormalScale: 1
-    - _NormalScale0: 1.3
+    - _NormalScale0: 1.658
     - _NormalScale1: 1.922
     - _NormalScale2: 1
     - _NormalScale3: 1
@@ -493,7 +493,7 @@ Material:
     - _SmoothnessRemapMax2: 1
     - _SmoothnessRemapMax3: 1
     - _SmoothnessRemapMin: 0
-    - _SmoothnessRemapMin0: 0.027261883
+    - _SmoothnessRemapMin0: 0.05454701
     - _SmoothnessRemapMin1: 0.07473309
     - _SmoothnessRemapMin2: 0
     - _SmoothnessRemapMin3: 0

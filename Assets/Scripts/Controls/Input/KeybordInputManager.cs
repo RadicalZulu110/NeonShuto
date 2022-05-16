@@ -36,12 +36,22 @@ public class KeybordInputManager : InputManager
         // Rotation
         if (Input.GetKey(KeyCode.Q))
         {
-            OnRotateInput?.Invoke(0, 1f);
+            OnRotateInput?.Invoke(0.8f, 0);
         }
 
         if (Input.GetKey(KeyCode.E))
         {
-            OnRotateInput?.Invoke(0, -1f);
+            OnRotateInput?.Invoke(-0.8f, 0);
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            OnRotateInput?.Invoke(0, 0.8f);
+        }
+
+        if (Input.GetKey(KeyCode.F))
+        {
+            OnRotateInput?.Invoke(0, -0.8f);
         }
 
         // Zoom
