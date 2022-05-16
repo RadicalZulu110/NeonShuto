@@ -29,6 +29,7 @@ public class Buildings : MonoBehaviour
     public float divisbleReturn;
 
     public NavMeshSurface surface;
+    private bool refreshNavMesh;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +40,18 @@ public class Buildings : MonoBehaviour
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
+        refreshNavMesh = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (refreshNavMesh)
+        {
+            surface.BuildNavMesh();
+            refreshNavMesh = false;
+        }
+
         roads = GameObject.FindGameObjectsWithTag("Road");
 
         if(grid == null)
@@ -542,14 +550,15 @@ public class Buildings : MonoBehaviour
                                 grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
+                                refreshNavMesh = true;
                             }
-
 
                             Destroy(selectedObjectToDelete);
                             deleteBuildingSound.Play();
                             selectedObjectToDelete = null;
+                            
                         }
-
+                        
                         break;
                     }
                 }
