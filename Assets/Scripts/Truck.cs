@@ -25,6 +25,9 @@ public class Truck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (agent.pathStatus == NavMeshPathStatus.PathPartial)
+            Debug.Log("Partial");
+
         // If it is not moving, reset the truck
         if(lastDistance == agent.remainingDistance)
         {

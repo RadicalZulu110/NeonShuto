@@ -106,4 +106,19 @@ public class ProductionBuilding : BuildingCost
     public virtual void addCrystal(int c)
     {
     }
+
+    // Get the nearest road to the building
+    public GameObject getNearestRoad()
+    {
+        GameObject[] roads = GameObject.FindGameObjectsWithTag("Road");
+        GameObject res = roads[0];
+
+        for (int i = 1; i < roads.Length; i++)
+        {
+            if (Vector3.Distance(roads[i].transform.position, this.transform.position) < Vector3.Distance(res.transform.position, this.transform.position))
+                res = roads[i];
+        }
+
+        return res;
+    }
 }
