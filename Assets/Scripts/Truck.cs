@@ -25,11 +25,11 @@ public class Truck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (agent.pathStatus == NavMeshPathStatus.PathPartial)
-            Debug.Log("Partial");
+        if (storageBuilding == null)
+            MakeAvailable();
 
         // If it is not moving, reset the truck
-        if(lastDistance == agent.remainingDistance)
+        if(this.gameObject.activeInHierarchy && lastDistance == agent.remainingDistance)
         {
             MakeAvailable();
         }
@@ -174,11 +174,11 @@ public class Truck : MonoBehaviour
 
     public void MakeAvailable()
     {
-        if (storageBuilding.GetComponent<StartingConstruction>())
+        if (storageBuilding && storageBuilding.GetComponent<StartingConstruction>())
         {
             storageBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
         }
-        else if (storageBuilding.GetComponent<StorageBuilding>())
+        else if (storageBuilding && storageBuilding.GetComponent<StorageBuilding>())
         {
             storageBuilding.GetComponent<StorageBuilding>().makeAvailableTruck(this.gameObject);
         }
