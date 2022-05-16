@@ -541,17 +541,22 @@ public class Buildings : MonoBehaviour
                             }
                             else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
+                                
                                 if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
                                 {
                                     gameManager.foodCapacity -= selectedObjectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
                                     gameManager.DeleteFoodStorageBuilding(selectedObjectToDelete.GetComponent<FoodStorageBuilding>());
+                                    grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<FoodStorageBuilding>().getNodes());
                                 }
                                 else if (selectedObjectToDelete.GetComponent<ResourceStorageBuilding>())
                                 {
                                     gameManager.stoneCapacity -= selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxStone();
                                     gameManager.crystalCapacity -= selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxCrystal();
                                     gameManager.DeleteResourceStorageBuilding(selectedObjectToDelete.GetComponent<ResourceStorageBuilding>());
+                                    grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().getNodes());
                                 }
+
+                                
                             }
                             else
                             {
