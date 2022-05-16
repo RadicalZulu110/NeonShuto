@@ -129,7 +129,8 @@ public class Truck : MonoBehaviour
 
                     this.gameObject.SetActive(false);
                     comingBack = false;
-                    capacity = 0;                }
+                    capacity = 0;                
+                }
             }
         }
     }
@@ -157,5 +158,34 @@ public class Truck : MonoBehaviour
     public int getMaxCapacity()
     {
         return maxCapacity;
+    }
+
+    public void MakeAvailable()
+    {
+        if (storageBuilding.GetComponent<StartingConstruction>())
+        {
+            storageBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
+        }
+        else if (storageBuilding.GetComponent<StorageBuilding>())
+        {
+            storageBuilding.GetComponent<StorageBuilding>().makeAvailableTruck(this.gameObject);
+        }
+
+        if (food)
+        {
+            food = false;
+        }
+        else if (stone)
+        {
+            stone = false;
+        }
+        else if (crystal)
+        {
+            crystal = false;
+        }
+
+        this.gameObject.SetActive(false);
+        comingBack = false;
+        capacity = 0;
     }
 }

@@ -500,20 +500,22 @@ public class Buildings : MonoBehaviour
                             }
                             else if (selectedObjectToDelete.tag == "ResourceBuilding")
                             {
-                                if (selectedObjectToDelete.GetType() == typeof(FoodBuilding))
+                                ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
+
+                                if (selectedObjectToDelete.GetComponent<FoodBuilding>())
                                 {
                                     gameManager.deleteFarm(selectedObjectToDelete);
                                 }
-                                else if (selectedObjectToDelete.GetType() == typeof(StoneMiner))
+                                else if (selectedObjectToDelete.GetComponent<StoneMiner>())
                                 {
                                     gameManager.deleteStoneMiner(selectedObjectToDelete);
                                 }
-                                else if (selectedObjectToDelete.GetType() == typeof(CrystalMiner))
+                                else if (selectedObjectToDelete.GetComponent<CrystalMiner>())
                                 {
                                     gameManager.deleteCrystalMiner(selectedObjectToDelete);
                                 }
 
-                                ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
+                                
                                 //gameManager.AddFood(-buildingScript.GetFoodIncrease());
                                 gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
                                 gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
@@ -530,6 +532,12 @@ public class Buildings : MonoBehaviour
                                 gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                                 gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                                 grid.setNodesUnoccupied(buildingScript.getNodes());
+
+                                // Truck associated with that production building
+                                if (buildingScript.getTruckRecollecting())
+                                {
+                                    buildingScript.getTruckRecollecting().GetComponent<Truck>().MakeAvailable();
+                                }
                             }
                             else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
