@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class Quota2 : MonoBehaviour
 {
+    [SerializeField]
+    private StartingConstruction heroBuilding;
+    private List<FoodStorageBuilding> foodStorageBuildings;
+    private List<ResourceStorageBuilding> resourceStorageBuildings;
+    private BuildingCost building;
+
     public int secondQuota;
 
     public int timeLimit;
@@ -21,8 +27,19 @@ public class Quota2 : MonoBehaviour
     public GameObject QuotaTwoComplete;
     public GameObject FailedQuota;
 
+    private void Start()
+    {
+        foodStorageBuildings = new List<FoodStorageBuilding>();
+        resourceStorageBuildings = new List<ResourceStorageBuilding>();
+    }
+
     void Update()
     {
+        if (heroBuilding == null)
+        {
+            heroBuilding = GameObject.FindGameObjectWithTag("HeroBuilding").GetComponent<StartingConstruction>();
+        }
+
         goldQuotaDisplay.text = gameManager.TotalGold.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
         foodQuotaDisplay.text = gameManager.TotalFood.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
         stoneQuotaDisplay.text = gameManager.TotalStone.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
@@ -39,10 +56,75 @@ public class Quota2 : MonoBehaviour
     {
         if (gameManager.TotalGold >= secondQuota && gameManager.TotalFood >= secondQuota && gameManager.TotalStone >= secondQuota && gameManager.TotalCrystal >= secondQuota)
         {
-            gameManager.TotalGold -= secondQuota;
-            gameManager.TotalFood -= secondQuota;
-            gameManager.TotalStone -= secondQuota;
-            gameManager.TotalCrystal -= secondQuota;
+			// FOOD CRYSTAL AND STONE
+			float percent = 0;
+			FoodStorageBuilding foodStorBuild = null;
+			ResourceStorageBuilding resoStorBuild = null;
+
+			if (heroBuilding)
+			{
+				if (gameManager.TotalFood >= secondQuota)
+				{
+					// Get the food storage with more percentage
+					percent = heroBuilding.GetFoodPercentage();
+					foodStorBuild = getMaxFoodStoragePercetnage();
+					if (foodStorBuild && foodStorBuild.GetFoodPercentage() > percent)
+					{
+						foodStorBuild.addFood(-secondQuota);
+					}
+					else
+					{
+						heroBuilding.addFood(-secondQuota);
+					}
+
+					percent = 0;
+					foodStorBuild = null;
+				}
+
+
+				if (gameManager.TotalStone >= secondQuota)
+				{
+					// Get the stone storage with more percentage
+					percent = heroBuilding.GetStonePercentage();
+					resoStorBuild = getMaxStoneStoragePercetnage();
+					if (resoStorBuild && resoStorBuild.GetStonePercentage() > percent)
+					{
+						resoStorBuild.addStone(-secondQuota);
+					}
+					else
+					{
+						heroBuilding.addStone(-secondQuota);
+					}
+
+					percent = 0;
+					resoStorBuild = null;
+				}
+
+
+				if (gameManager.TotalCrystal >= secondQuota)
+				{
+					// Get the crystal storage with more percentage
+					percent = heroBuilding.GetCrystalPercentage();
+					resoStorBuild = getMaxCrystalStoragePercetnage();
+					if (resoStorBuild && resoStorBuild.GetCrystalPercentage() > percent)
+					{
+						resoStorBuild.addCrystal(-secondQuota);
+					}
+					else
+					{
+						heroBuilding.addCrystal(-secondQuota);
+					}
+
+					percent = 0;
+					resoStorBuild = null;
+				}
+
+			}
+
+			gameManager.TotalGold -= secondQuota;
+            //gameManager.TotalFood -= secondQuota;
+            //gameManager.TotalStone -= secondQuota;
+            //gameManager.TotalCrystal -= secondQuota;
 
             QuotaTwo.SetActive(false);
             QuotaThree.SetActive(true);
@@ -51,4 +133,79 @@ public class Quota2 : MonoBehaviour
             Time.timeScale = 0;
         }
     }
+
+	// Get the food storage with more percentage
+	private FoodStorageBuilding getMaxFoodStoragePercetnage()
+	{
+		if (foodStorageBuildings.Count == 0)
+			return null;
+
+		float max = 0;
+		FoodStorageBuilding maxObject = null;
+
+		for (int i = 0; i < foodStorageBuildings.Count; i++)
+		{
+			if (foodStorageBuildings[i].GetFoodPercentage() > max || max == 0)
+			{
+				maxObject = foodStorageBuildings[i];
+				max = maxObject.GetFoodPercentage();
+			}
+
+			if (max == 100)
+				break;
+
+		}
+
+		return maxObject;
+	}
+
+	// Get the stone storage with more percentage
+	private ResourceStorageBuilding getMaxStoneStoragePercetnage()
+	{
+		if (resourceStorageBuildings.Count == 0)
+			return null;
+
+		float max = 0;
+		ResourceStorageBuilding maxObject = null;
+
+		for (int i = 0; i < resourceStorageBuildings.Count; i++)
+		{
+			if (resourceStorageBuildings[i].GetStonePercentage() > max || max == 0)
+			{
+				maxObject = resourceStorageBuildings[i];
+				max = maxObject.GetStonePercentage();
+			}
+
+			if (max == 100)
+				break;
+
+		}
+
+		return maxObject;
+	}
+
+	// Get the crystal storage with more percentage
+	private ResourceStorageBuilding getMaxCrystalStoragePercetnage()
+	{
+		if (resourceStorageBuildings.Count == 0)
+			return null;
+
+		float max = 0;
+		ResourceStorageBuilding maxObject = null;
+
+		for (int i = 0; i < resourceStorageBuildings.Count; i++)
+		{
+			if (resourceStorageBuildings[i].GetCrystalPercentage() > max || max == 0)
+			{
+				maxObject = resourceStorageBuildings[i];
+				max = maxObject.GetCrystalPercentage();
+			}
+
+			if (max == 100)
+				break;
+
+		}
+
+		return maxObject;
+	}
 }
