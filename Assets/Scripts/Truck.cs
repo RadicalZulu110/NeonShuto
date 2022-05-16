@@ -11,6 +11,7 @@ public class Truck : MonoBehaviour
     private GameObject  storageBuilding;
     private bool comingBack, food, stone, crystal;
     private GameManager gameManager;
+    private float lastDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +19,20 @@ public class Truck : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         comingBack = false;
         capacity = 0;
+        lastDistance = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // If it is not moving, reset the truck
+        if(lastDistance == agent.remainingDistance)
+        {
+            MakeAvailable();
+        }
+
+        if(this.gameObject.activeInHierarchy)
+            lastDistance = agent.remainingDistance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -183,6 +192,7 @@ public class Truck : MonoBehaviour
         {
             crystal = false;
         }
+
 
         this.gameObject.SetActive(false);
         comingBack = false;

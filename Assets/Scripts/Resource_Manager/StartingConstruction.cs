@@ -57,7 +57,10 @@ public class StartingConstruction : BuildingCost
             gm.goldIncome = gm.TotalPop * GoldIncreasePerPerson;
             gm.TotalGold += gm.goldIncome;
         }
-        Debug.Log(gm.getFarms().Count);
+
+        Debug.Log("Farms: " + gm.getFarms().Count);
+        Debug.Log("Trucks: " + trucksAvailable.Count);
+
         // If there is a truck available
         if (trucksAvailable.Count > 0)
         {

@@ -16,9 +16,14 @@ public class ProductionBuilding : BuildingCost
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-       
+       if(!truckRecollecting || !truckRecollecting.activeInHierarchy)
+        {
+            recollecting = false;
+            truckRecollecting = null;
+        }
+            
     }
 
     public virtual int GetPersonalFoodCapacity()
