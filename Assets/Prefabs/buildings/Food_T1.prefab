@@ -83,7 +83,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5975342, y: 1.2871704, z: 1.6414752}
+  m_Size: {x: 1.99, y: 1.2871704, z: 1.6414752}
   m_Center: {x: 0.0048217773, y: 0.5155945, z: -0.10104203}
 --- !u!135 &6897818237577707364
 SphereCollider:
@@ -96,7 +96,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.3149887
+  m_Radius: 1.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7779791837984811888
 PrefabInstance:

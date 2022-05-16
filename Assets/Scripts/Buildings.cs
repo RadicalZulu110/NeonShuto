@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Buildings : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class Buildings : MonoBehaviour
     private bool firstRoadPlaced, initialPlaced;
     private GameObject[] roads;
     public float divisbleReturn;
+
+    public Button DeleteButton;
+    public Color ActiveColor;
+
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
@@ -462,6 +467,9 @@ public class Buildings : MonoBehaviour
 
         if (isDeleting) // If Im deleting
         {
+            ColorBlock cb = DeleteButton.colors;
+            cb.normalColor = ActiveColor;
+            DeleteButton.colors = cb;
             // set button color here 
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position

@@ -88,8 +88,8 @@ MonoBehaviour:
   trucksNoAvailable: []
   currentBuilding: {fileID: 0}
   currentTruck: {fileID: 0}
-  maxStone: 0
-  maxCrystal: 0
+  maxStone: 1000
+  maxCrystal: 1000
   storedStone: 0
   storedCrystal: 0
 --- !u!135 &5155773891494077367
