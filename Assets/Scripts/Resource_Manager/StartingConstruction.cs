@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 
@@ -59,10 +60,11 @@ public class StartingConstruction : BuildingCost
         }
 
         // If there is a truck available
-        if(trucksAvailable.Count > 0)
+        if (trucksAvailable.Count > 0)
         {
             // Get the buildings
             farms = gm.getFarms();
+            
             stoneMiners = gm.getStoneMiners();
             crystalMiners = gm.getCrystalMiners();
             if(farms.Count > 0 || stoneMiners.Count > 0 || crystalMiners.Count > 0)
@@ -136,8 +138,13 @@ public class StartingConstruction : BuildingCost
                 if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
                     (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
                 {
-                    res = farms[i];
-                    actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(getNearestRoad().transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                    if(path.status == NavMeshPathStatus.PathComplete)
+                    {
+                        res = farms[i];
+                        actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                    }
                 }
             }
         }
@@ -150,8 +157,13 @@ public class StartingConstruction : BuildingCost
                 if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
                     (res != null && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
                 {
-                    res = stoneMiners[i];
-                    actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(getNearestRoad().transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                    if (path.status == NavMeshPathStatus.PathComplete)
+                    {
+                        res = stoneMiners[i];
+                        actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                    }
                 }
             }
         }
@@ -164,8 +176,13 @@ public class StartingConstruction : BuildingCost
                 if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
                     (res != null && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
                 {
-                    res = crystalMiners[i];
-                    actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(getNearestRoad().transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                    if (path.status == NavMeshPathStatus.PathComplete)
+                    {
+                        res = crystalMiners[i];
+                        actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                    }
                 }
             }
         }
