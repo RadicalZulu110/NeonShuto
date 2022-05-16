@@ -11,6 +11,7 @@ public class Truck : MonoBehaviour
     private GameObject  storageBuilding;
     private bool comingBack, food, stone, crystal;
     private GameManager gameManager;
+    private float lastDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +19,23 @@ public class Truck : MonoBehaviour
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         comingBack = false;
         capacity = 0;
+        lastDistance = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (storageBuilding == null)
+            MakeAvailable();
+
+        // If it is not moving, reset the truck
+        if(this.gameObject.activeInHierarchy && lastDistance == agent.remainingDistance)
+        {
+            MakeAvailable();
+        }
+
+        if(this.gameObject.activeInHierarchy)
+            lastDistance = agent.remainingDistance;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -129,7 +141,8 @@ public class Truck : MonoBehaviour
 
                     this.gameObject.SetActive(false);
                     comingBack = false;
-                    capacity = 0;                }
+                    capacity = 0;                
+                }
             }
         }
     }
@@ -157,5 +170,35 @@ public class Truck : MonoBehaviour
     public int getMaxCapacity()
     {
         return maxCapacity;
+    }
+
+    public void MakeAvailable()
+    {
+        if (storageBuilding && storageBuilding.GetComponent<StartingConstruction>())
+        {
+            storageBuilding.GetComponent<StartingConstruction>().makeAvailableTruck(this.gameObject);
+        }
+        else if (storageBuilding && storageBuilding.GetComponent<StorageBuilding>())
+        {
+            storageBuilding.GetComponent<StorageBuilding>().makeAvailableTruck(this.gameObject);
+        }
+
+        if (food)
+        {
+            food = false;
+        }
+        else if (stone)
+        {
+            stone = false;
+        }
+        else if (crystal)
+        {
+            crystal = false;
+        }
+
+
+        this.gameObject.SetActive(false);
+        comingBack = false;
+        capacity = 0;
     }
 }

@@ -164,20 +164,71 @@ public class GameManager : MonoBehaviour
 			TotalEnergy -= building.EnergyCost;
 		}
 
-		if (TotalFood >= building.FoodCost)
-		{
-			TotalFood -= building.FoodCost;
+		// FOOD CRYSTAL AND STONE
+		float percent = 0;
+		FoodStorageBuilding foodStorBuild = null;
+		ResourceStorageBuilding resoStorBuild = null;
+
+        if (heroBuilding)
+        {
+			if(TotalFood > building.FoodCost)
+            {
+				// Get the food storage with more percentage
+				percent = heroBuilding.GetFoodPercentage();
+				foodStorBuild = getMaxFoodStoragePercetnage();
+				if (foodStorBuild && foodStorBuild.GetFoodPercentage() > percent)
+				{
+					foodStorBuild.addFood(-building.FoodCost);
+				}
+				else
+				{
+					heroBuilding.addFood(-building.FoodCost);
+				}
+
+				percent = 0;
+				foodStorBuild = null;
+			}
+			
+
+			if(TotalStone > building.StoneCost)
+            {
+				// Get the stone storage with more percentage
+				percent = heroBuilding.GetStonePercentage();
+				resoStorBuild = getMaxStoneStoragePercetnage();
+				if (resoStorBuild && resoStorBuild.GetStonePercentage() > percent)
+				{
+					resoStorBuild.addStone(-building.StoneCost);
+				}
+				else
+				{
+					heroBuilding.addStone(-building.StoneCost);
+				}
+
+				percent = 0;
+				resoStorBuild = null;
+			}
+			
+
+			if(TotalCrystal > building.CrystalCost)
+            {
+				// Get the crystal storage with more percentage
+				percent = heroBuilding.GetCrystalPercentage();
+				resoStorBuild = getMaxCrystalStoragePercetnage();
+				if (resoStorBuild && resoStorBuild.GetCrystalPercentage() > percent)
+				{
+					resoStorBuild.addCrystal(-building.CrystalCost);
+				}
+				else
+				{
+					heroBuilding.addCrystal(-building.CrystalCost);
+				}
+
+				percent = 0;
+				resoStorBuild = null;
+			}
+			
 		}
 
-		if (TotalStone >= building.StoneCost)
-		{
-			TotalStone -= building.StoneCost;
-		}
-
-		if (TotalCrystal >= building.CrystalCost)
-		{
-			TotalCrystal -= building.CrystalCost;
-		}
 
 		if (pop >= building.PopCost)
 		{
@@ -466,4 +517,80 @@ public class GameManager : MonoBehaviour
 	{
 		resourceStorageBuildings.Remove(rsb);
 	}
+
+	// Get the food storage with more percentage
+	private FoodStorageBuilding getMaxFoodStoragePercetnage()
+    {
+		if (foodStorageBuildings.Count == 0)
+			return null;
+
+		float max = 0;
+		FoodStorageBuilding maxObject = null;
+
+		for(int i=0; i<foodStorageBuildings.Count; i++)
+        {
+			if (foodStorageBuildings[i].GetFoodPercentage() > max || max == 0)
+            {
+				maxObject = foodStorageBuildings[i];
+				max = maxObject.GetFoodPercentage();
+			}
+
+			if (max == 100)
+				break;
+
+        }
+
+		return maxObject;
+    }
+
+	// Get the stone storage with more percentage
+	private ResourceStorageBuilding getMaxStoneStoragePercetnage()
+	{
+		if (resourceStorageBuildings.Count == 0)
+			return null;
+
+		float max = 0;
+		ResourceStorageBuilding maxObject = null;
+
+		for (int i = 0; i < resourceStorageBuildings.Count; i++)
+		{
+			if (resourceStorageBuildings[i].GetStonePercentage() > max || max == 0)
+			{
+				maxObject = resourceStorageBuildings[i];
+				max = maxObject.GetStonePercentage();
+			}
+
+			if (max == 100)
+				break;
+
+		}
+
+		return maxObject;
+	}
+
+	// Get the crystal storage with more percentage
+	private ResourceStorageBuilding getMaxCrystalStoragePercetnage()
+	{
+		if (resourceStorageBuildings.Count == 0)
+			return null;
+
+		float max = 0;
+		ResourceStorageBuilding maxObject = null;
+
+		for (int i = 0; i < resourceStorageBuildings.Count; i++)
+		{
+			if (resourceStorageBuildings[i].GetCrystalPercentage() > max || max == 0)
+			{
+				maxObject = resourceStorageBuildings[i];
+				max = maxObject.GetCrystalPercentage();
+			}
+
+			if (max == 100)
+				break;
+
+		}
+
+		return maxObject;
+	}
+
 }

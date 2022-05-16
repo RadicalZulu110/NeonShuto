@@ -61,7 +61,7 @@ public class MouseInputManager : InputManager
             }
             else
             {
-                // Rotete up and down
+                // Rotate up and down
                 if (mp.y < mousePositionOnRotateStart.y - 100)
                 {
                     OnRotateInput?.Invoke(0, -1f);
