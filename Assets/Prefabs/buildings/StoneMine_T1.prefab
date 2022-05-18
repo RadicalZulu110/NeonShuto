@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9209885554386574324}
   m_Layer: 0
   m_Name: StoneMine_T1
-  m_TagString: Untagged
+  m_TagString: ResourceBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8138345597263560314
 PrefabInstance:

@@ -78,9 +78,9 @@ MonoBehaviour:
   storedFood: 2000
   storedStone: 2000
   storedCrystal: 2000
-  foodPercentage: 40
-  stonePercentage: 40
-  crystalPercentage: 40
+  foodPercentage: 0
+  stonePercentage: 0
+  crystalPercentage: 0
   maxTrucks: 4
   nTrucks: 0
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
