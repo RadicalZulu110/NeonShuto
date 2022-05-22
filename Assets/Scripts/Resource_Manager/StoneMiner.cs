@@ -10,7 +10,7 @@ public class StoneMiner : MinerBuilding
     // Start is called before the first frame update
     void Start()
     {
-        gm.stoneCapacity += PersonalStoneCapacity;
+        //gm.stoneCapacity += PersonalStoneCapacity;
     }
 
     // Update is called once per frame

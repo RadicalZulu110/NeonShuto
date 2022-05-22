@@ -10,7 +10,7 @@ public class FoodBuilding : ProductionBuilding
     // Start is called before the first frame update
     void Start()
     {
-        gm.foodCapacity += PersonalFoodCapacity;
+        //gm.foodCapacity += PersonalFoodCapacity;
     }
 
     // Update is called once per frame
