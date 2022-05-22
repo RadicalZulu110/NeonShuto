@@ -801,7 +801,9 @@ public class Buildings : MonoBehaviour
                     gameManager.addStoneMiner(buildCreated);
 
                     buildingPlaceSound.Play();
-                    buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                    buildingPlaceParticles.transform.position = buildPos;
+                    Debug.Log(buildPos);
+                    buildingPlaceParticles.transform.localScale = new Vector3((building.GetComponent<BuildingCost>().getGridWidth() / 4) / 2, 1, (building.GetComponent<BuildingCost>().getGridHeight() / 4) / 2);
                     buildingPlaceParticles.Play();
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
@@ -839,7 +841,9 @@ public class Buildings : MonoBehaviour
 
 
                     buildingPlaceSound.Play();
-                    buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                    buildingPlaceParticles.transform.position = buildPos;
+                    Debug.Log(buildPos);
+                    buildingPlaceParticles.transform.localScale = new Vector3((building.GetComponent<BuildingCost>().getGridWidth() / 4) / 2, 1, (building.GetComponent<BuildingCost>().getGridHeight() / 4) / 2);
                     buildingPlaceParticles.Play();
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
@@ -876,7 +880,9 @@ public class Buildings : MonoBehaviour
                 }
 
                 buildingPlaceSound.Play();
-                buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                buildingPlaceParticles.transform.position = buildPos;
+                Debug.Log(buildPos);
+                buildingPlaceParticles.transform.localScale = new Vector3((float)(building.GetComponent<BuildingCost>().getGridWidth() / 4) / 2, 1, (float)(building.GetComponent<BuildingCost>().getGridHeight() / 4) / 2); 
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
