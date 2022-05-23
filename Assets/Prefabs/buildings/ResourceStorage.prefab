@@ -80,6 +80,7 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  tier: 1
   gm: {fileID: 0}
   maxTrucks: 3
   nTrucks: 0
