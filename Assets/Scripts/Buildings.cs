@@ -35,6 +35,7 @@ public class Buildings : MonoBehaviour
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
+    public float polutionMultiplicator;
 
     // Start is called before the first frame update
     void Start()
@@ -807,6 +808,7 @@ public class Buildings : MonoBehaviour
                     buildingPlaceParticles.Play();
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+                    gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
 
                     // If the sifht is down, continue 
                     if (!Input.GetKey(KeyCode.LeftShift))
@@ -847,6 +849,7 @@ public class Buildings : MonoBehaviour
                     buildingPlaceParticles.Play();
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+                    gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
 
                     // If the sifht is down, continue 
                     if (!Input.GetKey(KeyCode.LeftShift))
@@ -886,6 +889,7 @@ public class Buildings : MonoBehaviour
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+                gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
