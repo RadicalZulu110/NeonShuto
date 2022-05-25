@@ -79,6 +79,7 @@ MonoBehaviour:
   FoodIncrease: -10
   GoldIncreasePerPerson: 0
   PopIncrease: 10
+  tier: 1
   gm: {fileID: 0}
 --- !u!1001 &8760031390978348647
 PrefabInstance:

@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
 	public CustomCursor customCursor;
 
 	private List<GameObject> foodBuildings, stoneMiners, crystalMiners;
+	public float treeLife;
+	public TreeBar treeBar;
 
 	private void Start()
 	{
@@ -593,4 +595,9 @@ public class GameManager : MonoBehaviour
 		return maxObject;
 	}
 
+	public void AddTreeLife(float life)
+    {
+		treeLife += life;
+		treeBar.SetHealth(treeLife);
+    }
 }
