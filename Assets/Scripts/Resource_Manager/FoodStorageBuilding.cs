@@ -67,7 +67,7 @@ public class FoodStorageBuilding : StorageBuilding
             for (int i = 0; i < farms.Count; i++)
             {
                 if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
-                    (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
+                    (res != null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
                     NavMesh.CalculatePath(getNearestRoad().transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);

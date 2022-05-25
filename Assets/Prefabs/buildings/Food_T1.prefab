@@ -67,6 +67,7 @@ MonoBehaviour:
   FoodIncrease: 100
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  tier: 1
   gm: {fileID: 0}
   recollecting: 0
   truckRecollecting: {fileID: 0}

@@ -74,7 +74,7 @@ public class ResourceStorageBuilding : StorageBuilding
             for (int i = 0; i < stoneMiners.Count; i++)
             {
                 if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
-                    (res != null && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+                    (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
                     NavMesh.CalculatePath(getNearestRoad().transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
@@ -93,7 +93,7 @@ public class ResourceStorageBuilding : StorageBuilding
             for (int i = 0; i < crystalMiners.Count; i++)
             {
                 if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
-                    (res != null && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+                    (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
                     NavMesh.CalculatePath(getNearestRoad().transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
