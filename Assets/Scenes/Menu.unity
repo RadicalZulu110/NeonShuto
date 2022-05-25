@@ -793,6 +793,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: NEON SHUTO
       objectReference: {fileID: 0}
+    - target: {fileID: 5281197338373770413, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7e57f976a83358e44b426570f830ac0a, type: 3}
     - target: {fileID: 5567138772328626329, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
       propertyPath: m_Name
       value: MM_Canvas
@@ -841,10 +845,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7124044060423536482, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7e57f976a83358e44b426570f830ac0a, type: 3}
     - target: {fileID: 7136610828078229594, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
       propertyPath: m_Text
       value: Music
       objectReference: {fileID: 0}
+    - target: {fileID: 7242560837334129830, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7e57f976a83358e44b426570f830ac0a, type: 3}
     - target: {fileID: 7456188339902466351, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.49995
@@ -905,6 +917,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8319161284348330734, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7e57f976a83358e44b426570f830ac0a, type: 3}
     - target: {fileID: 8608840002041457058, guid: dc66740e8bc13d846a3fd3288ad14a7b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.49995
