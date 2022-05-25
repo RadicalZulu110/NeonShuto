@@ -31,6 +31,8 @@ public class BuildingCost : MonoBehaviour
     public int GoldIncreasePerPerson;
     public int PopIncrease;
 
+    public int tier;
+
     public GameManager gm;
 
     private List<GameObject> nodes;
@@ -86,5 +88,10 @@ public class BuildingCost : MonoBehaviour
     public void setNodes(List<GameObject> n)
     {
         nodes = n;
+    }
+
+    public int getTier()
+    {
+        return tier;
     }
 }

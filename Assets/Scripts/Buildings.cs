@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Buildings : MonoBehaviour
 {
@@ -28,7 +29,13 @@ public class Buildings : MonoBehaviour
     private GameObject[] roads;
     public float divisbleReturn;
 
+    public Button DeleteButton;
+    public Color ActiveColor;
+
+
     public NavMeshSurface surface;
+    private bool refreshNavMesh;
+    public float polutionMultiplicator;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +46,18 @@ public class Buildings : MonoBehaviour
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
+        refreshNavMesh = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (refreshNavMesh)
+        {
+            surface.BuildNavMesh();
+            refreshNavMesh = false;
+        }
+
         roads = GameObject.FindGameObjectsWithTag("Road");
 
         if(grid == null)
@@ -454,6 +468,9 @@ public class Buildings : MonoBehaviour
 
         if (isDeleting) // If Im deleting
         {
+            ColorBlock cb = DeleteButton.colors;
+            cb.normalColor = ActiveColor;
+            DeleteButton.colors = cb;
             // set button color here 
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);     // Throw a ray in the mouse position
@@ -492,20 +509,22 @@ public class Buildings : MonoBehaviour
                             }
                             else if (selectedObjectToDelete.tag == "ResourceBuilding")
                             {
-                                if (selectedObjectToDelete.GetType() == typeof(FoodBuilding))
+                                ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
+
+                                if (selectedObjectToDelete.GetComponent<FoodBuilding>())
                                 {
                                     gameManager.deleteFarm(selectedObjectToDelete);
                                 }
-                                else if (selectedObjectToDelete.GetType() == typeof(StoneMiner))
+                                else if (selectedObjectToDelete.GetComponent<StoneMiner>())
                                 {
                                     gameManager.deleteStoneMiner(selectedObjectToDelete);
                                 }
-                                else if (selectedObjectToDelete.GetType() == typeof(CrystalMiner))
+                                else if (selectedObjectToDelete.GetComponent<CrystalMiner>())
                                 {
                                     gameManager.deleteCrystalMiner(selectedObjectToDelete);
                                 }
 
-                                ProductionBuilding buildingScript = selectedObjectToDelete.GetComponent<ProductionBuilding>();
+                                
                                 //gameManager.AddFood(-buildingScript.GetFoodIncrease());
                                 gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
                                 gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
@@ -522,34 +541,46 @@ public class Buildings : MonoBehaviour
                                 gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                                 gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
                                 grid.setNodesUnoccupied(buildingScript.getNodes());
+
+                                // Truck associated with that production building
+                                if (buildingScript.getTruckRecollecting())
+                                {
+                                    buildingScript.getTruckRecollecting().GetComponent<Truck>().MakeAvailable();
+                                }
                             }
                             else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
+                                
                                 if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
                                 {
                                     gameManager.foodCapacity -= selectedObjectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
                                     gameManager.DeleteFoodStorageBuilding(selectedObjectToDelete.GetComponent<FoodStorageBuilding>());
+                                    grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<FoodStorageBuilding>().getNodes());
                                 }
                                 else if (selectedObjectToDelete.GetComponent<ResourceStorageBuilding>())
                                 {
                                     gameManager.stoneCapacity -= selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxStone();
                                     gameManager.crystalCapacity -= selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxCrystal();
                                     gameManager.DeleteResourceStorageBuilding(selectedObjectToDelete.GetComponent<ResourceStorageBuilding>());
+                                    grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<ResourceStorageBuilding>().getNodes());
                                 }
+
+                                
                             }
                             else
                             {
                                 grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
+                                refreshNavMesh = true;
                             }
-
 
                             Destroy(selectedObjectToDelete);
                             deleteBuildingSound.Play();
                             selectedObjectToDelete = null;
+                            
                         }
-
+                        
                         break;
                     }
                 }
@@ -764,16 +795,20 @@ public class Buildings : MonoBehaviour
                     building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
                     buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                     grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
-                    building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                    
                     buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+                    buildCreated.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
 
                     gameManager.addStoneMiner(buildCreated);
 
                     buildingPlaceSound.Play();
-                    buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                    buildingPlaceParticles.transform.position = buildPos;
+                    Debug.Log(buildPos);
+                    buildingPlaceParticles.transform.localScale = new Vector3((building.GetComponent<BuildingCost>().getGridWidth() / 4) / 2, 1, (building.GetComponent<BuildingCost>().getGridHeight() / 4) / 2);
                     buildingPlaceParticles.Play();
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+                    gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
 
                     // If the sifht is down, continue 
                     if (!Input.GetKey(KeyCode.LeftShift))
@@ -799,18 +834,22 @@ public class Buildings : MonoBehaviour
                     building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
                     buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                     grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
-                    building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                    
                     buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+                    buildCreated.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
 
 
                     gameManager.addCrystalMiner(buildCreated);
 
 
                     buildingPlaceSound.Play();
-                    buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                    buildingPlaceParticles.transform.position = buildPos;
+                    Debug.Log(buildPos);
+                    buildingPlaceParticles.transform.localScale = new Vector3((building.GetComponent<BuildingCost>().getGridWidth() / 4) / 2, 1, (building.GetComponent<BuildingCost>().getGridHeight() / 4) / 2);
                     buildingPlaceParticles.Play();
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+                    gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
 
                     // If the sifht is down, continue 
                     if (!Input.GetKey(KeyCode.LeftShift))
@@ -834,8 +873,9 @@ public class Buildings : MonoBehaviour
                 building.GetComponent<BuildingCost>().setWH(shadow.GetComponent<BuildingCost>().getGridWidth(), shadow.GetComponent<BuildingCost>().getGridHeight());
                 buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                 grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
-                building.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
+                
                 buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+                buildCreated.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
 
                 if (buildCreated.GetComponent<FoodBuilding>())
                 {
@@ -843,10 +883,13 @@ public class Buildings : MonoBehaviour
                 }
 
                 buildingPlaceSound.Play();
-                buildingPlaceParticles.transform.position = new Vector3(lastNearActiveNode.transform.position.x, 0, lastNearActiveNode.transform.position.z);
+                buildingPlaceParticles.transform.position = buildPos;
+                Debug.Log(buildPos);
+                buildingPlaceParticles.transform.localScale = new Vector3((float)(building.GetComponent<BuildingCost>().getGridWidth() / 4) / 2, 1, (float)(building.GetComponent<BuildingCost>().getGridHeight() / 4) / 2); 
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
+                gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
