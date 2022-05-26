@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ResourceStorageBuilding : StorageBuilding
 {
 
     List<GameObject> stoneMiners, crystalMiners;
+    public int maxStone, maxCrystal;
+    [SerializeField]
+    private int storedStone, storedCrystal;
+    private float stonePercentage, crystalPercentage;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -13,6 +18,8 @@ public class ResourceStorageBuilding : StorageBuilding
         base.Start();
         stoneMiners = new List<GameObject>();
         crystalMiners = new List<GameObject>();
+        gm.stoneCapacity += maxStone;
+        gm.crystalCapacity += maxCrystal;
     }
 
     // Update is called once per frame
@@ -62,27 +69,86 @@ public class ResourceStorageBuilding : StorageBuilding
         int actual = 0;
 
         // Check stone miners
-        for (int i = 0; i < stoneMiners.Count; i++)
+        if (storedStone + truckStorage <= maxStone)
         {
-            if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
-                (res != null && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+            for (int i = 0; i < stoneMiners.Count; i++)
             {
-                res = stoneMiners[i];
-                actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
+                    (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+                {
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(getNearestRoad().transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                    if (path.status == NavMeshPathStatus.PathComplete)
+                    {
+                        res = stoneMiners[i];
+                        actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                    }
+                }
             }
         }
 
         // Check crystal miners
-        for (int i = 0; i < crystalMiners.Count; i++)
+        if (storedCrystal + truckStorage <= maxCrystal)
         {
-            if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
-                (res != null && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+            for (int i = 0; i < crystalMiners.Count; i++)
             {
-                res = crystalMiners[i];
-                actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
+                    (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+                {
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(getNearestRoad().transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                    if (path.status == NavMeshPathStatus.PathComplete)
+                    {
+                        res = crystalMiners[i];
+                        actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                    }
+                }
             }
         }
 
+
         return res;
+    }
+
+    public void addStone(int s)
+    {
+        storedStone += s;
+        stonePercentage = (storedStone * 100) / maxStone;
+    }
+
+    public void addCrystal(int c)
+    {
+        storedCrystal += c;
+        crystalPercentage = (storedCrystal * 100) / maxCrystal;
+    }
+
+    public int GetMaxStone()
+    {
+        return maxStone;
+    }
+
+    public int GetMaxCrystal()
+    {
+        return maxCrystal;
+    }
+
+    public int GetStoneStored()
+    {
+        return storedStone;
+    }
+
+    public int GetCrystalStored()
+    {
+        return storedCrystal;
+    }
+
+    public float GetStonePercentage()
+    {
+        return stonePercentage;
+    }
+
+    public float GetCrystalPercentage()
+    {
+        return crystalPercentage;
     }
 }

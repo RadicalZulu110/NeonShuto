@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.3160095, z: 0.8626251}
-  m_Center: {x: 0, y: 0.6287384, z: -0.06868744}
+  m_Size: {x: 1, y: 0.61213684, z: 0.9571328}
+  m_Center: {x: 0, y: 0.22142792, z: 0}
 --- !u!114 &3678188784780324046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,29 +61,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 0
-  FoodCost: 0
-  EnergyCost: 0
+  GoldCost: 100
+  FoodCost: 100
+  EnergyCost: 100
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  MaintenanceGoldCost: 0
+  MaintenanceGoldCost: 25
   MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 0
+  MaintenanceEnergyCost: 25
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 5
+  timeBtwIncrease: 3
   nextIncreaseTime: 0
   StoneIncrease: 0
-  CrystalIncrease: 10
+  CrystalIncrease: 100
   EnergyIncrease: 0
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  tier: 1
   gm: {fileID: 0}
   recollecting: 0
   truckRecollecting: {fileID: 0}
-  PersonalCrystalCapacity: 200
+  PersonalCrystalCapacity: 500
   currentCrystalStored: 0
 --- !u!135 &-656283116489129824
 SphereCollider:

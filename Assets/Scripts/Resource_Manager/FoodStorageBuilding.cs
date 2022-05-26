@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FoodStorageBuilding : StorageBuilding
 {
 
     List<GameObject> farms;
+    public int maxFood;
+    [SerializeField]
+    private int storedFood;
+    [SerializeField]
+    private float foodPercentage;
 
     // Start is called before the first frame update
     protected new void Start()
     {
         base.Start();
         farms = new List<GameObject>();
+        gm.foodCapacity += maxFood;
     }
 
     // Update is called once per frame
@@ -47,26 +54,53 @@ public class FoodStorageBuilding : StorageBuilding
     // Get the farm with more food in the storage
     private GameObject getMaxFarm()
     {
-        GameObject res;
+        GameObject res = null;
+        int actual = 0;
 
-        if (!farms[0].GetComponent<FoodBuilding>().isRecollecting())
+        if(!(storedFood + truckStorage <= maxFood))
         {
-            res = farms[0];
-        }
-        else
-        {
-            res = null;
+            return null;
         }
 
-        for (int i = 1; i < farms.Count; i++)
+        if (storedFood + truckStorage <= maxFood)
         {
-            if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
-                (res != null && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > res.GetComponent<FoodBuilding>().GetCurrentFoodStored() && !farms[i].GetComponent<FoodBuilding>().isRecollecting()))
+            for (int i = 0; i < farms.Count; i++)
             {
-                res = farms[i];
+                if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
+                    (res != null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
+                {
+                    NavMeshPath path = new NavMeshPath();
+                    NavMesh.CalculatePath(getNearestRoad().transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                    if (path.status == NavMeshPathStatus.PathComplete)
+                    {
+                        res = farms[i];
+                        actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                    }
+                }
             }
         }
 
         return res;
+    }
+
+    public void addFood(int f)
+    {
+        storedFood += f;
+        foodPercentage = (storedFood * 100) / maxFood;
+    }
+
+    public int GetMaxFood()
+    {
+        return maxFood;
+    }
+
+    public int GetFoodStored()
+    {
+        return storedFood;
+    }
+
+    public float GetFoodPercentage()
+    {
+        return foodPercentage;
     }
 }

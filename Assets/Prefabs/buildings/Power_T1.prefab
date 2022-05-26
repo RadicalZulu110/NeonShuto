@@ -66,6 +66,7 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  tier: 1
   gm: {fileID: 0}
   recollecting: 0
   truckRecollecting: {fileID: 0}
@@ -80,8 +81,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4213562, z: 1.6567395}
-  m_Center: {x: 0, y: 0.6087799, z: 0.07320011}
+  m_Size: {x: 1.6541748, y: 0.90127563, z: 1.9291048}
+  m_Center: {x: 0.023254395, y: 0.34873962, z: -0.06298256}
 --- !u!1001 &3648779116198333245
 PrefabInstance:
   m_ObjectHideFlags: 0
