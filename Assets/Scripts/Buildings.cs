@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Buildings : MonoBehaviour
 {
-    private GameObject T1HouseToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T1PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
+    private GameObject T1HouseToPlace, T2HouseToPlace, T3HouseToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T2FoodToPlace, T3FoodToPlace, T1PowerToPlace, T2PowerToPlace, T3PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
     public CustomCursor customCursor;
     public Grid grid;
     public GameObject[,] tiles;
     public Camera camera;
-    public GameObject initialShadow, roadShadow, T1HouseShadow, T1FoodShadow, T1PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
+    public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
     private Material roadShadowMaterial, T1HouseShadowMaterial, T1FoodShadowMaterial, T1PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
@@ -317,7 +317,7 @@ public class Buildings : MonoBehaviour
                 grid.checkTilesRoads();
             }
 
-            // Create house
+            // Create T1 house
             if (T1HouseToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
@@ -326,7 +326,25 @@ public class Buildings : MonoBehaviour
                 gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
             }
 
-            //Create farm
+            // Create T2 house
+            if (T2HouseToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2HouseToPlace, T2HouseShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T3 house
+            if (T3HouseToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3HouseToPlace, T3HouseShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            //Create Food T1
             if (T1FoodToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
@@ -336,12 +354,50 @@ public class Buildings : MonoBehaviour
                 
             }
 
-            //Create battery
+            //Create Food T2
+            if (T2FoodToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2FoodToPlace, T2FoodShadow);
+                gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
+
+            }
+
+            //Create Food T3
+            if (T3FoodToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3FoodToPlace, T3FoodShadow);
+                gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
+
+            }
+
+            //Create Power T1
             if (T1PowerToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(T1PowerToPlace, T1PowerShadow);
+                gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
+            }
+
+            //Create Power T2
+            if (T2PowerToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2PowerToPlace, T2PowerShadow);
+                gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
+            }
+
+            //Create Power T3
+            if (T3PowerToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3PowerToPlace, T3PowerShadow);
                 gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
             }
 
