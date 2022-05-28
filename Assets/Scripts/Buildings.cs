@@ -12,7 +12,7 @@ public class Buildings : MonoBehaviour
     public GameObject[,] tiles;
     public Camera camera;
     public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
-    private Material roadShadowMaterial, T1HouseShadowMaterial, T1FoodShadowMaterial, T1PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
+    private Material roadShadowMaterial, T1HouseShadowMaterial, T2HouseShadowMaterial, T3HouseShadowMaterial, T1FoodShadowMaterial, T1PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
 
@@ -130,6 +130,30 @@ public class Buildings : MonoBehaviour
                 buildingRotateSound.Play();
             }
             
+        }
+        //T2 House Shadow
+        if (T2HouseShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T2HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T2HouseShadow.GetComponentInChildren<Renderer>().material = T2HouseShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T2HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T2HouseShadow, 90);
+                buildingRotateSound.Play();
+            }
+
         }
 
         //T1 Food shadow
@@ -996,6 +1020,26 @@ public class Buildings : MonoBehaviour
             T1HouseToPlace = building;
             isDeleting = false;
             T1HouseShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T2House
+    public void createT2House(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T2HouseToPlace = building;
+            isDeleting = false;
+            T2HouseShadow.SetActive(true);
         }
     }
 
