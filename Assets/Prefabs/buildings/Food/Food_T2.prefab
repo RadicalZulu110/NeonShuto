@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b384f5af84bc5844ab65aa9a1ae8044f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 4
-  height: 4
+  width: 2
+  height: 2
   GoldCost: 0
   FoodCost: 0
   EnergyCost: 0
