@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3953578381318894951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 945.3179, y: 517.2619, z: 21.28778}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9086957133747220876}
   m_Father: {fileID: 0}
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c10e0df72c0484e96d983eb70d7464, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 4
-  height: 4
+  width: 2
+  height: 2
   GoldCost: 0
   FoodCost: 100
   EnergyCost: 50
