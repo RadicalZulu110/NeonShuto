@@ -604,6 +604,10 @@ public class GameManager : MonoBehaviour
 	public void AddTreeLife(float life)
     {
 		treeLife += life;
+		if (treeLife < minLight)
+			treeLife = minLight;
+		if (treeLife > maxLight)
+			treeLife = maxLight;
 		treeBar.SetHealth(treeLife);
 		AdjustLight();
     }
