@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.HighDefinition;
 
 
 public class GameManager : MonoBehaviour
@@ -75,6 +76,9 @@ public class GameManager : MonoBehaviour
 	private List<GameObject> foodBuildings, stoneMiners, crystalMiners;
 	public float treeLife;
 	public TreeBar treeBar;
+	private GameObject light;
+	private HDAdditionalLightData lightData;
+	public int maxLight, minLight;
 
 	private void Start()
 	{
@@ -94,6 +98,8 @@ public class GameManager : MonoBehaviour
 		TotalFood = 0;
 		TotalStone = 0;
 		TotalCrystal = 0;
+		light = GameObject.FindGameObjectWithTag("Light");
+		lightData = light.GetComponent<HDAdditionalLightData>();
 	}
 
 	private void Update()
@@ -599,5 +605,11 @@ public class GameManager : MonoBehaviour
     {
 		treeLife += life;
 		treeBar.SetHealth(treeLife);
+		AdjustLight();
     }
+
+	private void AdjustLight()
+    {
+		lightData.intensity = treeLife;
+	}
 }
