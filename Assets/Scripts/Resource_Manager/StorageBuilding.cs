@@ -31,7 +31,11 @@ public class StorageBuilding : BuildingCost
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time > nextIncreaseTime)
+        {
+            nextIncreaseTime = Time.time + timeBtwIncrease;
+            gm.AddTreeLife(-T3TreeLife);
+        }
     }
 
     // Get the nearest road to the hero building

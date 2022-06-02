@@ -1274,18 +1274,20 @@ public class Buildings : MonoBehaviour
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
                 BuildingCost buildCreatedScript = buildCreated.GetComponent<BuildingCost>();
-                if (buildCreatedScript.getTier() == 3)
+                if (buildCreatedScript.getTier() != 3 && buildCreated.tag != "StorageBuilding")
                 {
-
+                    if (buildCreated.tag == "Water")
+                    {
+                        gameManager.AddTreeLife(+buildCreated.GetComponent<BuildingCost>().getTier() * waterMultiplicator);
+                    }
+                    else
+                    {
+                        gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    }
                 }
                 else
                 {
-                    if(buildCreated.tag == "Water")
-                    {
-                        gameManager.AddTreeLife(+buildCreated.GetComponent<BuildingCost>().getTier() * waterMultiplicator);
-                    }else{
-                        gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
-                    }
+                    
                 }
                 
 

@@ -33,6 +33,7 @@ public class StoneMiner : MinerBuilding
             {
                 currentStoneStored = PersonalStoneCapacity;
             }
+
         }
     }
 
