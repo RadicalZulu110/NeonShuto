@@ -128,6 +128,7 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1HouseShadow, 90);
                 buildingRotateSound.Play();
+                T1HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
             }
             
         }
@@ -153,6 +154,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2HouseShadow, 90);
                 buildingRotateSound.Play();
+                T2HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -178,6 +181,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3HouseShadow, 90);
                 buildingRotateSound.Play();
+                T3HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -203,6 +208,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1WaterShadow, 90);
                 buildingRotateSound.Play();
+                T1WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -228,6 +235,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2WaterShadow, 90);
                 buildingRotateSound.Play();
+                T2WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -253,6 +262,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3WaterShadow, 90);
                 buildingRotateSound.Play();
+                T3WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -280,8 +291,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1FoodShadow, 90);
                 buildingRotateSound.Play();
+                T1FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-          
+
         }
 
         //T2 Food shadow
@@ -307,6 +320,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2FoodShadow, 90);
                 buildingRotateSound.Play();
+                T2FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -334,6 +349,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3FoodShadow, 90);
                 buildingRotateSound.Play();
+                T3FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -360,8 +377,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1PowerShadow, 90);
                 buildingRotateSound.Play();
+                T1PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         //T2 Power shadow
@@ -386,6 +405,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2PowerShadow, 90);
                 buildingRotateSound.Play();
+                T2PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -412,6 +433,7 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3PowerShadow, 90);
                 buildingRotateSound.Play();
+                T3PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
             }
 
         }
@@ -439,6 +461,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(B_FoodStoageShadow, 90);
                 buildingRotateSound.Play();
+                B_FoodStoageShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -466,6 +490,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(B_ResourceStorageShadow, 90);
                 buildingRotateSound.Play();
+                B_ResourceStorageShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -493,8 +519,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(stoneMineShadow, 90);
                 buildingRotateSound.Play();
+                stoneMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         //crystalmine shadow
@@ -520,8 +548,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(crystalMineShadow, 90);
                 buildingRotateSound.Play();
+                crystalMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         // Cancel construction with escape

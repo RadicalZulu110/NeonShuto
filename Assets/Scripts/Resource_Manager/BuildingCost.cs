@@ -43,11 +43,21 @@ public class BuildingCost : MonoBehaviour
         nodes = new List<GameObject>();
     }
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         
     }
     
+    public void RotateBuilding()
+    {
+        int aux = width;
+        width = height;
+        height = aux;
+    }
 
     public int getGridWidth()
     {
