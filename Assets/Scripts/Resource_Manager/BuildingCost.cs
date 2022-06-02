@@ -35,6 +35,8 @@ public class BuildingCost : MonoBehaviour
 
     public GameManager gm;
 
+    public float T3TreeLife;
+
     private List<GameObject> nodes;
 
     private void Awake()

@@ -35,7 +35,7 @@ public class Buildings : MonoBehaviour
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
-    public float polutionMultiplicator;
+    public float polutionMultiplicator, waterMultiplicator;
 
     // Start is called before the first frame update
     void Start()
@@ -1273,7 +1273,21 @@ public class Buildings : MonoBehaviour
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
-                gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                BuildingCost buildCreatedScript = buildCreated.GetComponent<BuildingCost>();
+                if (buildCreatedScript.getTier() == 3)
+                {
+
+                }
+                else
+                {
+                    if(buildCreated.tag == "Water")
+                    {
+                        gameManager.AddTreeLife(+buildCreated.GetComponent<BuildingCost>().getTier() * waterMultiplicator);
+                    }else{
+                        gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    }
+                }
+                
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
