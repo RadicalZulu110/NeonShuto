@@ -66,7 +66,7 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
-  tier: 0
+  tier: 3
   gm: {fileID: 0}
 --- !u!65 &3584946951573113311
 BoxCollider:

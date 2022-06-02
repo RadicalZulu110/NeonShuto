@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: Assets/Scenes/GermanScene3.unity
+    guid: a37b334c454e3594aa0ec047e3e7a93d
   m_configObjects: {}
