@@ -15,6 +15,7 @@ TagManager:
   - Truck
   - HeroBuilding
   - StorageBuilding
+  - Light
   layers:
   - Default
   - TransparentFX
