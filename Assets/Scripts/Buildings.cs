@@ -928,6 +928,7 @@ public class Buildings : MonoBehaviour
                                 refreshNavMesh = true;
                             }
 
+                            gameManager.DeleteBuilding(selectedObjectToDelete);
                             Destroy(selectedObjectToDelete);
                             deleteBuildingSound.Play();
                             selectedObjectToDelete = null;
@@ -940,6 +941,98 @@ public class Buildings : MonoBehaviour
             }
         }
 
+    }
+
+    /********************************************************************************************************************************/
+
+    // Public functions
+    // Delete the gameobject given
+    public void DeleteBuilding(GameObject objectToDelete)
+    {
+        if (objectToDelete.tag == "PopulationBuilding")
+        {
+            PopulationBuilding buildingScript = objectToDelete.GetComponent<PopulationBuilding>();
+            gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
+            gameManager.AddPop(-buildingScript.GetPopulation());
+            gameManager.AddGold(-buildingScript.GetGoldIncrease());
+            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+            grid.setNodesUnoccupied(buildingScript.getNodes());
+        }
+        else if (objectToDelete.tag == "ResourceBuilding")
+        {
+            ProductionBuilding buildingScript = objectToDelete.GetComponent<ProductionBuilding>();
+
+            if (objectToDelete.GetComponent<FoodBuilding>())
+            {
+                gameManager.deleteFarm(objectToDelete);
+            }
+            else if (objectToDelete.GetComponent<StoneMiner>())
+            {
+                gameManager.deleteStoneMiner(objectToDelete);
+            }
+            else if (objectToDelete.GetComponent<CrystalMiner>())
+            {
+                gameManager.deleteCrystalMiner(objectToDelete);
+            }
+
+
+            //gameManager.AddFood(-buildingScript.GetFoodIncrease());
+            gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
+            gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
+            gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
+            //gameManager.AddStone(-buildingScript.GetStoneIncrease());
+            gameManager.stoneCapacity -= (buildingScript.GetPersonalStoneCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalStoneCapacity;
+            gameManager.stoneStored -= (buildingScript.GetCurrentStoneStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentStoneStored;
+                                                                                //gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
+            gameManager.crystalCapacity -= (buildingScript.GetPersonalCrystalCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalCrystalCapacity;
+            gameManager.crystalStored -= (buildingScript.GetCurrentCrystalStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentCrystalStored;
+            grid.setNodesUnoccupied(buildingScript.getNodes());
+
+            // Truck associated with that production building
+            if (buildingScript.getTruckRecollecting())
+            {
+                buildingScript.getTruckRecollecting().GetComponent<Truck>().MakeAvailable();
+            }
+        }
+        else if (objectToDelete.tag == "StorageBuilding")
+        {
+            storageBuildings.Remove(objectToDelete.GetComponent<StorageBuilding>());
+
+            if (objectToDelete.GetComponent<FoodStorageBuilding>())
+            {
+                gameManager.foodCapacity -= objectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
+                gameManager.DeleteFoodStorageBuilding(objectToDelete.GetComponent<FoodStorageBuilding>());
+                grid.setNodesUnoccupied(objectToDelete.GetComponent<FoodStorageBuilding>().getNodes());
+            }
+            else if (objectToDelete.GetComponent<ResourceStorageBuilding>())
+            {
+                gameManager.stoneCapacity -= objectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxStone();
+                gameManager.crystalCapacity -= objectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxCrystal();
+                gameManager.DeleteResourceStorageBuilding(objectToDelete.GetComponent<ResourceStorageBuilding>());
+                grid.setNodesUnoccupied(objectToDelete.GetComponent<ResourceStorageBuilding>().getNodes());
+            }
+
+
+        }
+        else
+        {
+            grid.setNodesUnoccupied(objectToDelete.GetComponent<BuildingCost>().getGridWidth(), objectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(objectToDelete.transform.position).GetComponent<Node>());
+            grid.checkTilesRoads();
+            updateRoadsJunction();
+            heroBuilding.CheckAdyacentRoads();
+            for (int i = 0; i < storageBuildings.Count; i++)
+            {
+                storageBuildings[i].CheckAdyacentRoads();
+            }
+            refreshNavMesh = true;
+        }
+
+        Destroy(objectToDelete);
+        deleteBuildingSound.Play();
     }
 
     /********************************************************************************************************************************/
@@ -1313,6 +1406,11 @@ public class Buildings : MonoBehaviour
                 {
                     gameManager.AddResourceStorageBuilding(buildCreated.GetComponent<ResourceStorageBuilding>());
                     storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
+                }
+
+                if (!buildCreated.GetComponent<StartingConstruction>())
+                {
+                    gameManager.AddBuilding(buildCreated);
                 }
 
                 // If the sifht is down, continue 
