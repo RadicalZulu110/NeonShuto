@@ -39,7 +39,7 @@ public class FoodStorageBuilding : StorageBuilding
                     currentTruck = trucksAvailable[0];
                     trucksAvailable.Remove(currentTruck);
                     trucksNoAvailable.Add(currentTruck);
-                    currentTruck.transform.position = getNearestRoad().transform.position;
+                    currentTruck.transform.position = roadToSpawn.transform.position;
                     currentTruck.SetActive(true);
                     currentTruck.GetComponent<Truck>().setDestination(currentBuilding.transform.position);
                     
@@ -70,11 +70,20 @@ public class FoodStorageBuilding : StorageBuilding
                     (res != null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
-                    NavMesh.CalculatePath(getNearestRoad().transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
+                    for (int j = 0; j < roadsToSpawn.Count; j++)
                     {
-                        res = farms[i];
-                        actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                        if(roadsToSpawn[j] != null)
+                        {
+                            NavMesh.CalculatePath(roadsToSpawn[j].transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                            if (path.status == NavMeshPathStatus.PathComplete)
+                            {
+                                res = farms[i];
+                                actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                                roadToSpawn = roadsToSpawn[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
