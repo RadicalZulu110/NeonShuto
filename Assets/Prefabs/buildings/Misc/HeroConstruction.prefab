@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3443972160010914857}
   - component: {fileID: 6602387101543961845}
   - component: {fileID: 6189464265877430504}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: HeroConstruction
   m_TagString: HeroBuilding
   m_Icon: {fileID: 0}
@@ -67,7 +67,9 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 3
   PopIncrease: 0
+  tier: 0
   gm: {fileID: 0}
+  T3TreeLife: 0
   MaxPop: 10
   MinPop: 1
   ExpectedPop: 0
@@ -130,7 +132,9 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  tier: 0
   gm: {fileID: 0}
+  T3TreeLife: 0
 --- !u!1001 &5400645475025704903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}

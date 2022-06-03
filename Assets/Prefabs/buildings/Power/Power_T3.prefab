@@ -58,7 +58,7 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 5
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   PopIncrease: 0
   tier: 3
   gm: {fileID: 0}
+  T3TreeLife: 5
   recollecting: 0
   truckRecollecting: {fileID: 0}
 --- !u!65 &8210362240721072261

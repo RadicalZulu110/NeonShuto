@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8598191624411118753}
   m_Layer: 0
   m_Name: Water_T3
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 5
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   PopIncrease: 0
   tier: 3
   gm: {fileID: 0}
+  T3TreeLife: 10
   recollecting: 0
   truckRecollecting: {fileID: 0}
 --- !u!65 &8598191624411118753

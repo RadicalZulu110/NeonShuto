@@ -58,7 +58,7 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 3
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   PopIncrease: 0
   tier: 3
   gm: {fileID: 0}
+  T3TreeLife: 15
 --- !u!65 &3584946951573113311
 BoxCollider:
   m_ObjectHideFlags: 0

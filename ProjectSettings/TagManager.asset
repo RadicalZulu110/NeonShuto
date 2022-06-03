@@ -16,6 +16,7 @@ TagManager:
   - HeroBuilding
   - StorageBuilding
   - Light
+  - Water
   layers:
   - Default
   - TransparentFX

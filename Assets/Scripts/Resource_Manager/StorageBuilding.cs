@@ -8,15 +8,17 @@ public class StorageBuilding : BuildingCost
     public int maxTrucks, nTrucks;
     public GameObject truckPrefab;
     public List<GameObject> trucksAvailable, trucksNoAvailable;
-    public GameObject currentBuilding, currentTruck;
+    protected GameObject currentBuilding, currentTruck, roadToSpawn;
     protected int truckStorage;
-    
+    protected List<GameObject> roadsToSpawn;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         trucksAvailable = new List<GameObject>();
         trucksNoAvailable = new List<GameObject>();
+        roadsToSpawn = new List<GameObject>();
         truckStorage = truckPrefab.GetComponent<Truck>().getMaxCapacity();
 
         for (int i = 0; i < maxTrucks; i++)
@@ -31,7 +33,33 @@ public class StorageBuilding : BuildingCost
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time > nextIncreaseTime)
+        {
+            nextIncreaseTime = Time.time + timeBtwIncrease;
+            gm.AddTreeLife(-T3TreeLife);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Add the roads available to spawn 
+        if (other.gameObject.tag == "Road")
+        {
+            roadsToSpawn.Add(other.gameObject);
+        }
+    }
+
+    // Check if all the roads to spawn are not null. If null, delete it
+    public void CheckAdyacentRoads()
+    {
+        for (int i = 0; i < roadsToSpawn.Count; i++)
+        {
+            if (roadsToSpawn[i] == null)
+            {
+                roadsToSpawn.RemoveAt(i);
+                i--;
+            }
+        }
     }
 
     // Get the nearest road to the hero building
