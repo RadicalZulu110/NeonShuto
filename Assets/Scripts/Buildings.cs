@@ -12,6 +12,7 @@ public class Buildings : MonoBehaviour
     public GameObject[,] tiles;
     public Camera camera;
     public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1WaterShadow, T2WaterShadow, T3WaterShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
+    private BuildingCost T1HouseShadowScript, initialShadowScript, roadShadowScript, T2HouseShadowScript, T3HouseShadowScript, T1WaterShadowScript, T2WaterShadowScript, T3WaterShadowScript, T1FoodShadowScript, T2FoodShadowScript, T3FoodShadowScript, T1PowerShadowScript, T2PowerShadowScript, T3PowerShadowScript, stoneMineShadowScript, crystalMineShadowScript, B_ResourceStorageShadowScript, B_FoodStoageShadowScript;
     private Material roadShadowMaterial, T1HouseShadowMaterial, T2HouseShadowMaterial, T3HouseShadowMaterial, T1WaterShadowMaterial, T2WaterShadowMaterial, T3WaterShadowMaterial, T1FoodShadowMaterial, T2FoodShadowMaterial, T3FoodShadowMaterial, T1PowerShadowMaterial, T2PowerShadowMaterial, T3PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
@@ -24,7 +25,7 @@ public class Buildings : MonoBehaviour
     private Material[] originalMaterial;
     public Material[] deletingMaterial;
     private Vector3 buildPos;
-    private BuildingCost buildingShadowScript, initialShadowScript;
+    
     private bool firstRoadPlaced, initialPlaced;
     private GameObject[] roads;
     public float divisbleReturn;
@@ -43,12 +44,11 @@ public class Buildings : MonoBehaviour
     void Start()
     {
         isDeleting = false;
-        buildingShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
-        initialShadowScript = initialShadow.GetComponent<BuildingCost>();
         storageBuildings = new List<StorageBuilding>();
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
+        GetShadowScripts();
         refreshNavMesh = false;
     }
 
@@ -78,6 +78,7 @@ public class Buildings : MonoBehaviour
             {
                 buildPos = buildCentered(grid.getNodes(initialShadowScript.getGridWidth(), initialShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
                 initialShadow.transform.position = new Vector3(buildPos.x, 0.3f, buildPos.z);
+                grid.MakeNodesHL(grid.getNodes(initialShadowScript.getGridWidth(), initialShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     rotateAroundY(initialShadow, 90);
@@ -103,6 +104,8 @@ public class Buildings : MonoBehaviour
             }
 
             roadShadow.transform.position = new Vector3(nearNode.transform.position.x, 0.1f, nearNode.transform.position.z);
+            grid.MakeNodesHL(grid.getNodes(roadShadowScript.getGridWidth(), roadShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R) && !firstRoadPlaced)
             {
                 rotateAroundY(roadShadow, 90);
@@ -115,7 +118,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
             
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1HouseShadowScript.getGridWidth(), T1HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -125,13 +128,14 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1HouseShadowScript.getGridWidth(), T1HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1HouseShadowScript.getGridWidth(), T1HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1HouseShadow, 90);
                 buildingRotateSound.Play();
-                T1HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T1HouseShadowScript.RotateBuilding();
             }
             
         }
@@ -141,7 +145,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2HouseShadowScript.getGridWidth(), T2HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T2HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -151,13 +155,15 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T2HouseShadowScript.getGridWidth(), T2HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T2HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2HouseShadowScript.getGridWidth(), T2HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T2HouseShadow, 90);
                 buildingRotateSound.Play();
-                T2HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T2HouseShadowScript.RotateBuilding();
 
             }
 
@@ -168,7 +174,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3HouseShadowScript.getGridWidth(), T3HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T3HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -178,13 +184,15 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T3HouseShadowScript.getGridWidth(), T3HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T3HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3HouseShadowScript.getGridWidth(), T3HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T3HouseShadow, 90);
                 buildingRotateSound.Play();
-                T3HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T3HouseShadowScript.RotateBuilding();
 
             }
 
@@ -195,7 +203,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1WaterShadowScript.getGridWidth(), T1WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -205,13 +213,15 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1WaterShadowScript.getGridWidth(), T1WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1WaterShadowScript.getGridWidth(), T1WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1WaterShadow, 90);
                 buildingRotateSound.Play();
-                T1WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T1WaterShadowScript.RotateBuilding();
 
             }
 
@@ -222,7 +232,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2WaterShadowScript.getGridWidth(), T2WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T2WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -232,13 +242,15 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T2WaterShadowScript.getGridWidth(), T2WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T2WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2WaterShadowScript.getGridWidth(), T2WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T2WaterShadow, 90);
                 buildingRotateSound.Play();
-                T2WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T2WaterShadowScript.RotateBuilding();
 
             }
 
@@ -249,7 +261,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3WaterShadowScript.getGridWidth(), T3WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T3WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -259,13 +271,15 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T3WaterShadowScript.getGridWidth(), T3WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T3WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3WaterShadowScript.getGridWidth(), T3WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T3WaterShadow, 90);
                 buildingRotateSound.Play();
-                T3WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T3WaterShadowScript.RotateBuilding();
 
             }
 
@@ -276,8 +290,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -288,13 +302,15 @@ public class Buildings : MonoBehaviour
             }
 
            
-            buildPos = buildCentered(grid.getNodes(T1FoodShadow.GetComponent<BuildingCost>().getGridWidth(), T1FoodShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1FoodShadow, 90);
                 buildingRotateSound.Play();
-                T1FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T1FoodShadowScript.RotateBuilding();
 
             }
 
@@ -305,8 +321,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T2FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -317,13 +333,15 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(T2FoodShadow.GetComponent<BuildingCost>().getGridWidth(), T2FoodShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T2FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T2FoodShadow, 90);
                 buildingRotateSound.Play();
-                T2FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T2FoodShadowScript.RotateBuilding();
 
             }
 
@@ -334,8 +352,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T3FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -346,13 +364,15 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(T3FoodShadow.GetComponent<BuildingCost>().getGridWidth(), T3FoodShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T3FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T3FoodShadow, 90);
                 buildingRotateSound.Play();
-                T3FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T3FoodShadowScript.RotateBuilding();
 
             }
 
@@ -363,7 +383,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1PowerShadowScript.getGridWidth(), T1PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -374,13 +394,15 @@ public class Buildings : MonoBehaviour
             }
 
             
-            buildPos = buildCentered(grid.getNodes(T1PowerShadow.GetComponent<BuildingCost>().getGridWidth(), T1PowerShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1PowerShadowScript.getGridWidth(), T1PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1PowerShadowScript.getGridWidth(), T1PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1PowerShadow, 90);
                 buildingRotateSound.Play();
-                T1PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T1PowerShadowScript.RotateBuilding();
 
             }
 
@@ -391,7 +413,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2PowerShadowScript.getGridWidth(), T2PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T2PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -402,13 +424,15 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(T2PowerShadow.GetComponent<BuildingCost>().getGridWidth(), T2PowerShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T2PowerShadowScript.getGridWidth(), T2PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T2PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2PowerShadowScript.getGridWidth(), T2PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T2PowerShadow, 90);
                 buildingRotateSound.Play();
-                T2PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T2PowerShadowScript.RotateBuilding();
 
             }
 
@@ -419,7 +443,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3PowerShadowScript.getGridWidth(), T3PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T3PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -430,13 +454,15 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(T3PowerShadow.GetComponent<BuildingCost>().getGridWidth(), T3PowerShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T3PowerShadowScript.getGridWidth(), T3PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T3PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3PowerShadowScript.getGridWidth(), T3PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T3PowerShadow, 90);
                 buildingRotateSound.Play();
-                T3PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+                T3PowerShadowScript.RotateBuilding();
             }
 
         }
@@ -446,8 +472,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 B_FoodStoageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -458,13 +484,15 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(B_FoodStoageShadow.GetComponent<BuildingCost>().getGridWidth(), B_FoodStoageShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             B_FoodStoageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(B_FoodStoageShadow, 90);
                 buildingRotateSound.Play();
-                B_FoodStoageShadow.GetComponent<BuildingCost>().RotateBuilding();
+                B_FoodStoageShadowScript.RotateBuilding();
 
             }
 
@@ -475,8 +503,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 B_ResourceStorageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -487,13 +515,15 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(B_ResourceStorageShadow.GetComponent<BuildingCost>().getGridWidth(), B_ResourceStorageShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             B_ResourceStorageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(B_ResourceStorageShadow, 90);
                 buildingRotateSound.Play();
-                B_ResourceStorageShadow.GetComponent<BuildingCost>().RotateBuilding();
+                B_ResourceStorageShadowScript.RotateBuilding();
 
             }
 
@@ -504,8 +534,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesStone(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesStone(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 stoneMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -516,13 +546,15 @@ public class Buildings : MonoBehaviour
             }
 
             
-            buildPos = buildCentered(grid.getNodes(stoneMineShadow.GetComponent<BuildingCost>().getGridWidth(), stoneMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             stoneMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(stoneMineShadow, 90);
                 buildingRotateSound.Play();
-                stoneMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+                stoneMineShadowScript.RotateBuilding();
 
             }
 
@@ -533,8 +565,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesCrystal(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesCrystal(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 crystalMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -545,13 +577,15 @@ public class Buildings : MonoBehaviour
             }
 
             
-            buildPos = buildCentered(grid.getNodes(crystalMineShadow.GetComponent<BuildingCost>().getGridWidth(), crystalMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             crystalMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(crystalMineShadow, 90);
                 buildingRotateSound.Play();
-                crystalMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+                crystalMineShadowScript.RotateBuilding();
 
             }
 
@@ -1243,6 +1277,29 @@ public class Buildings : MonoBehaviour
         crystalMineShadowMaterial = crystalMineShadow.GetComponentInChildren<Renderer>().material;
         B_FoodStorageShadowMaterial = B_FoodStoageShadow.GetComponentInChildren<Renderer>().material;
         B_ResourceStorageShadowMaterial = B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material;
+    }
+
+    // Get all the scripts from the shadow game objects
+    private void GetShadowScripts()
+    {
+        T1HouseShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
+        initialShadowScript = initialShadow.GetComponent<BuildingCost>();
+        roadShadowScript = roadShadow.GetComponent<BuildingCost>();
+        T2HouseShadowScript = T2HouseShadow.GetComponent<BuildingCost>();
+        T3HouseShadowScript = T3HouseShadow.GetComponent<BuildingCost>();
+        T1WaterShadowScript = T1WaterShadow.GetComponent<BuildingCost>();
+        T2WaterShadowScript = T2WaterShadow.GetComponent<BuildingCost>();
+        T3WaterShadowScript = T3WaterShadow.GetComponent<BuildingCost>();
+        T1FoodShadowScript = T1FoodShadow.GetComponent<BuildingCost>();
+        T2FoodShadowScript = T2FoodShadow.GetComponent<BuildingCost>();
+        T3FoodShadowScript = T3FoodShadow.GetComponent<BuildingCost>();
+        T1PowerShadowScript = T1PowerShadow.GetComponent<BuildingCost>();
+        T2PowerShadowScript = T2PowerShadow.GetComponent<BuildingCost>();
+        T3PowerShadowScript = T3PowerShadow.GetComponent<BuildingCost>();
+        stoneMineShadowScript = stoneMineShadow.GetComponent<BuildingCost>();
+        crystalMineShadowScript = crystalMineShadow.GetComponent<BuildingCost>();
+        B_ResourceStorageShadowScript = B_ResourceStorageShadow.GetComponent<BuildingCost>();
+        B_FoodStoageShadowScript = B_FoodStoageShadow.GetComponent<BuildingCost>();
     }
 
     /* Instantiate a building in the nodes necessary
