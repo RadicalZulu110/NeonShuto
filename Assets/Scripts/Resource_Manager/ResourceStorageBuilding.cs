@@ -41,7 +41,7 @@ public class ResourceStorageBuilding : StorageBuilding
                     currentTruck = trucksAvailable[0];
                     trucksAvailable.Remove(currentTruck);
                     trucksNoAvailable.Add(currentTruck);
-                    currentTruck.transform.position = getNearestRoad().transform.position;
+                    currentTruck.transform.position = roadToSpawn.transform.position;
                     currentTruck.SetActive(true);
                     currentTruck.GetComponent<Truck>().setDestination(currentBuilding.transform.position);
                     
@@ -77,11 +77,20 @@ public class ResourceStorageBuilding : StorageBuilding
                     (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
-                    NavMesh.CalculatePath(getNearestRoad().transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
+                    for (int j = 0; j < roadsToSpawn.Count; j++)
                     {
-                        res = stoneMiners[i];
-                        actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                        if(roadsToSpawn[j] != null)
+                        {
+                            NavMesh.CalculatePath(roadsToSpawn[j].transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                            if (path.status == NavMeshPathStatus.PathComplete)
+                            {
+                                res = stoneMiners[i];
+                                actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                                roadToSpawn = roadsToSpawn[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -96,11 +105,20 @@ public class ResourceStorageBuilding : StorageBuilding
                     (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
-                    NavMesh.CalculatePath(getNearestRoad().transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
+                    for (int j = 0; j < roadsToSpawn.Count; j++)
                     {
-                        res = crystalMiners[i];
-                        actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                        if(roadsToSpawn[j] != null)
+                        {
+                            NavMesh.CalculatePath(roadsToSpawn[j].transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                            if (path.status == NavMeshPathStatus.PathComplete)
+                            {
+                                res = crystalMiners[i];
+                                actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                                roadToSpawn = roadsToSpawn[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }

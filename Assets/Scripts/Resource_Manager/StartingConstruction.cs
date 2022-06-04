@@ -22,8 +22,9 @@ public class StartingConstruction : BuildingCost
     public GameObject truckPrefab;
     List<GameObject> trucksAvailable, trucksNoAvailable;
     List<GameObject> farms, stoneMiners, crystalMiners;
+    private List<GameObject> roadsToSpawn;
 
-    private GameObject currentBuilding, currentTruck;
+    private GameObject currentBuilding, currentTruck, roadToSpawn;
     private int truckStorage;
 
     private void Start()
@@ -33,6 +34,7 @@ public class StartingConstruction : BuildingCost
         farms = new List<GameObject>();
         stoneMiners = new List<GameObject>();
         crystalMiners = new List<GameObject>();
+        roadsToSpawn = new List<GameObject>();
         truckStorage = truckPrefab.GetComponent<Truck>().getMaxCapacity();
         gm.foodCapacity += maxFood;
         gm.stoneCapacity += maxStone;
@@ -77,7 +79,7 @@ public class StartingConstruction : BuildingCost
                     currentTruck = trucksAvailable[0];
                     trucksAvailable.Remove(currentTruck);
                     trucksNoAvailable.Add(currentTruck);
-                    currentTruck.transform.position = getNearestRoad().transform.position;
+                    currentTruck.transform.position = roadToSpawn.transform.position;
                     currentTruck.SetActive(true);
                     currentTruck.GetComponent<Truck>().setDestination(currentBuilding.transform.position);
 
@@ -101,6 +103,29 @@ public class StartingConstruction : BuildingCost
             
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Add the roads available to spawn 
+        if(other.gameObject.tag == "Road")
+        {
+            roadsToSpawn.Add(other.gameObject);
+        }
+    }
+
+    // Check if all the roads to spawn are not null. If null, delete it
+    public void CheckAdyacentRoads()
+    {
+        for(int i=0; i<roadsToSpawn.Count; i++)
+        {
+            if(roadsToSpawn[i] == null)
+            {
+                roadsToSpawn.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
 
     public int GetExpectedPop()
     {
@@ -139,11 +164,20 @@ public class StartingConstruction : BuildingCost
                     (res != null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
-                    NavMesh.CalculatePath(getNearestRoad().transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
-                    if(path.status == NavMeshPathStatus.PathComplete)
+                    for(int j=0; j<roadsToSpawn.Count; j++)
                     {
-                        res = farms[i];
-                        actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                        if(roadsToSpawn[j] != null)
+                        {
+                            NavMesh.CalculatePath(roadsToSpawn[j].transform.position, farms[i].GetComponent<FoodBuilding>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                            if (path.status == NavMeshPathStatus.PathComplete)
+                            {
+                                res = farms[i];
+                                actual = farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored();
+                                roadToSpawn = roadsToSpawn[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -158,11 +192,20 @@ public class StartingConstruction : BuildingCost
                     (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
-                    NavMesh.CalculatePath(getNearestRoad().transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
+                    for (int j = 0; j < roadsToSpawn.Count; j++)
                     {
-                        res = stoneMiners[i];
-                        actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                        if(roadsToSpawn[j] != null)
+                        {
+                            NavMesh.CalculatePath(roadsToSpawn[j].transform.position, stoneMiners[i].GetComponent<StoneMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                            if (path.status == NavMeshPathStatus.PathComplete)
+                            {
+                                res = stoneMiners[i];
+                                actual = stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored();
+                                roadToSpawn = roadsToSpawn[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -177,11 +220,20 @@ public class StartingConstruction : BuildingCost
                     (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
                 {
                     NavMeshPath path = new NavMeshPath();
-                    NavMesh.CalculatePath(getNearestRoad().transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
+                    for (int j = 0; j < roadsToSpawn.Count; j++)
                     {
-                        res = crystalMiners[i];
-                        actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                        if(roadsToSpawn[j] != null)
+                        {
+                            NavMesh.CalculatePath(roadsToSpawn[j].transform.position, crystalMiners[i].GetComponent<CrystalMiner>().getNearestRoad().transform.position, NavMesh.AllAreas, path);
+                            if (path.status == NavMeshPathStatus.PathComplete)
+                            {
+                                res = crystalMiners[i];
+                                actual = crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored();
+                                roadToSpawn = roadsToSpawn[j];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }

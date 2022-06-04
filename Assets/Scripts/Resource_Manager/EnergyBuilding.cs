@@ -23,6 +23,11 @@ public class EnergyBuilding : ProductionBuilding
             gm.TotalEnergy += EnergyIncrease;
             gm.TotalGold -= MaintenanceGoldCost;
         }
+
+        if (getTier() == 3)
+        {
+            gm.AddTreeLife(-T3TreeLife);
+        }
     }
     
 
