@@ -16,6 +16,9 @@ public class Grid : MonoBehaviour
 	int gridSizeX, gridSizeY; // defintion of x and y
 	public int treeX, treeY;
 
+	public Material tile, tileHL;
+	private List<GameObject> previousNodesHL, actualNodesHL;
+
 	void Awake()
 	{ // start function to create the grid and find the world size and diameter
 		nodeDiameter = nodeRadius * 2;
@@ -23,6 +26,8 @@ public class Grid : MonoBehaviour
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
 		CreateGrid(); // creates the grid using the creategrid() function
 		this.gameObject.transform.localScale = new Vector3(gridWorldSize.x, 0.1f, gridWorldSize.y);
+		previousNodesHL = new List<GameObject>();
+		actualNodesHL = new List<GameObject>();
 	}
 
 	void CreateGrid()
@@ -597,6 +602,48 @@ public class Grid : MonoBehaviour
 
 		return false;
 	}
+
+	// Highlite the nodes of the shadow
+	public void MakeNodesHL(List<GameObject> nodesToHL)
+    {
+		if(ListsAreEqual(nodesToHL, previousNodesHL))
+        {
+			return;
+        }
+        else
+        {
+			actualNodesHL = nodesToHL;
+
+			if (previousNodesHL != null)
+			{
+				for (int i = 0; i < previousNodesHL.Count; i++)
+				{
+					previousNodesHL[i].GetComponent<Renderer>().material = tile;
+				}
+			}
+
+			for (int i=0; i< actualNodesHL.Count; i++)
+            {
+				actualNodesHL[i].GetComponent<Renderer>().material = tileHL;
+            }
+
+			previousNodesHL = nodesToHL;
+        }
+    }
+
+	private bool ListsAreEqual(List<GameObject> list1, List<GameObject> list2)
+    {
+		if (list1.Count != list2.Count)
+			return false;
+
+		for(int i = 0; i < list1.Count; i++)
+        {
+			if (list1[i] != list2[i])
+				return false;
+        }
+
+		return true;
+    }
 }
 
 

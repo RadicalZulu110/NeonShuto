@@ -17,6 +17,7 @@ TagManager:
   - StorageBuilding
   - Light
   - Water
+  - RootAttack
   layers:
   - Default
   - TransparentFX
