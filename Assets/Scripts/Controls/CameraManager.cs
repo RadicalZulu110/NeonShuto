@@ -33,6 +33,7 @@ public class CameraManager : MonoBehaviour
     float frameZoom;
     Camera cam;
     float rotationX, rotationY;
+    
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class CameraManager : MonoBehaviour
         //zoomStrategy = new OrtographZoomStrategy(cam, startingZoom);
         zoomStrategy = new PerspectiveZoomStrategy(cam, cameraOffset, startingZoom);
         cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
+        
     }
 
     private void OnEnable()
@@ -81,14 +83,14 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(frameMove != Vector3.zero)
+        if (frameMove != Vector3.zero)
         {
             Vector3 speedModFrameMove = new Vector3(frameMove.x * lateralSpeed, frameMove.y, frameMove.z * inOutSpeed);
             transform.position += transform.TransformDirection(speedModFrameMove) * Time.deltaTime;
             LockPositionInBounds();
             frameMove = Vector3.zero;
         }
-
+        
         if(frameRotateX != 0f)
         {
             transform.Rotate(Vector3.up, frameRotateX * Time.deltaTime * rotateSpeed);
@@ -146,4 +148,6 @@ public class CameraManager : MonoBehaviour
         else
             return false;
     }
+
+    
 }

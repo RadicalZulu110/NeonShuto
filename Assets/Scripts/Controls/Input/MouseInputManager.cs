@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MouseInputManager : InputManager
 {
     Vector2Int screen;
@@ -11,10 +12,12 @@ public class MouseInputManager : InputManager
     public static event MoveInputHandler OnMoveInput;
     public static event RotateInputHandler OnRotateInput;
     public static event ZoomInputHandler OnZoomInput;
+    private bool isOnPanel;
 
     private void Awake()
     {
         screen = new Vector2Int(Screen.width, Screen.height);
+        //isOnPanel = false;
     }
 
     private void Update()
@@ -23,24 +26,29 @@ public class MouseInputManager : InputManager
         bool mouseValid = (mp.y <= screen.y * 1.05f && mp.y >= screen.y * -0.05f &&
                             mp.x <= screen.x * 1.05f && mp.x >= screen.x * -0.05f); // The mouse must to be near to the window
 
-        if (!mouseValid) return;
+        //if (!mouseValid) return;
 
         // Movement Near to the borders
-        if(mp.y > screen.y * 0.95) 
+        Debug.Log(isOnPanel);
+        if (!isOnPanel)
         {
-            OnMoveInput?.Invoke(Vector3.forward);
-        }else if(mp.y < screen.y * 0.05)
-        {
-            OnMoveInput?.Invoke(-Vector3.forward);
-        }
+            if (mp.y > screen.y * 0.95)
+            {
+                OnMoveInput?.Invoke(Vector3.forward);
+            }
+            else if (mp.y < screen.y * 0.05)
+            {
+                OnMoveInput?.Invoke(-Vector3.forward);
+            }
 
-        if (mp.x > screen.x * 0.95)
-        {
-            OnMoveInput?.Invoke(Vector3.right);
-        }
-        else if (mp.x < screen.x * 0.05)
-        {
-            OnMoveInput?.Invoke(-Vector3.right);
+            if (mp.x > screen.x * 0.95)
+            {
+                OnMoveInput?.Invoke(Vector3.right);
+            }
+            else if (mp.x < screen.x * 0.05)
+            {
+                OnMoveInput?.Invoke(-Vector3.right);
+            }
         }
 
         // Rotation
@@ -83,5 +91,10 @@ public class MouseInputManager : InputManager
         {
             OnZoomInput?.Invoke(3f);
         }
+    }
+
+    public void SetOnPanel(bool p)
+    {
+        isOnPanel = p;
     }
 }

@@ -79,6 +79,12 @@ public class GameManager : MonoBehaviour
 	private GameObject light;
 	private HDAdditionalLightData lightData;
 	public int maxLight, minLight;
+	public Buildings buildingsScript;
+	private List<GameObject> allBuildings;
+	public int firstLifeQuota, secondLifeQuota, thirdLifeQuota;
+	public int firstPercentage, secondPercentage, thirdPercentage;
+	public int timeAttack;
+	private float nextIncreaseTime;
 
 	private void Start()
 	{
@@ -95,6 +101,7 @@ public class GameManager : MonoBehaviour
 		foodBuildings = new List<GameObject>();
 		foodStorageBuildings = new List<FoodStorageBuilding>();
 		resourceStorageBuildings = new List<ResourceStorageBuilding>();
+		allBuildings = new List<GameObject>();
 		TotalFood = 0;
 		TotalStone = 0;
 		TotalCrystal = 0;
@@ -148,7 +155,49 @@ public class GameManager : MonoBehaviour
 
 		popDisplay.text = (TotalPop).ToString() + "/" + "[" + (PopCapacity).ToString() + "]";
 
+		if (Time.time > nextIncreaseTime)
+		{
+			nextIncreaseTime = Time.time + timeAttack;
+			RootAttack();
+		}
+		
 	}
+
+
+	private void RootAttack()
+    {
+		int randomNumber = Random.Range(0, 100);
+		int randomBuildingIndex = Random.Range(0, allBuildings.Count);
+		if(treeLife <= firstLifeQuota && treeLife > secondLifeQuota && treeLife > thirdLifeQuota)
+        {
+			if(randomNumber < firstPercentage)
+            {
+				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
+				DeleteBuilding(deletingBuilding);
+				buildingsScript.DeleteBuilding(deletingBuilding);
+            }
+        }
+
+		if(treeLife <= secondLifeQuota && treeLife > thirdLifeQuota)
+        {
+			if (randomNumber < secondPercentage)
+			{
+				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
+				DeleteBuilding(deletingBuilding);
+				buildingsScript.DeleteBuilding(deletingBuilding);
+			}
+		}
+
+		if(treeLife < thirdLifeQuota)
+        {
+			if (randomNumber < thirdPercentage)
+			{
+				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
+				DeleteBuilding(deletingBuilding);
+				buildingsScript.DeleteBuilding(deletingBuilding);
+			}
+		}
+    }
 
 	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)
@@ -616,4 +665,14 @@ public class GameManager : MonoBehaviour
     {
 		lightData.intensity = treeLife;
 	}
+
+	public void AddBuilding(GameObject building)
+    {
+		allBuildings.Add(building);
+    }
+
+	public void DeleteBuilding(GameObject building)
+    {
+		allBuildings.Remove(building);
+    }
 }
