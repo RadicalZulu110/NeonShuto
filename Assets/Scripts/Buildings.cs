@@ -32,10 +32,12 @@ public class Buildings : MonoBehaviour
     public Button DeleteButton;
     public Color ActiveColor;
 
+    private StartingConstruction heroBuilding;
+    private List<StorageBuilding> storageBuildings;
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
-    public float polutionMultiplicator;
+    public float polutionMultiplicator, waterMultiplicator;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,7 @@ public class Buildings : MonoBehaviour
         isDeleting = false;
         buildingShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
         initialShadowScript = initialShadow.GetComponent<BuildingCost>();
+        storageBuildings = new List<StorageBuilding>();
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
@@ -128,6 +131,7 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1HouseShadow, 90);
                 buildingRotateSound.Play();
+                T1HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
             }
             
         }
@@ -153,6 +157,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2HouseShadow, 90);
                 buildingRotateSound.Play();
+                T2HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -178,6 +184,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3HouseShadow, 90);
                 buildingRotateSound.Play();
+                T3HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -203,6 +211,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1WaterShadow, 90);
                 buildingRotateSound.Play();
+                T1WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -228,6 +238,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2WaterShadow, 90);
                 buildingRotateSound.Play();
+                T2WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -253,6 +265,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3WaterShadow, 90);
                 buildingRotateSound.Play();
+                T3WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -280,8 +294,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1FoodShadow, 90);
                 buildingRotateSound.Play();
+                T1FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-          
+
         }
 
         //T2 Food shadow
@@ -307,6 +323,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2FoodShadow, 90);
                 buildingRotateSound.Play();
+                T2FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -334,6 +352,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3FoodShadow, 90);
                 buildingRotateSound.Play();
+                T3FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -360,8 +380,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1PowerShadow, 90);
                 buildingRotateSound.Play();
+                T1PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         //T2 Power shadow
@@ -386,6 +408,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2PowerShadow, 90);
                 buildingRotateSound.Play();
+                T2PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -412,6 +436,7 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3PowerShadow, 90);
                 buildingRotateSound.Play();
+                T3PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
             }
 
         }
@@ -439,6 +464,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(B_FoodStoageShadow, 90);
                 buildingRotateSound.Play();
+                B_FoodStoageShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -466,6 +493,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(B_ResourceStorageShadow, 90);
                 buildingRotateSound.Play();
+                B_ResourceStorageShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -493,8 +522,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(stoneMineShadow, 90);
                 buildingRotateSound.Play();
+                stoneMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         //crystalmine shadow
@@ -520,8 +551,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(crystalMineShadow, 90);
                 buildingRotateSound.Play();
+                crystalMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         // Cancel construction with escape
@@ -864,7 +897,8 @@ public class Buildings : MonoBehaviour
                             }
                             else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
-                                
+                                storageBuildings.Remove(selectedObjectToDelete.GetComponent<StorageBuilding>());
+
                                 if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
                                 {
                                     gameManager.foodCapacity -= selectedObjectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
@@ -886,6 +920,11 @@ public class Buildings : MonoBehaviour
                                 grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
+                                heroBuilding.CheckAdyacentRoads();
+                                for(int i=0; i<storageBuildings.Count; i++)
+                                {
+                                    storageBuildings[i].CheckAdyacentRoads();
+                                }
                                 refreshNavMesh = true;
                             }
 
@@ -1243,17 +1282,37 @@ public class Buildings : MonoBehaviour
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
-                gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                BuildingCost buildCreatedScript = buildCreated.GetComponent<BuildingCost>();
+                if (buildCreatedScript.getTier() != 3 && buildCreated.tag != "StorageBuilding")
+                {
+                    if (buildCreated.tag == "Water")
+                    {
+                        gameManager.AddTreeLife(+buildCreated.GetComponent<BuildingCost>().getTier() * waterMultiplicator);
+                    }
+                    else
+                    {
+                        gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    }
+                }
+                else
+                {
+                    
+                }
+                
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
                     gameManager.AddHeroBuilding(buildCreated.GetComponent<StartingConstruction>());
-                }else if (buildCreated.GetComponent<FoodStorageBuilding>())
+                    heroBuilding = buildCreated.GetComponent<StartingConstruction>();
+                }
+                else if (buildCreated.GetComponent<FoodStorageBuilding>())
                 {
                     gameManager.AddFoodStorageBuilding(buildCreated.GetComponent<FoodStorageBuilding>());
+                    storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
                 }else if (buildCreated.GetComponent<ResourceStorageBuilding>())
                 {
                     gameManager.AddResourceStorageBuilding(buildCreated.GetComponent<ResourceStorageBuilding>());
+                    storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
                 }
 
                 // If the sifht is down, continue 
