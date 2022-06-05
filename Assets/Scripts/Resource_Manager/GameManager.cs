@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
 	public int firstPercentage, secondPercentage, thirdPercentage;
 	public int timeAttack;
 	private float nextIncreaseTime;
+	public GameObject treeRootAttack;
+	private Animation treeRootAttackAnimation;
 
 	private void Start()
 	{
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour
 		TotalCrystal = 0;
 		light = GameObject.FindGameObjectWithTag("Light");
 		lightData = light.GetComponent<HDAdditionalLightData>();
+		treeRootAttackAnimation = treeRootAttack.GetComponent<Animation>();
 	}
 
 	private void Update()
@@ -173,6 +176,8 @@ public class GameManager : MonoBehaviour
 			if(randomNumber < firstPercentage)
             {
 				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
+				treeRootAttack.transform.position = deletingBuilding.transform.position;
+				treeRootAttackAnimation.Play();
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
             }
@@ -183,6 +188,8 @@ public class GameManager : MonoBehaviour
 			if (randomNumber < secondPercentage)
 			{
 				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
+				treeRootAttack.transform.position = deletingBuilding.transform.position;
+				treeRootAttackAnimation.Play();
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
 			}
@@ -193,6 +200,8 @@ public class GameManager : MonoBehaviour
 			if (randomNumber < thirdPercentage)
 			{
 				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
+				treeRootAttack.transform.position = deletingBuilding.transform.position;
+				treeRootAttackAnimation.Play();
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
 			}
