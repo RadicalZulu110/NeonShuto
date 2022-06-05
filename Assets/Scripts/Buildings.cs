@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Buildings : MonoBehaviour
 {
-    private GameObject T1HouseToPlace, T2HouseToPlace, T3HouseToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T2FoodToPlace, T3FoodToPlace, T1PowerToPlace, T2PowerToPlace, T3PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
+    private GameObject T1HouseToPlace, T2HouseToPlace, T3HouseToPlace, T1WaterToPlace, T2WaterToPlace, T3WaterToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T2FoodToPlace, T3FoodToPlace, T1PowerToPlace, T2PowerToPlace, T3PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
     public CustomCursor customCursor;
     public Grid grid;
     public GameObject[,] tiles;
     public Camera camera;
-    public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
-    private Material roadShadowMaterial, T1HouseShadowMaterial, T2HouseShadowMaterial, T3HouseShadowMaterial, T1FoodShadowMaterial, T2FoodShadowMaterial, T3FoodShadowMaterial, T1PowerShadowMaterial, T2PowerShadowMaterial, T3PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
+    public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1WaterShadow, T2WaterShadow, T3WaterShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
+    private Material roadShadowMaterial, T1HouseShadowMaterial, T2HouseShadowMaterial, T3HouseShadowMaterial, T1WaterShadowMaterial, T2WaterShadowMaterial, T3WaterShadowMaterial, T1FoodShadowMaterial, T2FoodShadowMaterial, T3FoodShadowMaterial, T1PowerShadowMaterial, T2PowerShadowMaterial, T3PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
 
@@ -32,10 +32,12 @@ public class Buildings : MonoBehaviour
     public Button DeleteButton;
     public Color ActiveColor;
 
+    private StartingConstruction heroBuilding;
+    private List<StorageBuilding> storageBuildings;
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
-    public float polutionMultiplicator;
+    public float polutionMultiplicator, waterMultiplicator;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,7 @@ public class Buildings : MonoBehaviour
         isDeleting = false;
         buildingShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
         initialShadowScript = initialShadow.GetComponent<BuildingCost>();
+        storageBuildings = new List<StorageBuilding>();
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
@@ -128,6 +131,7 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1HouseShadow, 90);
                 buildingRotateSound.Play();
+                T1HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
             }
             
         }
@@ -153,6 +157,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2HouseShadow, 90);
                 buildingRotateSound.Play();
+                T2HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -178,6 +184,89 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3HouseShadow, 90);
                 buildingRotateSound.Play();
+                T3HouseShadow.GetComponent<BuildingCost>().RotateBuilding();
+
+            }
+
+        }
+
+        //T1 Water Shadow
+        if (T1WaterShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T1WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T1WaterShadow.GetComponentInChildren<Renderer>().material = T1WaterShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T1WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T1WaterShadow, 90);
+                buildingRotateSound.Play();
+                T1WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
+            }
+
+        }
+
+        //T2 Water Shadow
+        if (T2WaterShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T2WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T2WaterShadow.GetComponentInChildren<Renderer>().material = T2WaterShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T2WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T2WaterShadow, 90);
+                buildingRotateSound.Play();
+                T2WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
+            }
+
+        }
+
+        //T3 Water Shadow
+        if (T3WaterShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T3WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T3WaterShadow.GetComponentInChildren<Renderer>().material = T3WaterShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T3WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T3WaterShadow, 90);
+                buildingRotateSound.Play();
+                T3WaterShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -205,8 +294,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1FoodShadow, 90);
                 buildingRotateSound.Play();
+                T1FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-          
+
         }
 
         //T2 Food shadow
@@ -232,6 +323,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2FoodShadow, 90);
                 buildingRotateSound.Play();
+                T2FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -259,6 +352,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3FoodShadow, 90);
                 buildingRotateSound.Play();
+                T3FoodShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -285,8 +380,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T1PowerShadow, 90);
                 buildingRotateSound.Play();
+                T1PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         //T2 Power shadow
@@ -311,6 +408,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T2PowerShadow, 90);
                 buildingRotateSound.Play();
+                T2PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -337,6 +436,7 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(T3PowerShadow, 90);
                 buildingRotateSound.Play();
+                T3PowerShadow.GetComponent<BuildingCost>().RotateBuilding();
             }
 
         }
@@ -364,6 +464,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(B_FoodStoageShadow, 90);
                 buildingRotateSound.Play();
+                B_FoodStoageShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -391,6 +493,8 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(B_ResourceStorageShadow, 90);
                 buildingRotateSound.Play();
+                B_ResourceStorageShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
 
         }
@@ -418,8 +522,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(stoneMineShadow, 90);
                 buildingRotateSound.Play();
+                stoneMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         //crystalmine shadow
@@ -445,8 +551,10 @@ public class Buildings : MonoBehaviour
             {
                 rotateAroundY(crystalMineShadow, 90);
                 buildingRotateSound.Play();
+                crystalMineShadow.GetComponent<BuildingCost>().RotateBuilding();
+
             }
-            
+
         }
 
         // Cancel construction with escape
@@ -497,6 +605,33 @@ public class Buildings : MonoBehaviour
                 //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(T3HouseToPlace, T3HouseShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T1 Water
+            if (T1WaterToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T1WaterToPlace, T1WaterShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T2 Water
+            if (T2WaterToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2WaterToPlace, T2WaterShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T3 Water
+            if (T3WaterToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3WaterToPlace, T3WaterShadow);
                 gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
             }
 
@@ -762,7 +897,8 @@ public class Buildings : MonoBehaviour
                             }
                             else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
-                                
+                                storageBuildings.Remove(selectedObjectToDelete.GetComponent<StorageBuilding>());
+
                                 if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
                                 {
                                     gameManager.foodCapacity -= selectedObjectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
@@ -784,6 +920,11 @@ public class Buildings : MonoBehaviour
                                 grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
+                                heroBuilding.CheckAdyacentRoads();
+                                for(int i=0; i<storageBuildings.Count; i++)
+                                {
+                                    storageBuildings[i].CheckAdyacentRoads();
+                                }
                                 refreshNavMesh = true;
                             }
 
@@ -969,6 +1110,9 @@ public class Buildings : MonoBehaviour
         T1HouseShadow.SetActive(false);
         T2HouseShadow.SetActive(false);
         T3HouseShadow.SetActive(false);
+        T1WaterShadow.SetActive(false);
+        T2WaterShadow.SetActive(false);
+        T3WaterShadow.SetActive(false);
         T1FoodShadow.SetActive(false);
         T2FoodShadow.SetActive(false);
         T3FoodShadow.SetActive(false);
@@ -988,6 +1132,10 @@ public class Buildings : MonoBehaviour
         T1HouseShadowMaterial = T1HouseShadow.GetComponentInChildren<Renderer>().material;
         T2HouseShadowMaterial = T2HouseShadow.GetComponentInChildren<Renderer>().material;
         T3HouseShadowMaterial = T3HouseShadow.GetComponentInChildren<Renderer>().material;
+
+        T1WaterShadowMaterial = T1WaterShadow.GetComponentInChildren<Renderer>().material;
+        T2WaterShadowMaterial = T2WaterShadow.GetComponentInChildren<Renderer>().material;
+        T3WaterShadowMaterial = T3WaterShadow.GetComponentInChildren<Renderer>().material;
 
         T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
         T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
@@ -1046,6 +1194,9 @@ public class Buildings : MonoBehaviour
                         T1HouseToPlace = null;
                         T2HouseToPlace = null;
                         T3HouseToPlace = null;
+                        T1WaterToPlace = null;
+                        T2WaterToPlace = null;
+                        T3WaterToPlace = null;
                         T1FoodToPlace = null;
                         T2FoodToPlace = null;
                         T3FoodToPlace = null;
@@ -1093,6 +1244,9 @@ public class Buildings : MonoBehaviour
                         T1HouseToPlace = null;
                         T2HouseToPlace = null;
                         T3HouseToPlace = null;
+                        T1WaterToPlace = null;
+                        T2WaterToPlace = null;
+                        T3WaterToPlace = null;
                         T1FoodToPlace = null;
                         T2FoodToPlace = null;
                         T3FoodToPlace = null;
@@ -1128,17 +1282,37 @@ public class Buildings : MonoBehaviour
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
-                gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                BuildingCost buildCreatedScript = buildCreated.GetComponent<BuildingCost>();
+                if (buildCreatedScript.getTier() != 3 && buildCreated.tag != "StorageBuilding")
+                {
+                    if (buildCreated.tag == "Water")
+                    {
+                        gameManager.AddTreeLife(+buildCreated.GetComponent<BuildingCost>().getTier() * waterMultiplicator);
+                    }
+                    else
+                    {
+                        gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    }
+                }
+                else
+                {
+                    
+                }
+                
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
                     gameManager.AddHeroBuilding(buildCreated.GetComponent<StartingConstruction>());
-                }else if (buildCreated.GetComponent<FoodStorageBuilding>())
+                    heroBuilding = buildCreated.GetComponent<StartingConstruction>();
+                }
+                else if (buildCreated.GetComponent<FoodStorageBuilding>())
                 {
                     gameManager.AddFoodStorageBuilding(buildCreated.GetComponent<FoodStorageBuilding>());
+                    storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
                 }else if (buildCreated.GetComponent<ResourceStorageBuilding>())
                 {
                     gameManager.AddResourceStorageBuilding(buildCreated.GetComponent<ResourceStorageBuilding>());
+                    storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
                 }
 
                 // If the sifht is down, continue 
@@ -1150,6 +1324,9 @@ public class Buildings : MonoBehaviour
                     T1HouseToPlace = null;
                     T2HouseToPlace = null;
                     T3HouseToPlace = null;
+                    T1WaterToPlace = null;
+                    T2WaterToPlace = null;
+                    T3WaterToPlace = null;
                     T1FoodToPlace = null;
                     T2FoodToPlace = null;
                     T3FoodToPlace = null;
@@ -1228,6 +1405,65 @@ public class Buildings : MonoBehaviour
         }
     }
 
+    // Button event to create a T1Water
+    public void createT1Water(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T1WaterToPlace = building;
+            isDeleting = false;
+            T1WaterShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T2Water
+    public void createT2Water(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T2WaterToPlace = building;
+            isDeleting = false;
+            T2WaterShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T3Water
+    public void createT3Water(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T3WaterToPlace = building;
+            isDeleting = false;
+            T3WaterShadow.SetActive(true);
+        }
+    }
     //button event to create T1Food
     public void createT1Food(GameObject farm)
     {

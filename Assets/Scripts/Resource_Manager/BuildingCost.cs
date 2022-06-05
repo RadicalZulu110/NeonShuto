@@ -35,6 +35,8 @@ public class BuildingCost : MonoBehaviour
 
     public GameManager gm;
 
+    public float T3TreeLife;
+
     private List<GameObject> nodes;
 
     private void Awake()
@@ -43,11 +45,21 @@ public class BuildingCost : MonoBehaviour
         nodes = new List<GameObject>();
     }
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         
     }
     
+    public void RotateBuilding()
+    {
+        int aux = width;
+        width = height;
+        height = aux;
+    }
 
     public int getGridWidth()
     {

@@ -84,14 +84,14 @@ public class CameraManager : MonoBehaviour
         if(frameMove != Vector3.zero)
         {
             Vector3 speedModFrameMove = new Vector3(frameMove.x * lateralSpeed, frameMove.y, frameMove.z * inOutSpeed);
-            transform.position += transform.TransformDirection(speedModFrameMove) * Time.deltaTime;
+            transform.position += transform.TransformDirection(speedModFrameMove) * Time.unscaledDeltaTime;
             LockPositionInBounds();
             frameMove = Vector3.zero;
         }
 
         if(frameRotateX != 0f)
         {
-            transform.Rotate(Vector3.up, frameRotateX * Time.deltaTime * rotateSpeed);
+            transform.Rotate(Vector3.up, frameRotateX * Time.unscaledDeltaTime * rotateSpeed);
             rotationY = transform.localEulerAngles.y;
             transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
             frameRotateX = 0f;
@@ -100,7 +100,7 @@ public class CameraManager : MonoBehaviour
         {
             if(checkAngleX(transform.eulerAngles.x))
             {
-                transform.Rotate(Vector3.right, frameRotateY * Time.deltaTime * rotateSpeed);
+                transform.Rotate(Vector3.right, frameRotateY * Time.unscaledDeltaTime * rotateSpeed);
                 rotationX = transform.localEulerAngles.x;
                 transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
             }
@@ -123,11 +123,11 @@ public class CameraManager : MonoBehaviour
 
         if (frameZoom < 0f)
         {
-            zoomStrategy.ZoomIn(cam, Time.deltaTime * Mathf.Abs(frameZoom) * zoomSpeed, nearZoomLimit);
+            zoomStrategy.ZoomIn(cam, Time.unscaledDeltaTime * Mathf.Abs(frameZoom) * zoomSpeed, nearZoomLimit);
             frameZoom = 0f;
         }else if(frameZoom > 0f)
         {
-            zoomStrategy.ZoomOut(cam, Time.deltaTime * frameZoom * zoomSpeed, farZoomLimit);
+            zoomStrategy.ZoomOut(cam, Time.unscaledDeltaTime * frameZoom * zoomSpeed, farZoomLimit);
             frameZoom = 0f;
         }
     }

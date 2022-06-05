@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6415299807961226606}
+  - {fileID: 1403587210396769927}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
   MaintenanceEnergyCost: 0
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 5
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
@@ -66,8 +66,9 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
-  tier: 0
+  tier: 3
   gm: {fileID: 0}
+  T3TreeLife: 10
   recollecting: 0
   truckRecollecting: {fileID: 0}
   PersonalFoodCapacity: 0
@@ -85,7 +86,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6114616, y: 1.8654394, z: 1.8287606}
   m_Center: {x: 0, y: 0.8185786, z: 0}
---- !u!1001 &6813102167689558661
+--- !u!1001 &1508761249650211180
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -98,7 +99,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0517bdc72c088b14ea39c536c70de0a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0517bdc72c088b14ea39c536c70de0a2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -142,8 +143,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0517bdc72c088b14ea39c536c70de0a2, type: 3}
---- !u!4 &6415299807961226606 stripped
+--- !u!4 &1403587210396769927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0517bdc72c088b14ea39c536c70de0a2, type: 3}
-  m_PrefabInstance: {fileID: 6813102167689558661}
+  m_PrefabInstance: {fileID: 1508761249650211180}
   m_PrefabAsset: {fileID: 0}

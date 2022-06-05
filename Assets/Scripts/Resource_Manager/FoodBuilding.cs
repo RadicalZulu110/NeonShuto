@@ -29,6 +29,11 @@ public class FoodBuilding : ProductionBuilding
             {
                 currentFoodStored = PersonalFoodCapacity;
             }
+
+            if (getTier() == 3)
+            {
+                gm.AddTreeLife(-T3TreeLife);
+            }
         }
     }
 
