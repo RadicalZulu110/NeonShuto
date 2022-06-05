@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
             {
 				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
 				treeRootAttack.transform.position = deletingBuilding.transform.position;
+				treeRootAttack.transform.localScale = new Vector3((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridWidth()), (float)((1f / 4f) * Mathf.Max(deletingBuilding.GetComponent<BuildingCost>().getGridWidth(), deletingBuilding.GetComponent<BuildingCost>().getGridHeight())), (float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridHeight()));
 				treeRootAttackAnimation.Play();
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
@@ -189,6 +190,7 @@ public class GameManager : MonoBehaviour
 			{
 				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
 				treeRootAttack.transform.position = deletingBuilding.transform.position;
+				treeRootAttack.transform.localScale = new Vector3((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridWidth()), (float)((1f / 4f) * Mathf.Max(deletingBuilding.GetComponent<BuildingCost>().getGridWidth(), deletingBuilding.GetComponent<BuildingCost>().getGridHeight())), (float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridHeight()));
 				treeRootAttackAnimation.Play();
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
@@ -201,6 +203,7 @@ public class GameManager : MonoBehaviour
 			{
 				GameObject deletingBuilding = allBuildings[randomBuildingIndex];
 				treeRootAttack.transform.position = deletingBuilding.transform.position;
+				treeRootAttack.transform.localScale = new Vector3((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridWidth()), (float)((1f / 4f) * Mathf.Max(deletingBuilding.GetComponent<BuildingCost>().getGridWidth(), deletingBuilding.GetComponent<BuildingCost>().getGridHeight())), (float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridHeight()));
 				treeRootAttackAnimation.Play();
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
