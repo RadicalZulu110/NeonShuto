@@ -15,6 +15,9 @@ TagManager:
   - Truck
   - HeroBuilding
   - StorageBuilding
+  - Light
+  - Water
+  - RootAttack
   layers:
   - Default
   - TransparentFX

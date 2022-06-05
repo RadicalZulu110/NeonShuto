@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5400645475189277893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5400645475189277895}
+  - component: {fileID: -3443972160010914857}
+  - component: {fileID: 6602387101543961845}
+  - component: {fileID: 6189464265877430504}
+  m_Layer: 0
+  m_Name: HeroConstruction
+  m_TagString: HeroBuilding
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5400645475189277895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400645475189277893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1150.7098, y: 487.3777, z: 4.1220703}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 5582294267634069548}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3443972160010914857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400645475189277893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d311d59fff159245a60140a61718757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 8
+  height: 8
+  GoldCost: 0
+  FoodCost: 0
+  EnergyCost: 0
+  StoneCost: 0
+  CrystalCost: 0
+  PopCost: 0
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 3
+  PopIncrease: 0
+  tier: 0
+  gm: {fileID: 0}
+  T3TreeLife: 0
+  MaxPop: 10
+  MinPop: 1
+  ExpectedPop: 0
+  timeBtwPopIncrease: 3
+  maxFood: 5000
+  maxStone: 5000
+  maxCrystal: 5000
+  storedFood: 2000
+  storedStone: 2000
+  storedCrystal: 2000
+  foodPercentage: 0
+  stonePercentage: 0
+  crystalPercentage: 0
+  maxTrucks: 4
+  nTrucks: 0
+  truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
+--- !u!135 &6602387101543961845
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400645475189277893}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0.18173218, z: 0}
+--- !u!114 &6189464265877430504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5400645475189277893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e975ff248777142ac24a205ff36358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  width: 8
+  height: 8
+  GoldCost: 0
+  FoodCost: 0
+  EnergyCost: 0
+  StoneCost: 0
+  CrystalCost: 0
+  PopCost: 0
+  MaintenanceGoldCost: 0
+  MaintenanceFoodCost: 0
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
+  MaintenanceCrystalCost: 0
+  timeBtwIncrease: 0
+  nextIncreaseTime: 0
+  StoneIncrease: 0
+  CrystalIncrease: 0
+  EnergyIncrease: 0
+  FoodIncrease: 0
+  GoldIncreasePerPerson: 0
+  PopIncrease: 0
+  tier: 0
+  gm: {fileID: 0}
+  T3TreeLife: 0
+--- !u!1001 &5400645475025704903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5400645475189277895}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.028579628
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1386694
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.086269885
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_Name
+      value: SM_HeroAsset
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+--- !u!4 &5582294267634069548 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca4ee766981bd5f47aa44cf49843985c, type: 3}
+  m_PrefabInstance: {fileID: 5400645475025704903}
+  m_PrefabAsset: {fileID: 0}

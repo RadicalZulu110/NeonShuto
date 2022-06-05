@@ -6,13 +6,14 @@ using UnityEngine.UI;
 
 public class Buildings : MonoBehaviour
 {
-    private GameObject T1HouseToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T1PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
+    private GameObject T1HouseToPlace, T2HouseToPlace, T3HouseToPlace, T1WaterToPlace, T2WaterToPlace, T3WaterToPlace, roadToPlace, initialToPlace, T1FoodToPlace, T2FoodToPlace, T3FoodToPlace, T1PowerToPlace, T2PowerToPlace, T3PowerToPlace, crystalMineToPlace, stoneMineToPlace, B_ResourceStorageToPlace, B_FoodStorageToPlace;
     public CustomCursor customCursor;
     public Grid grid;
     public GameObject[,] tiles;
     public Camera camera;
-    public GameObject initialShadow, roadShadow, T1HouseShadow, T1FoodShadow, T1PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
-    private Material roadShadowMaterial, T1HouseShadowMaterial, T1FoodShadowMaterial, T1PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
+    public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1WaterShadow, T2WaterShadow, T3WaterShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
+    private BuildingCost T1HouseShadowScript, initialShadowScript, roadShadowScript, T2HouseShadowScript, T3HouseShadowScript, T1WaterShadowScript, T2WaterShadowScript, T3WaterShadowScript, T1FoodShadowScript, T2FoodShadowScript, T3FoodShadowScript, T1PowerShadowScript, T2PowerShadowScript, T3PowerShadowScript, stoneMineShadowScript, crystalMineShadowScript, B_ResourceStorageShadowScript, B_FoodStoageShadowScript;
+    private Material roadShadowMaterial, T1HouseShadowMaterial, T2HouseShadowMaterial, T3HouseShadowMaterial, T1WaterShadowMaterial, T2WaterShadowMaterial, T3WaterShadowMaterial, T1FoodShadowMaterial, T2FoodShadowMaterial, T3FoodShadowMaterial, T1PowerShadowMaterial, T2PowerShadowMaterial, T3PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
 
@@ -24,7 +25,7 @@ public class Buildings : MonoBehaviour
     private Material[] originalMaterial;
     public Material[] deletingMaterial;
     private Vector3 buildPos;
-    private BuildingCost buildingShadowScript, initialShadowScript;
+    
     private bool firstRoadPlaced, initialPlaced;
     private GameObject[] roads;
     public float divisbleReturn;
@@ -32,20 +33,22 @@ public class Buildings : MonoBehaviour
     public Button DeleteButton;
     public Color ActiveColor;
 
+    private StartingConstruction heroBuilding;
+    private List<StorageBuilding> storageBuildings;
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
-    public float polutionMultiplicator;
+    public float polutionMultiplicator, waterMultiplicator;
 
     // Start is called before the first frame update
     void Start()
     {
         isDeleting = false;
-        buildingShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
-        initialShadowScript = initialShadow.GetComponent<BuildingCost>();
+        storageBuildings = new List<StorageBuilding>();
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
+        GetShadowScripts();
         refreshNavMesh = false;
     }
 
@@ -75,6 +78,7 @@ public class Buildings : MonoBehaviour
             {
                 buildPos = buildCentered(grid.getNodes(initialShadowScript.getGridWidth(), initialShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
                 initialShadow.transform.position = new Vector3(buildPos.x, 0.3f, buildPos.z);
+                grid.MakeNodesHL(grid.getNodes(initialShadowScript.getGridWidth(), initialShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     rotateAroundY(initialShadow, 90);
@@ -100,6 +104,8 @@ public class Buildings : MonoBehaviour
             }
 
             roadShadow.transform.position = new Vector3(nearNode.transform.position.x, 0.1f, nearNode.transform.position.z);
+            grid.MakeNodesHL(grid.getNodes(roadShadowScript.getGridWidth(), roadShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R) && !firstRoadPlaced)
             {
                 rotateAroundY(roadShadow, 90);
@@ -112,7 +118,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
             
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1HouseShadowScript.getGridWidth(), T1HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -122,14 +128,161 @@ public class Buildings : MonoBehaviour
                 lastNearActiveNode = nearNode;
             }
 
-            buildPos = buildCentered(grid.getNodes(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1HouseShadowScript.getGridWidth(), T1HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1HouseShadowScript.getGridWidth(), T1HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1HouseShadow, 90);
                 buildingRotateSound.Play();
+                T1HouseShadowScript.RotateBuilding();
             }
             
+        }
+
+        //T2 House Shadow
+        if (T2HouseShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2HouseShadowScript.getGridWidth(), T2HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T2HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T2HouseShadow.GetComponentInChildren<Renderer>().material = T2HouseShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(T2HouseShadowScript.getGridWidth(), T2HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T2HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2HouseShadowScript.getGridWidth(), T2HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T2HouseShadow, 90);
+                buildingRotateSound.Play();
+                T2HouseShadowScript.RotateBuilding();
+
+            }
+
+        }
+
+        //T3 House Shadow
+        if (T3HouseShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3HouseShadowScript.getGridWidth(), T3HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T3HouseShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T3HouseShadow.GetComponentInChildren<Renderer>().material = T3HouseShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(T3HouseShadowScript.getGridWidth(), T3HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T3HouseShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3HouseShadowScript.getGridWidth(), T3HouseShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T3HouseShadow, 90);
+                buildingRotateSound.Play();
+                T3HouseShadowScript.RotateBuilding();
+
+            }
+
+        }
+
+        //T1 Water Shadow
+        if (T1WaterShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1WaterShadowScript.getGridWidth(), T1WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T1WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T1WaterShadow.GetComponentInChildren<Renderer>().material = T1WaterShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(T1WaterShadowScript.getGridWidth(), T1WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T1WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1WaterShadowScript.getGridWidth(), T1WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T1WaterShadow, 90);
+                buildingRotateSound.Play();
+                T1WaterShadowScript.RotateBuilding();
+
+            }
+
+        }
+
+        //T2 Water Shadow
+        if (T2WaterShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2WaterShadowScript.getGridWidth(), T2WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T2WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T2WaterShadow.GetComponentInChildren<Renderer>().material = T2WaterShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(T2WaterShadowScript.getGridWidth(), T2WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T2WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2WaterShadowScript.getGridWidth(), T2WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T2WaterShadow, 90);
+                buildingRotateSound.Play();
+                T2WaterShadowScript.RotateBuilding();
+
+            }
+
+        }
+
+        //T3 Water Shadow
+        if (T3WaterShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3WaterShadowScript.getGridWidth(), T3WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T3WaterShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T3WaterShadow.GetComponentInChildren<Renderer>().material = T3WaterShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+            buildPos = buildCentered(grid.getNodes(T3WaterShadowScript.getGridWidth(), T3WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T3WaterShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3WaterShadowScript.getGridWidth(), T3WaterShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T3WaterShadow, 90);
+                buildingRotateSound.Play();
+                T3WaterShadowScript.RotateBuilding();
+
+            }
+
         }
 
         //T1 Food shadow
@@ -137,8 +290,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -149,14 +302,80 @@ public class Buildings : MonoBehaviour
             }
 
            
-            buildPos = buildCentered(grid.getNodes(T1FoodShadow.GetComponent<BuildingCost>().getGridWidth(), T1FoodShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1FoodShadowScript.getGridWidth(), T1FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1FoodShadow, 90);
                 buildingRotateSound.Play();
+                T1FoodShadowScript.RotateBuilding();
+
             }
-          
+
+        }
+
+        //T2 Food shadow
+        if (T2FoodShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T2FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T2FoodShadow.GetComponentInChildren<Renderer>().material = T2FoodShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+
+            buildPos = buildCentered(grid.getNodes(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T2FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2FoodShadowScript.getGridWidth(), T2FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T2FoodShadow, 90);
+                buildingRotateSound.Play();
+                T2FoodShadowScript.RotateBuilding();
+
+            }
+
+        }
+
+        //T3 Food shadow
+        if (T3FoodShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T3FoodShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T3FoodShadow.GetComponentInChildren<Renderer>().material = T3FoodShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+
+            buildPos = buildCentered(grid.getNodes(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T3FoodShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3FoodShadowScript.getGridWidth(), T3FoodShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T3FoodShadow, 90);
+                buildingRotateSound.Play();
+                T3FoodShadowScript.RotateBuilding();
+
+            }
+
         }
 
         //T1 Power shadow
@@ -164,7 +383,7 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T1PowerShadowScript.getGridWidth(), T1PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 T1PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -175,14 +394,77 @@ public class Buildings : MonoBehaviour
             }
 
             
-            buildPos = buildCentered(grid.getNodes(T1PowerShadow.GetComponent<BuildingCost>().getGridWidth(), T1PowerShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(T1PowerShadowScript.getGridWidth(), T1PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             T1PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T1PowerShadowScript.getGridWidth(), T1PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(T1PowerShadow, 90);
                 buildingRotateSound.Play();
+                T1PowerShadowScript.RotateBuilding();
+
             }
-            
+
+        }
+
+        //T2 Power shadow
+        if (T2PowerShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T2PowerShadowScript.getGridWidth(), T2PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T2PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T2PowerShadow.GetComponentInChildren<Renderer>().material = T2PowerShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+
+            buildPos = buildCentered(grid.getNodes(T2PowerShadowScript.getGridWidth(), T2PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T2PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T2PowerShadowScript.getGridWidth(), T2PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T2PowerShadow, 90);
+                buildingRotateSound.Play();
+                T2PowerShadowScript.RotateBuilding();
+
+            }
+
+        }
+
+        //T3 Power shadow
+        if (T3PowerShadow.activeInHierarchy)
+        {
+            nearNode = getNearestNode(customCursor.gameObject);
+
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(T3PowerShadowScript.getGridWidth(), T3PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            {
+                T3PowerShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+            }
+            else
+            {
+                T3PowerShadow.GetComponentInChildren<Renderer>().material = T3PowerShadowMaterial;
+                lastNearActiveNode = nearNode;
+            }
+
+
+            buildPos = buildCentered(grid.getNodes(T3PowerShadowScript.getGridWidth(), T3PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            T3PowerShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(T3PowerShadowScript.getGridWidth(), T3PowerShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                rotateAroundY(T3PowerShadow, 90);
+                buildingRotateSound.Play();
+                T3PowerShadowScript.RotateBuilding();
+            }
+
         }
 
         //Food Storage shadow
@@ -190,8 +472,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 B_FoodStoageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -202,12 +484,16 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(B_FoodStoageShadow.GetComponent<BuildingCost>().getGridWidth(), B_FoodStoageShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             B_FoodStoageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(B_FoodStoageShadow, 90);
                 buildingRotateSound.Play();
+                B_FoodStoageShadowScript.RotateBuilding();
+
             }
 
         }
@@ -217,8 +503,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 B_ResourceStorageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -229,12 +515,16 @@ public class Buildings : MonoBehaviour
             }
 
 
-            buildPos = buildCentered(grid.getNodes(B_ResourceStorageShadow.GetComponent<BuildingCost>().getGridWidth(), B_ResourceStorageShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             B_ResourceStorageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(B_ResourceStorageShadowScript.getGridWidth(), B_ResourceStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(B_ResourceStorageShadow, 90);
                 buildingRotateSound.Play();
+                B_ResourceStorageShadowScript.RotateBuilding();
+
             }
 
         }
@@ -244,8 +534,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesStone(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesStone(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 stoneMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -256,14 +546,18 @@ public class Buildings : MonoBehaviour
             }
 
             
-            buildPos = buildCentered(grid.getNodes(stoneMineShadow.GetComponent<BuildingCost>().getGridWidth(), stoneMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             stoneMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(stoneMineShadowScript.getGridWidth(), stoneMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(stoneMineShadow, 90);
                 buildingRotateSound.Play();
+                stoneMineShadowScript.RotateBuilding();
+
             }
-            
+
         }
 
         //crystalmine shadow
@@ -271,8 +565,8 @@ public class Buildings : MonoBehaviour
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesCrystal(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(buildingShadowScript.getGridWidth(), buildingShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesCrystal(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
                 crystalMineShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
@@ -283,14 +577,18 @@ public class Buildings : MonoBehaviour
             }
 
             
-            buildPos = buildCentered(grid.getNodes(crystalMineShadow.GetComponent<BuildingCost>().getGridWidth(), crystalMineShadow.GetComponent<BuildingCost>().getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
             crystalMineShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(crystalMineShadowScript.getGridWidth(), crystalMineShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+
             if (Input.GetKeyDown(KeyCode.R))
             {
                 rotateAroundY(crystalMineShadow, 90);
                 buildingRotateSound.Play();
+                crystalMineShadowScript.RotateBuilding();
+
             }
-            
+
         }
 
         // Cancel construction with escape
@@ -317,7 +615,7 @@ public class Buildings : MonoBehaviour
                 grid.checkTilesRoads();
             }
 
-            // Create house
+            // Create T1 house
             if (T1HouseToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
@@ -326,7 +624,52 @@ public class Buildings : MonoBehaviour
                 gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
             }
 
-            //Create farm
+            // Create T2 house
+            if (T2HouseToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2HouseToPlace, T2HouseShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T3 house
+            if (T3HouseToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3HouseToPlace, T3HouseShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T1 Water
+            if (T1WaterToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T1WaterToPlace, T1WaterShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T2 Water
+            if (T2WaterToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2WaterToPlace, T2WaterShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            // Create T3 Water
+            if (T3WaterToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3WaterToPlace, T3WaterShadow);
+                gameManager.SetNoBuilding(gameManager.GetNoBuildings() + 1);
+            }
+
+            //Create Food T1
             if (T1FoodToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
@@ -336,12 +679,50 @@ public class Buildings : MonoBehaviour
                 
             }
 
-            //Create battery
+            //Create Food T2
+            if (T2FoodToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2FoodToPlace, T2FoodShadow);
+                gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
+
+            }
+
+            //Create Food T3
+            if (T3FoodToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3FoodToPlace, T3FoodShadow);
+                gameManager.SetNoFarms(gameManager.GetNoFarms() + 1);
+
+            }
+
+            //Create Power T1
             if (T1PowerToPlace != null)
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
 
                 createBuilding(T1PowerToPlace, T1PowerShadow);
+                gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
+            }
+
+            //Create Power T2
+            if (T2PowerToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T2PowerToPlace, T2PowerShadow);
+                gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
+            }
+
+            //Create Power T3
+            if (T3PowerToPlace != null)
+            {
+                //nearNode = getNearestNode(customCursor.gameObject);
+
+                createBuilding(T3PowerToPlace, T3PowerShadow);
                 gameManager.SetNoBatterys(gameManager.GetNoBatterys() + 1);
             }
 
@@ -550,7 +931,8 @@ public class Buildings : MonoBehaviour
                             }
                             else if (selectedObjectToDelete.tag == "StorageBuilding")
                             {
-                                
+                                storageBuildings.Remove(selectedObjectToDelete.GetComponent<StorageBuilding>());
+
                                 if (selectedObjectToDelete.GetComponent<FoodStorageBuilding>())
                                 {
                                     gameManager.foodCapacity -= selectedObjectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
@@ -572,9 +954,15 @@ public class Buildings : MonoBehaviour
                                 grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
+                                heroBuilding.CheckAdyacentRoads();
+                                for(int i=0; i<storageBuildings.Count; i++)
+                                {
+                                    storageBuildings[i].CheckAdyacentRoads();
+                                }
                                 refreshNavMesh = true;
                             }
 
+                            gameManager.DeleteBuilding(selectedObjectToDelete);
                             Destroy(selectedObjectToDelete);
                             deleteBuildingSound.Play();
                             selectedObjectToDelete = null;
@@ -587,6 +975,98 @@ public class Buildings : MonoBehaviour
             }
         }
 
+    }
+
+    /********************************************************************************************************************************/
+
+    // Public functions
+    // Delete the gameobject given
+    public void DeleteBuilding(GameObject objectToDelete)
+    {
+        if (objectToDelete.tag == "PopulationBuilding")
+        {
+            PopulationBuilding buildingScript = objectToDelete.GetComponent<PopulationBuilding>();
+            gameManager.SetNoBuilding(gameManager.GetNoBuildings() - 1);
+            gameManager.AddPop(-buildingScript.GetPopulation());
+            gameManager.AddGold(-buildingScript.GetGoldIncrease());
+            gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+            gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+            gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+            gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+            gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+            grid.setNodesUnoccupied(buildingScript.getNodes());
+        }
+        else if (objectToDelete.tag == "ResourceBuilding")
+        {
+            ProductionBuilding buildingScript = objectToDelete.GetComponent<ProductionBuilding>();
+
+            if (objectToDelete.GetComponent<FoodBuilding>())
+            {
+                gameManager.deleteFarm(objectToDelete);
+            }
+            else if (objectToDelete.GetComponent<StoneMiner>())
+            {
+                gameManager.deleteStoneMiner(objectToDelete);
+            }
+            else if (objectToDelete.GetComponent<CrystalMiner>())
+            {
+                gameManager.deleteCrystalMiner(objectToDelete);
+            }
+
+
+            //gameManager.AddFood(-buildingScript.GetFoodIncrease());
+            gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
+            gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
+            gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
+            //gameManager.AddStone(-buildingScript.GetStoneIncrease());
+            gameManager.stoneCapacity -= (buildingScript.GetPersonalStoneCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalStoneCapacity;
+            gameManager.stoneStored -= (buildingScript.GetCurrentStoneStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentStoneStored;
+                                                                                //gameManager.AddCrystal(-buildingScript.GetCrystalIncrease());
+            gameManager.crystalCapacity -= (buildingScript.GetPersonalCrystalCapacity());//selectedObjectToDelete.GetComponent<MinerBuilding>().PersonalCrystalCapacity;
+            gameManager.crystalStored -= (buildingScript.GetCurrentCrystalStored());//selectedObjectToDelete.GetComponent<MinerBuilding>().currentCrystalStored;
+            grid.setNodesUnoccupied(buildingScript.getNodes());
+
+            // Truck associated with that production building
+            if (buildingScript.getTruckRecollecting())
+            {
+                buildingScript.getTruckRecollecting().GetComponent<Truck>().MakeAvailable();
+            }
+        }
+        else if (objectToDelete.tag == "StorageBuilding")
+        {
+            storageBuildings.Remove(objectToDelete.GetComponent<StorageBuilding>());
+
+            if (objectToDelete.GetComponent<FoodStorageBuilding>())
+            {
+                gameManager.foodCapacity -= objectToDelete.GetComponent<FoodStorageBuilding>().GetMaxFood();
+                gameManager.DeleteFoodStorageBuilding(objectToDelete.GetComponent<FoodStorageBuilding>());
+                grid.setNodesUnoccupied(objectToDelete.GetComponent<FoodStorageBuilding>().getNodes());
+            }
+            else if (objectToDelete.GetComponent<ResourceStorageBuilding>())
+            {
+                gameManager.stoneCapacity -= objectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxStone();
+                gameManager.crystalCapacity -= objectToDelete.GetComponent<ResourceStorageBuilding>().GetMaxCrystal();
+                gameManager.DeleteResourceStorageBuilding(objectToDelete.GetComponent<ResourceStorageBuilding>());
+                grid.setNodesUnoccupied(objectToDelete.GetComponent<ResourceStorageBuilding>().getNodes());
+            }
+
+
+        }
+        else
+        {
+            grid.setNodesUnoccupied(objectToDelete.GetComponent<BuildingCost>().getGridWidth(), objectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(objectToDelete.transform.position).GetComponent<Node>());
+            grid.checkTilesRoads();
+            updateRoadsJunction();
+            heroBuilding.CheckAdyacentRoads();
+            for (int i = 0; i < storageBuildings.Count; i++)
+            {
+                storageBuildings[i].CheckAdyacentRoads();
+            }
+            refreshNavMesh = true;
+        }
+
+        Destroy(objectToDelete);
+        deleteBuildingSound.Play();
     }
 
     /********************************************************************************************************************************/
@@ -755,8 +1235,17 @@ public class Buildings : MonoBehaviour
         initialShadow.SetActive(false);
         roadShadow.SetActive(false);
         T1HouseShadow.SetActive(false);
+        T2HouseShadow.SetActive(false);
+        T3HouseShadow.SetActive(false);
+        T1WaterShadow.SetActive(false);
+        T2WaterShadow.SetActive(false);
+        T3WaterShadow.SetActive(false);
         T1FoodShadow.SetActive(false);
+        T2FoodShadow.SetActive(false);
+        T3FoodShadow.SetActive(false);
         T1PowerShadow.SetActive(false);
+        T2PowerShadow.SetActive(false);
+        T3PowerShadow.SetActive(false);
         stoneMineShadow.SetActive(false);
         crystalMineShadow.SetActive(false);
         B_FoodStoageShadow.SetActive(false);
@@ -768,13 +1257,49 @@ public class Buildings : MonoBehaviour
     private void getShadowMaterials()
     {
         T1HouseShadowMaterial = T1HouseShadow.GetComponentInChildren<Renderer>().material;
-        roadShadowMaterial = roadShadow.GetComponentInChildren<Renderer>().material;
+        T2HouseShadowMaterial = T2HouseShadow.GetComponentInChildren<Renderer>().material;
+        T3HouseShadowMaterial = T3HouseShadow.GetComponentInChildren<Renderer>().material;
+
+        T1WaterShadowMaterial = T1WaterShadow.GetComponentInChildren<Renderer>().material;
+        T2WaterShadowMaterial = T2WaterShadow.GetComponentInChildren<Renderer>().material;
+        T3WaterShadowMaterial = T3WaterShadow.GetComponentInChildren<Renderer>().material;
+
         T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
+        T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
+        T3FoodShadowMaterial = T3FoodShadow.GetComponentInChildren<Renderer>().material;
+
         T1PowerShadowMaterial = T1PowerShadow.GetComponentInChildren<Renderer>().material;
+        T2PowerShadowMaterial = T2PowerShadow.GetComponentInChildren<Renderer>().material;
+        T3PowerShadowMaterial = T3PowerShadow.GetComponentInChildren<Renderer>().material;
+
+        roadShadowMaterial = roadShadow.GetComponentInChildren<Renderer>().material;
         stoneMineShadowMaterial = stoneMineShadow.GetComponentInChildren<Renderer>().material;
         crystalMineShadowMaterial = crystalMineShadow.GetComponentInChildren<Renderer>().material;
         B_FoodStorageShadowMaterial = B_FoodStoageShadow.GetComponentInChildren<Renderer>().material;
         B_ResourceStorageShadowMaterial = B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material;
+    }
+
+    // Get all the scripts from the shadow game objects
+    private void GetShadowScripts()
+    {
+        T1HouseShadowScript = T1HouseShadow.GetComponent<BuildingCost>();
+        initialShadowScript = initialShadow.GetComponent<BuildingCost>();
+        roadShadowScript = roadShadow.GetComponent<BuildingCost>();
+        T2HouseShadowScript = T2HouseShadow.GetComponent<BuildingCost>();
+        T3HouseShadowScript = T3HouseShadow.GetComponent<BuildingCost>();
+        T1WaterShadowScript = T1WaterShadow.GetComponent<BuildingCost>();
+        T2WaterShadowScript = T2WaterShadow.GetComponent<BuildingCost>();
+        T3WaterShadowScript = T3WaterShadow.GetComponent<BuildingCost>();
+        T1FoodShadowScript = T1FoodShadow.GetComponent<BuildingCost>();
+        T2FoodShadowScript = T2FoodShadow.GetComponent<BuildingCost>();
+        T3FoodShadowScript = T3FoodShadow.GetComponent<BuildingCost>();
+        T1PowerShadowScript = T1PowerShadow.GetComponent<BuildingCost>();
+        T2PowerShadowScript = T2PowerShadow.GetComponent<BuildingCost>();
+        T3PowerShadowScript = T3PowerShadow.GetComponent<BuildingCost>();
+        stoneMineShadowScript = stoneMineShadow.GetComponent<BuildingCost>();
+        crystalMineShadowScript = crystalMineShadow.GetComponent<BuildingCost>();
+        B_ResourceStorageShadowScript = B_ResourceStorageShadow.GetComponent<BuildingCost>();
+        B_FoodStoageShadowScript = B_FoodStoageShadow.GetComponent<BuildingCost>();
     }
 
     /* Instantiate a building in the nodes necessary
@@ -817,8 +1342,17 @@ public class Buildings : MonoBehaviour
                         grid.setTilesActive(false);
                         shadow.SetActive(false);
                         T1HouseToPlace = null;
+                        T2HouseToPlace = null;
+                        T3HouseToPlace = null;
+                        T1WaterToPlace = null;
+                        T2WaterToPlace = null;
+                        T3WaterToPlace = null;
                         T1FoodToPlace = null;
+                        T2FoodToPlace = null;
+                        T3FoodToPlace = null;
                         T1PowerToPlace = null;
+                        T2PowerToPlace = null;
+                        T3PowerToPlace = null;
                         stoneMineToPlace = null;
                         crystalMineToPlace = null;
                     }
@@ -858,8 +1392,17 @@ public class Buildings : MonoBehaviour
                         grid.setTilesActive(false);
                         shadow.SetActive(false);
                         T1HouseToPlace = null;
+                        T2HouseToPlace = null;
+                        T3HouseToPlace = null;
+                        T1WaterToPlace = null;
+                        T2WaterToPlace = null;
+                        T3WaterToPlace = null;
                         T1FoodToPlace = null;
+                        T2FoodToPlace = null;
+                        T3FoodToPlace = null;
                         T1PowerToPlace = null;
+                        T2PowerToPlace = null;
+                        T3PowerToPlace = null;
                         stoneMineToPlace = null;
                         crystalMineToPlace = null;
                     }
@@ -889,17 +1432,42 @@ public class Buildings : MonoBehaviour
                 buildingPlaceParticles.Play();
 
                 gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
-                gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                BuildingCost buildCreatedScript = buildCreated.GetComponent<BuildingCost>();
+                if (buildCreatedScript.getTier() != 3 && buildCreated.tag != "StorageBuilding")
+                {
+                    if (buildCreated.tag == "Water")
+                    {
+                        gameManager.AddTreeLife(+buildCreated.GetComponent<BuildingCost>().getTier() * waterMultiplicator);
+                    }
+                    else
+                    {
+                        gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    }
+                }
+                else
+                {
+                    
+                }
+                
 
                 if (buildCreated.GetComponent<StartingConstruction>())
                 {
                     gameManager.AddHeroBuilding(buildCreated.GetComponent<StartingConstruction>());
-                }else if (buildCreated.GetComponent<FoodStorageBuilding>())
+                    heroBuilding = buildCreated.GetComponent<StartingConstruction>();
+                }
+                else if (buildCreated.GetComponent<FoodStorageBuilding>())
                 {
                     gameManager.AddFoodStorageBuilding(buildCreated.GetComponent<FoodStorageBuilding>());
+                    storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
                 }else if (buildCreated.GetComponent<ResourceStorageBuilding>())
                 {
                     gameManager.AddResourceStorageBuilding(buildCreated.GetComponent<ResourceStorageBuilding>());
+                    storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
+                }
+
+                if (!buildCreated.GetComponent<StartingConstruction>())
+                {
+                    gameManager.AddBuilding(buildCreated);
                 }
 
                 // If the sifht is down, continue 
@@ -909,8 +1477,17 @@ public class Buildings : MonoBehaviour
                     grid.setTilesActive(false);
                     shadow.SetActive(false);
                     T1HouseToPlace = null;
+                    T2HouseToPlace = null;
+                    T3HouseToPlace = null;
+                    T1WaterToPlace = null;
+                    T2WaterToPlace = null;
+                    T3WaterToPlace = null;
                     T1FoodToPlace = null;
+                    T2FoodToPlace = null;
+                    T3FoodToPlace = null;
                     T1PowerToPlace = null;
+                    T2PowerToPlace = null;
+                    T3PowerToPlace = null;
                     stoneMineToPlace = null;
                     crystalMineToPlace = null;
                     B_FoodStorageToPlace = null;
@@ -923,8 +1500,8 @@ public class Buildings : MonoBehaviour
 
     /********************************************************************************************************************************/
 
-    // Button event to create a building
-    public void createBuilding(GameObject building)
+    // Button event to create a T1House
+    public void createT1House(GameObject building)
     {
         if (initialPlaced)
         {
@@ -943,8 +1520,107 @@ public class Buildings : MonoBehaviour
         }
     }
 
-    //button event to create a farm
-    public void createFarm(GameObject farm)
+    // Button event to create a T2House
+    public void createT2House(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T2HouseToPlace = building;
+            isDeleting = false;
+            T2HouseShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T3House
+    public void createT3House(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T3HouseToPlace = building;
+            isDeleting = false;
+            T3HouseShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T1Water
+    public void createT1Water(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T1WaterToPlace = building;
+            isDeleting = false;
+            T1WaterShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T2Water
+    public void createT2Water(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T2WaterToPlace = building;
+            isDeleting = false;
+            T2WaterShadow.SetActive(true);
+        }
+    }
+
+    // Button event to create a T3Water
+    public void createT3Water(GameObject building)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T3WaterToPlace = building;
+            isDeleting = false;
+            T3WaterShadow.SetActive(true);
+        }
+    }
+    //button event to create T1Food
+    public void createT1Food(GameObject farm)
     {
         if (initialPlaced)
         {
@@ -964,8 +1640,50 @@ public class Buildings : MonoBehaviour
         
     }
 
-    //button event to create a battery
-    public void createBattery(GameObject battery)
+    //button event to create T2Food
+    public void createT2Food(GameObject farm)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T2FoodToPlace = farm;
+            isDeleting = false;
+            T2FoodShadow.SetActive(true);
+        }
+
+    }
+
+    //button event to create T3Food
+    public void createT3Food(GameObject farm)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T3FoodToPlace = farm;
+            isDeleting = false;
+            T3FoodShadow.SetActive(true);
+        }
+
+    }
+
+    //button event to create T1Power
+    public void createT1Power(GameObject battery)
     {
         if (initialPlaced)
         {
@@ -981,6 +1699,46 @@ public class Buildings : MonoBehaviour
             T1PowerToPlace = battery;
             isDeleting = false;
             T1PowerShadow.SetActive(true);
+        }
+    }
+
+    //button event to create T2Power
+    public void createT2Power(GameObject battery)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T2PowerToPlace = battery;
+            isDeleting = false;
+            T2PowerShadow.SetActive(true);
+        }
+    }
+
+    //button event to create T3Power
+    public void createT3Power(GameObject battery)
+    {
+        if (initialPlaced)
+        {
+            if (gameManager.GetTotalGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
+            gameManager.GetTotalFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
+            gameManager.GetTotalEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
+            gameManager.GetTotalStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
+            gameManager.GetTotalCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
+
+            grid.setTilesNearRoadActive(true);
+            customCursor.gameObject.SetActive(true);
+            Cursor.visible = false;
+            T3PowerToPlace = battery;
+            isDeleting = false;
+            T3PowerShadow.SetActive(true);
         }
     }
 
