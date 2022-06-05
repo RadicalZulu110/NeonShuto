@@ -74,12 +74,12 @@ MonoBehaviour:
   MinPop: 1
   ExpectedPop: 0
   timeBtwPopIncrease: 3
-  maxFood: 5000
-  maxStone: 5000
-  maxCrystal: 5000
-  storedFood: 2000
-  storedStone: 2000
-  storedCrystal: 2000
+  maxFood: 50000
+  maxStone: 50000
+  maxCrystal: 50000
+  storedFood: 20000
+  storedStone: 20000
+  storedCrystal: 20000
   foodPercentage: 0
   stonePercentage: 0
   crystalPercentage: 0
