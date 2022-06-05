@@ -92,8 +92,19 @@ public class MouseInputManager : InputManager
             OnZoomInput?.Invoke(3f);
         }
     }
-
+    /*
     public void SetOnPanel(bool p)
+    {
+        isOnPanel = p;
+    }
+    
+    private void OnMouseEnter(bool p)
+    {
+        isOnPanel = p;
+    }
+    */
+
+    public void derp (bool p)
     {
         isOnPanel = p;
     }
