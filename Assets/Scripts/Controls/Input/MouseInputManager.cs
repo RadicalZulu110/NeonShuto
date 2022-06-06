@@ -26,10 +26,10 @@ public class MouseInputManager : InputManager
         bool mouseValid = (mp.y <= screen.y * 1.05f && mp.y >= screen.y * -0.05f &&
                             mp.x <= screen.x * 1.05f && mp.x >= screen.x * -0.05f); // The mouse must to be near to the window
 
-        //if (!mouseValid) return;
+        if (!mouseValid) return;
 
         // Movement Near to the borders
-        Debug.Log(isOnPanel);
+        //Debug.Log(isOnPanel);
         if (!isOnPanel)
         {
             if (mp.y > screen.y * 0.95)
