@@ -128,12 +128,13 @@ public class Grid : MonoBehaviour
 	// Check which tiles are near to a road and update the tiles
 	public void checkTilesRoads()
     {
-		// Erase every near road
+		// Erase every near road and adyacent road
 		for (int i = 0; i < grid.GetLength(0); i++)
 		{
 			for (int j = 0; j < grid.GetLength(1); j++)
 			{
 				grid[i, j].GetComponent<Node>().setNearRoad(false);
+				grid[i, j].GetComponent<Node>().setAdyacentRoad(false);
 			}
 		}
 
@@ -227,6 +228,15 @@ public class Grid : MonoBehaviour
 			}
 		}
 	}
+
+	// Make the node blank again
+	public void ResetNodes(List<GameObject> n)
+    {
+		for(int i = 0; i < n.Count; i++)
+        {
+			n[i].GetComponent<Node>().ResetValues();
+        }	
+    }
 
 	// Make all tiles visible or invisible
 	public void setTilesActive(bool ac)

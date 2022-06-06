@@ -32,6 +32,7 @@ public class Buildings : MonoBehaviour
 
     public Button DeleteButton;
     public Color ActiveColor;
+    public Color InactiveColor;
 
     private StartingConstruction heroBuilding;
     private List<StorageBuilding> storageBuildings;
@@ -853,9 +854,17 @@ public class Buildings : MonoBehaviour
             }
         }
 
-        if(roadToPlace != null && actualNodeRoad != null && !Input.GetKey(KeyCode.Mouse0))
+        if(roadToPlace != null && (actualNodeRoad != null || firstNodeRoad != null) && !Input.GetKey(KeyCode.Mouse0))
         {
-            buildLineRoads(firstNodeRoad.GetComponent<Node>(), actualNodeRoad.GetComponent<Node>());
+            if(actualNodeRoad == null)
+            {
+                buildLineRoads(firstNodeRoad.GetComponent<Node>(), firstNodeRoad.GetComponent<Node>());
+            }
+            else
+            {
+                buildLineRoads(firstNodeRoad.GetComponent<Node>(), actualNodeRoad.GetComponent<Node>());
+            }
+            
             firstNodeRoad = null;
             actualNodeRoad = null;
             roadToPlace = null;
@@ -982,7 +991,8 @@ public class Buildings : MonoBehaviour
                             }
                             else
                             {
-                                grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
+                                //grid.setNodesUnoccupied(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>());
+                                grid.ResetNodes(grid.getNodes(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>()));
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
                                 heroBuilding.CheckAdyacentRoads();
@@ -1004,6 +1014,12 @@ public class Buildings : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            ColorBlock cb = DeleteButton.colors;
+            cb.normalColor = InactiveColor;
+            DeleteButton.colors = cb;
         }
 
     }
@@ -1183,6 +1199,16 @@ public class Buildings : MonoBehaviour
     // Build a line of roads betweem the first node and the last node
     private void buildLineRoads(Node firstNode, Node lastNode)
     {
+        if(firstNode == lastNode)
+        {
+            Instantiate(roadToPlace, firstNode.transform.position, roadShadow.transform.rotation);
+            buildingPlaceParticles.transform.position = firstNode.transform.position;
+            buildingPlaceParticles.Play();
+            firstNode.GetComponent<Node>().setOcupied(true);
+            firstNode.GetComponent<Node>().setRoad(true);
+            gameManager.BuyBuilding(roadToPlace.GetComponent<BuildingCost>());
+        }
+
         // First we have to know in which direction we are building
         float lineX = firstNode.transform.position.x - lastNode.transform.position.x;
         float lineZ = firstNode.transform.position.z - lastNode.transform.position.z;
