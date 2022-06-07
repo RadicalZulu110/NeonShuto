@@ -72,7 +72,7 @@ MonoBehaviour:
   MaintenanceEnergyCost: 25
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 3
+  timeBtwIncrease: 1
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 100
@@ -82,6 +82,7 @@ MonoBehaviour:
   PopIncrease: 0
   tier: 1
   gm: {fileID: 0}
+  T3TreeLife: 0
   recollecting: 0
   truckRecollecting: {fileID: 0}
   PersonalCrystalCapacity: 500

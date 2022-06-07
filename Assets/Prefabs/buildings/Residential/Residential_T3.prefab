@@ -47,8 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 0
-  FoodCost: 0
+  GoldCost: 150
+  FoodCost: 250
   EnergyCost: 0
   StoneCost: 0
   CrystalCost: 0
@@ -56,16 +56,16 @@ MonoBehaviour:
   MaintenanceGoldCost: 0
   MaintenanceFoodCost: 0
   MaintenanceEnergyCost: 0
-  MaintenanceStoneCost: 0
-  MaintenanceCrystalCost: 0
-  timeBtwIncrease: 3
+  MaintenanceStoneCost: 175
+  MaintenanceCrystalCost: 150
+  timeBtwIncrease: 1
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 0
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
-  PopIncrease: 0
+  PopIncrease: 25
   tier: 3
   gm: {fileID: 0}
   T3TreeLife: 15
