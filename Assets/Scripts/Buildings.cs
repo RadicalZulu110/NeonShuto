@@ -32,6 +32,7 @@ public class Buildings : MonoBehaviour
 
     public Button DeleteButton;
     public Color ActiveColor;
+    public Color InactiveColor;
 
     private StartingConstruction heroBuilding;
     private List<StorageBuilding> storageBuildings;
@@ -39,6 +40,7 @@ public class Buildings : MonoBehaviour
     public NavMeshSurface surface;
     private bool refreshNavMesh;
     public float polutionMultiplicator, waterMultiplicator;
+    GameObject  actualNodeRoad = null;
 
     // Start is called before the first frame update
     void Start()
@@ -765,7 +767,7 @@ public class Buildings : MonoBehaviour
 
 
         // Create road
-        if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && !Input.GetKey(KeyCode.LeftShift)) // Create single road
+        /*if (Input.GetKeyDown(KeyCode.Mouse0) && roadToPlace != null && !Input.GetKey(KeyCode.LeftShift)) // Create single road
         {
             nearNode = getNearestActiveNode(customCursor.gameObject);
 
@@ -834,14 +836,44 @@ public class Buildings : MonoBehaviour
             firstNodeRoad = nearNode;
             grid.setTilesLineRoadVisible(firstNodeRoad.GetComponent<Node>());
             updateRoadsJunction();
+        }*/
+
+
+
+        if(roadToPlace != null && Input.GetKey(KeyCode.Mouse0))
+        {
+            if(firstNodeRoad == null)
+            {
+                firstNodeRoad = getNearestActiveNode(customCursor.gameObject);
+            }
+            else
+            {
+                grid.setTilesLineRoadVisible(firstNodeRoad.GetComponent<Node>());
+                actualNodeRoad = getNearestActiveNode(customCursor.gameObject);
+                grid.MakeNodesHL(grid.GetNodesAvailableBetween(firstNodeRoad.GetComponent<Node>(), actualNodeRoad.GetComponent<Node>()));
+            }
         }
 
-        
+        if(roadToPlace != null && actualNodeRoad != null && !Input.GetKey(KeyCode.Mouse0))
+        {
+            buildLineRoads(firstNodeRoad.GetComponent<Node>(), actualNodeRoad.GetComponent<Node>());
+            firstNodeRoad = null;
+            actualNodeRoad = null;
+            roadToPlace = null;
+            buildingPlaceSound.Play();
+            customCursor.gameObject.SetActive(false);
+            Cursor.visible = true;
+            grid.setTilesActive(false);
+            grid.checkTilesRoads();
+            roadShadow.SetActive(false);
+            updateRoadsJunction();
+            surface.BuildNavMesh();
+        }
 
-        
+
 
         // Delete building or road
-        if(selectedObjectToDelete != null)
+        if (selectedObjectToDelete != null)
         {
             selectedObjectToDelete.GetComponentInChildren<Renderer>().materials = originalMaterial;
             selectedObjectToDelete = null;
@@ -851,6 +883,7 @@ public class Buildings : MonoBehaviour
         {
             ColorBlock cb = DeleteButton.colors;
             cb.normalColor = ActiveColor;
+            cb.selectedColor = ActiveColor;
             DeleteButton.colors = cb;
             // set button color here 
 
@@ -973,6 +1006,13 @@ public class Buildings : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+        {
+            ColorBlock cb = DeleteButton.colors;
+            cb.normalColor = InactiveColor;
+            cb.selectedColor = InactiveColor;
+            DeleteButton.colors = cb;
         }
 
     }
@@ -1158,7 +1198,7 @@ public class Buildings : MonoBehaviour
 
         if (lineX < 0)   // Build to the right
         {
-            for (int i = firstNode.getPosX() + 1; i < lastNode.getPosX(); i++)
+            for (int i = firstNode.getPosX(); i <= lastNode.getPosX(); i++)
             {
                 GameObject tileToBuild = grid.getTile(i, firstNode.getPosY());
                 Instantiate(roadToPlace, tileToBuild.transform.position, roadShadow.transform.rotation);
@@ -1171,7 +1211,7 @@ public class Buildings : MonoBehaviour
         }
         else if (lineX > 0) // Build to the left
         {
-            for (int i = lastNode.getPosX() + 1; i < firstNode.getPosX(); i++)
+            for (int i = lastNode.getPosX(); i <= firstNode.getPosX(); i++)
             {
                 GameObject tileToBuild = grid.getTile(i, firstNode.getPosY());
                 Instantiate(roadToPlace, tileToBuild.transform.position, roadShadow.transform.rotation);
@@ -1184,7 +1224,7 @@ public class Buildings : MonoBehaviour
         }
         else if (lineZ < 0) // Build up
         {
-            for (int i = firstNode.getPosY() + 1; i < lastNode.getPosY(); i++)
+            for (int i = firstNode.getPosY(); i <= lastNode.getPosY(); i++)
             {
                 GameObject tileToBuild = grid.getTile(firstNode.getPosX(), i);
                 Instantiate(roadToPlace, tileToBuild.transform.position, roadShadow.transform.rotation);
@@ -1197,7 +1237,7 @@ public class Buildings : MonoBehaviour
         }
         else if (lineZ > 0) // Build down
         {
-            for (int i = lastNode.getPosY() + 1; i < firstNode.getPosY(); i++)
+            for (int i = lastNode.getPosY(); i <= firstNode.getPosY(); i++)
             {
                 GameObject tileToBuild = grid.getTile(firstNode.getPosX(), i);
                 Instantiate(roadToPlace, tileToBuild.transform.position, roadShadow.transform.rotation);

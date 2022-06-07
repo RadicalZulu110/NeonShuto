@@ -644,6 +644,86 @@ public class Grid : MonoBehaviour
 
 		return true;
     }
+
+	// Get the nodes available between one node and another
+	public List<GameObject> GetNodesAvailableBetween(Node node1, Node node2)
+    {
+		List<GameObject> res = new List<GameObject>();
+		res.Add(node1.gameObject);
+
+		if (node1 == node2)
+			return res;
+
+		int xDifference = node1.getPosX() - node2.getPosX();
+		int yDifference = node1.getPosY() - node2.getPosY();
+
+		// We are going to roight or left
+		if(Mathf.Abs(xDifference) > Mathf.Abs(yDifference))
+        {
+			if(xDifference > 0)		// Left
+            {
+				for(int i = 1; i <= Mathf.Abs(xDifference); i++)
+                {
+					if(grid[node1.getPosX()-i, node1.getPosY()].GetComponent<Node>().isOcupied())
+                    {
+						return res;
+                    }
+                    else
+                    {
+						res.Add(grid[node1.getPosX() - i, node1.getPosY()]);
+                    }
+                }
+            }
+            else  // Right
+            {
+				for (int i = 1; i <= Mathf.Abs(xDifference); i++)
+				{
+					if (grid[node1.getPosX() + i, node1.getPosY()].GetComponent<Node>().isOcupied())
+					{
+						return res;
+					}
+					else
+					{
+						res.Add(grid[node1.getPosX() + i, node1.getPosY()]);
+					}
+				}
+			}
+        }
+        else    // We are going up or down
+        {
+			if (yDifference > 0)        // Down
+			{
+				for (int i = 1; i <= Mathf.Abs(yDifference); i++)
+				{
+					if (grid[node1.getPosX(), node1.getPosY() - i].GetComponent<Node>().isOcupied())
+					{
+						return res;
+					}
+					else
+					{
+						res.Add(grid[node1.getPosX(), node1.getPosY() - i]);
+					}
+				}
+			}
+			else  // Up
+			{
+				for (int i = 1; i <= Mathf.Abs(yDifference); i++)
+				{
+					if (grid[node1.getPosX(), node1.getPosY() + i].GetComponent<Node>().isOcupied())
+					{
+						return res;
+					}
+					else
+					{
+						res.Add(grid[node1.getPosX(), node1.getPosY() + i]);
+					}
+				}
+			}
+		}
+
+		return res;
+        
+    }
 }
 
 
