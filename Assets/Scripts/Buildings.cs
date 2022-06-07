@@ -891,6 +891,7 @@ public class Buildings : MonoBehaviour
         {
             ColorBlock cb = DeleteButton.colors;
             cb.normalColor = ActiveColor;
+            cb.selectedColor = ActiveColor;
             DeleteButton.colors = cb;
             // set button color here 
 
@@ -1019,6 +1020,7 @@ public class Buildings : MonoBehaviour
         {
             ColorBlock cb = DeleteButton.colors;
             cb.normalColor = InactiveColor;
+            cb.selectedColor = InactiveColor;
             DeleteButton.colors = cb;
         }
 
