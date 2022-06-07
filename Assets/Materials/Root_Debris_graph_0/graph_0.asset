@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed5864476f84ce4b85454db09ca4eaa, type: 3}
+  m_Name: graph_0
+  m_EditorClassIdentifier: 
+  AssetPath: Assets/Materials/Root_Debris.sbsar
+  OutputPath: Assets/Materials/Root_Debris_graph_0
+  RawData: {fileID: -244192453324840774, guid: fdd4d6906ba73a4468fc2b689528d2c2, type: 3}
+  Graph:
+    Index: 0
+    Owner: {fileID: 11400000}
+    Input:
+    - id: 0
+    - id: 1
+    Output:
+    - Index: 0
+      VirtualOutputIndex: 9
+      GraphIndex: 0
+      Description:
+        Identifier: basecolor
+        Label: basecolor
+        Index: 0
+        Type: 8
+        Channel: baseColor
+      OutputTexture: {fileID: 2800000, guid: 92054942d950b964f9e831e17ec1bacd, type: 3}
+      sRGB: 1
+      IsVirtual: 0
+      IsStandardOutput: 1
+      IsAlphaAssignable: 1
+      AlphaChannel: Opacity
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 1
+      VirtualOutputIndex: 10
+      GraphIndex: 0
+      Description:
+        Identifier: normal
+        Label: normal
+        Index: 1
+        Type: 8
+        Channel: normal
+      OutputTexture: {fileID: 2800000, guid: 4f9f443e8311f4542af76ab72b16fdfd, type: 3}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 1
+      IsAlphaAssignable: 0
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 2
+      VirtualOutputIndex: 11
+      GraphIndex: 0
+      Description:
+        Identifier: roughness
+        Label: roughness
+        Index: 2
+        Type: 8
+        Channel: roughness
+      OutputTexture: {fileID: 0}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 0
+      IsAlphaAssignable: 1
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 3
+      VirtualOutputIndex: 12
+      GraphIndex: 0
+      Description:
+        Identifier: metallic
+        Label: metallic
+        Index: 3
+        Type: 8
+        Channel: metallic
+      OutputTexture: {fileID: 0}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 0
+      IsAlphaAssignable: 1
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 4
+      VirtualOutputIndex: 13
+      GraphIndex: 0
+      Description:
+        Identifier: height
+        Label: height
+        Index: 4
+        Type: 8
+        Channel: height
+      OutputTexture: {fileID: 2800000, guid: 6e2873febf0415d4884bda036f9bfb81, type: 3}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 1
+      IsAlphaAssignable: 1
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 5
+      VirtualOutputIndex: 14
+      GraphIndex: 0
+      Description:
+        Identifier: ambientocclusion
+        Label: ambientocclusion
+        Index: 5
+        Type: 8
+        Channel: ambientOcclusion
+      OutputTexture: {fileID: 0}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 0
+      IsAlphaAssignable: 1
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 6
+      VirtualOutputIndex: 15
+      GraphIndex: 0
+      Description:
+        Identifier: Opacity
+        Label: Opacity
+        Index: 6
+        Type: 8
+        Channel: opacity
+      OutputTexture: {fileID: 0}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 0
+      IsAlphaAssignable: 1
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 7
+      VirtualOutputIndex: 16
+      GraphIndex: 0
+      Description:
+        Identifier: Emission
+        Label: Emission
+        Index: 7
+        Type: 8
+        Channel: emissive
+      OutputTexture: {fileID: 2800000, guid: 3aefc1fd44fb5314a91acb357bd8d3ce, type: 3}
+      sRGB: 0
+      IsVirtual: 0
+      IsStandardOutput: 1
+      IsAlphaAssignable: 1
+      AlphaChannel: Emission
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 0
+    - Index: 8
+      VirtualOutputIndex: 8
+      GraphIndex: 0
+      Description:
+        Identifier: mask
+        Label: mask
+        Index: 8
+        Type: 8
+        Channel: mask
+      OutputTexture: {fileID: 2800000, guid: 5ec910c66abf5b241b03c817d2cfaf08, type: 3}
+      sRGB: 0
+      IsVirtual: 1
+      IsStandardOutput: 1
+      IsAlphaAssignable: 0
+      AlphaChannel: 
+      InvertAssignedAlpha: 0
+      BGRATexture: 0
+      Flags: 4
+    RenderTextures: 0
+    OutputRemaped: 0
+    Thumbnail: 
+    HasThumbnail: 0
+    OutputMaterial: {fileID: 2100000, guid: 8e9352c631f44574693f1991048c6359, type: 2}
+    MaterialShader: HDRP/Lit
+    GenerateAllOutputs: 0
+    GenerateAllMipmaps: 0
+    DefaultPreset: " <sbspreset pkgurl=\"pkg://Root_Debris\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"2859638378\" type=\"8\" value=\"10,10\" />\n
+      </sbspreset>\n"
+    CurrentStatePreset: " <sbspreset pkgurl=\"pkg://Root_Debris\" label=\"\" >\n 
+      <presetinput identifier=\"$outputsize\" uid=\"2859638378\" type=\"8\" value=\"10,10\"
+      />\n </sbspreset>\n"
+    IsRuntimeOnly: 0
+  RefreshMaterial: 1
+  Name: graph_0
+  IsRoot: 1
+  FlagedForDelete: 0
+  GUID: 3da3e4dc-8bef-42c9-88be-9a626266aa93
+  references:
+    version: 1
+    00000000:
+      type: {class: SubstanceInputInt2, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        _Description:
+          Identifier: $outputsize
+          Label: $outputsize
+          GuiGroup: 
+          GuiDescription: 
+          GuiVisibleIf: 
+          Index: 0
+          Type: 5
+          WidgetType: 0
+        _Index: 0
+        _GraphID: 0
+        _Data: {x: 10, y: 10}
+        _isVisible: 1
+        _NumericalDescription:
+          _DefaultValue: {x: 8, y: 8}
+          _MinValue: {x: 0, y: 0}
+          _MaxValue: {x: 1, y: 1}
+          _SliderClamp: 0
+          _EnumValueCount: 0
+          _EnumValues: []
+        _HasChanged: 0
+    00000001:
+      type: {class: SubstanceInputInt, ns: Adobe.Substance.Input, asm: Adobe.Substance}
+      data:
+        _Description:
+          Identifier: $randomseed
+          Label: $randomseed
+          GuiGroup: 
+          GuiDescription: 
+          GuiVisibleIf: 
+          Index: 1
+          Type: 4
+          WidgetType: 0
+        _Index: 1
+        _Data: 0
+        _isVisible: 1
+        _GraphID: 0
+        _NumericalDescription:
+          _DefaultValue: 0
+          _MinValue: 0
+          _MaxValue: 1
+          _SliderStep: 0.01
+          _SliderClamp: 0
+          _LabelFalse: 
+          _LabelTrue: 
+          _EnumValueCount: 0
+          _EnumValues: []
+        _HasChanged: 0
