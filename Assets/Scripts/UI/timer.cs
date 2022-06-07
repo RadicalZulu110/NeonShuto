@@ -20,13 +20,13 @@ public class timer : MonoBehaviour
     {
 
         seconds += Time.deltaTime * timeMod;
-
+        //sec = tick
         if (seconds >= 60)
         {
             min += (int)(seconds / 60);
             seconds %= 60;
         }
-
+        //min = cycle
         if (min >= 60)
         {
             hour += min / 60;

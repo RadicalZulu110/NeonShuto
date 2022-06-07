@@ -125,4 +125,14 @@ public class Node : MonoBehaviour
 		crystal = c;
     }
 
+	public void ResetValues()
+    {
+		ocupied = false;
+		nearRoad = false;
+		road = false;
+		initial = false;
+		adyacentRoad = false;
+		stone = false;
+		crystal = false;
+	}
 }

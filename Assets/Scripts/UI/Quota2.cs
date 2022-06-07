@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Quota2 : MonoBehaviour
     private List<ResourceStorageBuilding> resourceStorageBuildings;
     private BuildingCost building;
 
-    public int secondQuota;
+    public int minQuota, maxQuota;
 
     public int timeLimit;
 
@@ -19,6 +20,8 @@ public class Quota2 : MonoBehaviour
     public Text foodQuotaDisplay;
     public Text stoneQuotaDisplay;
     public Text crystalQuotaDisplay;
+
+	public int goldQuota, foodQuota, stoneQuota, crystalQuota;
 
     public GameManager gameManager;
     public timer timer;
@@ -31,7 +34,9 @@ public class Quota2 : MonoBehaviour
     {
         foodStorageBuildings = new List<FoodStorageBuilding>();
         resourceStorageBuildings = new List<ResourceStorageBuilding>();
+		GenerateQuotas();
     }
+
 
     void Update()
     {
@@ -40,10 +45,10 @@ public class Quota2 : MonoBehaviour
             heroBuilding = GameObject.FindGameObjectWithTag("HeroBuilding").GetComponent<StartingConstruction>();
         }
 
-        goldQuotaDisplay.text = gameManager.TotalGold.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
-        foodQuotaDisplay.text = gameManager.TotalFood.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
-        stoneQuotaDisplay.text = gameManager.TotalStone.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
-        crystalQuotaDisplay.text = gameManager.TotalCrystal.ToString() + "/" + "(" + (secondQuota).ToString() + ")";
+        goldQuotaDisplay.text = gameManager.TotalGold.ToString() + "/" + "(" + (goldQuota).ToString() + ")";
+        foodQuotaDisplay.text = gameManager.TotalFood.ToString() + "/" + "(" + (foodQuota).ToString() + ")";
+        stoneQuotaDisplay.text = gameManager.TotalStone.ToString() + "/" + "(" + (stoneQuota).ToString() + ")";
+        crystalQuotaDisplay.text = gameManager.TotalCrystal.ToString() + "/" + "(" + (crystalQuota).ToString() + ")";
 
         if (timer.hour >= timeLimit)
         {
@@ -54,7 +59,7 @@ public class Quota2 : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (gameManager.TotalGold >= secondQuota && gameManager.TotalFood >= secondQuota && gameManager.TotalStone >= secondQuota && gameManager.TotalCrystal >= secondQuota)
+        if (gameManager.TotalGold >= goldQuota && gameManager.TotalFood >= foodQuota && gameManager.TotalStone >= stoneQuota && gameManager.TotalCrystal >= crystalQuota)
         {
 			// FOOD CRYSTAL AND STONE
 			float percent = 0;
@@ -63,18 +68,18 @@ public class Quota2 : MonoBehaviour
 
 			if (heroBuilding)
 			{
-				if (gameManager.TotalFood >= secondQuota)
+				if (gameManager.TotalFood >= foodQuota)
 				{
 					// Get the food storage with more percentage
 					percent = heroBuilding.GetFoodPercentage();
 					foodStorBuild = getMaxFoodStoragePercetnage();
 					if (foodStorBuild && foodStorBuild.GetFoodPercentage() > percent)
 					{
-						foodStorBuild.addFood(-secondQuota);
+						foodStorBuild.addFood(-foodQuota);
 					}
 					else
 					{
-						heroBuilding.addFood(-secondQuota);
+						heroBuilding.addFood(-foodQuota);
 					}
 
 					percent = 0;
@@ -82,18 +87,18 @@ public class Quota2 : MonoBehaviour
 				}
 
 
-				if (gameManager.TotalStone >= secondQuota)
+				if (gameManager.TotalStone >= stoneQuota)
 				{
 					// Get the stone storage with more percentage
 					percent = heroBuilding.GetStonePercentage();
 					resoStorBuild = getMaxStoneStoragePercetnage();
 					if (resoStorBuild && resoStorBuild.GetStonePercentage() > percent)
 					{
-						resoStorBuild.addStone(-secondQuota);
+						resoStorBuild.addStone(-stoneQuota);
 					}
 					else
 					{
-						heroBuilding.addStone(-secondQuota);
+						heroBuilding.addStone(-stoneQuota);
 					}
 
 					percent = 0;
@@ -101,18 +106,18 @@ public class Quota2 : MonoBehaviour
 				}
 
 
-				if (gameManager.TotalCrystal >= secondQuota)
+				if (gameManager.TotalCrystal >= crystalQuota)
 				{
 					// Get the crystal storage with more percentage
 					percent = heroBuilding.GetCrystalPercentage();
 					resoStorBuild = getMaxCrystalStoragePercetnage();
 					if (resoStorBuild && resoStorBuild.GetCrystalPercentage() > percent)
 					{
-						resoStorBuild.addCrystal(-secondQuota);
+						resoStorBuild.addCrystal(-crystalQuota);
 					}
 					else
 					{
-						heroBuilding.addCrystal(-secondQuota);
+						heroBuilding.addCrystal(-crystalQuota);
 					}
 
 					percent = 0;
@@ -121,7 +126,7 @@ public class Quota2 : MonoBehaviour
 
 			}
 
-			gameManager.TotalGold -= secondQuota;
+			gameManager.TotalGold -= goldQuota;
             //gameManager.TotalFood -= secondQuota;
             //gameManager.TotalStone -= secondQuota;
             //gameManager.TotalCrystal -= secondQuota;
@@ -207,5 +212,14 @@ public class Quota2 : MonoBehaviour
 		}
 
 		return maxObject;
+	}
+
+
+	private void GenerateQuotas()
+	{
+		goldQuota = UnityEngine.Random.Range(minQuota, maxQuota);
+		foodQuota = UnityEngine.Random.Range(minQuota, maxQuota);
+		stoneQuota = UnityEngine.Random.Range(minQuota, maxQuota);
+		crystalQuota = UnityEngine.Random.Range(minQuota, maxQuota);
 	}
 }
