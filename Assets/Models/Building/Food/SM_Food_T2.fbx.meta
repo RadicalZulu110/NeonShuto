@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: c5a80b4559d9e9640b3cc20e45d31b8d
+guid: 0f9c8fd1b2bf3504da3254805b7ba227
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -5696925327283780397
+    second: _anim
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -36,7 +39,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
