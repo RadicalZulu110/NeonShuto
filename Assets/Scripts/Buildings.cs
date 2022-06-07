@@ -36,6 +36,9 @@ public class Buildings : MonoBehaviour
 
     private StartingConstruction heroBuilding;
     private List<StorageBuilding> storageBuildings;
+    private List<FoodBuilding> foodBuildings;
+    private List<StoneMiner> stoneMinerBuildings;
+    private List<CrystalMiner> crystalMinerBuildings;
 
     public NavMeshSurface surface;
     private bool refreshNavMesh;
@@ -47,6 +50,9 @@ public class Buildings : MonoBehaviour
     {
         isDeleting = false;
         storageBuildings = new List<StorageBuilding>();
+        foodBuildings = new List<FoodBuilding>();
+        stoneMinerBuildings = new List<StoneMiner>();
+        crystalMinerBuildings = new List<CrystalMiner>();
         firstRoadPlaced = false;
         initialPlaced = false;
         getShadowMaterials();
@@ -936,14 +942,16 @@ public class Buildings : MonoBehaviour
                                 if (selectedObjectToDelete.GetComponent<FoodBuilding>())
                                 {
                                     gameManager.deleteFarm(selectedObjectToDelete);
+                                    foodBuildings.Remove(selectedObjectToDelete.GetComponent<FoodBuilding>());
                                 }
                                 else if (selectedObjectToDelete.GetComponent<StoneMiner>())
                                 {
                                     gameManager.deleteStoneMiner(selectedObjectToDelete);
+                                    stoneMinerBuildings.Remove(selectedObjectToDelete.GetComponent<StoneMiner>());
                                 }
                                 else if (selectedObjectToDelete.GetComponent<CrystalMiner>())
                                 {
-                                    gameManager.deleteCrystalMiner(selectedObjectToDelete);
+                                    crystalMinerBuildings.Remove(selectedObjectToDelete.GetComponent<CrystalMiner>());
                                 }
 
                                 
@@ -996,11 +1004,27 @@ public class Buildings : MonoBehaviour
                                 grid.ResetNodes(grid.getNodes(selectedObjectToDelete.GetComponent<BuildingCost>().getGridWidth(), selectedObjectToDelete.GetComponent<BuildingCost>().getGridHeight(), grid.getTile(selectedObjectToDelete.transform.position).GetComponent<Node>()));
                                 grid.checkTilesRoads();
                                 updateRoadsJunction();
-                                heroBuilding.CheckAdyacentRoads();
-                                for(int i=0; i<storageBuildings.Count; i++)
+                                heroBuilding.RemoveRoad(selectedObjectToDelete);
+                                for (int i = 0; i < storageBuildings.Count; i++)
                                 {
-                                    storageBuildings[i].CheckAdyacentRoads();
+                                    storageBuildings[i].RemoveRoad(selectedObjectToDelete);
                                 }
+
+                                for (int i = 0; i < foodBuildings.Count; i++)
+                                {
+                                    foodBuildings[i].RemoveRoad(selectedObjectToDelete);
+                                }
+
+                                for (int i = 0; i < stoneMinerBuildings.Count; i++)
+                                {
+                                    stoneMinerBuildings[i].RemoveRoad(selectedObjectToDelete);
+                                }
+
+                                for (int i = 0; i < crystalMinerBuildings.Count; i++)
+                                {
+                                    crystalMinerBuildings[i].RemoveRoad(selectedObjectToDelete);
+                                }
+
                                 refreshNavMesh = true;
                             }
 
@@ -1110,6 +1134,19 @@ public class Buildings : MonoBehaviour
             for (int i = 0; i < storageBuildings.Count; i++)
             {
                 storageBuildings[i].CheckAdyacentRoads();
+            }
+            for (int i = 0; i < foodBuildings.Count; i++)
+            {
+                foodBuildings[i].CheckAdyacentRoads();
+            }
+            for (int i = 0; i < stoneMinerBuildings.Count; i++)
+            {
+                stoneMinerBuildings[i].RemoveRoad(selectedObjectToDelete);
+            }
+
+            for (int i = 0; i < crystalMinerBuildings.Count; i++)
+            {
+                crystalMinerBuildings[i].RemoveRoad(selectedObjectToDelete);
             }
             refreshNavMesh = true;
         }
@@ -1393,6 +1430,7 @@ public class Buildings : MonoBehaviour
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
                     gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    stoneMinerBuildings.Add(buildCreated.GetComponent<StoneMiner>());
 
                     // If the sifht is down, continue 
                     if (!Input.GetKey(KeyCode.LeftShift))
@@ -1443,6 +1481,7 @@ public class Buildings : MonoBehaviour
 
                     gameManager.BuyBuilding(building.GetComponent<BuildingCost>());
                     gameManager.AddTreeLife(-buildCreated.GetComponent<BuildingCost>().getTier() * polutionMultiplicator);
+                    crystalMinerBuildings.Add(buildCreated.GetComponent<CrystalMiner>());
 
                     // If the sifht is down, continue 
                     if (!Input.GetKey(KeyCode.LeftShift))
@@ -1522,6 +1561,9 @@ public class Buildings : MonoBehaviour
                 {
                     gameManager.AddResourceStorageBuilding(buildCreated.GetComponent<ResourceStorageBuilding>());
                     storageBuildings.Add(buildCreated.GetComponent<StorageBuilding>());
+                }else if (buildCreated.GetComponent<FoodBuilding>())
+                {
+                    foodBuildings.Add(buildCreated.GetComponent<FoodBuilding>());
                 }
 
                 if (!buildCreated.GetComponent<StartingConstruction>())
