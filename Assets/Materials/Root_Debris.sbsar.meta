@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: fdd4d6906ba73a4468fc2b689528d2c2
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: a92413d4804d23a4d866a71e930d8a64, type: 2}
+  _assetPath: Assets/Materials/Root_Debris.sbsar

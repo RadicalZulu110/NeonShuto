@@ -31,6 +31,8 @@ public class BuildingCost : MonoBehaviour
     public int GoldIncreasePerPerson;
     public int PopIncrease;
 
+    public float speedAnimation, amountAnimation;
+
     public int tier;
 
     public GameManager gm;
@@ -51,7 +53,7 @@ public class BuildingCost : MonoBehaviour
 
     private void Update()
     {
-        
+        transform.position = new Vector3(transform.position.x + Mathf.Sin(Time.time * speedAnimation) * amountAnimation, transform.position.y + Mathf.Sin(Time.time * speedAnimation) * amountAnimation, transform.position.z + Mathf.Sin(Time.time * speedAnimation) * amountAnimation);
     }
     
     public void RotateBuilding()
@@ -106,4 +108,5 @@ public class BuildingCost : MonoBehaviour
     {
         return tier;
     }
+
 }
