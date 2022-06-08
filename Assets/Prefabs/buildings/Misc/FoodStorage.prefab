@@ -61,9 +61,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 300
+  GoldCost: 250
   FoodCost: 0
-  EnergyCost: 0
+  EnergyCost: 50
   StoneCost: 0
   CrystalCost: 0
   PopCost: 0
@@ -88,9 +88,7 @@ MonoBehaviour:
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
   trucksAvailable: []
   trucksNoAvailable: []
-  currentBuilding: {fileID: 0}
-  currentTruck: {fileID: 0}
-  maxFood: 1000
+  maxFood: 2500
   storedFood: 0
   foodPercentage: 0
 --- !u!135 &-212300576196665198

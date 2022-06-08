@@ -61,26 +61,27 @@ MonoBehaviour:
   width: 4
   height: 4
   GoldCost: 0
-  FoodCost: 0
-  EnergyCost: 0
-  StoneCost: 0
+  FoodCost: 150
+  EnergyCost: 75
+  StoneCost: 150
   CrystalCost: 0
   PopCost: 0
   MaintenanceGoldCost: 0
-  MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 0
-  MaintenanceStoneCost: 0
+  MaintenanceFoodCost: 75
+  MaintenanceEnergyCost: 90
+  MaintenanceStoneCost: 10
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 0
+  timeBtwIncrease: 1
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 0
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
-  PopIncrease: 0
+  PopIncrease: 15
   tier: 2
   gm: {fileID: 0}
+  T3TreeLife: 0
 --- !u!1001 &3240094668181614846
 PrefabInstance:
   m_ObjectHideFlags: 0
