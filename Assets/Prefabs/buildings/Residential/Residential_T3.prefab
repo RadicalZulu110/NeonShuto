@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7609353672636245376}
   - component: {fileID: 2560117196053808460}
   - component: {fileID: 3584946951573113311}
-  - component: {fileID: 2311063122219063866}
   m_Layer: 0
   m_Name: Residential_T3
   m_TagString: PopulationBuilding
@@ -85,22 +84,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.058899, y: 8.071838, z: 5.289951}
   m_Center: {x: -0.13851929, y: 3.5359192, z: 0.120740175}
---- !u!111 &2311063122219063866
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6878121432869353196}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 8fd187792cb52994fad4fb220ca96d27, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 8fd187792cb52994fad4fb220ca96d27, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1001 &2693568777298747504
 PrefabInstance:
   m_ObjectHideFlags: 0
