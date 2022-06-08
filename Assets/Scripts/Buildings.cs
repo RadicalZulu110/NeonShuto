@@ -882,6 +882,7 @@ public class Buildings : MonoBehaviour
             roadShadow.SetActive(false);
             updateRoadsJunction();
             surface.BuildNavMesh();
+            refreshNavMesh = true;
         }
 
 
