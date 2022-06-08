@@ -28,6 +28,8 @@ public class StorageBuilding : BuildingCost
             truck.GetComponent<Truck>().setStorageBuilding(this.gameObject);
             trucksAvailable.Add(truck);
         }
+
+        noRoadAccessIcon = transform.Find("NoRoadAccess").gameObject;
     }
 
     // Update is called once per frame
@@ -37,6 +39,15 @@ public class StorageBuilding : BuildingCost
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.AddTreeLife(-T3TreeLife);
+        }
+
+        if (roadsToSpawn.Count == 0)
+        {
+            noRoadAccessIcon.SetActive(true);
+        }
+        else
+        {
+            noRoadAccessIcon.SetActive(false);
         }
     }
 
@@ -58,6 +69,19 @@ public class StorageBuilding : BuildingCost
             {
                 roadsToSpawn.RemoveAt(i);
                 i--;
+            }
+        }
+    }
+
+    // Remove a road from the adyacent roads
+    public void RemoveRoad(GameObject road)
+    {
+        for (int i = 0; i < roadsToSpawn.Count; i++)
+        {
+            if (roadsToSpawn[i] == road)
+            {
+                roadsToSpawn.RemoveAt(i);
+                break;
             }
         }
     }
