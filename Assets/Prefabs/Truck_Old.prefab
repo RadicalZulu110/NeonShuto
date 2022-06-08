@@ -87,6 +87,9 @@ MonoBehaviour:
   agent: {fileID: 7502551073737281037}
   capacity: 0
   maxCapacity: 100
+  lastDistance: 0
+  nextIncreaseTime: 0
+  timeBtwIncrease: 3
 --- !u!54 &-5126402542986078320
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -11,7 +11,9 @@ public class Truck : MonoBehaviour
     private GameObject  storageBuilding;
     private bool comingBack, food, stone, crystal;
     private GameManager gameManager;
-    private float lastDistance;
+    public float lastDistance;
+    public float nextIncreaseTime; 
+    public float timeBtwIncrease;
 
     // Start is called before the first frame update
     void Start()
@@ -28,14 +30,20 @@ public class Truck : MonoBehaviour
         if (storageBuilding == null)
             MakeAvailable();
 
-        // If it is not moving, reset the truck
-        if(this.gameObject.activeInHierarchy && lastDistance == agent.remainingDistance)
-        {
-            MakeAvailable();
-        }
 
-        if(this.gameObject.activeInHierarchy)
-            lastDistance = agent.remainingDistance;
+        if (Time.time > nextIncreaseTime)
+        {
+            nextIncreaseTime = Time.time + timeBtwIncrease;
+            // If it is not moving, reset the truck
+            if (this.gameObject.activeInHierarchy && lastDistance == GetPathRemainingDistance())
+            {
+                MakeAvailable();
+            }
+
+            if (this.gameObject.activeInHierarchy)
+                lastDistance = GetPathRemainingDistance();
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -200,5 +208,21 @@ public class Truck : MonoBehaviour
         this.gameObject.SetActive(false);
         comingBack = false;
         capacity = 0;
+    }
+
+    private float GetPathRemainingDistance()
+    {
+        if (agent.pathPending ||
+            agent.pathStatus == NavMeshPathStatus.PathInvalid ||
+            agent.path.corners.Length == 0)
+            return -1f;
+
+        float distance = 0.0f;
+        for (int i = 0; i < agent.path.corners.Length - 1; ++i)
+        {
+            distance += Vector3.Distance(agent.path.corners[i], agent.path.corners[i + 1]);
+        }
+
+        return distance;
     }
 }
