@@ -41,6 +41,8 @@ public class BuildingCost : MonoBehaviour
 
     private List<GameObject> nodes;
 
+    protected GameObject noRoadAccessIcon;
+
     private void Awake()
     {
         gm = FindObjectOfType<GameManager>();
@@ -49,6 +51,8 @@ public class BuildingCost : MonoBehaviour
 
     private void Start()
     {
+       
+        
     }
 
     private void Update()

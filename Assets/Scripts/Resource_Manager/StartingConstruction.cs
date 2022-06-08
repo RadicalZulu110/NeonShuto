@@ -47,6 +47,8 @@ public class StartingConstruction : BuildingCost
             truck.GetComponent<Truck>().setStorageBuilding(this.gameObject);
             trucksAvailable.Add(truck);
         }
+
+        noRoadAccessIcon = transform.Find("NoRoadAccess").gameObject;
     }
 
     void Update()
@@ -59,6 +61,16 @@ public class StartingConstruction : BuildingCost
             gm.AddTotalPop(ExpectedPop);
             gm.goldIncome = gm.TotalPop * GoldIncreasePerPerson;
             gm.TotalGold += gm.goldIncome;
+        }
+
+
+        if(roadsToSpawn.Count == 0)
+        {
+            noRoadAccessIcon.SetActive(true);
+        }
+        else
+        {
+            noRoadAccessIcon.SetActive(false);
         }
 
         // If there is a truck available
@@ -122,6 +134,19 @@ public class StartingConstruction : BuildingCost
             {
                 roadsToSpawn.RemoveAt(i);
                 i--;
+            }
+        }
+    }
+
+    // Remove a road from the adyacent roads
+    public void RemoveRoad(GameObject road)
+    {
+        for(int i = 0; i < roadsToSpawn.Count; i++)
+        {
+            if (roadsToSpawn[i] == road)
+            {
+                roadsToSpawn.RemoveAt(i);
+                break;
             }
         }
     }

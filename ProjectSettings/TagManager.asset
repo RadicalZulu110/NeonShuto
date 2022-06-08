@@ -18,6 +18,7 @@ TagManager:
   - Light
   - Water
   - RootAttack
+  - NoRoadAccess
   layers:
   - Default
   - TransparentFX
