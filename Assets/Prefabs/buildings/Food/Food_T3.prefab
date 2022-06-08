@@ -49,23 +49,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 0
+  GoldCost: 250
   FoodCost: 0
-  EnergyCost: 0
-  StoneCost: 0
-  CrystalCost: 0
+  EnergyCost: 250
+  StoneCost: 125
+  CrystalCost: 100
   PopCost: 0
-  MaintenanceGoldCost: 0
+  MaintenanceGoldCost: 69
   MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 0
-  MaintenanceStoneCost: 0
-  MaintenanceCrystalCost: 0
-  timeBtwIncrease: 5
+  MaintenanceEnergyCost: 69
+  MaintenanceStoneCost: 20
+  MaintenanceCrystalCost: 10
+  timeBtwIncrease: 1
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 0
-  FoodIncrease: 0
+  FoodIncrease: 250
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   speedAnimation: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   T3TreeLife: 10
   recollecting: 0
   truckRecollecting: {fileID: 0}
-  PersonalFoodCapacity: 0
+  PersonalFoodCapacity: 600
   currentFoodStored: 0
 --- !u!65 &6296580036174916303
 BoxCollider:

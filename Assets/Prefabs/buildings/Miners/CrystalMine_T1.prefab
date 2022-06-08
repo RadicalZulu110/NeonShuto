@@ -74,7 +74,7 @@ MonoBehaviour:
   MaintenanceEnergyCost: 25
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 3
+  timeBtwIncrease: 1
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 100
