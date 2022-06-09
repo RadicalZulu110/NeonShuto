@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Take 001
+    second: Anim_RaisingRoot
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -40,18 +40,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Anim_RaisingRoot
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 180
-      wrapMode: 0
+      lastFrame: 250
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 1
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -71,7 +71,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.25
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -122,8 +122,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.25
-    rootMotionBoneName: Raising_Root
+    globalScale: 1
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
