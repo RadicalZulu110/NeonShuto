@@ -23,6 +23,8 @@ public class Tutorial : MonoBehaviour
     public Button RoadButton;
     public Button DeleteButton;
 
+    public GameObject Close;
+
     public Color ActiveColor;
     public Color CompleteColor;
 
@@ -129,6 +131,8 @@ public class Tutorial : MonoBehaviour
             ColorBlock cba1 = PowerButton.colors;
             cba1.normalColor = ActiveColor;
             PowerButton.colors = cba1;
+
+            Close.SetActive(true);
 
             if (GameObject.Find("SM_PowerT1_New") != null)
             {

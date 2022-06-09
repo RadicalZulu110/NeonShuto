@@ -66,7 +66,7 @@ MonoBehaviour:
   CrystalIncrease: 0
   EnergyIncrease: 0
   FoodIncrease: 0
-  GoldIncreasePerPerson: 3
+  GoldIncreasePerPerson: 10
   PopIncrease: 0
   speedAnimation: 0
   amountAnimation: 0

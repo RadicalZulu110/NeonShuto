@@ -1362,7 +1362,7 @@ public class Buildings : MonoBehaviour
         T3WaterShadowMaterial = T3WaterShadow.GetComponentInChildren<Renderer>().material;
 
         T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
-        T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
+        //T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
         T3FoodShadowMaterial = T3FoodShadow.GetComponentInChildren<Renderer>().material;
 
         T1PowerShadowMaterial = T1PowerShadow.GetComponentInChildren<Renderer>().material;
