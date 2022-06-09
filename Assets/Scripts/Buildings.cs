@@ -114,11 +114,11 @@ public class Buildings : MonoBehaviour
             roadShadow.transform.position = new Vector3(nearNode.transform.position.x, 0.1f, nearNode.transform.position.z);
             grid.MakeNodesHL(grid.getNodes(roadShadowScript.getGridWidth(), roadShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
 
-            if (Input.GetKeyDown(KeyCode.R) && !firstRoadPlaced)
+            /*if (Input.GetKeyDown(KeyCode.R) && !firstRoadPlaced)
             {
                 rotateAroundY(roadShadow, 90);
                 buildingRotateSound.Play();
-            }
+            }*/
         }
 
         //T1 House Shadow

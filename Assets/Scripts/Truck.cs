@@ -46,7 +46,7 @@ public class Truck : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         // If it colides with a sphere collider
         if(other is SphereCollider)
