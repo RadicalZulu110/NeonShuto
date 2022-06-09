@@ -102,4 +102,9 @@ public class CrystalMiner : MinerBuilding
             }
         }
     }
+
+    public int GetNumberRoads()
+    {
+        return roadsToSpawn.Count;
+    }
 }
