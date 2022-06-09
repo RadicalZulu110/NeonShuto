@@ -114,6 +114,15 @@ public class Road : MonoBehaviour
                     this.gameObject.transform.Rotate(0, 180, 0);
                 else if (right && down)
                     this.gameObject.transform.Rotate(0, 270, 0);
+            }else if(right && left)
+            {
+                this.gameObject.GetComponent<MeshFilter>().mesh = straightMesh;
+                this.gameObject.GetComponent<MeshRenderer>().material = straightMaterial;
+            }else if(up && down)
+            {
+                this.gameObject.GetComponent<MeshFilter>().mesh = straightMesh;
+                this.gameObject.GetComponent<MeshRenderer>().material = straightMaterial;
+                this.gameObject.transform.Rotate(0, 90, 0);
             }
             else
             {
@@ -124,7 +133,7 @@ public class Road : MonoBehaviour
         }
         else if(roads == 1)
         {
-            /*this.gameObject.transform.rotation = currentRotation;
+            this.gameObject.transform.rotation = currentRotation;
             if (this.gameObject.GetComponent<MeshFilter>().mesh != straightMesh)
             {
                 this.gameObject.GetComponent<MeshFilter>().mesh = straightMesh;
@@ -134,7 +143,7 @@ public class Road : MonoBehaviour
             if(up || down)
             {
                 this.gameObject.transform.Rotate(0, 90, 0);
-            }*/
+            }
         }
         else if(roads == 0)
         {

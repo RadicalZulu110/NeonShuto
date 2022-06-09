@@ -6,17 +6,29 @@ public class FoodBuilding : ProductionBuilding
 {
     public int PersonalFoodCapacity;
     public int currentFoodStored;
+    private List<GameObject> roadsToSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
         //gm.foodCapacity += PersonalFoodCapacity;
+        roadsToSpawn = new List<GameObject>();
+        noRoadAccessIcon = transform.Find("NoRoadAccess").gameObject;
     }
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+
+        if (roadsToSpawn.Count == 0)
+        {
+            noRoadAccessIcon.SetActive(true);
+        }
+        else
+        {
+            noRoadAccessIcon.SetActive(false);
+        }
 
         if (Time.time > nextIncreaseTime)
         {
@@ -33,6 +45,41 @@ public class FoodBuilding : ProductionBuilding
             if (getTier() == 3)
             {
                 gm.AddTreeLife(-T3TreeLife);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Add the roads available to spawn 
+        if (other.gameObject.tag == "Road")
+        {
+            roadsToSpawn.Add(other.gameObject);
+        }
+    }
+
+    // Check if all the roads to spawn are not null. If null, delete it
+    public void CheckAdyacentRoads()
+    {
+        for (int i = 0; i < roadsToSpawn.Count; i++)
+        {
+            if (roadsToSpawn[i] == null)
+            {
+                roadsToSpawn.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
+    // Remove a road from the adyacent roads
+    public void RemoveRoad(GameObject road)
+    {
+        for (int i = 0; i < roadsToSpawn.Count; i++)
+        {
+            if (roadsToSpawn[i] == road)
+            {
+                roadsToSpawn.RemoveAt(i);
+                break;
             }
         }
     }
@@ -55,5 +102,10 @@ public class FoodBuilding : ProductionBuilding
     public override void addFood(int food)
     {
         currentFoodStored += food;
+    }
+
+    public int GetNumberRoads()
+    {
+        return roadsToSpawn.Count;
     }
 }

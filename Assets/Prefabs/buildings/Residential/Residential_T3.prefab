@@ -47,25 +47,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  GoldCost: 0
-  FoodCost: 0
+  GoldCost: 150
+  FoodCost: 250
   EnergyCost: 0
-  StoneCost: 0
-  CrystalCost: 0
+  StoneCost: 175
+  CrystalCost: 150
   PopCost: 0
   MaintenanceGoldCost: 0
   MaintenanceFoodCost: 0
   MaintenanceEnergyCost: 0
-  MaintenanceStoneCost: 0
-  MaintenanceCrystalCost: 0
-  timeBtwIncrease: 3
+  MaintenanceStoneCost: 175
+  MaintenanceCrystalCost: 150
+  timeBtwIncrease: 1
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 0
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
-  PopIncrease: 0
+  PopIncrease: 25
+  speedAnimation: 1
+  amountAnimation: 1
   tier: 3
   gm: {fileID: 0}
   T3TreeLife: 15
@@ -82,6 +84,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.058899, y: 8.071838, z: 5.289951}
   m_Center: {x: -0.13851929, y: 3.5359192, z: 0.120740175}
+--- !u!111 &2311063122219063866
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6878121432869353196}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 8fd187792cb52994fad4fb220ca96d27, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 8fd187792cb52994fad4fb220ca96d27, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &2693568777298747504
 PrefabInstance:
   m_ObjectHideFlags: 0

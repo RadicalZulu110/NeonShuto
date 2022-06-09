@@ -8,6 +8,8 @@ public class SetVolume : MonoBehaviour
 {
     public AudioMixer mixer;
 
+    public static float lastSliderValue;
+
     /*
     public string Channel;
     public GameObject DataManager;
@@ -24,6 +26,11 @@ public class SetVolume : MonoBehaviour
         slider.v
     }
     */
+
+    private void Update()
+    {
+        
+    }
 
     public void SetMasterLevel(float sliderValue)
     {
@@ -45,5 +52,10 @@ public class SetVolume : MonoBehaviour
         mixer.SetFloat("SFXVol", Mathf.Log10(sliderValue) * 20);
         //DataManager.GetComponent<DataManager>().sfxVolume = Mathf.Log10(sliderValue) * 20;
         //slider.value = Mathf.Log10(sliderValue) * 20;
+    }
+
+    public void SetSliderValue(float sliderValue)
+    {
+        lastSliderValue = sliderValue;
     }
 }
