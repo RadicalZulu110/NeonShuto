@@ -103,4 +103,9 @@ public class FoodBuilding : ProductionBuilding
     {
         currentFoodStored += food;
     }
+
+    public int GetNumberRoads()
+    {
+        return roadsToSpawn.Count;
+    }
 }

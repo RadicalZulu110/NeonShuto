@@ -105,4 +105,9 @@ public class StoneMiner : MinerBuilding
             }
         }
     }
+
+    public int GetNumberRoads()
+    {
+        return roadsToSpawn.Count;
+    }
 }

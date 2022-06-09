@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7609353672636245376}
   - component: {fileID: 2560117196053808460}
   - component: {fileID: 3584946951573113311}
-  - component: {fileID: 2311063122219063866}
   m_Layer: 0
   m_Name: Residential_T3
   m_TagString: PopulationBuilding
