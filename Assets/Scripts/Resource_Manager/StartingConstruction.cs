@@ -71,49 +71,49 @@ public class StartingConstruction : BuildingCost
         else
         {
             noRoadAccessIcon.SetActive(false);
-        }
-
-        // If there is a truck available
-        if (trucksAvailable.Count > 0)
-        {
-            // Get the buildings
-            farms = gm.getFarms();
-            stoneMiners = gm.getStoneMiners();
-            crystalMiners = gm.getCrystalMiners();
-
-            if(farms.Count > 0 || stoneMiners.Count > 0 || crystalMiners.Count > 0)
+            // If there is a truck available
+            if (trucksAvailable.Count > 0)
             {
-                // Get the building with more rosources in
-                currentBuilding = getMaxResourceBuilding();
+                // Get the buildings
+                farms = gm.getFarms();
+                stoneMiners = gm.getStoneMiners();
+                crystalMiners = gm.getCrystalMiners();
 
-                if (currentBuilding != null)
+                if (farms.Count > 0 || stoneMiners.Count > 0 || crystalMiners.Count > 0)
                 {
-                    currentTruck = trucksAvailable[0];
-                    trucksAvailable.Remove(currentTruck);
-                    trucksNoAvailable.Add(currentTruck);
-                    currentTruck.transform.position = roadToSpawn.transform.position;
-                    currentTruck.SetActive(true);
-                    currentTruck.GetComponent<Truck>().setDestination(currentBuilding.transform.position);
+                    // Get the building with more rosources in
+                    currentBuilding = getMaxResourceBuilding();
 
-                    // If it is a farm
-                    if (currentBuilding.GetComponent<FoodBuilding>())
+                    if (currentBuilding != null)
                     {
-                        currentBuilding.GetComponent<FoodBuilding>().setRecollecting(true);
-                        currentBuilding.GetComponent<FoodBuilding>().setTruckRecollecting(currentTruck);
-                    }
-                    else if (currentBuilding.GetComponent<StoneMiner>())     // if it is a stone miner
-                    {
-                        currentBuilding.GetComponent<StoneMiner>().setRecollecting(true);
-                        currentBuilding.GetComponent<StoneMiner>().setTruckRecollecting(currentTruck);
-                    }else if (currentBuilding.GetComponent<CrystalMiner>())     // If it is a crystal miner
-                    {
-                        currentBuilding.GetComponent<CrystalMiner>().setRecollecting(true);
-                        currentBuilding.GetComponent<CrystalMiner>().setTruckRecollecting(currentTruck);
+                        currentTruck = trucksAvailable[0];
+                        trucksAvailable.Remove(currentTruck);
+                        trucksNoAvailable.Add(currentTruck);
+                        currentTruck.transform.position = roadToSpawn.transform.position;
+                        currentTruck.SetActive(true);
+                        currentTruck.GetComponent<Truck>().setDestination(currentBuilding.transform.position);
+
+                        // If it is a farm
+                        if (currentBuilding.GetComponent<FoodBuilding>())
+                        {
+                            currentBuilding.GetComponent<FoodBuilding>().setRecollecting(true);
+                            currentBuilding.GetComponent<FoodBuilding>().setTruckRecollecting(currentTruck);
+                        }
+                        else if (currentBuilding.GetComponent<StoneMiner>())     // if it is a stone miner
+                        {
+                            currentBuilding.GetComponent<StoneMiner>().setRecollecting(true);
+                            currentBuilding.GetComponent<StoneMiner>().setTruckRecollecting(currentTruck);
+                        }
+                        else if (currentBuilding.GetComponent<CrystalMiner>())     // If it is a crystal miner
+                        {
+                            currentBuilding.GetComponent<CrystalMiner>().setRecollecting(true);
+                            currentBuilding.GetComponent<CrystalMiner>().setTruckRecollecting(currentTruck);
+                        }
                     }
                 }
             }
-            
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -185,8 +185,8 @@ public class StartingConstruction : BuildingCost
         {
             for (int i = 0; i < farms.Count; i++)
             {
-                if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting()) ||
-                    (res != null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual))
+                if ((res == null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetNumberRoads() > 0) ||
+                    (res != null && !farms[i].GetComponent<FoodBuilding>().isRecollecting() && farms[i].GetComponent<FoodBuilding>().GetCurrentFoodStored() > actual && farms[i].GetComponent<FoodBuilding>().GetNumberRoads() > 0))
                 {
                     NavMeshPath path = new NavMeshPath();
                     for(int j=0; j<roadsToSpawn.Count; j++)
@@ -213,8 +213,8 @@ public class StartingConstruction : BuildingCost
         {
             for (int i = 0; i < stoneMiners.Count; i++)
             {
-                if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting()) ||
-                    (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual))
+                if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetNumberRoads() > 0) ||
+                    (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual && stoneMiners[i].GetComponent<StoneMiner>().GetNumberRoads() > 0))
                 {
                     NavMeshPath path = new NavMeshPath();
                     for (int j = 0; j < roadsToSpawn.Count; j++)
@@ -241,8 +241,8 @@ public class StartingConstruction : BuildingCost
         {
             for (int i = 0; i < crystalMiners.Count; i++)
             {
-                if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting()) ||
-                    (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual))
+                if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetNumberRoads() > 0) ||
+                    (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual && crystalMiners[i].GetComponent<CrystalMiner>().GetNumberRoads() > 0))
                 {
                     NavMeshPath path = new NavMeshPath();
                     for (int j = 0; j < roadsToSpawn.Count; j++)
