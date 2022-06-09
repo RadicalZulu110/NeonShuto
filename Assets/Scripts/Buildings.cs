@@ -114,11 +114,11 @@ public class Buildings : MonoBehaviour
             roadShadow.transform.position = new Vector3(nearNode.transform.position.x, 0.1f, nearNode.transform.position.z);
             grid.MakeNodesHL(grid.getNodes(roadShadowScript.getGridWidth(), roadShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
 
-            if (Input.GetKeyDown(KeyCode.R) && !firstRoadPlaced)
+            /*if (Input.GetKeyDown(KeyCode.R) && !firstRoadPlaced)
             {
                 rotateAroundY(roadShadow, 90);
                 buildingRotateSound.Play();
-            }
+            }*/
         }
 
         //T1 House Shadow
@@ -882,6 +882,7 @@ public class Buildings : MonoBehaviour
             roadShadow.SetActive(false);
             updateRoadsJunction();
             surface.BuildNavMesh();
+            refreshNavMesh = true;
         }
 
 
@@ -1361,7 +1362,7 @@ public class Buildings : MonoBehaviour
         T3WaterShadowMaterial = T3WaterShadow.GetComponentInChildren<Renderer>().material;
 
         T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
-     //   T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
+        //T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
         T3FoodShadowMaterial = T3FoodShadow.GetComponentInChildren<Renderer>().material;
 
         T1PowerShadowMaterial = T1PowerShadow.GetComponentInChildren<Renderer>().material;
