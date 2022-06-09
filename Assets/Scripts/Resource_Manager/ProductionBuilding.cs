@@ -93,6 +93,7 @@ public class ProductionBuilding : BuildingCost
     public void setTruckRecollecting(GameObject truck)
     {
         truckRecollecting = truck;
+        recollecting = true;
     }
 
     public virtual void addFood(int food)
