@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: 1827226128182048838
     second: Anim_PowerT3_SpinCycle
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: e545ec9ce3015524fac40f0362d71971, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -40,11 +45,11 @@ ModelImporter:
       internalID: 0
       firstFrame: 1
       lastFrame: 119
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
-      loop: 0
+      loop: 1
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0

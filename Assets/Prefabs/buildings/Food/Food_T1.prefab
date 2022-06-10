@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3949696708190098339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1150.7098, y: 487.3777, z: 4.1220703}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 7817657451815898267}
   - {fileID: 7161939375460571845}
@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b384f5af84bc5844ab65aa9a1ae8044f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 4
-  height: 4
+  width: 3
+  height: 3
   GoldCost: 100
   FoodCost: 0
   EnergyCost: 100
@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99047017cc89f0a4a8d51c719adbbe05, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.40917248
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 99047017cc89f0a4a8d51c719adbbe05, type: 3}
       propertyPath: m_LocalPosition.z

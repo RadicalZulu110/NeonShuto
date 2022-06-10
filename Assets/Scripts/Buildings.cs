@@ -11,8 +11,8 @@ public class Buildings : MonoBehaviour
     public Grid grid;
     public GameObject[,] tiles;
     public Camera camera;
-    public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1WaterShadow, T2WaterShadow, T3WaterShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStoageShadow;
-    private BuildingCost T1HouseShadowScript, initialShadowScript, roadShadowScript, T2HouseShadowScript, T3HouseShadowScript, T1WaterShadowScript, T2WaterShadowScript, T3WaterShadowScript, T1FoodShadowScript, T2FoodShadowScript, T3FoodShadowScript, T1PowerShadowScript, T2PowerShadowScript, T3PowerShadowScript, stoneMineShadowScript, crystalMineShadowScript, B_ResourceStorageShadowScript, B_FoodStoageShadowScript;
+    public GameObject initialShadow, roadShadow, T1HouseShadow, T2HouseShadow, T3HouseShadow, T1WaterShadow, T2WaterShadow, T3WaterShadow, T1FoodShadow, T2FoodShadow, T3FoodShadow, T1PowerShadow, T2PowerShadow, T3PowerShadow, stoneMineShadow, crystalMineShadow, B_ResourceStorageShadow, B_FoodStorageShadow;
+    private BuildingCost T1HouseShadowScript, initialShadowScript, roadShadowScript, T2HouseShadowScript, T3HouseShadowScript, T1WaterShadowScript, T2WaterShadowScript, T3WaterShadowScript, T1FoodShadowScript, T2FoodShadowScript, T3FoodShadowScript, T1PowerShadowScript, T2PowerShadowScript, T3PowerShadowScript, stoneMineShadowScript, crystalMineShadowScript, B_ResourceStorageShadowScript, B_FoodStorageShadowScript;
     private Material roadShadowMaterial, T1HouseShadowMaterial, T2HouseShadowMaterial, T3HouseShadowMaterial, T1WaterShadowMaterial, T2WaterShadowMaterial, T3WaterShadowMaterial, T1FoodShadowMaterial, T2FoodShadowMaterial, T3FoodShadowMaterial, T1PowerShadowMaterial, T2PowerShadowMaterial, T3PowerShadowMaterial, stoneMineShadowMaterial, crystalMineShadowMaterial, B_ResourceStorageShadowMaterial, B_FoodStorageShadowMaterial;
     public AudioSource buildingPlaceSound, buildingRotateSound, deleteBuildingSound;
     public ParticleSystem buildingPlaceParticles;
@@ -476,37 +476,37 @@ public class Buildings : MonoBehaviour
         }
 
         //Food Storage shadow
-        if (B_FoodStoageShadow.activeInHierarchy)
+        if (B_FoodStorageShadow.activeInHierarchy)
         {
             nearNode = getNearestNode(customCursor.gameObject);
 
-            if (!nearNode.activeInHierarchy || !grid.areNodesFree(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
-                || !grid.hasRoadAdyacent(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
+            if (!nearNode.activeInHierarchy || !grid.areNodesFree(B_FoodStorageShadowScript.getGridWidth(), B_FoodStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>())
+                || !grid.hasRoadAdyacent(B_FoodStorageShadowScript.getGridWidth(), B_FoodStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()))
             {
-                B_FoodStoageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
+                B_FoodStorageShadow.GetComponentInChildren<Renderer>().materials = deletingMaterial;
             }
             else
             {
-                B_FoodStoageShadow.GetComponentInChildren<Renderer>().material = T1PowerShadowMaterial;
+                B_FoodStorageShadow.GetComponentInChildren<Renderer>().material = B_FoodStorageShadowMaterial;
                 lastNearActiveNode = nearNode;
             }
 
 
-            buildPos = buildCentered(grid.getNodes(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
-            B_FoodStoageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
-            grid.MakeNodesHL(grid.getNodes(B_FoodStoageShadowScript.getGridWidth(), B_FoodStoageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            buildPos = buildCentered(grid.getNodes(B_FoodStorageShadowScript.getGridWidth(), B_FoodStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
+            B_FoodStorageShadow.transform.position = new Vector3(buildPos.x, 0.1f, buildPos.z);
+            grid.MakeNodesHL(grid.getNodes(B_FoodStorageShadowScript.getGridWidth(), B_FoodStorageShadowScript.getGridHeight(), nearNode.GetComponent<Node>()));
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                rotateAroundY(B_FoodStoageShadow, 90);
+                rotateAroundY(B_FoodStorageShadow, 90);
                 buildingRotateSound.Play();
-                B_FoodStoageShadowScript.RotateBuilding();
+                B_FoodStorageShadowScript.RotateBuilding();
 
             }
 
         }
 
-        //Food Resource shadow
+        //Resource storage shadow
         if (B_ResourceStorageShadow.activeInHierarchy)
         {
             nearNode = getNearestNode(customCursor.gameObject);
@@ -518,7 +518,7 @@ public class Buildings : MonoBehaviour
             }
             else
             {
-                B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material = T1PowerShadowMaterial;
+                B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material = B_ResourceStorageShadowMaterial;
                 lastNearActiveNode = nearNode;
             }
 
@@ -739,7 +739,7 @@ public class Buildings : MonoBehaviour
             {
                 //nearNode = getNearestNode(customCursor.gameObject);
 
-                createBuilding(B_FoodStorageToPlace, B_FoodStoageShadow);
+                createBuilding(B_FoodStorageToPlace, B_FoodStorageShadow);
                 gameManager.SetNoFoodStorage(gameManager.GetNoFoodStorage() + 1);
             }
 
@@ -1345,7 +1345,7 @@ public class Buildings : MonoBehaviour
         T3PowerShadow.SetActive(false);
         stoneMineShadow.SetActive(false);
         crystalMineShadow.SetActive(false);
-        B_FoodStoageShadow.SetActive(false);
+        B_FoodStorageShadow.SetActive(false);
         B_ResourceStorageShadow.SetActive(false);
         isDeleting = false;
     }
@@ -1362,7 +1362,7 @@ public class Buildings : MonoBehaviour
         T3WaterShadowMaterial = T3WaterShadow.GetComponentInChildren<Renderer>().material;
 
         T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
-        //T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
+        T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
         T3FoodShadowMaterial = T3FoodShadow.GetComponentInChildren<Renderer>().material;
 
         T1PowerShadowMaterial = T1PowerShadow.GetComponentInChildren<Renderer>().material;
@@ -1372,7 +1372,7 @@ public class Buildings : MonoBehaviour
         roadShadowMaterial = roadShadow.GetComponentInChildren<Renderer>().material;
         stoneMineShadowMaterial = stoneMineShadow.GetComponentInChildren<Renderer>().material;
         crystalMineShadowMaterial = crystalMineShadow.GetComponentInChildren<Renderer>().material;
-        B_FoodStorageShadowMaterial = B_FoodStoageShadow.GetComponentInChildren<Renderer>().material;
+        B_FoodStorageShadowMaterial = B_FoodStorageShadow.GetComponentInChildren<Renderer>().material;
         B_ResourceStorageShadowMaterial = B_ResourceStorageShadow.GetComponentInChildren<Renderer>().material;
     }
 
@@ -1396,7 +1396,7 @@ public class Buildings : MonoBehaviour
         stoneMineShadowScript = stoneMineShadow.GetComponent<BuildingCost>();
         crystalMineShadowScript = crystalMineShadow.GetComponent<BuildingCost>();
         B_ResourceStorageShadowScript = B_ResourceStorageShadow.GetComponent<BuildingCost>();
-        B_FoodStoageShadowScript = B_FoodStoageShadow.GetComponent<BuildingCost>();
+        B_FoodStorageShadowScript = B_FoodStorageShadow.GetComponent<BuildingCost>();
     }
 
     /* Instantiate a building in the nodes necessary
@@ -1860,7 +1860,7 @@ public class Buildings : MonoBehaviour
             Cursor.visible = false;
             B_FoodStorageToPlace = foodStorage;
             isDeleting = false;
-            B_FoodStoageShadow.SetActive(true);
+            B_FoodStorageShadow.SetActive(true);
         }
     }
 
