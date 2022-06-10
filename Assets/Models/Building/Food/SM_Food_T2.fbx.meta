@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: 0f9c8fd1b2bf3504da3254805b7ba227
+guid: 698e4c829435ccf4a9990f8c6d9c3239
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -5696925327283780397
-    second: _anim
+      74: 1827226128182048838
+    second: Take 001
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert4
+      name: lambert5
     second: {fileID: 2100000, guid: e939a9be52a354c4d8405859dc73e2b4, type: 2}
   materials:
     materialImportMode: 2
@@ -39,7 +39,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
