@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4744f3f44fd0eaf4883fe3dfde5886b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 4
+  width: 6
   height: 4
   GoldCost: 0
   FoodCost: 0
@@ -66,6 +66,8 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  speedAnimation: 0
+  amountAnimation: 0
   tier: 3
   gm: {fileID: 0}
   T3TreeLife: 10
@@ -101,7 +103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e3f30a734003f1e4899285038e7b3fbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e3f30a734003f1e4899285038e7b3fbf, type: 3}
       propertyPath: m_LocalPosition.z

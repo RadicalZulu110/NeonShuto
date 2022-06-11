@@ -1,47 +1,12 @@
 fileFormatVersion: 2
-guid: 4c44d11ee7c75504692c432c63345053
+guid: c6ef05fde7a470a4b8a8b73c8214591c
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -4347925920062332232
-    second: Dropship|CircleAction.003
-  - first:
-      74: -7403191495221377808
-    second: Dropship|DropshipAction.001
-  - first:
-      74: 4973795833914813724
-    second: Dropship|DropshipAction.002
-  - first:
-      74: 4148653081943535900
-    second: Dropship|DropshipAction.003
-  - first:
-      74: -2563965050320053678
-    second: Dropship|PlanetAction.001
-  - first:
-      74: 5060737582773226055
-    second: Dropship|ShipShell_FLAction
-  - first:
-      74: 2727594471251657620
-    second: Dropship|ShipShell_FRAction
-  - first:
-      74: 3916739372315796842
-    second: Dropship|SolarPanels_FL.012Action
-  - first:
-      74: -860086491020189482
-    second: Dropship|SolarPanels_FL.013Action
-  - first:
-      74: 1554133178896527908
-    second: Dropship|SolarPanels_FR.012Action
-  - first:
-      74: -1265784477762546469
-    second: Dropship|SolarPanels_FRAction
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Base
-    second: {fileID: 2100000, guid: d06eaef9d39c4574c9be7647d8f4abd3, type: 2}
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -68,7 +33,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 446
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -130,7 +124,7 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 1
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1

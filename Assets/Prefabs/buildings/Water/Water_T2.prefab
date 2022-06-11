@@ -66,8 +66,11 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  speedAnimation: 0
+  amountAnimation: 0
   tier: 2
   gm: {fileID: 0}
+  T3TreeLife: 0
   recollecting: 0
   truckRecollecting: {fileID: 0}
 --- !u!65 &994400024716842556
@@ -100,7 +103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 93a55c64c49c9ac40a406d262450f700, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 93a55c64c49c9ac40a406d262450f700, type: 3}
       propertyPath: m_LocalPosition.z
