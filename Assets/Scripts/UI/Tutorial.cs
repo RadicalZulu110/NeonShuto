@@ -22,6 +22,8 @@ public class Tutorial : MonoBehaviour
     public Button FoodStorageButton;
     public Button RoadButton;
     public Button DeleteButton;
+    public Button WaterButton;
+
 
     public GameObject Close;
 
@@ -143,6 +145,30 @@ public class Tutorial : MonoBehaviour
                 ColorBlock cbc1 = PowerButton.colors;
                 cbc1.normalColor = CompleteColor;
                 PowerButton.colors = cbc1;
+                popUpIndex++;
+            }
+        }
+        else if (popUpIndex == 5)
+        {
+            ColorBlock cba = StorageTab.colors;
+            cba.normalColor = ActiveColor;
+            StorageTab.colors = cba;
+
+            ColorBlock cba1 = WaterButton.colors;
+            cba1.normalColor = ActiveColor;
+            WaterButton.colors = cba1;
+
+            Close.SetActive(true);
+
+            if (GameObject.Find("SM_Water_T1") != null)
+            {
+                ColorBlock cbc = StorageTab.colors;
+                cbc.normalColor = CompleteColor;
+                StorageTab.colors = cbc;
+
+                ColorBlock cbc1 = WaterButton.colors;
+                cbc1.normalColor = CompleteColor;
+                WaterButton.colors = cbc1;
                 popUpIndex++;
             }
         }
