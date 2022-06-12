@@ -4963,6 +4963,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Food_T2
       objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 1827226128182048838, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
+    - target: {fileID: 2223639932434330405, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
+      propertyPath: m_Animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
 --- !u!4 &5527409503490702843 stripped

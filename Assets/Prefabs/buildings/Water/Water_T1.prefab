@@ -66,8 +66,11 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  speedAnimation: 0
+  amountAnimation: 0
   tier: 1
   gm: {fileID: 0}
+  T3TreeLife: 0
   recollecting: 0
   truckRecollecting: {fileID: 0}
 --- !u!65 &1027784074948455429
@@ -140,8 +143,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05a5d33d95feac6488ba4d643d0672bf, type: 3}
+--- !u!1 &3679003758602334751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 05a5d33d95feac6488ba4d643d0672bf, type: 3}
+  m_PrefabInstance: {fileID: 4597924243045125966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4054825991550396581 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 05a5d33d95feac6488ba4d643d0672bf, type: 3}
   m_PrefabInstance: {fileID: 4597924243045125966}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &5260702990261658277
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3679003758602334751}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
