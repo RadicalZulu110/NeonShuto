@@ -39,6 +39,9 @@ public class StorageBuilding : BuildingCost
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.AddTreeLife(-T3TreeLife);
+            gm.PayFoodRent(MaintenanceFoodCost);
+            gm.PayRentStone(MaintenanceStoneCost);
+            gm.PayRentCrystal(MaintenanceCrystalCost);
         }
 
         if (roadsToSpawn.Count == 0)

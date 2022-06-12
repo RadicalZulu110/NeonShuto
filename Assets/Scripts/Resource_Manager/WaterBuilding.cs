@@ -14,15 +14,21 @@ public class WaterBuilding : ProductionBuilding
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if(getTier() == 3)
+        
+        if (Time.time > nextIncreaseTime)
         {
-            if (Time.time > nextIncreaseTime)
+            if(getTier() == 3)
             {
                 nextIncreaseTime = Time.time + timeBtwIncrease;
                 gm.AddTreeLife(T3TreeLife);
             }
+            gm.PayFoodRent(MaintenanceFoodCost);
+            gm.PayRentStone(MaintenanceStoneCost);
+            gm.PayRentCrystal(MaintenanceCrystalCost);
         }
+
+        
     }
 }

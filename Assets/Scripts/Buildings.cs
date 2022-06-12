@@ -915,7 +915,7 @@ public class Buildings : MonoBehaviour
                                                             hitInfo.collider.tag == "Road" ||
                                                             hitInfo.collider.tag == "ResourceBuilding" ||
                                                             hitInfo.collider.tag == "StorageBuilding" ||
-                                                             hitInfo.collider.tag == "Water"))                        // is a good one
+                                                            hitInfo.collider.tag == "Water"))                        // is a good one
                     {
                         Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.green, 1, true);
                         selectedObjectToDelete = hitInfo.collider.gameObject;
@@ -999,6 +999,15 @@ public class Buildings : MonoBehaviour
                                 }
 
                                 
+                            }else if(selectedObjectToDelete.tag == "Water")
+                            {
+                                WaterBuilding buildingScript = selectedObjectToDelete.GetComponent<WaterBuilding>();
+                                gameManager.TotalGold += (int)(buildingScript.GoldCost * divisbleReturn);
+                                gameManager.TotalFood += (int)(buildingScript.FoodCost * divisbleReturn);
+                                gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
+                                gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
+                                gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+                                grid.setNodesUnoccupied(buildingScript.getNodes());
                             }
                             else
                             {
@@ -1363,7 +1372,7 @@ public class Buildings : MonoBehaviour
         T3WaterShadowMaterial = T3WaterShadow.GetComponentInChildren<Renderer>().material;
 
         T1FoodShadowMaterial = T1FoodShadow.GetComponentInChildren<Renderer>().material;
-        T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
+        //T2FoodShadowMaterial = T2FoodShadow.GetComponentInChildren<Renderer>().material;
         T3FoodShadowMaterial = T3FoodShadow.GetComponentInChildren<Renderer>().material;
 
         T1PowerShadowMaterial = T1PowerShadow.GetComponentInChildren<Renderer>().material;
