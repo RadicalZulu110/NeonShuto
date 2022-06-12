@@ -39,6 +39,9 @@ public class StoneMiner : MinerBuilding
 
             gm.TotalGold -= MaintenanceGoldCost;
             gm.TotalEnergy -= MaintenanceEnergyCost;
+            gm.PayFoodRent(MaintenanceFoodCost);
+            gm.PayRentStone(MaintenanceStoneCost);
+            gm.PayRentCrystal(MaintenanceCrystalCost);
 
             gm.AddStonePersonalCapacity(StoneIncrease);
             currentStoneStored += StoneIncrease;
