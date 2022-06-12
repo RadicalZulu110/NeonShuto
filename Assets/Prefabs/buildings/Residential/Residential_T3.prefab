@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7609353672636245376}
   - component: {fileID: 2560117196053808460}
   - component: {fileID: 3584946951573113311}
+  - component: {fileID: 2311063122219063866}
   m_Layer: 0
   m_Name: Residential_T3
   m_TagString: PopulationBuilding
@@ -93,9 +94,9 @@ Animation:
   m_GameObject: {fileID: 6878121432869353196}
   m_Enabled: 0
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 8fd187792cb52994fad4fb220ca96d27, type: 2}
+  m_Animation: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 8fd187792cb52994fad4fb220ca96d27, type: 2}
+  - {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -167,6 +168,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Residential_T3
       objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: b600fe0ba1a601843a4f894ed81e7d34, type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
+    - target: {fileID: 2223639932434330405, guid: b600fe0ba1a601843a4f894ed81e7d34, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: b600fe0ba1a601843a4f894ed81e7d34, type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b600fe0ba1a601843a4f894ed81e7d34, type: 3}
 --- !u!4 &2516320275365414811 stripped

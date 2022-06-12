@@ -322,6 +322,49 @@ public class GameManager : MonoBehaviour
         }
 	}
 
+	public void PayFoodRent(int number)
+    {
+		// Get the food storage with more percentage
+		float percent = heroBuilding.GetFoodPercentage();
+		FoodStorageBuilding foodStorBuild = getMaxFoodStoragePercetnage();
+		if (foodStorBuild && foodStorBuild.GetFoodPercentage() > percent)
+		{
+			foodStorBuild.addFood(-number);
+		}
+		else
+		{
+			heroBuilding.addFood(-number);
+		}
+	}
+
+	public void PayRentStone(int number)
+    {
+		float percent = heroBuilding.GetStonePercentage();
+		ResourceStorageBuilding resoStorBuild = getMaxStoneStoragePercetnage();
+		if (resoStorBuild && resoStorBuild.GetStonePercentage() > percent)
+		{
+			resoStorBuild.addStone(-number);
+		}
+		else
+		{
+			heroBuilding.addStone(-number);
+		}
+	}
+
+	public void PayRentCrystal(int number)
+    {
+		float percent = heroBuilding.GetCrystalPercentage();
+		ResourceStorageBuilding resoStorBuild = getMaxCrystalStoragePercetnage();
+		if (resoStorBuild && resoStorBuild.GetCrystalPercentage() > percent)
+		{
+			resoStorBuild.addCrystal(-number);
+		}
+		else
+		{
+			heroBuilding.addCrystal(-number);
+		}
+	}
+
 	public int GetNoBuildings()
 	{
 		return NoBuildings;

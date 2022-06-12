@@ -34,6 +34,9 @@ public class FoodBuilding : ProductionBuilding
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.TotalGold -= MaintenanceGoldCost;
+            gm.PayFoodRent(MaintenanceFoodCost);
+            gm.PayRentStone(MaintenanceStoneCost);
+            gm.PayRentCrystal(MaintenanceCrystalCost);
             gm.AddFoodPersonalCapacity(FoodIncrease);
             currentFoodStored += FoodIncrease;
 
