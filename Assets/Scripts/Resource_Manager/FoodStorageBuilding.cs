@@ -12,6 +12,7 @@ public class FoodStorageBuilding : StorageBuilding
     private int storedFood;
     [SerializeField]
     private float foodPercentage;
+    public float noTruckDistance;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -29,6 +30,8 @@ public class FoodStorageBuilding : StorageBuilding
         {
             // Get the farms
             farms = gm.getFarms();
+            CheckBuildings();
+
             if (farms.Count > 0)
             {
                 // Get the building with more rosources in
@@ -111,5 +114,17 @@ public class FoodStorageBuilding : StorageBuilding
     public float GetFoodPercentage()
     {
         return foodPercentage;
+    }
+
+    private void CheckBuildings()
+    {
+        for (int i = 0; i < farms.Count; i++)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, farms[i].gameObject.transform.position) < noTruckDistance)
+            {
+                farms.RemoveAt(i);
+                i--;
+            }
+        }
     }
 }

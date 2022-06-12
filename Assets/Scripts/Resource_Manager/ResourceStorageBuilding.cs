@@ -11,6 +11,7 @@ public class ResourceStorageBuilding : StorageBuilding
     [SerializeField]
     private int storedStone, storedCrystal;
     private float stonePercentage, crystalPercentage;
+    public float noTruckDistance;
 
     // Start is called before the first frame update
     protected new void Start()
@@ -31,6 +32,8 @@ public class ResourceStorageBuilding : StorageBuilding
             // Get the buildings
             stoneMiners = gm.getStoneMiners();
             crystalMiners = gm.getCrystalMiners();
+            CheckBuildings();
+
             if (stoneMiners.Count > 0 || crystalMiners.Count > 0)
             {
                 // Get the building with more rosources in
@@ -168,5 +171,26 @@ public class ResourceStorageBuilding : StorageBuilding
     public float GetCrystalPercentage()
     {
         return crystalPercentage;
+    }
+
+    private void CheckBuildings()
+    {
+        for (int i = 0; i < stoneMiners.Count; i++)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, stoneMiners[i].gameObject.transform.position) < noTruckDistance)
+            {
+                stoneMiners.RemoveAt(i);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < crystalMiners.Count; i++)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, crystalMiners[i].gameObject.transform.position) < noTruckDistance)
+            {
+                crystalMiners.RemoveAt(i);
+                i--;
+            }
+        }
     }
 }

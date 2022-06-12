@@ -27,6 +27,7 @@ public class StartingConstruction : BuildingCost
     private GameObject currentBuilding, currentTruck, roadToSpawn;
     private int truckStorage;
 
+    public float noTruckDistance;
     private void Start()
     {
         trucksAvailable = new List<GameObject>();
@@ -78,6 +79,7 @@ public class StartingConstruction : BuildingCost
                 farms = gm.getFarms();
                 stoneMiners = gm.getStoneMiners();
                 crystalMiners = gm.getCrystalMiners();
+                CheckBuildings();
 
                 if (farms.Count > 0 || stoneMiners.Count > 0 || crystalMiners.Count > 0)
                 {
@@ -336,5 +338,40 @@ public class StartingConstruction : BuildingCost
     public float GetCrystalPercentage()
     {
         return crystalPercentage;
+    }
+
+    public float GetNotruckDistance()
+    {
+        return noTruckDistance;
+    }
+
+    private void CheckBuildings()
+    {
+        for(int i = 0; i < farms.Count; i++)
+        {
+            if(Vector3.Distance(this.gameObject.transform.position, farms[i].gameObject.transform.position) < noTruckDistance)
+            {
+                farms.RemoveAt(i);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < stoneMiners.Count; i++)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, stoneMiners[i].gameObject.transform.position) < noTruckDistance)
+            {
+                stoneMiners.RemoveAt(i);
+                i--;
+            }
+        }
+
+        for (int i = 0; i < crystalMiners.Count; i++)
+        {
+            if (Vector3.Distance(this.gameObject.transform.position, crystalMiners[i].gameObject.transform.position) < noTruckDistance)
+            {
+                crystalMiners.RemoveAt(i);
+                i--;
+            }
+        }
     }
 }
