@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2793401228941614115}
   - component: {fileID: 6497169852038685792}
   - component: {fileID: 373686681419630767}
+  - component: {fileID: 7464556928861863109}
   m_Layer: 0
   m_Name: Food_T2
   m_TagString: ResourceBuilding
@@ -29,8 +30,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7916372239670001721}
   - {fileID: 4008554176212020967}
+  - {fileID: 5527409503490702843}
+  - {fileID: 5871839955006693482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,23 +50,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   height: 2
-  GoldCost: 150
+  GoldCost: 0
   FoodCost: 0
-  EnergyCost: 150
-  StoneCost: 100
+  EnergyCost: 0
+  StoneCost: 0
   CrystalCost: 0
   PopCost: 0
-  MaintenanceGoldCost: 40
+  MaintenanceGoldCost: 0
   MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 40
-  MaintenanceStoneCost: 10
+  MaintenanceEnergyCost: 0
+  MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0
-  timeBtwIncrease: 1
+  timeBtwIncrease: 3
   nextIncreaseTime: 0
   StoneIncrease: 0
   CrystalIncrease: 0
   EnergyIncrease: 0
-  FoodIncrease: 135
+  FoodIncrease: 100
   GoldIncreasePerPerson: 0
   PopIncrease: 0
   speedAnimation: 0
@@ -74,7 +76,7 @@ MonoBehaviour:
   T3TreeLife: 0
   recollecting: 0
   truckRecollecting: {fileID: 0}
-  PersonalFoodCapacity: 400
+  PersonalFoodCapacity: 1000
   currentFoodStored: 0
 --- !u!65 &373686681419630767
 BoxCollider:
@@ -89,6 +91,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.346189, z: 1}
   m_Center: {x: 0, y: 0.5902798, z: 0}
+--- !u!135 &7464556928861863109
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763862046672839361}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2168309112097566828
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2793401228941614115}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &6717675267501171659
 ParticleSystem:
@@ -4893,7 +4908,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!1001 &7662351289081538514
+--- !u!1001 &5422321672329042448
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4902,7 +4917,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4950,12 +4965,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
---- !u!4 &2706577728293836031 stripped
+--- !u!4 &5527409503490702843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
-  m_PrefabInstance: {fileID: 2451378113163916052}
+  m_PrefabInstance: {fileID: 5422321672329042448}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5699090235852843181
+--- !u!1001 &7057948742773876396
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4968,7 +4983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498779764459374278, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3498779764459374278, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4976,7 +4991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3498779764459374278, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.494
+      value: 1.526
       objectReference: {fileID: 0}
     - target: {fileID: 3498779764459374278, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5012,8 +5027,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
---- !u!4 &9194404266281463403 stripped
+--- !u!4 &5871839955006693482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3498779764459374278, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
-  m_PrefabInstance: {fileID: 5699090235852843181}
+  m_PrefabInstance: {fileID: 7057948742773876396}
   m_PrefabAsset: {fileID: 0}
