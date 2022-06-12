@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 5582294267634069548}
-  - {fileID: 8797801985096085084}
+  - {fileID: 8539632046793889668}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10135b7b1d48232498b1311cd2f2a29b, type: 3}
---- !u!1001 &5374549048806992026
+--- !u!1001 &5047681628573012290
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -373,10 +373,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
---- !u!4 &8797801985096085084 stripped
+--- !u!4 &8539632046793889668 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3498779764459374278, guid: 45abd76e1e1c53949bc38c7996e80c46, type: 3}
-  m_PrefabInstance: {fileID: 5374549048806992026}
+  m_PrefabInstance: {fileID: 5047681628573012290}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5400645475025704903
 PrefabInstance:
