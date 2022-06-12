@@ -914,7 +914,8 @@ public class Buildings : MonoBehaviour
                                                             (hitInfo.collider.gameObject.tag == "PopulationBuilding" ||      // We see if the gameobject hitted
                                                             hitInfo.collider.tag == "Road" ||
                                                             hitInfo.collider.tag == "ResourceBuilding" ||
-                                                            hitInfo.collider.tag == "StorageBuilding"))                        // is a good one
+                                                            hitInfo.collider.tag == "StorageBuilding" ||
+                                                             hitInfo.collider.tag == "Water"))                        // is a good one
                     {
                         Debug.DrawLine(Input.mousePosition, hitInfo.collider.transform.position, Color.green, 1, true);
                         selectedObjectToDelete = hitInfo.collider.gameObject;
