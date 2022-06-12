@@ -30,6 +30,8 @@ public class Quota3 : MonoBehaviour
 
     private void Start()
     {
+		foodStorageBuildings = new List<FoodStorageBuilding>();
+		resourceStorageBuildings = new List<ResourceStorageBuilding>();
 		GenerateQuotas();
 	}
 
