@@ -153,16 +153,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 05a5d33d95feac6488ba4d643d0672bf, type: 3}
   m_PrefabInstance: {fileID: 4597924243045125966}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2241994256825488302
-BoxCollider:
+--- !u!111 &5260702990261658277
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3679003758602334751}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.9722875, y: 2.4704423, z: 1.9722875}
-  m_Center: {x: 0, y: 1.1465459, z: 0}
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
