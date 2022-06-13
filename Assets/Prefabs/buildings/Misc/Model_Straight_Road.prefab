@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 1
   height: 1
-  GoldCost: 25
+  GoldCost: 5
   FoodCost: 0
   EnergyCost: 0
   StoneCost: 0
@@ -132,6 +132,8 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  speedAnimation: 0
+  amountAnimation: 0
   tier: 0
   gm: {fileID: 0}
   T3TreeLife: 0
