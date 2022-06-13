@@ -101,20 +101,31 @@ public class CameraManager : MonoBehaviour
         }
         else if(frameRotateY != 0f)
         {
-            if(checkAngleX(transform.eulerAngles.x))
+            if(checkAngleX(transform.localEulerAngles.x))
             {
-                cam.transform.Rotate(Vector3.right, frameRotateY * Time.unscaledDeltaTime * rotateSpeed);
-                rotationX = cam.transform.localEulerAngles.x;
-                cam.transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+                transform.Rotate(Vector3.right, frameRotateY * Time.unscaledDeltaTime * rotateSpeed);
+                rotationX = transform.localEulerAngles.x;
+                /*if(rotationX >= maxRotationX+10)
+                {
+                    transform.rotation = Quaternion.Euler(minRotationX, rotationY, 0);
+                }else if(rotationX-360 <= minRotationX)
+                {
+                    transform.rotation = Quaternion.Euler(maxRotationX, rotationY, 0);
+                }
+                else
+                {*/
+                    transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+                //}
+                
                 //LockRotationInBounds();
             }
-            /*else
+            else
             {
                 if(transform.localEulerAngles.x >= maxRotationX+10 )
                     transform.rotation = Quaternion.Euler(minRotationX, rotationY, 0);
                 else if(transform.localEulerAngles.x-360 <= minRotationX)
                     transform.rotation = Quaternion.Euler(maxRotationX, rotationY, 0);
-            }*/
+            }
             //Debug.Log(transform.eulerAngles.x);
             
             frameRotateY = 0f;
@@ -126,6 +137,7 @@ public class CameraManager : MonoBehaviour
             //LockRotationInBounds();
         }
 
+       
         if (frameZoom < 0f)
         {
             zoomStrategy.ZoomIn(cam, Time.unscaledDeltaTime * Mathf.Abs(frameZoom) * zoomSpeed, nearZoomLimit);
