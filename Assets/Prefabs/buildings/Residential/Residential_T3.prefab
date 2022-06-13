@@ -173,6 +173,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
     - target: {fileID: 2223639932434330405, guid: b600fe0ba1a601843a4f894ed81e7d34, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223639932434330405, guid: b600fe0ba1a601843a4f894ed81e7d34, type: 3}
       propertyPath: m_Animations.Array.size
       value: 1
       objectReference: {fileID: 0}
