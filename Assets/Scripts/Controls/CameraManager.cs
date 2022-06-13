@@ -96,24 +96,26 @@ public class CameraManager : MonoBehaviour
             transform.Rotate(Vector3.up, frameRotateX * Time.unscaledDeltaTime * rotateSpeed);
             rotationY = transform.localEulerAngles.y;
             transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+            //LockRotationInBounds();
             frameRotateX = 0f;
         }
         else if(frameRotateY != 0f)
         {
             if(checkAngleX(transform.eulerAngles.x))
             {
-                transform.Rotate(Vector3.right, frameRotateY * Time.unscaledDeltaTime * rotateSpeed);
-                rotationX = transform.localEulerAngles.x;
-                transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+                cam.transform.Rotate(Vector3.right, frameRotateY * Time.unscaledDeltaTime * rotateSpeed);
+                rotationX = cam.transform.localEulerAngles.x;
+                cam.transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+                //LockRotationInBounds();
             }
-            else
+            /*else
             {
                 if(transform.localEulerAngles.x >= maxRotationX+10 )
                     transform.rotation = Quaternion.Euler(minRotationX, rotationY, 0);
                 else if(transform.localEulerAngles.x-360 <= minRotationX)
                     transform.rotation = Quaternion.Euler(maxRotationX, rotationY, 0);
-            }
-            Debug.Log(transform.eulerAngles.x);
+            }*/
+            //Debug.Log(transform.eulerAngles.x);
             
             frameRotateY = 0f;
         }
@@ -121,6 +123,7 @@ public class CameraManager : MonoBehaviour
         {
            
             transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
+            //LockRotationInBounds();
         }
 
         if (frameZoom < 0f)
@@ -139,6 +142,13 @@ public class CameraManager : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minBounds.x, maxBounds.x),
                                         Mathf.Clamp(transform.position.y, verticalBounds.x, verticalBounds.y),
                                         Mathf.Clamp(transform.position.z, minBounds.y, maxBounds.y));
+    }
+
+    private void LockRotationInBounds()
+    {
+        transform.rotation = Quaternion.Euler(Mathf.Clamp(rotationX, minRotationX, maxRotationX),
+                                              rotationY,
+                                              0);
     }
 
     private bool checkAngleX(float angle)

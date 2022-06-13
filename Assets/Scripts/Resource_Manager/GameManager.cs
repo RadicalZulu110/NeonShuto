@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
 	private float nextIncreaseTime;
 	public GameObject treeRootAttack;
 	private Animation treeRootAttackAnimation;
+	private float totalGoldIncome, totalGoldMaintenance;
 
 
 	private void Start()
@@ -111,6 +112,8 @@ public class GameManager : MonoBehaviour
 		light = GameObject.FindGameObjectWithTag("Light");
 		lightData = light.GetComponent<HDAdditionalLightData>();
 		treeRootAttackAnimation = treeRootAttack.GetComponent<Animation>();
+		totalGoldIncome = 0;
+		totalGoldMaintenance = 0;
 	}
 
 	private void Update()
@@ -137,7 +140,8 @@ public class GameManager : MonoBehaviour
 		
 
 		PlayerGoldDisplay.text = (TotalGold).ToString();
-		GoldProduced.text = (goldIncome).ToString();
+		totalGoldIncome = goldIncome - totalGoldMaintenance;
+		GoldProduced.text = (totalGoldIncome).ToString();
 
 		PlayerEnergyDisplay.text = (TotalEnergy).ToString();
 		EnergyProduced.text = (energyIncome).ToString();
@@ -215,7 +219,7 @@ public class GameManager : MonoBehaviour
 	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)
 	{
-		goldIncome -= building.MaintenanceGoldCost;
+		totalGoldMaintenance += building.MaintenanceGoldCost;
 		energyIncome -= building.MaintenanceEnergyCost;
 		foodIncome -= building.MaintenanceFoodCost;
 		stoneIncome -= building.MaintenanceStoneCost;
