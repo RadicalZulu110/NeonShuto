@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
 	private float nextIncreaseTime;
 	public GameObject treeRootAttack;
 	private Animation treeRootAttackAnimation;
-	private float totalGoldIncome, totalGoldMaintenance;
+	private float totalGoldIncome;
+	[HideInInspector] public int totalGoldMaintenance;
 
 
 	private void Start()
@@ -147,7 +148,6 @@ public class GameManager : MonoBehaviour
 		EnergyProduced.text = (energyIncome).ToString();
 
 		PlayerFoodDisplay.text = (TotalFood).ToString();
-		FoodConsumed.text = (foodIncome).ToString();
 		FoodProduced.text = (foodIncome).ToString();
 		FoodCapacity.text = (foodCapacity).ToString();
 
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour
 	private void RootAttack()
     {
 		int randomNumber = Random.Range(0, 100);
-		int randomBuildingIndex = Random.Range(0, allBuildings.Count);
+		int randomBuildingIndex = Random.Range(0, allBuildings.Count-1);
 		if(treeLife <= firstLifeQuota && treeLife > secondLifeQuota && treeLife > thirdLifeQuota)
         {
 			if(randomNumber < firstPercentage)
@@ -184,6 +184,7 @@ public class GameManager : MonoBehaviour
 				treeRootAttack.transform.position = deletingBuilding.transform.position;
 				treeRootAttack.transform.localScale = new Vector3(((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridWidth()))/2, ((float)((1f / 4f) * Mathf.Max(deletingBuilding.GetComponent<BuildingCost>().getGridWidth(), deletingBuilding.GetComponent<BuildingCost>().getGridHeight())))/2, ((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridHeight()))/2);
 				treeRootAttackAnimation.Play();
+                StartCoroutine(Animate(deletingBuilding.transform.GetChild(0).GetComponent<Animation>()));
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
             }
@@ -197,6 +198,7 @@ public class GameManager : MonoBehaviour
 				treeRootAttack.transform.position = deletingBuilding.transform.position;
 				treeRootAttack.transform.localScale = new Vector3(((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridWidth())) / 2, ((float)((1f / 4f) * Mathf.Max(deletingBuilding.GetComponent<BuildingCost>().getGridWidth(), deletingBuilding.GetComponent<BuildingCost>().getGridHeight()))) / 2, ((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridHeight())) / 2);
 				treeRootAttackAnimation.Play();
+				StartCoroutine(Animate(deletingBuilding.transform.GetChild(0).GetComponent<Animation>()));
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
 			}
@@ -210,11 +212,25 @@ public class GameManager : MonoBehaviour
 				treeRootAttack.transform.position = deletingBuilding.transform.position;
 				treeRootAttack.transform.localScale = new Vector3(((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridWidth())) / 2, ((float)((1f / 4f) * Mathf.Max(deletingBuilding.GetComponent<BuildingCost>().getGridWidth(), deletingBuilding.GetComponent<BuildingCost>().getGridHeight()))) / 2, ((float)((1f / 4f) * deletingBuilding.GetComponent<BuildingCost>().getGridHeight())) / 2);
 				treeRootAttackAnimation.Play();
+				StartCoroutine(Animate(deletingBuilding.transform.GetChild(0).GetComponent<Animation>()));
 				DeleteBuilding(deletingBuilding);
 				buildingsScript.DeleteBuilding(deletingBuilding);
 			}
 		}
     }
+
+	private IEnumerator Animate(Animation anim)
+	{
+		AnimationClip clip = anim.GetClip("DestructionBuilding");
+		anim.Play();
+		yield return new WaitForSeconds(clip.length);
+	}
+
+	/*private IEnumerator WaitForAnim(AnimationState animclip, float spd)
+	{
+		tempTime = animclip.length * (1 / spd);
+		yield return new WaitForSeconds(tempTime);
+	}*/
 
 	//deduction of Reasources
 	public void BuyBuilding(BuildingCost building)

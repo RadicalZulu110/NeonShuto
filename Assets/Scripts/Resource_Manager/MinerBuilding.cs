@@ -20,19 +20,4 @@ public class MinerBuilding : ProductionBuilding
     {
         
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

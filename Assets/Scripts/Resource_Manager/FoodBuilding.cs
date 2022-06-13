@@ -111,4 +111,14 @@ public class FoodBuilding : ProductionBuilding
     {
         return roadsToSpawn.Count;
     }
+
+    public override int GetMaintenanceEnergyCost()
+    {
+        return MaintenanceEnergyCost;
+    }
+
+    public override int GetMaintenanceGoldCost()
+    {
+        return MaintenanceGoldCost;
+    }
 }
