@@ -68,7 +68,7 @@ MonoBehaviour:
   CrystalCost: 0
   PopCost: 0
   MaintenanceGoldCost: 0
-  MaintenanceFoodCost: 50
+  MaintenanceFoodCost: 25
   MaintenanceEnergyCost: 30
   MaintenanceStoneCost: 0
   MaintenanceCrystalCost: 0

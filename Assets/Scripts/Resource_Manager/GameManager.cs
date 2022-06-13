@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
 	public Text PlayerFoodDisplay;
 	public Text FoodConsumed;
-	public Text FoodStored;
+	public Text FoodProduced;
 	public Text FoodCapacity;
 
 	public Text PlayerStoneDisplay;
@@ -144,7 +144,7 @@ public class GameManager : MonoBehaviour
 
 		PlayerFoodDisplay.text = (TotalFood).ToString();
 		FoodConsumed.text = (foodIncome).ToString();
-		FoodStored.text = (foodStored).ToString();
+		FoodProduced.text = (foodIncome).ToString();
 		FoodCapacity.text = (foodCapacity).ToString();
 
 		PlayerStoneDisplay.text = (TotalStone).ToString();

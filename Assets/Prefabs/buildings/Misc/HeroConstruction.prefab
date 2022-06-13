@@ -66,7 +66,7 @@ MonoBehaviour:
   CrystalIncrease: 0
   EnergyIncrease: 0
   FoodIncrease: 0
-  GoldIncreasePerPerson: 10
+  GoldIncreasePerPerson: 12
   PopIncrease: 0
   speedAnimation: 0
   amountAnimation: 0
@@ -80,9 +80,9 @@ MonoBehaviour:
   maxFood: 50000
   maxStone: 50000
   maxCrystal: 50000
-  storedFood: 20000
-  storedStone: 20000
-  storedCrystal: 20000
+  storedFood: 2000
+  storedStone: 2000
+  storedCrystal: 2000
   foodPercentage: 0
   stonePercentage: 0
   crystalPercentage: 0
