@@ -21,8 +21,10 @@ public class PopulationBuilding : BuildingCost
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.TotalEnergy -= MaintenanceEnergyCost;
-            gm.TotalFood -= MaintenanceFoodCost;
-            
+            gm.PayFoodRent(MaintenanceFoodCost);
+            gm.PayRentStone(MaintenanceStoneCost);
+            gm.PayRentCrystal(MaintenanceCrystalCost);
+
             if(getTier() == 3)
             {
                 gm.AddTreeLife(-T3TreeLife);

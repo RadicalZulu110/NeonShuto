@@ -22,6 +22,9 @@ public class EnergyBuilding : ProductionBuilding
             nextIncreaseTime = Time.time + timeBtwIncrease;
             gm.TotalEnergy += EnergyIncrease;
             gm.TotalGold -= MaintenanceGoldCost;
+            gm.PayFoodRent(MaintenanceFoodCost);
+            gm.PayRentStone(MaintenanceStoneCost);
+            gm.PayRentCrystal(MaintenanceCrystalCost);
         }
 
         if (getTier() == 3)
