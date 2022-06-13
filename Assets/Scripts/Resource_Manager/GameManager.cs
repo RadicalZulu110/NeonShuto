@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
 	private float nextIncreaseTime;
 	public GameObject treeRootAttack;
 	private Animation treeRootAttackAnimation;
-	private float totalGoldIncome, totalGoldMaintenance;
+	private float totalGoldIncome;
+	[HideInInspector] public int totalGoldMaintenance;
 
 
 	private void Start()
@@ -147,7 +148,6 @@ public class GameManager : MonoBehaviour
 		EnergyProduced.text = (energyIncome).ToString();
 
 		PlayerFoodDisplay.text = (TotalFood).ToString();
-		FoodConsumed.text = (foodIncome).ToString();
 		FoodProduced.text = (foodIncome).ToString();
 		FoodCapacity.text = (foodCapacity).ToString();
 

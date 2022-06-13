@@ -44,5 +44,13 @@ public class PopulationBuilding : BuildingCost
         return GoldIncreasePerPerson;
     }
 
-    
+    public int GetMaintenanceEnergyCost()
+    {
+        return MaintenanceEnergyCost;
+    }
+
+    public int GetMaintenanceFoodCost()
+    {
+        return MaintenanceFoodCost;
+    }
 }

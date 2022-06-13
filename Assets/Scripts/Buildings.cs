@@ -935,6 +935,8 @@ public class Buildings : MonoBehaviour
                                 gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
                                 gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                                 gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+                                gameManager.energyIncome += (buildingScript.GetMaintenanceEnergyCost());
+                                gameManager.foodIncome += (buildingScript.GetMaintenanceFoodCost());
                                 grid.setNodesUnoccupied(buildingScript.getNodes());
                             }
                             else if (selectedObjectToDelete.tag == "ResourceBuilding")
@@ -956,9 +958,11 @@ public class Buildings : MonoBehaviour
                                     crystalMinerBuildings.Remove(selectedObjectToDelete.GetComponent<CrystalMiner>());
                                 }
 
-                                
+
                                 //gameManager.AddFood(-buildingScript.GetFoodIncrease());
-                                gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
+                                gameManager.energyIncome += (buildingScript.GetMaintenanceEnergyCost());
+                                gameManager.foodIncome += (buildingScript.GetMaintenanceFoodCost());
+                                gameManager.totalGoldMaintenance -= (buildingScript.GetMaintenanceGoldCost());
                                 gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
                                 gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());
                                 //gameManager.AddStone(-buildingScript.GetStoneIncrease());
@@ -1007,6 +1011,9 @@ public class Buildings : MonoBehaviour
                                 gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
                                 gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
                                 gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+                                //gameManager.energyIncome += (buildingScript.GetMaintenanceEnergyCost());
+                                //gameManager.foodIncome += (buildingScript.GetMaintenanceFoodCost());
+                                //gameManager.totalGoldMaintenance -= (buildingScript.GetMaintenanceGoldCost());
                                 grid.setNodesUnoccupied(buildingScript.getNodes());
                             }
                             else
@@ -1078,6 +1085,8 @@ public class Buildings : MonoBehaviour
             gameManager.TotalEnergy += (int)(buildingScript.EnergyCost * divisbleReturn);
             gameManager.TotalCrystal += (int)(buildingScript.CrystalCost * divisbleReturn);
             gameManager.TotalStone += (int)(buildingScript.StoneCost * divisbleReturn);
+            gameManager.energyIncome += (buildingScript.GetMaintenanceEnergyCost());
+            gameManager.foodIncome += (buildingScript.GetMaintenanceFoodCost());
             grid.setNodesUnoccupied(buildingScript.getNodes());
         }
         else if (objectToDelete.tag == "ResourceBuilding")
@@ -1099,6 +1108,9 @@ public class Buildings : MonoBehaviour
 
 
             //gameManager.AddFood(-buildingScript.GetFoodIncrease());
+            gameManager.energyIncome += (buildingScript.GetMaintenanceEnergyCost());
+            gameManager.foodIncome += (buildingScript.GetMaintenanceFoodCost());
+            gameManager.totalGoldMaintenance -= (buildingScript.GetMaintenanceGoldCost());
             gameManager.foodCapacity -= (buildingScript.GetPersonalFoodCapacity());//selectedObjectToDelete.GetComponent<FoodBuilding>().PersonalFoodCapacity;
             gameManager.foodStored -= (buildingScript.GetCurrentFoodStored());//selectedObjectToDelete.GetComponent<FoodBuilding>().currentFoodStored;
             gameManager.AddEnergy(-buildingScript.GetEnergyIncrease());

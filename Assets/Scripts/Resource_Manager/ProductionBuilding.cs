@@ -75,6 +75,21 @@ public class ProductionBuilding : BuildingCost
         return 0;
     }
 
+    public virtual int GetMaintenanceEnergyCost()
+    {
+        return 0;
+    }
+
+    public virtual int GetMaintenanceFoodCost()
+    {
+        return 0;
+    }
+
+    public virtual int GetMaintenanceGoldCost()
+    {
+        return 0;
+    }
+
     public bool isRecollecting()
     {
         return recollecting;

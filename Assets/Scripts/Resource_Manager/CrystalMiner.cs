@@ -80,6 +80,16 @@ public class CrystalMiner : MinerBuilding
         currentCrystalStored += c;
     }
 
+    public override int GetMaintenanceEnergyCost()
+    {
+        return MaintenanceEnergyCost;
+    }
+
+    public override int GetMaintenanceFoodCost()
+    {
+        return MaintenanceFoodCost;
+    }
+
     // Check if all the roads to spawn are not null. If null, delete it
     public void CheckAdyacentRoads()
     {
