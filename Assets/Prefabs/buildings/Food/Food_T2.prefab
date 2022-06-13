@@ -30,8 +30,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4008554176212020967}
   - {fileID: 5527409503490702843}
+  - {fileID: 4008554176212020967}
   - {fileID: 5871839955006693482}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -134,7 +134,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2793401228941614115}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &6717675267501171659
 ParticleSystem:
@@ -4917,11 +4917,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 698e4c829435ccf4a9990f8c6d9c3239, type: 3}
       propertyPath: m_LocalPosition.y
