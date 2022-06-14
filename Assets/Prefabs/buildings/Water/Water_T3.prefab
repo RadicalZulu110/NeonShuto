@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 6
   height: 4
-  GoldCost: 0
+  GoldCost: 3000
   FoodCost: 0
   EnergyCost: 0
   StoneCost: 0
@@ -166,6 +166,6 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: d5afe86ef1fc73b45ad8f8aa4ac6d2c5, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
