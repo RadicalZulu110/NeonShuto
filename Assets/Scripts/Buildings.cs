@@ -1629,11 +1629,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -1649,11 +1649,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -1669,11 +1669,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -1689,11 +1689,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -1709,11 +1709,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -1729,11 +1729,11 @@ public class Buildings : MonoBehaviour
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
@@ -1744,20 +1744,20 @@ public class Buildings : MonoBehaviour
         }
     }
     //button event to create T1Food
-    public void createT1Food(GameObject farm)
+    public void createT1Food(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            T1FoodToPlace = farm;
+            T1FoodToPlace = building;
             isDeleting = false;
             T1FoodShadow.SetActive(true);
         }
@@ -1765,20 +1765,20 @@ public class Buildings : MonoBehaviour
     }
 
     //button event to create T2Food
-    public void createT2Food(GameObject farm)
+    public void createT2Food(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            T2FoodToPlace = farm;
+            T2FoodToPlace = building;
             isDeleting = false;
             T2FoodShadow.SetActive(true);
         }
@@ -1786,20 +1786,20 @@ public class Buildings : MonoBehaviour
     }
 
     //button event to create T3Food
-    public void createT3Food(GameObject farm)
+    public void createT3Food(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - farm.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - farm.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - farm.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - farm.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - farm.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            T3FoodToPlace = farm;
+            T3FoodToPlace = building;
             isDeleting = false;
             T3FoodShadow.SetActive(true);
         }
@@ -1807,160 +1807,160 @@ public class Buildings : MonoBehaviour
     }
 
     //button event to create T1Power
-    public void createT1Power(GameObject battery)
+    public void createT1Power(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            T1PowerToPlace = battery;
+            T1PowerToPlace = building;
             isDeleting = false;
             T1PowerShadow.SetActive(true);
         }
     }
 
     //button event to create T2Power
-    public void createT2Power(GameObject battery)
+    public void createT2Power(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            T2PowerToPlace = battery;
+            T2PowerToPlace = building;
             isDeleting = false;
             T2PowerShadow.SetActive(true);
         }
     }
 
     //button event to create T3Power
-    public void createT3Power(GameObject battery)
+    public void createT3Power(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - battery.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - battery.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - battery.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - battery.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - battery.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            T3PowerToPlace = battery;
+            T3PowerToPlace = building;
             isDeleting = false;
             T3PowerShadow.SetActive(true);
         }
     }
 
     //button event to create a Food Storage
-    public void createFoodStorage(GameObject foodStorage)
+    public void createFoodStorage(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - foodStorage.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - foodStorage.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - foodStorage.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - foodStorage.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - foodStorage.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            B_FoodStorageToPlace = foodStorage;
+            B_FoodStorageToPlace = building;
             isDeleting = false;
             B_FoodStorageShadow.SetActive(true);
         }
     }
 
     //button event to create a Resource Storage
-    public void createResourceStorage(GameObject resourceStorage)
+    public void createResourceStorage(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - resourceStorage.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - resourceStorage.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - resourceStorage.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - resourceStorage.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - resourceStorage.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesNearRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            B_ResourceStorageToPlace = resourceStorage;
+            B_ResourceStorageToPlace = building;
             isDeleting = false;
             B_ResourceStorageShadow.SetActive(true);
         }
     }
 
     //button event to create a StoneMine
-    public void createStoneMine(GameObject StoneMine)
+    public void createStoneMine(GameObject building)
     {
         if (initialPlaced && grid.isStoneAvailable())
         {
-            if (gameManager.GetTotalGold() - StoneMine.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - StoneMine.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - StoneMine.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - StoneMine.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - StoneMine.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesStoneActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            stoneMineToPlace = StoneMine;
+            stoneMineToPlace = building;
             isDeleting = false;
             stoneMineShadow.SetActive(true);
         }
     }
 
     //button event to create a CrystalMine
-    public void createCrystalMine(GameObject CrystalMine)
+    public void createCrystalMine(GameObject building)
     {
         if (initialPlaced && grid.isCrystalAvailable())
         {
-            if (gameManager.GetTotalGold() - CrystalMine.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - CrystalMine.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - CrystalMine.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - CrystalMine.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - CrystalMine.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesCrystalActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            crystalMineToPlace = CrystalMine;
+            crystalMineToPlace = building;
             isDeleting = false;
             crystalMineShadow.SetActive(true);
         }
     }
 
     // Button event to create a road
-    public void createRoad(GameObject road)
+    public void createRoad(GameObject building)
     {
         if (initialPlaced)
         {
-            if (gameManager.GetTotalGold() - road.GetComponent<BuildingCost>().GoldCost < 0 ||
-            gameManager.GetTotalFood() - road.GetComponent<BuildingCost>().FoodCost < 0 ||
-            gameManager.GetTotalEnergy() - road.GetComponent<BuildingCost>().EnergyCost < 0 ||
-            gameManager.GetTotalStone() - road.GetComponent<BuildingCost>().StoneCost < 0 ||
-            gameManager.GetTotalCrystal() - road.GetComponent<BuildingCost>().CrystalCost < 0) return;
+            if ((building.GetComponent<BuildingCost>().GoldCost != 0 && gameManager.GetTotalGold() - building.GetComponent<BuildingCost>().GoldCost < 0) ||
+            (building.GetComponent<BuildingCost>().FoodCost != 0 && gameManager.GetTotalFood() - building.GetComponent<BuildingCost>().FoodCost < 0) ||
+            (building.GetComponent<BuildingCost>().EnergyCost != 0 && gameManager.GetTotalEnergy() - building.GetComponent<BuildingCost>().EnergyCost < 0) ||
+            (building.GetComponent<BuildingCost>().StoneCost != 0 && gameManager.GetTotalStone() - building.GetComponent<BuildingCost>().StoneCost < 0) ||
+            (building.GetComponent<BuildingCost>().CrystalCost != 0 && gameManager.GetTotalCrystal() - building.GetComponent<BuildingCost>().CrystalCost < 0)) return;
 
             grid.setTilesAdyacentRoadActive(true);
             customCursor.gameObject.SetActive(true);
             Cursor.visible = false;
-            roadToPlace = road;
+            roadToPlace = building;
             isDeleting = false;
             roadShadow.SetActive(true);
         }

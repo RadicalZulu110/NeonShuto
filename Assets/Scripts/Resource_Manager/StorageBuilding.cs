@@ -44,24 +44,10 @@ public class StorageBuilding : BuildingCost
             gm.PayRentCrystal(MaintenanceCrystalCost);
         }
 
-        if (roadsToSpawn.Count == 0)
-        {
-            noRoadAccessIcon.SetActive(true);
-        }
-        else
-        {
-            noRoadAccessIcon.SetActive(false);
-        }
+        
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Add the roads available to spawn 
-        if (other.gameObject.tag == "Road")
-        {
-            roadsToSpawn.Add(other.gameObject);
-        }
-    }
+    
 
     // Check if all the roads to spawn are not null. If null, delete it
     public void CheckAdyacentRoads()
