@@ -118,7 +118,7 @@ MonoBehaviour:
   amountAnimation: 0
   tier: 3
   gm: {fileID: 0}
-  T3TreeLife: 0.1
+  T3TreeLife: 3
   recollecting: 0
   truckRecollecting: {fileID: 0}
 --- !u!65 &8210362240721072261

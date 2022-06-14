@@ -22,7 +22,7 @@ public class CrystalMiner : MinerBuilding
     {
         base.Update();
 
-        Debug.Log(roadsToSpawn.Count);
+        
 
         if (roadsToSpawn.Count == 0)
         {
