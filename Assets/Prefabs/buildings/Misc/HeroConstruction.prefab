@@ -80,9 +80,9 @@ MonoBehaviour:
   maxFood: 50000
   maxStone: 50000
   maxCrystal: 50000
-  storedFood: 200000
-  storedStone: 200000
-  storedCrystal: 200000
+  storedFood: 2000
+  storedStone: 2000
+  storedCrystal: 2000
   foodPercentage: 0
   stonePercentage: 0
   crystalPercentage: 0
@@ -101,7 +101,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 1.25
   m_Center: {x: 0, y: 0.18173218, z: 0}
 --- !u!114 &6189464265877430504
 MonoBehaviour:
