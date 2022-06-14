@@ -26,6 +26,15 @@ public class ResourceStorageBuilding : StorageBuilding
     // Update is called once per frame
     void Update()
     {
+        if (roadsToSpawn.Count == 0)
+        {
+            noRoadAccessIcon.SetActive(true);
+        }
+        else
+        {
+            noRoadAccessIcon.SetActive(false);
+        }
+
         // If there is a truck available
         if (trucksAvailable.Count > 0)
         {
@@ -61,6 +70,15 @@ public class ResourceStorageBuilding : StorageBuilding
                 }
             }
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Add the roads available to spawn 
+        if (other.gameObject.tag == "Road")
+        {
+            roadsToSpawn.Add(other.gameObject);
         }
     }
 
