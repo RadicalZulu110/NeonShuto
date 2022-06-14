@@ -85,7 +85,7 @@ MonoBehaviour:
   amountAnimation: 0
   tier: 1
   gm: {fileID: 0}
-  T3TreeLife: 25
+  T3TreeLife: 5
   maxTrucks: 3
   nTrucks: 0
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
