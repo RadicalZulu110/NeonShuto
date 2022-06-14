@@ -95,7 +95,7 @@ MonoBehaviour:
   maxCrystal: 2500
   storedStone: 0
   storedCrystal: 0
-  noTruckDistance: 0
+  noTruckDistance: 5
 --- !u!135 &5155773891494077367
 SphereCollider:
   m_ObjectHideFlags: 0
