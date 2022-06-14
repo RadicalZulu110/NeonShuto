@@ -50,16 +50,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   height: 2
-  GoldCost: 0
+  GoldCost: 150
   FoodCost: 0
-  EnergyCost: 0
-  StoneCost: 0
+  EnergyCost: 150
+  StoneCost: 100
   CrystalCost: 0
   PopCost: 0
-  MaintenanceGoldCost: 0
+  MaintenanceGoldCost: 40
   MaintenanceFoodCost: 0
-  MaintenanceEnergyCost: 0
-  MaintenanceStoneCost: 0
+  MaintenanceEnergyCost: 40
+  MaintenanceStoneCost: 10
   MaintenanceCrystalCost: 0
   timeBtwIncrease: 3
   nextIncreaseTime: 0
