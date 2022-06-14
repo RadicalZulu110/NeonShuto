@@ -71,7 +71,7 @@ MonoBehaviour:
   amountAnimation: 1
   tier: 3
   gm: {fileID: 0}
-  T3TreeLife: 15
+  T3TreeLife: 3
 --- !u!65 &3584946951573113311
 BoxCollider:
   m_ObjectHideFlags: 0

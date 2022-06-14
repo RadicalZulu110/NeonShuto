@@ -4878,7 +4878,7 @@ MonoBehaviour:
   amountAnimation: 0
   tier: 3
   gm: {fileID: 0}
-  T3TreeLife: 5
+  T3TreeLife: 3
   recollecting: 0
   truckRecollecting: {fileID: 0}
   PersonalFoodCapacity: 1000
