@@ -25,12 +25,14 @@ public class EnergyBuilding : ProductionBuilding
             gm.PayFoodRent(MaintenanceFoodCost);
             gm.PayRentStone(MaintenanceStoneCost);
             gm.PayRentCrystal(MaintenanceCrystalCost);
+
+            if (getTier() == 3)
+            {
+                gm.AddTreeLife(-T3TreeLife);
+            }
         }
 
-        if (getTier() == 3)
-        {
-            gm.AddTreeLife(-T3TreeLife);
-        }
+        
     }
     
 

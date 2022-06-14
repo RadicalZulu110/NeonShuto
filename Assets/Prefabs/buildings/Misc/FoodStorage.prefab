@@ -86,7 +86,7 @@ MonoBehaviour:
   tier: 1
   gm: {fileID: 0}
   T3TreeLife: 25
-  maxTrucks: 5
+  maxTrucks: 3
   nTrucks: 0
   truckPrefab: {fileID: 8437575543401800700, guid: 3fd40695ceaed7441a308d6097153980, type: 3}
   trucksAvailable: []
@@ -94,7 +94,7 @@ MonoBehaviour:
   maxFood: 2500
   storedFood: 0
   foodPercentage: 0
-  noTruckDistance: 0
+  noTruckDistance: 5
 --- !u!135 &-212300576196665198
 SphereCollider:
   m_ObjectHideFlags: 0
