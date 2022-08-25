@@ -6,7 +6,7 @@ public class MinerBuilding : ProductionBuilding
 {
     
 
-    ResourceNode rn;
+    [SerializeField] protected ResourceNode resourceNode;
 
     // Start is called before the first frame update
     void Start()

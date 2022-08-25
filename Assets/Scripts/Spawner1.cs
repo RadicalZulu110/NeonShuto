@@ -28,7 +28,7 @@ public class Spawner1 : MonoBehaviour
     }
 
     // Spawn stone chunks the number given
-    private void createStones(int numberStones)
+    public void createStones(int numberStones)
     {
         for(int i = 0; i < numberStones; i++)
         {
@@ -51,7 +51,7 @@ public class Spawner1 : MonoBehaviour
     }
 
     // Spawn crystal chunks the number given
-    private void createCrystals(int numberCrystal)
+    public void createCrystals(int numberCrystal)
     {
         for (int i = 0; i < numberCrystal; i++)
         {

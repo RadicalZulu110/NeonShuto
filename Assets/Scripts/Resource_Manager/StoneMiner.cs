@@ -14,6 +14,21 @@ public class StoneMiner : MinerBuilding
         //gm.stoneCapacity += PersonalStoneCapacity;
         roadsToSpawn = new List<GameObject>();
         noRoadAccessIcon = transform.Find("NoRoadAccess").gameObject;
+
+        ResourceNode[] resources = GameObject.FindObjectsOfType<ResourceNode>();
+        float dist = float.MaxValue;
+
+        for(int i = 0; i < resources.Length; i++)
+        {
+            if(resources[i].StoneNodeAmount > 0)
+            {
+                if(Vector3.Distance(this.gameObject.transform.position, resources[i].gameObject.transform.position) < dist)
+                {
+                    dist = Vector3.Distance(this.gameObject.transform.position, resources[i].gameObject.transform.position);
+                    resourceNode = resources[i];
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -35,20 +50,35 @@ public class StoneMiner : MinerBuilding
         if (Time.time > nextIncreaseTime)
         {
             nextIncreaseTime = Time.time + timeBtwIncrease;
-            currentStoneStored += StoneIncrease;
-
-            gm.TotalGold -= MaintenanceGoldCost;
-            gm.TotalEnergy -= MaintenanceEnergyCost;
-            gm.PayFoodRent(MaintenanceFoodCost);
-            gm.PayRentStone(MaintenanceStoneCost);
-            gm.PayRentCrystal(MaintenanceCrystalCost);
-
-            gm.AddStonePersonalCapacity(StoneIncrease);
-            currentStoneStored += StoneIncrease;
-
-            if (currentStoneStored > PersonalStoneCapacity)
+            
+            if(resourceNode != null)
             {
-                currentStoneStored = PersonalStoneCapacity;
+                gm.TotalGold -= MaintenanceGoldCost;
+                gm.TotalEnergy -= MaintenanceEnergyCost;
+                gm.PayFoodRent(MaintenanceFoodCost);
+                gm.PayRentStone(MaintenanceStoneCost);
+                gm.PayRentCrystal(MaintenanceCrystalCost);
+
+                if (currentStoneStored + StoneIncrease > PersonalStoneCapacity)
+                {
+                    resourceNode.StoneNodeAmount -= PersonalStoneCapacity - currentStoneStored;
+                    gm.AddStonePersonalCapacity(PersonalStoneCapacity - StoneIncrease);
+                    currentStoneStored = PersonalStoneCapacity;
+                }
+                else
+                {
+                    resourceNode.StoneNodeAmount -= StoneIncrease;
+                    currentStoneStored += StoneIncrease;
+                    gm.AddStonePersonalCapacity(StoneIncrease);
+                }
+            }
+            else
+            {
+                gm.TotalGold -= MaintenanceGoldCost/2;
+                gm.TotalEnergy -= MaintenanceEnergyCost/2;
+                gm.PayFoodRent(MaintenanceFoodCost/2);
+                gm.PayRentStone(MaintenanceStoneCost/2);
+                gm.PayRentCrystal(MaintenanceCrystalCost/2);
             }
 
         }

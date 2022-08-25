@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232d1128c9b303f479c5d69fae0ae318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CrystalNodeAmount: 10000
+  CrystalNodeAmount: 2000
   StoneNodeAmount: 0
 --- !u!114 &-2427357427039430822
 MonoBehaviour:
@@ -80,7 +80,11 @@ MonoBehaviour:
   FoodIncrease: 0
   GoldIncreasePerPerson: 0
   PopIncrease: 0
+  speedAnimation: 0
+  amountAnimation: 0
+  tier: 0
   gm: {fileID: 0}
+  T3TreeLife: 0
 --- !u!1001 &5973245363870265037
 PrefabInstance:
   m_ObjectHideFlags: 0

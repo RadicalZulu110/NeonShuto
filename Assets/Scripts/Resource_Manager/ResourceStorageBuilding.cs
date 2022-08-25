@@ -94,8 +94,9 @@ public class ResourceStorageBuilding : StorageBuilding
         {
             for (int i = 0; i < stoneMiners.Count; i++)
             {
-                if ((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetNumberRoads() > 0) ||
-                    (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual && stoneMiners[i].GetComponent<StoneMiner>().GetNumberRoads() > 0))
+                if (((res == null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetNumberRoads() > 0) ||
+                    (res != null && !stoneMiners[i].GetComponent<StoneMiner>().isRecollecting() && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > actual  && stoneMiners[i].GetComponent<StoneMiner>().GetNumberRoads() > 0))
+                    && stoneMiners[i].GetComponent<StoneMiner>().GetCurrentStoneStored() > 0)
                 {
                     NavMeshPath path = new NavMeshPath();
                     for (int j = 0; j < roadsToSpawn.Count; j++)
@@ -122,8 +123,9 @@ public class ResourceStorageBuilding : StorageBuilding
         {
             for (int i = 0; i < crystalMiners.Count; i++)
             {
-                if ((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetNumberRoads() > 0) ||
+                if (((res == null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetNumberRoads() > 0) ||
                     (res != null && !crystalMiners[i].GetComponent<CrystalMiner>().isRecollecting() && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > actual) && crystalMiners[i].GetComponent<CrystalMiner>().GetNumberRoads() > 0)
+                    && crystalMiners[i].GetComponent<CrystalMiner>().GetCurrentCrystalStored() > 0)
                 {
                     NavMeshPath path = new NavMeshPath();
                     for (int j = 0; j < roadsToSpawn.Count; j++)
