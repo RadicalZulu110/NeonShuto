@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -1440,7 +1441,8 @@ public class Buildings : MonoBehaviour
                     buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                     grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
                     
-                    buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+                    buildCreated = Instantiate(building, new Vector3(buildPos.x, -5f, buildPos.z), shadow.transform.rotation);
+                    buildCreated.transform.DOMove(new Vector3(buildPos.x, 0f, buildPos.z), 5f).SetEase(Ease.InOutQuad);
                     buildCreated.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
 
                     gameManager.addStoneMiner(buildCreated);
@@ -1489,7 +1491,8 @@ public class Buildings : MonoBehaviour
                     buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                     grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
                     
-                    buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+                    buildCreated = Instantiate(building, new Vector3(buildPos.x, -5f, buildPos.z), shadow.transform.rotation);
+                    buildCreated.transform.DOMove(new Vector3(buildPos.x, 0f, buildPos.z), 5f).SetEase(Ease.InOutQuad);
                     buildCreated.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
 
 
@@ -1538,7 +1541,8 @@ public class Buildings : MonoBehaviour
                 buildPos = buildCentered(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
                 grid.setNodesOccupied(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>());
                 
-                buildCreated = Instantiate(building, new Vector3(buildPos.x, 0f, buildPos.z), shadow.transform.rotation);
+                buildCreated = Instantiate(building, new Vector3(buildPos.x, -5f, buildPos.z), shadow.transform.rotation);
+                buildCreated.transform.DOMove(new Vector3(buildPos.x, 0f, buildPos.z), 5f).SetEase(Ease.InOutQuad);
                 buildCreated.GetComponent<BuildingCost>().setNodes(grid.getNodes(building.GetComponent<BuildingCost>().getGridWidth(), building.GetComponent<BuildingCost>().getGridHeight(), lastNearActiveNode.GetComponent<Node>()));
 
                 if (buildCreated.GetComponent<FoodBuilding>())
