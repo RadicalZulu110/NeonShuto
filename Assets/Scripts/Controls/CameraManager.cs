@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +34,8 @@ public class CameraManager : MonoBehaviour
     float frameZoom;
     Camera cam;
     float rotationX, rotationY;
-    
+    public static bool isCenital;
+    private Vector3 normalPosition, cenitalPosition;
 
     private void Awake()
     {
@@ -42,7 +44,8 @@ public class CameraManager : MonoBehaviour
         //zoomStrategy = new OrtographZoomStrategy(cam, startingZoom);
         zoomStrategy = new PerspectiveZoomStrategy(cam, cameraOffset, startingZoom);
         cam.transform.LookAt(transform.position + Vector3.up * lookAtOffset);
-        
+        normalPosition = cam.transform.localPosition;
+        cenitalPosition = new Vector3(0, 10, 0);
     }
 
     private void OnEnable()
@@ -83,6 +86,24 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
+        {
+            if (isCenital)
+            {
+                cenitalPosition = cam.transform.localPosition;
+                isCenital = false;
+                cam.transform.DOLocalMove(normalPosition, 1f).SetEase(Ease.InOutSine);
+                cam.transform.DOLocalRotate(new Vector3(35, 0, 0), 1f).SetEase(Ease.InOutSine);
+            }
+            else
+            {
+                normalPosition = cam.transform.localPosition;
+                isCenital = true;
+                cam.transform.DOLocalMove(cenitalPosition, 1f).SetEase(Ease.InOutSine);
+                cam.transform.DOLocalRotate(new Vector3(90, 0, 0), 1f).SetEase(Ease.InOutSine);
+            }
+        }
+
         if (frameMove != Vector3.zero)
         {
             Vector3 speedModFrameMove = new Vector3(frameMove.x * lateralSpeed, frameMove.y, frameMove.z * inOutSpeed);

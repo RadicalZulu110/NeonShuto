@@ -52,11 +52,11 @@ public class MouseInputManager : InputManager
         }
 
         // Rotation
-        if (Input.GetMouseButtonDown(1))
+        if (!CameraManager.isCenital && Input.GetMouseButtonDown(1))
         {
             mousePositionOnRotateStart.x = mp.x;
             mousePositionOnRotateStart.y = mp.y;
-        }else if (Input.GetMouseButton(1))
+        }else if (!CameraManager.isCenital && Input.GetMouseButton(1))
         {
             // Rotate to right and left
             if(mp.x < mousePositionOnRotateStart.x-100)
@@ -78,6 +78,7 @@ public class MouseInputManager : InputManager
                 {
                     OnRotateInput?.Invoke(0, 1f);
                 }
+                
             }
 
             
